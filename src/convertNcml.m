@@ -1,4 +1,4 @@
-function cdl = convertNcml(ncmlfile)
+function cdl = convertNcml(ncmlfile, outdir)
 
     % convert a ncml file in various forms
 
@@ -42,14 +42,15 @@ function cdl = convertNcml(ncmlfile)
     cdl = [cdl sprintf('}\n')];
 
     % Write out the CDL file
-    cdlfile = [ncmlfile(1:end-5) '.cdl'];
+    [~, name, ~] = fileparts(ncmlfile);
+    cdlfile = fullfile(outdir, [name '.cdl']);
     fid = fopen(cdlfile, 'w');
     fwrite(fid, cdl);
     fclose(fid);
     disp(['Wrote ' cdlfile])
     
     % write out tables into a Word document
-    wordfile=[ncmlfile(1:end-5) '-tables-only.docx'];
+    wordfile = fullfile(outdir, [name '-tables-only.docx']);
     wordfile = GetFullPath(wordfile);
     delete(wordfile); % remove existing file
 	[actXWord, wordHandle] = StartWord(wordfile);
