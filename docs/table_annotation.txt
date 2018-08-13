@@ -1,0 +1,18 @@
+|===
+|Description|Obligation|Comment
+|Dimensions||
+|time = unlimited||Can be of fixed or unlimited length, as appropriate.
+|Coordinate variable||
+|uint64 time(time)|MA|
+|:axis = "T"||
+|:calendar = "gregorian"||
+|:long_name = "Timestamps of annotations"||
+|:standard_name = "time"||
+|:units =  "nanoseconds since 1601-01-01 00:00:00Z"||
+|Variables||
+|string annotation_category(time)|O|Optional category for the annotation, for use in grouping annotation types.
+|:long_name = "Annotation category"||
+|||
+|string annotation_text(time)|MA|
+|:long_name = "Annotation text"||
+|===
