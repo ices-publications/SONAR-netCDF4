@@ -43,55 +43,55 @@
 	  <attribute name='long_name' value='Distance travelled by the platform'/>
 	  <attribute name='valid_min' value='0.0'/>
 	</variable>
-    <variable name='transducer_offset_x' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the sonar transducer along the x-axes.">
+    <variable name='transducer_offset_x' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the sonar transducer along the _x_-axes.">
       <attribute name='units' value='m'/>
-      <attribute name='long_name' value='x-axis distance from the platform coordinate system origin to the sonar transducer'/>
+      <attribute name='long_name' value='_x_-axis distance from the platform coordinate system origin to the sonar transducer'/>
     </variable>
-    <variable name='transducer_offset_y' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the sonar transducer along the y-axes.">
+    <variable name='transducer_offset_y' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the sonar transducer along the _y_-axes.">
       <attribute name='units' value='m'/>
-      <attribute name='long_name' value='y-axis distance from the platform coordinate system origin to the sonar transducer'/>
+      <attribute name='long_name' value='_y_-axis distance from the platform coordinate system origin to the sonar transducer'/>
     </variable>
-    <variable name='transducer_offset_z' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the sonar transducer along the z-axes.">
+    <variable name='transducer_offset_z' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the sonar transducer along the _z_-axes.">
       <attribute name='units' value='m'/>
-      <attribute name='long_name' value='z-axis distance from the platform coordinate system origin to the sonar transducer'/>
+      <attribute name='long_name' value='_z_-axis distance from the platform coordinate system origin to the sonar transducer'/>
     </variable>
-    <variable name='position_offset_x' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the latitude/longitude position origin along the x-axes.">
+    <variable name='position_offset_x' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the latitude/longitude position origin along the _x_-axes.">
       <attribute name='units' value='m' />
-      <attribute name='long_name' value='Distance along the x-axis from the platform coordinate system origin to the latitude/longitude sensor origin' />
+      <attribute name='long_name' value='Distance along the _x_-axis from the platform coordinate system origin to the latitude/longitude sensor origin' />
     </variable>
-    <variable name='position_offset_y' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the latitude/longitude position origin along the y-axes.">
+    <variable name='position_offset_y' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the latitude/longitude position origin along the _y_-axes.">
       <attribute name='units' value='m' />
-      <attribute name='long_name' value='Distance along the y-axis from the platform coordinate system origin to the latitude/longitude sensor origin' />
+      <attribute name='long_name' value='Distance along the _y_-axis from the platform coordinate system origin to the latitude/longitude sensor origin' />
     </variable>
-    <variable name='position_offset_z' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the latitude/longitude position origin along the z-axes.">
+    <variable name='position_offset_z' type='float' obligation="R" comment="Distance from the platform coordinate system origin to the latitude/longitude position origin along the _z_-axes.">
       <attribute name='units' value='m' />
-      <attribute name='long_name' value='Distance along  the z-axis from the platform coordinate system origin to the latitude/longitude sensor origin' />
+      <attribute name='long_name' value='Distance along the _z_-axis from the platform coordinate system origin to the latitude/longitude sensor origin' />
     </variable>
-    <variable name='MRU_offset_x' type='float' obligation="R" comment="x-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.">
+    <variable name='MRU_offset_x' type='float' obligation="R" comment="_x_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.">
       <attribute name='units' value='m' />
-      <attribute name='long_name' value='Distance along the x-axis from the platform coordinate system origin to the motion reference unit sensor origin' />
+      <attribute name='long_name' value='Distance along the _x_-axis from the platform coordinate system origin to the motion reference unit sensor origin' />
     </variable>
-    <variable name='MRU_offset_y' type='float'  obligation="R" comment="y-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.">
+    <variable name='MRU_offset_y' type='float'  obligation="R" comment="_y_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.">
       <attribute name='units' value='m' />
-      <attribute name='long_name' value='Distance along the y-axis from the platform coordinate system origin to the motion reference unit sensor origin' />
+      <attribute name='long_name' value='Distance along the _y_-axis from the platform coordinate system origin to the motion reference unit sensor origin' />
     </variable>
-    <variable name='MRU_offset_z' type='float'  obligation="R" comment="z-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.">
+    <variable name='MRU_offset_z' type='float'  obligation="R" comment="_z_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.">
       <attribute name='units' value='m' />
-      <attribute name='long_name' value='Distance along the z-axis from the platform coordinate system origin to the motion reference unit sensor origin' />
+      <attribute name='long_name' value='Distance along the _z_-axis from the platform coordinate system origin to the motion reference unit sensor origin' />
     </variable>
-    <variable name='MRU_rotation_x' type='float' obligation="R" comment="Extrinsic angular rotation about the x-axis from the platform zero angle to the MRU zero angle.">
+    <variable name='MRU_rotation_x' type='float' obligation="R" comment="Extrinsic angular rotation about the _x_-axis from the platform zero angle to the MRU zero angle.">
       <attribute name='units' value='arc_degree' />
-      <attribute name='long_name' value='Extrinsic rotation about the x-axis from the platform to MRU coordinate systems' />
+      <attribute name='long_name' value='Extrinsic rotation about the _x_-axis from the platform to MRU coordinate systems' />
       <attribute name='valid_range' value='-180.0  180.0' type='float' />
     </variable>
-    <variable name='MRU_rotation_y' type='float' obligation="R" comment="Extrinsic angular rotation about the y-axis from the platform zero angle to the MRU zero angle.">
+    <variable name='MRU_rotation_y' type='float' obligation="R" comment="Extrinsic angular rotation about the _y_-axis from the platform zero angle to the MRU zero angle.">
       <attribute name='units' value='arc_degree' />
-      <attribute name='long_name' value='Extrinsic rotation about the y-axis from the platform to MRU coordinate systems' />
+      <attribute name='long_name' value='Extrinsic rotation about the _y_-axis from the platform to MRU coordinate systems' />
       <attribute name='valid_range' value='-180.0  180.0' type='float' />
     </variable>
-    <variable name='MRU_rotation_z' type='float' obligation="R" comment="Extrinsic angular rotation about the z-axis from the platform zero angle to the MRU zero angle.">
+    <variable name='MRU_rotation_z' type='float' obligation="R" comment="Extrinsic angular rotation about the _z_-axis from the platform zero angle to the MRU zero angle.">
       <attribute name='units' value='arc_degree' />
-      <attribute name='long_name' value='Extrinsic rotation about the z-axis from the platform to MRU coordinate systems' />
+      <attribute name='long_name' value='Extrinsic rotation about the _z_-axis from the platform to MRU coordinate systems' />
       <attribute name='valid_range' value='-180.0  180.0' type='float' />
     </variable>
     <variable name='latitude' type='double' shape='time1' obligation="MA" comment="Platform latitudes in the WGS-84 coordinate reference system.">
@@ -370,17 +370,17 @@
         <attribute name='units' value='dB' />
         <attribute name='long_name' value='Gain correction' />
       </variable>
-      <variable name='beam_diFrection_x' type='float' shape='ping_time beam' obligation="M" comment="The $x$-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.">
+      <variable name='beam_diFrection_x' type='float' shape='ping_time beam' obligation="M" comment="The _x_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.">
         <attribute name='units' value='1' />
         <attribute name='long_name' value='x-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system' />
         <attribute name='valid_range' value='-1.0  1.0' type='float' />
       </variable>
-      <variable name='beam_direction_y' type='float' shape='ping_time beam' obligation="M" comment="The $y$-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.">
+      <variable name='beam_direction_y' type='float' shape='ping_time beam' obligation="M" comment="The _y_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.">
         <attribute name='units' value='1' />
         <attribute name='long_name' value='y-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system' />
         <attribute name='valid_range' value='-1.0  1.0' type='float' />
       </variable>
-      <variable name='beam_direction_z' type='float' shape='ping_time beam' obligation="M" comment="The $z$-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.">
+      <variable name='beam_direction_z' type='float' shape='ping_time beam' obligation="M" comment="The _z_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.">
         <attribute name='units' value='1' />
         <attribute name='long_name' value='z-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system' />
         <attribute name='valid_range' value='-1.0  1.0' type='float' />
