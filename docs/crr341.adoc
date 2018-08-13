@@ -1,6 +1,6 @@
 = The SONAR-netCDF4 convention for sonar data, Version 1.0
 Gavin Macaulay; Héctor Peña
-:toc:
+:toc: left
 :toclevels: 3
 :doctype: book
 :revnumber: 1.0
@@ -10,18 +10,21 @@ Gavin Macaulay; Héctor Peña
 :sectnumslevels: 4
 :stem: latexmath
 :eqnums:
+:bibtex-file: references.bib
+:bibtex-style: ices-journal-of-marine-science
 
-
-International Council for the Exploration of the Sea
-
+// a future version of Asciidoctor will use the 'untitledæ option to now show the heading
+[colophon%untitled]
+== Colophon
+International Council for the Exploration of the Sea +
 Conseil International pour l’Exploration de la Mer
 
-H\. C. Andersens Boulevard 44-46 
-DK-1553 Copenhagen V 
-Denmark 
-Telephone (+45) 33 38 67 00 
-Telefax (+45) 33 93 42 15 
-www.ices.dk 
+{empty}H. C. Andersens Boulevard 44-46  +
+DK-1553 Copenhagen V +
+Denmark +
+Telephone (+45) 33 38 67 00 +
+Telefax (+45) 33 93 42 15 +
+http://www.ices.dk[www.ices.dk] +
 info@ices.dk
 
 Recommended format for purposes of citation:
@@ -34,14 +37,13 @@ The material in this report may be reused for non-commercial purposes using the 
 
 This document is the product of an expert group under the auspices of the International Council for the Exploration of the Sea and does not necessarily represent the view of the Council.
 
-Cover image: © OCEANA/Carlos Suárez
+Cover image: (C) OCEANA/Carlos Suárez
 
-http://doi.org/10.17895/ices.pub.4392
-
+http://doi.org/10.17895/ices.pub.4392 +
 ISBN 978-87-7482-214-1 +
 ISSN 1017-6195
 
-© 2018 International Council for the Exploration of the Sea
+(C) 2018 International Council for the Exploration of the Sea
 
 :sectnums!:
 == Foreword
@@ -59,7 +61,7 @@ This document presents a convention for the storage and exchange of fisheries so
 
 === Background
 
-Many purpose-built file formats exist to store and exchange data from scientific and industrial equipment. Formats have been created by sonar and echosounder manufacturers; in addition, more generic acoustic data formats such as the Generic Water Column (GWC) format (Gee _et al_., 2012), the eXtended Triton Format (XTF; Triton, 2013), and the HydroACoustics (HAC) format (McQuinn _et al_., 2005) have also been created. These formats store a time-ordered sequence of datagrams, making it easy to append new data. Other data, such as geographical position, are typically interleaved into the sequence of datagrams. However, this is not optimal for analysis purposes when data are viewed and analysed as a set of pings and metadata from a time-period or spatial grouping. In addition, efficient random-read access to individual pings is not possible unless an index is available or created.
+Many purpose-built file formats exist to store and exchange data from scientific and industrial equipment. Formats have been created by sonar and echosounder manufacturers; in addition, more generic acoustic data formats such as the Generic Water Column (GWC) format cite:[geeMultibeamWaterColumn2012], the eXtended Triton Format (XTF; Triton, 2013), and the HydroACoustics (HAC) format (McQuinn _et al_., 2005) have also been created. These formats store a time-ordered sequence of datagrams, making it easy to append new data. Other data, such as geographical position, are typically interleaved into the sequence of datagrams. However, this is not optimal for analysis purposes when data are viewed and analysed as a set of pings and metadata from a time-period or spatial grouping. In addition, efficient random-read access to individual pings is not possible unless an index is available or created.
 
 The Topic Group on Defining a data format for omnidirectional fisheries sonar do not want to create yet another sonar-specific file format; the knowledge required is not within the expertise of this group. However, the group does have the expertise to specify what data must be stored to allow for unambiguous use of backscatter data during quantitative analysis.
 
@@ -106,7 +108,7 @@ Datasets can be added to SONAR-netCDF4 files if they do not conflict with the SO
 
 Each SONAR-netCDF4 file is intended to store data from one sonar mounted on one platform. The storage of data from multiple sonars and multiple platforms in one SONAR-netCDF4 file is not in the scope of the convention.
 
-A design principle of SONAR-netCDF4 has been to focus on describing the acoustic backscatter data, not the overall purpose and context of why the data were collected. Such broader metadata are better stored in separate metadata systems and schema (e.g. ISO, 2014; ICES, 2016).
+A design principle of SONAR-netCDF4 has been to focus on describing the acoustic backscatter data, not the overall purpose and context of why the data were collected. Such broader metadata are better stored in separate metadata systems and schema (e.g. ISO, 2014; ICES, 2016) cite:[icesMetadataConventionProcessed2016].
 
 === Hierarchical structure
 
@@ -139,7 +141,7 @@ The _FillValue attribute should be used to indicate missing data in variables. F
 
 === Metadata and authorities
 
-The fisheries acoustics community has developed a metadata convention for processed acoustic data (ICES, 2016). Where relevant, attribute and variable names have been reused from this convention. The NetCDF Climate and Forecast (CF) Metadata Conventions (Eaton _et al_., 2017) have been used where sensible (the efficient storage of unprocessed active sonar data has not been a design goal of the CF convention) along with the ESIP Attribute Convention for Data Discovery (ACDD). Terms and concepts from other metadata conventions have also been used where appropriate.
+The fisheries acoustics community has developed a metadata convention for processed acoustic data cite:[icesMetadataConventionProcessed2016]. Where relevant, attribute and variable names have been reused from this convention. The NetCDF Climate and Forecast (CF) Metadata Conventions cite:[eatonNetCDFClimateForecast2017] have been used where sensible (the efficient storage of unprocessed active sonar data has not been a design goal of the CF convention) along with the ESIP Attribute Convention for Data Discovery (ACDD). Terms and concepts from other metadata conventions have also been used where appropriate.
 
 === Units
 
@@ -285,7 +287,7 @@ The volume backscatter strength is derived from a similar equation:
 S_v = 20\log_{10}(\frac{A}{\sqrt{2}}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}( \frac{c\tau_e}{2}\Psi ) - (SL + K + \Delta G + G_T),
 ++++
 
-where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape (Sawada and Furusawa, 1993), the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended (MacLennan, 1986; Furusawa _et al_., 1999) for calculation of latexmath:[S_v].
+where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape (Sawada and Furusawa, 1993), the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended (MacLennan, 1986; Furusawa _et al_., 1999) cite:[furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
 
 == Coordinate systems
 
@@ -342,6 +344,10 @@ Some sensors (e.g. the attitude sensor) can have a rotation relative to the plat
 We are grateful for the thorough and considered contributions from the Marine Acoustics Society of Japan’s Technical Committee. Advice and experience on the practicalities of reading netCDF files in analysis software was generously provided by Christian Michelsen Research AS, Echoview Software, and Nortek AS. Sindre Vatnehol and Arne Johannes Holmin kindly developed software to generate SONAR-netCDF4 files. We also thank Elodie Fernandez and Jim Biard for their invaluable reviews and suggestions for improving both the convention and this document.
 
 == References
+
+bibliography::[]
+
+---
 
 Eaton, B., Gregory, J., Drach, B., Taylor, K., Hankin, S., Blower, J., Caron, J., _et al._ 2017. NetCDF Climate and Forecast (CF) Metadata Conventions, version 1.7. 151 pp.
 
