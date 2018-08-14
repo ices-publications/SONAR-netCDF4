@@ -228,6 +228,11 @@ Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in
 [[sonar_group_table]]
 include::table_sonar_group.adoc[]
 
+.Description of the beam mode subgroups of the sonar group.
+[cols=",,",options="header",]
+[[sonar_beammode_table]]
+include::table_sonar_beammode.adoc[]
+
 ==== Vendor specific group
 
 The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is */Vendor_specific*. Currently, there is no mandatory information for the vendor specific group.
