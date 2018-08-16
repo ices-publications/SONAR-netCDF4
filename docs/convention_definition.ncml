@@ -136,13 +136,13 @@
       <attribute name='standard_name' value='platform_roll_angle' />
       <attribute name='valid_range' value='-180.0  180.0' type='float' />
     </variable>
-    <variable name='vertical_offset' type='float' shape='time2' obligation="R" comment="Distance from the nominal water level to the actual water level measured along the z-axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth. This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).">
+    <variable name='vertical_offset' type='float' shape='time2' obligation="R" comment="Distance from the nominal water level to the actual water level measured along the _z_-axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth. This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).">
       <attribute name='units' value='m' />
       <attribute name='long_name' value='Platform vertical offset from nominal' />
     </variable>
-    <variable name='water_level' type='float' obligation="R" comment="Distance from the origin of the platform coordinate system to the nominal water level measured along the z-axis of the platform coordinate system (positive values are below the origin). The distance between the nominal and actual water level is provided by vertical_offset.">
+    <variable name='water_level' type='float' obligation="R" comment="Distance from the origin of the platform coordinate system to the nominal water level measured along the _z_-axis of the platform coordinate system (positive values are below the origin). The distance between the nominal and actual water level is provided by vertical_offset.">
       <attribute name='units' value='m' />
-      <attribute name='long_name' value='Distance from the platform coordinate system origin to the nominal water level along the z-axis' />
+      <attribute name='long_name' value='Distance from the platform coordinate system origin to the nominal water level along the _z_-axis' />
     </variable>
     <group name='NMEA' obligation="O" comment="Suggested sub-group to store raw NMEA data as an example of a /Platform sub groups.">
       <dimension name='time' length='0' isUnlimited='true' comment="Can be of fixed or unlimited length, as appropriate."/>
