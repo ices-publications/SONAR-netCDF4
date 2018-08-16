@@ -172,7 +172,7 @@ The top-level group contains metadata about the SONAR-netCDF4 file, represented 
 .Description of the top-level group.
 [cols=",,",options="header",]
 [[top_level_table]]
-include::table_top_level.adoc[]
+include::table_Toplevel.adoc[]
 
 ==== Annotation group
 
@@ -181,7 +181,7 @@ The annotation group contains timestamped annotations with optional identificati
 .Description of the annotation group.
 [cols=",,",options="header",]
 [[annotation_table]]
-include::table_annotation.adoc[]
+include::table_Annotation.adoc[]
 
 ==== Environment group
 
@@ -190,7 +190,7 @@ The environment group contains information on environmental conditions, especial
 .Description of the environment group.
 [cols=",,",options="header",]
 [[environment_table]]
-include::table_environment.adoc[]
+include::table_Environment.adoc[]
 
 ==== Platform group
 
@@ -201,7 +201,7 @@ Optionally, /Platform subgroups can be included to store data from individual in
 .Description of the platform group.
 [cols=",,",options="header",]
 [[platform_group_table]]
-include::table_platform_group.adoc[]
+include::table_Platform.adoc[]
 
 .Suggested group for storing NMEA datagrams from marine instruments.
 [cols=",,",options="header",]
@@ -215,7 +215,7 @@ The provenance group provides information on how the SONAR-netCDF4 version of th
 .Description of the provenance group.
 [cols=",,",options="header",]
 [[provenance_table]]
-include::table_provenance.adoc[]
+include::table_Provenance.adoc[]
 
 ==== Sonar group
 
@@ -226,12 +226,12 @@ Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in
 .Description of the sonar group.
 [cols=",,",options="header",]
 [[sonar_group_table]]
-include::table_sonar_group.adoc[]
+include::table_Sonar.adoc[]
 
 .Description of the beam mode subgroups of the sonar group.
 [cols=",,",options="header",]
 [[sonar_beammode_table]]
-include::table_sonar_beammode.adoc[]
+include::table_Beam_group1.adoc[]
 
 ==== Vendor specific group
 
