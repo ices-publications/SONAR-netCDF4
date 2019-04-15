@@ -223,6 +223,8 @@ This group contains the sonar backscatter data and associated metadata. The netC
 
 Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonar_beammode_table>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
 
+Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
+
 .Description of the sonar group.
 [cols=",,",options="header",]
 [[sonar_group_table]]
