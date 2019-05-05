@@ -319,7 +319,7 @@ The orientation of the platform is represented using the _z_–_y_’–_x_” T
 
 .Platform coordinate system. The arrows on the axes indicate the positive direction and the arrows around each axis indicate positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
 [[coordinate_system_figure]]
-image::coordinate%20system%20figure.svg[]
+image::coordinateSystemFigure.svg[]
 
 === Sonar beam coordinate system
 
