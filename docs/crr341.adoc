@@ -1,9 +1,9 @@
 = The SONAR-netCDF4 convention for sonar data, Version 1.0
-Gavin Macaulay; Héctor Peña
+Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :toc: left
 :toclevels: 3
 :doctype: book
-:revnumber: 1.0
+:revnumber: 1.8
 :xrefstyle: short
 :source-highlighter: highlightjs
 :highlightjsdir: highlight
@@ -13,7 +13,7 @@ Gavin Macaulay; Héctor Peña
 :bibtex-file: references.bib
 :bibtex-style: ices-journal-of-marine-science
 
-// a future version of Asciidoctor will use the 'untitledæ option to now show the heading
+// a future version of Asciidoctor will use the 'untitled' option to now show the heading
 [colophon%untitled]
 == Colophon
 International Council for the Exploration of the Sea +
@@ -336,6 +336,7 @@ Some sensors (e.g. the attitude sensor) can have a rotation relative to the plat
 [cols=",,,",options="header",]
 |===
 |Document version |SONAR-netCDF4 version |Date |Changes
+|{revnumber}|1.0 | |
 |1.7 |1.0 |29 May 2018 |Modifications due to ICES CRR review and editorial process.
 |1.6 |1.0 |7 Feburary 2018 |Modifications due to further Topic Group input.
 |1.5 |1.0 |20 December 2017 |Formatted to ICES CRR style
