@@ -8,12 +8,27 @@ Version 1.0 of the SONAR-netCDF4 convention (as ICES CRR No. 341) is available h
 
 == Contributing
 
-Use the Asciidoctor.js Live Preview extension for Chrome, X, and X to view asciidoctor files, either from a URL or from a local file.
+=== Viewing the compiled document
 
-Or, after installing asciidoctor locally, produce an html version of the document via:
+* *Live Preview*: Use the Asciidoctor.js Live Preview extension for Chrome, Firefox, or Opera to view asciidoc files, either from a URL or from a local file. The bibliography is not currently rendered.
+
+* *HTML files*: After installing asciidoctor locally, use:
 
  asciidoctor -r asciidoctor-bibtex crr341.adoc
 
+* *HTML (single file)*: For a single html file (including the figures, which makes it easier to distribute):
+
+ asciidoctor -r asciidoctor-bibtex --backend html5 -a data-uri crr341.adoc
+ 
+* *PDF*: For a PDF file (note: install the asciidoctor-mathematical extension to get the equations):
+
+ asciidoctor-pdf -r asciidoctor-bibtex  crr341.adoc
+ 
+* *Word (.docx)*: First convert to docbook format, then use pandoc to convert to Word:
+
+ asciidoctor -r asciidoctor-bibtex --backend docbook crr341.adoc
+ pandoc --from docbook --to docx -o crr341.docx crr341.xml
+ 
 == Versioning
 
 == Authors
