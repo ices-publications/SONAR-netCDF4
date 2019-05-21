@@ -1,10 +1,15 @@
-|==============================================================================================================================================================================================================
+﻿|==============================================================================================================================================================================================================
 |Description |Obligation |Comment
+
 |Group attributes | |
 |:platform_code_ICES |O |Platform code from the ICES SHIPC vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/SHIPC).
 |:platform_name |O |Platform name of which the sonar is a part.
 |:platform_type |O |Platform type that the sonar is part of. Use the description field from the ICES ”Platform Class” vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/Platform%20Class).
+|Types | |
+|byte enum transducer_type_t {rx_transducer = 0, tx_transducer = 1, monostatic_transducer = 3 } | |transducer type indicate if the transducer is a Tx Transducer, Rx Transducer or both (monostatic)
+
 |Dimensions | |
+|transducer:transducer |M |transducer count
 |time1 = unlimited | |Can be of fixed or unlimited length, as appropriate.
 |time2 = unlimited | |Can be of fixed or unlimited length, as appropriate. Use as many time-dimensions as necessary with names of timeX, where X is a positive integer.
 |Coordinate variables | |
@@ -152,26 +157,43 @@ a|
 |:units = "m/s" | |
 |float :valid_min = 0.0 | |
 | | |
-|float transducer_offset_x |R |Distance from the platform coordinate system origin to the monostatic sonar transducer along the _x_-axis.
-|:long_name =  +
-"_x_-axis distance from the +
+|float transducer_offset_x(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _x_-axis.
+|:long_name = "_x_-axis distance from the +
 platform coordinate system +
 origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
-|float transducer_offset_y |R |Distance from the platform coordinate system origin to the monostatic sonar transducer along the _y_-axis.
-|:long_name =  +
-"_y_-axis distance from the +
+|float transducer_offset_y(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _y_-axis.
+|:long_name = "_y_-axis distance from the +
 platform coordinate system +
 origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
-|float transducer_offset_z |R |Distance from the platform coordinate system origin to the monostatic sonar transducer along the _z_-axis.
-|:long_name =  +
-"_z_-axis distance from the +
+|float transducer_offset_z(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _z_-axis.
+|:long_name = "_z_-axis distance from the +
 platform coordinate system +
 origin to the sonar transducer" | |
 |:units = "m" | |
+| | |
+|int transducer(transducer) |R |transducer serial number
+| | |
+|float transducer_rotation_x(transducer) |R |Extrinsic angular rotation about the _x_-axis from the transducer zero angle to the coordinate system origin zero angle.
+|float :valid_range = -180.0f, 180.0f | |
+|:units = "arc_degree" | |
+|:long_name = "Extrinsic rotation about the _x_-axis from the transducer to reference coordinate systems" | |
+| | |
+|float transducer_rotation_y(transducer) |R |Extrinsic angular rotation about the _y_-axis from the transducer zero angle to the coordinate system origin zero angle.
+|float :valid_range = -180.0f, 180.0f | |
+|:units = "arc_degree" | |
+|:long_name = "Extrinsic rotation about the _y_-axis from the transducer to reference coordinate systems" | |
+| | |
+|float transducer_rotation_z(transducer) |R |Extrinsic angular rotation about the _z_-axis from the transducer zero angle to the coordinate system origin zero angle.
+|float :valid_range = -180.0f, 180.0f | |
+|:units = "arc_degree" | |
+|:long_name = "Extrinsic rotation about the _z_-azis from the transducer to reference coordinate systems" | |
+| | |
+|transducer_type_t transducer_type(transducer) |M |The type of transducer, might be rx , tx or monostatic
+|:long_name = " type of transducer" | |
 | | |
 |float vertical_offset(time2) |R |Distance from the nominal water level to the actual water level measured along the _z_-axis of the +
 platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to +
