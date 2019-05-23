@@ -11,32 +11,25 @@
 |uint64 time1(time1) | |Use as many time-coordinate variables as necessary to contain the sample times of the various platform variable sensors. Use the naming scheme of timeX, where X is a positive integer.
 |:axis = "T" | |
 |:calendar = "gregorian" | |
-|:long_name =  +
-"Timestamps for position data" | |
+|:long_name =  "Timestamps for position data" | |
 |:standard_name = "time" | |
-|:units = "nanoseconds since +
-1601-01-01 00:00:00Z" | |
+|:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
 | | |
 |uint64 time2(time2) | |Use as many time-coordinate variables as necessary to contain the sample times of the various platform variable sensors. Use the naming scheme of timeX, where X is a positive integer.
 |:axis = "T" | |
 |:calendar = "gregorian" | |
-|:long_name = "Timestamps for +
-gyrocompass data" | |
+|:long_name = "Timestamps for gyrocompass data" | |
 |:standard_name = "time" | |
-|:units = "nanoseconds since +
-1601-01-01 00:00:00Z" | |
+|:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
 |Variables | |
 |float distance(time2) |O |Distance travelled by the platform from an arbitrary location.
-|:long_name = "Distance travelled +
-by the platform" | |
+|:long_name = "Distance travelled by the platform" | |
 |:units = "m" | |
 |:valid_min = "0.0" | |
 | | |
 |float heading(time2) |MA |Platform heading. Measured clockwise from north.
-|:long_name =  +
-"Platform heading (true)" | |
-|:standard_name =  +
-"platform_orientation" | |
+|:long_name =  "Platform heading (true)" | |
+|:standard_name =  "platform_orientation" | |
 |:units = "degrees_north" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
@@ -53,96 +46,64 @@ by the platform" | |
 |double :valid_range = –180.0, 180.0 | |
 | | |
 |float MRU_offset_x |R |_x_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
-|:long_name = "Distance along +
-the _x_-axis from the platform +
-coordinate system origin to the +
-motion reference unit sensor origin" | |
+|:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
 |:units = "m" | |
 | | |
 |float MRU_offset_y |R |_y_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
-|:long_name = "Distance along +
-the _y_-axis from the platform +
-coordinate system origin to the +
-motion reference unit sensor origin" | |
+|:long_name = "Distance along the _y_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
 |:units = "m" | |
 | | |
 |float MRU_offset_z |R |_z_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
-|:long_name = "Distance along +
-the _z_-axis from the platform +
-coordinate system origin to the +
-motion reference unit sensor origin" | |
+|:long_name = "Distance along the _z_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
 |:units = "m" | |
 | | |
 |float MRU_rotation_x |R |Extrinsic angular rotation about the _x_-axis from the platform zero angle to the MRU zero angle.
-|:long_name = "Extrinsic rotation +
-about the _x_-axis from the platform +
-to MRU coordinate systems" | |
+|:long_name = "Extrinsic rotation about the _x_-axis from the platform to MRU coordinate systems" | |
 |:units = "arc_degree" | |
 |float :valid_range = –180.0, 180.0 | |
 | | |
 |float MRU_rotation_y |R |Extrinsic angular rotation about the _y_-axis from the platform zero angle to the MRU zero angle.
-|:long_name = "Extrinsic rotation +
-about the _y_-axis from the platform +
-to MRU coordinate systems" | |
+|:long_name = "Extrinsic rotation about the _y_-axis from the platform to MRU coordinate systems" | |
 |:units = "arc_degree" | |
 |float :valid_range = –180.0, 180.0 | |
 | | |
 |float MRU_rotation_z |R |Extrinsic angular rotation about the _z_-axis from the platform zero angle to the MRU zero angle.
-|:long_name = "Extrinsic rotation +
-about the _z_-axis from the platform +
-to MRU coordinate systems" | |
+|:long_name = "Extrinsic rotation about the _z_-axis from the platform to MRU coordinate systems" | |
 |:units = "arc_degree" | |
 |float :valid_range = –180.0, 180.0 | |
 | | |
 |float pitch(time2) |MA |Platform pitch. Positive values indicate a bow-up pitch.
 |:long_name = "Platform pitch" | |
-|:standard_name =  +
-"platform_pitch_angle" | |
+|:standard_name =  "platform_pitch_angle" | |
 |:units = "arc_degree" | |
 |float :valid_range = –90.0, 90.0 | |
 | | |
-|float position_offset_x |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the +
-_x_-axis.
-|:long_name = "Distance along +
-the _x_-axis from the platform +
-coordinate system origin to the +
-latitude/longitude sensor origin" | |
+|float position_offset_x |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _x_-axis.
+|:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
 |:units = "m" | |
 | | |
-|float position_offset_y |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the +
-_y_-axis.
-|:long_name = "Distance along +
-the _y_-axis from the platform +
-coordinate system origin to the +
-latitude/longitude sensor origin" | |
+|float position_offset_y |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _y_-axis.
+|:long_name = "Distance along the _y_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
 |:units = "m" | |
 | | |
-|float position_offset_z |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the +
-_z_-axis.
-|:long_name = "Distance along +
-the _z_-axis from the platform +
-coordinate system origin to the +
-latitude/longitude sensor origin" | |
+|float position_offset_z |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _z_-axis.
+|:long_name = "Distance along the _z_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
 |:units = "m" | |
 | | |
 |float roll(time2) |MA |Platform roll. Positive values indicate a roll to starboard.
 |:long_name = "Platform roll" | |
-|:standard_name =  +
-"platform_roll_angle" | |
+|:standard_name =  "platform_roll_angle" | |
 |:units = "arc_degree" | |
 |float :valid_range = –180.0, 180.0 | |
 | | |
 |float speed_ground(time1) |MA |Platform speed over ground.
-|:long_name =  +
-"Platform speed over ground" | |
-|:standard_name =  +
-"platform_speed_wrt_ground" | |
+|:long_name =  "Platform speed over ground" | |
+|:standard_name =  "platform_speed_wrt_ground" | |
 |:units = "m/s" | |
 |float :valid_min = 0.0 | |
 | | |
 |float speed_relative(time2) |O |Platform speed relative to water.
-|:long_name = "Platform speed +
-relative to water" | |
+|:long_name = "Platform speed relative to water" | |
 a|
 :standard_name = 
 
@@ -153,40 +114,23 @@ a|
 |float :valid_min = 0.0 | |
 | | |
 |float transducer_offset_x |R |Distance from the platform coordinate system origin to the monostatic sonar transducer along the _x_-axis.
-|:long_name =  +
-"_x_-axis distance from the +
-platform coordinate system +
-origin to the sonar transducer" | |
+|:long_name =  "_x_-axis distance from the platform coordinate system origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
 |float transducer_offset_y |R |Distance from the platform coordinate system origin to the monostatic sonar transducer along the _y_-axis.
-|:long_name =  +
-"_y_-axis distance from the +
-platform coordinate system +
-origin to the sonar transducer" | |
+|:long_name =  "_y_-axis distance from the platform coordinate system origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
 |float transducer_offset_z |R |Distance from the platform coordinate system origin to the monostatic sonar transducer along the _z_-axis.
-|:long_name =  +
-"_z_-axis distance from the +
-platform coordinate system +
-origin to the sonar transducer" | |
+|:long_name =  "_z_-axis distance from the platform coordinate system origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
-|float vertical_offset(time2) |R |Distance from the nominal water level to the actual water level measured along the _z_-axis of the +
-platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to +
-underwater vehicle depth. This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).
-|:long_name =  +
-"Platform vertical offset from nominal" | |
+|float vertical_offset(time2) |R |Distance from the nominal water level to the actual water level measured along the _z_-axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth. This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).
+|:long_name =  "Platform vertical offset from nominal" | |
 |:units = "m" | |
 | | |
-|float water_level |R |Distance from the origin of the platform coordinate system to the nominal water level measured along the _z_-axis of the platform coordinate system +
-(positive values are below the origin). The distance between the nominal and actual water level is +
-provided by vertical_offset.
-|:long_name = "Distance from +
-the platform coordinate system +
-origin to the nominal water level +
-along the _z_-axis" | |
+|float water_level |R |Distance from the origin of the platform coordinate system to the nominal water level measured along the _z_-axis of the platform coordinate system (positive values are below the origin). The distance between the nominal and actual water level is provided by vertical_offset.
+|:long_name = "Distance from the platform coordinate system origin to the nominal water level along the _z_-axis" | |
 |:units = "m" | |
 |Subgroups | |
 |NMEA |O |Suggested subgroup to store raw NMEA data as an example of a /Platform subgroup.
