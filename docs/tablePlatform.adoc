@@ -6,7 +6,7 @@
 |:platform_name |O |Platform name of which the sonar is a part.
 |:platform_type |O |Platform type that the sonar is part of. Use the description field from the ICES ”Platform Class” vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/Platform%20Class).
 |Types | |
-|byte enum transducer_type_t {rx_transducer = 0, tx_transducer = 1, monostatic_transducer = 3 } | |transducer type indicate if the transducer is a Tx Transducer, Rx Transducer or both (monostatic)
+|byte enum transducer_type_t {receive_only = 0, transmit_only = 1, monostatic = 3 } | |Transducer function - transmit only, receive only or both (monostatic)
 
 |Dimensions | |
 |transducer:transducer |M |transducer count
