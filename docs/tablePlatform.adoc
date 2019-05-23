@@ -192,7 +192,7 @@ origin to the sonar transducer" | |
 |:units = "arc_degree" | |
 |:long_name = "Extrinsic rotation about the _z_-azis from the transducer to reference coordinate systems" | |
 | | |
-|transducer_type_t transducer_type(transducer) |M |The type of transducer, might be rx , tx or monostatic
+|transducer_type_t transducer_function(transducer) |M |The transducer function (that is, transmit_only, receive_only, or monostatic)
 |:long_name = "Transducer function (transmit_only, receive_only, monostatic)" | |
 | | |
 |float vertical_offset(time2) |R |Distance from the nominal water level to the actual water level measured along the _z_-axis of the +
