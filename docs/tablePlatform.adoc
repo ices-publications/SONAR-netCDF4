@@ -175,7 +175,7 @@ platform coordinate system +
 origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
-|int transducer(transducer) |R |transducer serial number
+|string transducerId(transducer) |R |Transducer serial number or identification name
 | | |
 |float transducer_rotation_x(transducer) |R |Extrinsic angular rotation about the _x_-axis from the transducer zero angle to the coordinate system origin zero angle.
 |float :valid_range = -180.0f, 180.0f | |
