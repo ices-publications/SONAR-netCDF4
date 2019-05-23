@@ -9,7 +9,7 @@
 |byte enum transducer_type_t {receive_only = 0, transmit_only = 1, monostatic = 3 } | |Transducer function - transmit only, receive only or both (monostatic)
 
 |Dimensions | |
-|transducer:transducer |M |transducer count
+|transducer:transducer |M |Transducer count
 |time1 = unlimited | |Can be of fixed or unlimited length, as appropriate.
 |time2 = unlimited | |Can be of fixed or unlimited length, as appropriate. Use as many time-dimensions as necessary with names of timeX, where X is a positive integer.
 |Coordinate variables | |
