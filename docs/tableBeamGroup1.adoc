@@ -7,77 +7,61 @@
 |beam | |The number of beams in this beam group.
 |ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
 |Coordinate variables | |
-|string beam(beam) |M |Beam name +
-(or number or identification code).
+|string beam(beam) |M |Beam name (or number or identification code).
 |:long_name = "Beam name" | |
 | | |
-|uint64 ping_time(ping_time) |M |Timestamp at which each ping +
-occurred.
+|uint64 ping_time(ping_time) |M |Timestamp at which each ping occurred.
 |:axis = "T" | |
 |:calendar = "gregorian" | |
 |:long_name = "Time-stamp of each ping" | |
 |:standard_name = "time" | |
-|:units =  +
-"nanoseconds since 1601-01-01 00:00:00Z" | |
+|:units =  "nanoseconds since 1601-01-01 00:00:00Z" | |
 |Variables | |
 |sample_t backscatter_i(ping_time, beam) |MA |Imaginary part of backscatter measurements. Each element in the 2D matrix is a variable length vector (of type sample_t) that contains the samples for that beam and ping time.
 |:long_name = "Raw backscatter measurements (imaginary part)" | |
 |:units = "as appropriate" | |Use units appropriate for the data.
 | | |
 |sample_t backscatter_r(ping_time, beam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 2D matrix is a variable length vector (of type sample_t) that contains the samples for that beam and ping time.
-|:long_name = "Raw backscatter +
-measurements (real part)" | |
+|:long_name = "Raw backscatter measurements (real part)" | |
 |:units = "as appropriate" | |Use units appropriate for the data.
 | | |
-|float beamwidth_receive_major +
-(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
-|:long_name = "Half power one-way +
-receive beam width along major +
-(horizontal) axis of beam" | |
+|float beamwidth_receive_major (ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
+|:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" | |
 |:units = "arc_degree" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
-|float beamwidth_receive_minor +
-(ping_time, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam.
-|:long_name = "Half power one-way +
-receive beam width along minor +
-(vertical) axis of beam" | |
+|float beamwidth_receive_minor (ping_time, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam.
+|:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam" | |
 |:units = "arc_degree" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
-|float beamwidth_transmit_major +
-(ping_time, beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
+|float beamwidth_transmit_major (ping_time, beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
 |:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam" | |
 |:units = "arc_degree" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
-|float beamwidth_transmit_minor +
-(ping_time, beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
+|float beamwidth_transmit_minor (ping_time, beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
 |:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" | |
 |:units = "arc_degree" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
 |float beam_direction_x(ping_time, beam) |M |The _x_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.
-|:long_name =  +
-"_x_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
+|:long_name =  "_x_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
 |:units = "1" | |
 |float :valid_range = −1.0, 1.0 | |
 | | |
 |float beam_direction_y(ping_time, beam) |M |The _y_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.
-|:long_name =  +
-"_y_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
+|:long_name =  "_y_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
 |:units = "1" | |
 |float :valid_range = −1.0, 1.0 | |
 | | |
 |float beam_direction_z(ping_time, beam) |M |The _z_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.
-|:long_name =  +
-"_z_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
+|:long_name =  "_z_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
 |:units = "1" | |
 |float :valid_range = −1.0, 1.0 | |
 | | |
 |beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
-|:long_name =  +
-"Beam stabilisation applied (or not)" | |
+|:long_name =  "Beam stabilisation applied (or not)" | |
 | | |
 |beam_t beam_type(ping_time) |M |Type of beam.
 |:long_name = "Type of beam" | |
@@ -91,8 +75,7 @@ receive beam width along minor +
 |:long_name = "Gain correction" | |
 |:units = "dB" | |
 | | |
-|short non_quantitative_processing(ping_time) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. +
-A value of 0 always indicates no such processing.
+|short non_quantitative_processing(ping_time) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. A value of 0 always indicates no such processing.
 |:flag_meanings | |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
 |short :flag_values | |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
 |:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" | |
@@ -102,8 +85,7 @@ A value of 0 always indicates no such processing.
 |:units = "dB re 1/μ" | |
 | | |
 |float sample_interval(ping_time) |M |Time between individual samples along a beam. Common for all beams in a ping.
-|:long_name = "Interval between +
-recorded raw data samples" | |
+|:long_name = "Interval between recorded raw data samples" | |
 |:units = "s" | |
 |float :valid_min = 0.0 | |
 | | |
@@ -135,8 +117,7 @@ recorded raw data samples" | |
 |float :valid_min = 0.0 | |
 | | |
 |float transmit_frequency_start(ping_time, beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
-|:long_name = "Start frequency in +
-transmitted pulse" | |
+|:long_name = "Start frequency in transmitted pulse" | |
 |:standard_name = "sound_frequency" | |
 |:units = "Hz" | |
 |float :valid_min = 0.0 | |
