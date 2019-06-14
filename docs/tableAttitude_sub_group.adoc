@@ -1,0 +1,58 @@
+|==============================================================================================================================================================================================================
+|Description |Obligation |Comment
+|Group attributes | |
+|:string |O |System description
+|Dimensions | |
+|time | |can be fixed or unlimited length, as appropriate
+|Coordinate variables | |
+|uint64 time(time) | |Time from attitude sensor
+|:axis = "T" | |
+|:calendar = "gregorian" | |
+|:long_name = "Timestamps for attitude data" | |
+|:standard_name = "time" | |
+|:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
+|Variables | |
+|float distance(time) |O |Distance travelled by the platform from an arbitrary location.
+|:long_name = "Distance travelled by the platform" | |
+|:units = "m" | |
+|:valid_min = "0.0" | |
+| | |
+|float heading(time) |MA |Platform heading. Measured clockwise from north.
+|:long_name =  "Platform heading (true)" | |
+|:standard_name =  "platform_orientation" | |
+|:units = "degrees_north" | |
+|float :valid_range = 0.0, 360.0 | |
+| | |
+|float heading_rate(time) |MA |Platform heading rate. Measured clockwise from north.
+|:long_name =  "Platform heading rate" | |
+|:units = "degree/s" | |
+| | |
+|float pitch(time) |M |platform pitch in VCS coordinate system
+|:crs = "VCS" | |
+|:standard_name = "platform_pitch_angle" | |
+|:units = "arc_degree" | |
+|:long_name = "pitch angle" | |
+|float :valid_range = –90.0, 90.0 | |
+| | |
+|float pitch_rate(time) |O |platform pitch in VCS coordinate system
+|:crs = "VCS" | |
+|:standard_name = "platform_pitch_rate" | |
+|:units = "degree/s" | |
+|:long_name = "pitch rate" | |
+| | |
+|float roll(time) |M |platform roll in VCS coordinate system
+|:crs = "VCS" | |
+|:standard_name = "platform_roll_angle" | |
+|:units = "arc_degree" | |
+|:long_name = "roll angle" | |
+| | |
+|float roll_rate(time) |O |platform roll in VCS coordinate system
+|:crs = "VCS" | |
+|:standard_name = "platform_roll_rate" | |
+|:units = "degree/s" | |
+|:long_name = "roll rate" | |
+| | |
+|float vertical_offset(time) |M |Distance from the nominal water level to the actual water level measured along the _z_axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).
+|:units = "m" | |
+|:long_name = "Platform vertical offset from nominal" | |
+|==============================================================================================================================================================================================================
