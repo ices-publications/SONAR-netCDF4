@@ -3,6 +3,8 @@
 |Group attributes | |
 |:beam_mode |M |Mode of the beam in this subgroup, taken from the defined vocabulary of: “vertical” (a set of beams that form a vertical slice through the water), ”horizontal” (a set of beams that form a nominally horizontal plane through the water), and ”inspection” (a set of beams with arbitrary pointing directions).
 |conversion_equation_t :conversion_equation_type |M |Type of equation used to convert backscatter measurements into volume backscattering strength and target strength.
+|int :preferred_MRU |MA |Index of the MRU sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_MRU. Index matches the ones used in the Platform MRU sensors variables. 
+|int :preferred_position |MA |Index of the position sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_position_sensor. Index matches the ones used in the Platform position sensors variables.  
 |Dimensions | |
 |beam | |The number of beams in this beam group.
 |ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
@@ -143,4 +145,12 @@
 |int receive_transducer_index(beam) |MA |Receiving or monostatic transducer index associated with the given beam
 |:valid_min = "0" | |
 |:long_name = "Receive transducer index" | |
-|=========================================================================================================================================================================================================================================================================================================================================================
+| | |
+|int active_MRU(ping_time)|MA |Indicate the index of the MRU sensor used at the time of the ping to compute the platform attitude.
+|:valid_min = "0" | |
+|:long_name = "Active MRU sensor index"| |
+| | |
+|int active_position_sensor(ping_time)|MA |Indicate the index of the position sensor used at the time of the ping to compute the platform position.
+|:valid_min = "0" | |
+|:long_name = "Active position sensor index"| |
+ =========================================================================================================================================================================================================================================================================================================================================================

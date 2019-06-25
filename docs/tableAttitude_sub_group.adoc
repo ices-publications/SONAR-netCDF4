@@ -23,31 +23,27 @@
 |:units = "degrees_north" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
-|float heading_rate(time) |MA |Platform heading rate. Measured clockwise from north.
+|float heading_rate(time) |MA |Platform heading rate. 
 |:long_name =  "Platform heading rate" | |
 |:units = "degree/s" | |
 | | |
-|float pitch(time) |M |platform pitch in VCS coordinate system
-|:crs = "VCS" | |
+|float pitch(time) |M |Platform pitch. Positive values indicate a bow-up pitch.
 |:standard_name = "platform_pitch_angle" | |
 |:units = "arc_degree" | |
 |:long_name = "pitch angle" | |
 |float :valid_range = –90.0, 90.0 | |
 | | |
-|float pitch_rate(time) |O |platform pitch in VCS coordinate system
-|:crs = "VCS" | |
+|float pitch_rate(time) |O |Platform pitch rate
 |:standard_name = "platform_pitch_rate" | |
 |:units = "degree/s" | |
 |:long_name = "pitch rate" | |
 | | |
-|float roll(time) |M |platform roll in VCS coordinate system
-|:crs = "VCS" | |
+|float roll(time) |M |Platform roll. Positive values indicate a roll to starboard.
 |:standard_name = "platform_roll_angle" | |
 |:units = "arc_degree" | |
 |:long_name = "roll angle" | |
 | | |
-|float roll_rate(time) |O |platform roll in VCS coordinate system
-|:crs = "VCS" | |
+|float roll_rate(time) |O |Platform roll rate
 |:standard_name = "platform_roll_rate" | |
 |:units = "degree/s" | |
 |:long_name = "roll rate" | |
