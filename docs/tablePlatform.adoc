@@ -92,6 +92,6 @@
 |:long_name = "Distance from the platform coordinate system origin to the nominal water level along the _z_-axis" | |
 |:units = "m" | |
 |Subgroups | |
-|Position |M |Suggested subgroup to store Position sensor data.
-|Attitude |M |Suggested subgroup to store MRU sensor data.
+|Positions |M |Suggested subgroup to store Position sensor data.
+|Attitudes |M |Suggested subgroup to store MRU sensor data.
 |==============================================================================================================================================================================================================
