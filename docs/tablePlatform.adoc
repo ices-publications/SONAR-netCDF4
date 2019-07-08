@@ -40,7 +40,7 @@
 |:units = "arc_degree" | |
 |float :valid_range = −180.0, 180.0 | |
 | | |
-|string MRU_ids(MRU) |R |MRU serial number or identification name
+|string MRU_ids(MRU) |R |MRU serial number or identification name. Must be a valid netCDF4 group name.
 | | |
 |string position_ids(position) |R |Position sensor serial number or identification name
 | | |
