@@ -1,4 +1,4 @@
-= The SONAR-netCDF4 convention for sonar data, Version 1.0
+= The SONAR-netCDF4 convention for sonar data, Version 1.1
 Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :toc: left
 :toclevels: 3
