@@ -42,7 +42,7 @@
 | | |
 |string MRU_ids(MRU) |R |MRU serial number or identification name. Must be a valid netCDF4 group name.
 | | |
-|string position_ids(position) |R |Position sensor serial number or identification name
+|string position_ids(position) |R |Position sensor serial number or identification name. Must be a valid netCDF4 group name.
 | | |
 |float position_offset_x(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _x_-axis.
 |:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
