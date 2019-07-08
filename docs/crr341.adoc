@@ -195,7 +195,7 @@ include::tableEnvironment.adoc[]
 ==== Platform group
 
 This group contains information about the sonar platform (e.g. ship). The netCDF4 group name is */Platform* and is described in <<platformGroupTable>>. 
-Optionally, /Platform subgroups can be included to store data from individual instruments measuring values that are relative to the platform. If those values are relative to the environment around the platform, they must be stored in the Environment group. 
+Optionally, subgroups of /Platform can be used to store data from individual instruments that provide measurements about the platform (note that if those values are relative to the environment around the platform, they should be stored in the Environment group). 
 Each platform can be made up with several instruments belonging to the same category. (For example a platform can associated to several position sensors). Each category is defined as a subgroup of the Platform group and data for each sensor are stored in a subgroup of the sensor category. This structure must be used to store any type of sensor. 
 More specifically individual position and (resp.) attitude instruments are defined individually as subgroups of the */Platform/Position* and (resp.) */Platform/Attitude* subgroups. The name of those subgroups must match the names of their serial number or identifier as defined in <<platformGroupTable>>.
 The coordinate system convention, including the definition of pitch and roll, is detailed in <<_coordinate_systems>>.
