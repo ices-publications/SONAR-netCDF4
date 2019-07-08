@@ -40,9 +40,9 @@
 |:units = "arc_degree" | |
 |float :valid_range = −180.0, 180.0 | |
 | | |
-|string MRU_ids(MRU) |R |MRU serial number or identification name. Must be a valid netCDF4 group name.
+|string MRU_ids(MRU) |MA |MRU serial number or identification name. Must be a valid netCDF4 group name.
 | | |
-|string position_ids(position) |R |Position sensor serial number or identification name. Must be a valid netCDF4 group name.
+|string position_ids(position) |MA |Position sensor serial number or identification name. Must be a valid netCDF4 group name.
 | | |
 |float position_offset_x(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _x_-axis.
 |:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
@@ -68,7 +68,7 @@
 |:long_name = "_z_-axis distance from the platform coordinate system origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
-|string transducer_ids(transducer) |R |Transducer serial number or identification name
+|string transducer_ids(transducer) |MA |Transducer serial number or identification name
 | | |
 |float transducer_rotation_x(transducer) |R |Extrinsic angular rotation about the _x_-axis from the transducer zero angle to the coordinate system origin zero angle.
 |float :valid_range = -180.0f, 180.0f | |
