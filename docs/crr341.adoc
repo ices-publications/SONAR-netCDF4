@@ -202,7 +202,9 @@ The coordinate system convention, including the definition of pitch and roll, is
 Each sensor instance group would also provide a standard place to store unprocessed and unparsed instrument data from multiple GPS sensors, motion reference units, etc. 
 The data format is not prescribed, but could be, for example, be NMEA-style text and/or numeric values. Subgroups must have one attribute called “description” that provides a short description of the contents. Other attributes can be added as desired. The variables under the subgroup should have appropriate names and an attribute that gives the units, where appropriate.
 The following table give the suggested convention recommended to name subgroups for different known kind of sensors or datagrams
+.Suggested subgroup names for platform instruments.
 [cols=",,",options="header",]
+[[platformInstrumentsTable]]
 |========================================================================
 |Sensor or datagram |Suggested category or group name | Comment
 |Attitude sensors, MRU |Attitude | 
