@@ -68,7 +68,7 @@
 |:long_name = "_z_-axis distance from the platform coordinate system origin to the sonar transducer" | |
 |:units = "m" | |
 | | |
-|string transducer_id(transducer) |R |Transducer serial number or identification name
+|string transducer_ids(transducer) |R |Transducer serial number or identification name
 | | |
 |float transducer_rotation_x(transducer) |R |Extrinsic angular rotation about the _x_-axis from the transducer zero angle to the coordinate system origin zero angle.
 |float :valid_range = -180.0f, 180.0f | |
