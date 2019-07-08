@@ -32,7 +32,7 @@
 |:units = "degree" | |
 |:long_name = "Platform heading(true)" | |
 | | |
-|float course_over_ground(time) |O |a platform course is the cardinal direction along which the platform or aircraft is to be steered
+|float course_over_ground(time) |O |a platform course is the cardinal direction along which the platform is to be steered
 |:standard_name = "platform_course" | |
 |:units = "m/s" | |
 |:long_name = "degree" | |
