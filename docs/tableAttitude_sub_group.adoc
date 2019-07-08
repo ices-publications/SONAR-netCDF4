@@ -12,11 +12,6 @@
 |:standard_name = "time" | |
 |:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
 |Variables | |
-|float distance(time) |O |Distance travelled by the platform from an arbitrary location.
-|:long_name = "Distance travelled by the platform" | |
-|:units = "m" | |
-|:valid_min = "0.0" | |
-| | |
 |float heading(time) |MA |Platform heading. Measured clockwise from north.
 |:long_name =  "Platform heading (true)" | |
 |:standard_name =  "platform_orientation" | |
