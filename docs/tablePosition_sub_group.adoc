@@ -49,19 +49,21 @@
 |:units = "m/s" | |
 |float :valid_min = 0.0 | |
 | | |
-|float height_above_reference(time) |MA |height of the platform reference point above reference coordinate system (could be geoid, ellipsoid, or chart datum specified in vertical reference attribute)
-|:grid_mapping = "vertical_reference" | |
+|float height_above_reference_ellipsoid(time) |MA |height of the platform reference point above the WGS-84 ellipsoid
+|:standard_name = "height_above_reference_ellipsoid" | |
 |:units = "m" | |
-|:long_name = "height_above_reference" | |
+|:long_name = "height_above_reference_ellipsoid" | |
+| | |
+|float altitude(time) |MA |Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level.
+|:standard_name = "altitude" | |
+|:units = "m" | |
+|:long_name = "altitude" | |
 | | |
 |float distance(time) |O |Distance travelled by the platform from an arbitrary location.
 |:long_name = "Distance travelled by the platform" | |
 |:units = "m" | |
 |:valid_min = "0.0" | |
 | | |
-|int vertical_reference(time) |MA |see 5.6. Horizontal Coordinate Reference Systems, Grid Mappings, and Projections in cf-convention 
-|:grid_mapping_name = " " | |
-
 |Subgroups | |
 |NMEA |O |Suggested subgroup to store raw NMEA data as an example of a Position subgroup.
 |==============================================================================================================================================================================================================
