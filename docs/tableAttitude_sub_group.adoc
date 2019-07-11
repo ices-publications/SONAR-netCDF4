@@ -5,7 +5,7 @@
 |Dimensions | |
 |time | |can be fixed or unlimited length, as appropriate
 |Coordinate variables | |
-|uint64 time(time) | |Time from attitude sensor
+|uint64 time(time) |M |Time from attitude sensor
 |:axis = "T" | |
 |:calendar = "gregorian" | |
 |:long_name = "Timestamps for attitude data" | |
@@ -13,20 +13,20 @@
 |:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
 |Variables | |
 |float heading(time) |MA |Platform heading. Measured clockwise from north.
-|:long_name =  "Platform heading (true)" | |
-|:standard_name =  "platform_orientation" | |
+|:long_name = "Platform heading (true)" | |
+|:standard_name = "platform_orientation" | |
 |:units = "degrees_north" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
-|float heading_rate(time) |MA |Platform heading rate. 
-|:long_name =  "Platform heading rate" | |
+|float heading_rate(time) |MA |Platform heading rate.
+|:long_name = "Platform heading rate" | |
 |:units = "degree/s" | |
 | | |
 |float pitch(time) |M |Platform pitch. Positive values indicate a bow-up pitch.
 |:standard_name = "platform_pitch_angle" | |
 |:units = "arc_degree" | |
 |:long_name = "pitch angle" | |
-|float :valid_range = –90.0, 90.0 | |
+|float :valid_range = −90.0, 90.0 | |
 | | |
 |float pitch_rate(time) |O |Platform pitch rate
 |:standard_name = "platform_pitch_rate" | |

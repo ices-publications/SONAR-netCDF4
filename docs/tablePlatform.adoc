@@ -71,17 +71,17 @@
 |string transducer_ids(transducer) |MA |Transducer serial number or identification name
 | | |
 |float transducer_rotation_x(transducer) |R |Extrinsic angular rotation about the _x_-axis from the transducer zero angle to the coordinate system origin zero angle.
-|float :valid_range = -180.0f, 180.0f | |
+|float :valid_range = −180.0, 180.0 | |
 |:units = "arc_degree" | |
 |:long_name = "Extrinsic rotation about the _x_-axis from the transducer to reference coordinate systems" | |
 | | |
 |float transducer_rotation_y(transducer) |R |Extrinsic angular rotation about the _y_-axis from the transducer zero angle to the coordinate system origin zero angle.
-|float :valid_range = -180.0f, 180.0f | |
+|float :valid_range = −180.0, 180.0 | |
 |:units = "arc_degree" | |
 |:long_name = "Extrinsic rotation about the _y_-axis from the transducer to reference coordinate systems" | |
 | | |
 |float transducer_rotation_z(transducer) |R |Extrinsic angular rotation about the _z_-axis from the transducer zero angle to the coordinate system origin zero angle.
-|float :valid_range = -180.0f, 180.0f | |
+|float :valid_range = −180.0, 180.0 | |
 |:units = "arc_degree" | |
 |:long_name = "Extrinsic rotation about the _z_-azis from the transducer to reference coordinate systems" | |
 | | |

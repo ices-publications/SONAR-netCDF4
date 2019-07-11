@@ -5,27 +5,27 @@
 |Dimensions | |
 |time | |can be fixed or unlimited length, as appropriate
 |Coordinate variables | |
-|uint64 time(time) | |Time from position sensor
+|uint64 time(time) |M |Time from position sensor
 |:axis = "T" | |
 |:calendar = "gregorian" | |
-|:long_name =  "Timestamps for position data" | |
+|:long_name = "Timestamps for position data" | |
 |:standard_name = "time" | |
 |:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
 | | |
 |Variables | |
 |double latitude(time) |M |latitude of the platform reference point in WGS-84 reference system
-|double :valid_range = –90.0, 90.0 | |
+|double :valid_range = −90.0, 90.0 | |
 |:standard_name = "Platform latitude" | |
 |:units = "degrees_north" | |
 |:long_name = "latitude" | |
-|double:_FillValue = Double.NaN | |
+|double :_FillValue = Double.NaN | |
 | | |
 |double longitude(time) |M |latitude of the platform reference point in WGS-84 reference system
-|double :valid_range = –180.0, 180.0 | |
+|double :valid_range = −180.0, 180.0 | |
 |:standard_name = "Platform longitude" | |
 |:units = "degrees_east" | |
 |:long_name = "longitude" | |
-|double:_FillValue = Double.NaN | |
+|double :_FillValue = Double.NaN | |
 | | |
 |float heading(time) |MA |Heading refers to the direction a platform is pointing. This may or may not be the direction that the platform actually travels, which is known as its course or track. Any difference between course and heading is due to the motion of the underlying medium, the air or water, or other effects like skidding or slipping. Heading is typically based on compass directions, so 0° (or 360°) indicates a direction toward true North, 90° indicates a direction toward true East, 180° is true South, and 270° is true West.  
 |:standard_name = "platform_orientation" | |
@@ -62,7 +62,7 @@
 |float distance(time) |O |Distance travelled by the platform from an arbitrary location.
 |:long_name = "Distance travelled by the platform" | |
 |:units = "m" | |
-|:valid_min = "0.0" | |
+|float :valid_min = 0.0 | |
 | | |
 |Subgroups | |
 |NMEA |O |Suggested subgroup to store raw NMEA data as an example of a Position subgroup.

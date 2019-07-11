@@ -7,16 +7,16 @@
 |:long_name = "Acoustic frequency" | |
 |:standard_name = "sound_frequency" | |
 |:units = "Hz" | |
-|float :valid_min = 0.0 | |
+|float :valid_min = 0.0 | |
 |Variables | |
 |float absorption_indicative(frequency) |M |Indicative absorption values used to calculate the time-varied-gain (TVG), in the absence of more detailed data.
-|:long_name =  "Indicative acoustic absorption" | |
+|:long_name = "Indicative acoustic absorption" | |
 |:units = "dB/m" | |
-|float :valid_min = 0.0 | |
+|float :valid_min = 0.0 | |
 | | |
 |float sound_speed_indicative |M |Mean sound speed in water used to calculate echo range, in the absence of more detailed sound-speed data.
 |:long_name = "Indicative sound speed" | |
-|:standard_name =  "speed_of_sound_in_sea_water" | |
+|:standard_name = "speed_of_sound_in_sea_water" | |
 |:units = "m/s" | |
-|float :valid_min = 0.0 | |
+|float :valid_min = 0.0 | |
 |===========================================================================================================================================================
