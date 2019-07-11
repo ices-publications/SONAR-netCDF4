@@ -49,12 +49,12 @@
 |:units = "m/s" | |
 |float :valid_min = 0.0 | |
 | | |
-|float height_above_reference_ellipsoid(time) |MA |height of the platform reference point above the WGS-84 ellipsoid
+|float height_above_reference_ellipsoid(time) |MA |Height of the platform reference point above the WGS-84 ellipsoid
 |:standard_name = "height_above_reference_ellipsoid" | |
 |:units = "m" | |
 |:long_name = "height_above_reference_ellipsoid" | |
 | | |
-|float altitude(time) |MA |Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level.
+|float altitude(time) |MA |Altitude is the (geometric) height of the platform reference point above the reference WGS-84 geoid. The geoid is similar to mean sea level.
 |:standard_name = "altitude" | |
 |:units = "m" | |
 |:long_name = "altitude" | |
