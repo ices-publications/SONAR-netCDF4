@@ -13,7 +13,7 @@
 |:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
 |Variables | |
 |float heading(time) |MA |Platform heading. Measured clockwise from north.
-|:long_name = "Platform heading (true)" | |
+|:long_name = "Platform heading(true)" | |
 |:standard_name = "platform_orientation" | |
 |:units = "degrees_north" | |
 |float :valid_range = 0.0, 360.0 | |

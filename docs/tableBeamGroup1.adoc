@@ -153,4 +153,40 @@
 |int active_position_sensor(ping_time) |MA |Indicate the index of the position sensor used at the time of the ping to compute the platform position.
 |:valid_min = "0" | |
 |:long_name = "Active position sensor index" | |
+|double platform_latitude(ping_time) |M |Latitude of the platform reference point in WGS-84 reference system at the time of the ping.
+|double :valid_range = −90.0, 90.0 | |
+|:standard_name = "Platform latitude" | |
+|:units = "degrees_north" | |
+|:long_name = "latitude" | |
+|double :_FillValue = Double.NaN | |
+| | |
+|double platform_longitude(ping_time) |M |longitude of the platform reference point in WGS-84 reference system at the time of the ping.
+|double :valid_range = −180.0, 180.0 | |
+|:standard_name = "Platform longitude" | |
+|:units = "degrees_east" | |
+|:long_name = "longitude" | |
+|double :_FillValue = Double.NaN | |
+| | |
+|float platform_heading(ping_time) |M |Heading of the platform at time of the ping.
+|:standard_name = "platform_orientation" | |
+|:units = "degrees_north" | |
+|:long_name = "Platform heading(true)" | |
+|float :valid_range = 0, 360.0 | |
+| | |
+|float platform_pitch(ping_time) |M |Platform pitch at the time of the ping.
+|:crs = "VCS" | |
+|:standard_name = "platform_pitch_angle" | |
+|:units = "arc_degree" | |
+|:long_name = "pitch angle" | |
+|float :valid_range = −90.0, 90.0 | |
+| | |
+|float platform_roll(ping_time) |M |Platform roll at the time of the ping.
+|:crs = "VCS" | |
+|:standard_name = "platform_roll_angle" | |
+|:units = "arc_degree" | |
+|:long_name = "roll angle" | |
+| | |
+|float platform_vertical_offset(ping_time) |M |Distance from the platform reference point to the water line (distance are positives downwards) . For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.
+|:long_name = "Platform vertical distance from reference point to the water line" | |
+|:units = "m" | |
 |=========================================================================================================================================================================================================================================================================================================================================================
