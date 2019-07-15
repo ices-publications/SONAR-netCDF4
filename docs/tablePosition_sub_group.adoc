@@ -13,7 +13,7 @@
 |:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
 | | |
 |Variables | |
-|double latitude(time) |M |latitude of the platform reference point in WGS-84 reference system
+|double latitude(time) |M |Latitude of the platform reference point in WGS-84 reference system
 |double :valid_range = −90.0, 90.0 | |
 |:standard_name = "Platform latitude" | |
 |:units = "degrees_north" | |
