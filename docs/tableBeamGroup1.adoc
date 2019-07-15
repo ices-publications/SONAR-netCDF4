@@ -160,7 +160,7 @@
 |:long_name = "latitude" | |
 |double :_FillValue = Double.NaN | |
 | | |
-|double platform_longitude(ping_time) |M |longitude of the platform reference point in WGS-84 reference system at the time of the ping.
+|double platform_longitude(ping_time) |M |Longitude of the platform reference point in WGS-84 reference system at the time of the ping.
 |double :valid_range = −180.0, 180.0 | |
 |:standard_name = "Platform longitude" | |
 |:units = "degrees_east" | |
