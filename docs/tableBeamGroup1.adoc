@@ -8,6 +8,7 @@
 |Dimensions | |
 |beam | |The number of beams in this beam group.
 |ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
+|tx_beam | |The number of transmit beams in this beam group
 |Coordinate variables | |
 |string beam(beam) |M |Beam name (or number or identification code).
 |:long_name = "Beam name" | |
@@ -37,12 +38,12 @@
 |:units = "arc_degree" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
-|float beamwidth_transmit_major(ping_time, beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
+|float beamwidth_transmit_major(ping_time, tx_beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
 |:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam" | |
 |:units = "arc_degree" | |
 |float :valid_range = 0.0, 360.0 | |
 | | |
-|float beamwidth_transmit_minor(ping_time, beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
+|float beamwidth_transmit_minor(ping_time, tx_beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
 |:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" | |
 |:units = "arc_degree" | |
 |float :valid_range = 0.0, 360.0 | |
@@ -62,8 +63,23 @@
 |:units = "1" | |
 |float :valid_range = −1.0, 1.0 | |
 | | |
+|float tx_beam_direction_x(ping_time, tx_beam) |M |The _x_-axis coordinate of a unit vector in the beam direction for each tx_beam and ping, as per the sonar beam coordinate system.
+|:long_name = "_x_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
+|:units = "1" | |
+|float :valid_range = −1.0, 1.0 | |
+| | |
+|float tx_beam_direction_y(ping_time, beam) |M |The _y_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
+|:long_name = "_y_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
+|:units = "1" | |
+|float :valid_range = −1.0, 1.0 | |
+| | |
+|float tx_beam_direction_z(ping_time, beam) |M |The _z_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
+|:long_name = "_z_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
+|:units = "1" | |
+|float :valid_range = −1.0, 1.0 | |
+| | |
 |beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
-|:long_name =  "Beam stabilisation applied (or not)" | |
+|:long_name = "Beam stabilisation applied (or not)" | |
 | | |
 |beam_t beam_type(ping_time) |M |Type of beam.
 |:long_name = "Type of beam" | |
@@ -95,6 +111,15 @@
 |:long_name = "Time offset that is subtracted from the timestamp of each sample" | |
 |:units = "s" | |
 | | |
+|float transmit_time_delay(ping_time, tx_beam) |O |Time delay for each transmit beam between the ping time and the transmit time
+|:long_name = "Time delay for each transmit beam between the ping time and the transmit time" | |
+|:units = "s" | |
+| | |
+|float blanking_interval(ping_time, beam) |M |Time between first sample in data array and the first valid values.
+|:long_name = "Time between first recorded sample in data array and the first valid value " | |
+|:units = "s" | |
+|:valid_min = "0.0" | |
+| | |
 |sample_t time_varied_gain(ping_time) |MA |Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.
 |:long_name = "Time-varied-gain coefficients" | |
 |:units = "dB" | |
@@ -103,39 +128,39 @@
 |:long_name = "Gain of transducer" | |
 |:units = "dB" | |
 | | |
-|float transmit_bandwidth(ping_time) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
+|float transmit_bandwidth(ping_time, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
 |:long_name = "Nominal bandwidth of transmitted pulse" | |
 |:units = "Hz" | |
 |float :valid_min = 0.0 | |
 | | |
-|float transmit_duration_equivalent(ping_time) |MA |Equivalent duration of the transmit pulse. This is the square pulse containing the same energy as the actual transmitted pulse. Necessary for both type 1 and 2 conversion equations.
+|float transmit_duration_equivalent(ping_time, tx_beam) |MA |Equivalent duration of the transmit pulse. This is the square pulse containing the same energy as the actual transmitted pulse. Necessary for both type 1 and 2 conversion equations.
 |:long_name = "Equivalent duration of transmitted pulse" | |
 |:units = "s" | |
 |float :valid_min = 0.0 | |
 | | |
-|float transmit_duration_nominal(ping_time) |M |Nominal duration of the transmit pulse. This is not the equivalent pulse duration.
+|float transmit_duration_nominal(ping_time, tx_beam) |M |Nominal duration of the transmit pulse. This is not the equivalent pulse duration.
 |:long_name = "Nominal duration of transmitted pulse" | |
 |:units = "s" | |
 |float :valid_min = 0.0 | |
 | | |
-|float transmit_frequency_start(ping_time, beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
+|float transmit_frequency_start(ping_time, tx_beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
 |:long_name = "Start frequency in transmitted pulse" | |
 |:standard_name = "sound_frequency" | |
 |:units = "Hz" | |
 |float :valid_min = 0.0 | |
 | | |
-|float transmit_frequency_stop(ping_time, beam) |M |Frequency at the end of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
+|float transmit_frequency_stop(ping_time, tx_beam) |M |Frequency at the end of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
 |:long_name = "Stop frequency in transmitted pulse" | |
 |:standard_name = "sound_frequency" | |
 |:units = "Hz" | |
 |float :valid_min = 0.0 | |
 | | |
-|float transmit_power(ping_time) |MA |Electrical transmit power used for the ping. Necessary for type 1 conversion equations
+|float transmit_power(ping_time, tx_beam) |MA |Electrical transmit power used for the ping. Necessary for type 1 conversion equations
 |:long_name = "Nominal transmit power" | |
 |:units = "W" | |
 |float :valid_min = 0.0 | |
 | | |
-|float transmit_source_level(ping_time) |MA |Source level generated by the transmit ping. Necessary for type 2 conversion equations.
+|float transmit_source_level(ping_time, tx_beam) |MA |Source level generated by the transmit ping. Necessary for type 2 conversion equations.
 |:long_name = "Transmit source level" | |
 |:units = "dB re 1 μPa at 1m" | |
 | | |
@@ -153,6 +178,13 @@
 |int active_position_sensor(ping_time) |MA |Indicate the index of the position sensor used at the time of the ping to compute the platform position.
 |:valid_min = "0" | |
 |:long_name = "Active position sensor index" | |
+| | |
+|float sound_speed_at_transducer(ping_time) |O |Sound speed at tx transducer depth at ping time
+|:long_name = "Indicative sound speed at ping time and transducer depth" | |
+|:units = "m/s" | |
+|float :valid_min = 0.0 | |
+|:standard_name = "speed_of_sound_in_sea_water" | |
+| | |
 |double platform_latitude(ping_time) |M |Latitude of the platform reference point in WGS-84 reference system at the time of the ping.
 |double :valid_range = −90.0, 90.0 | |
 |:standard_name = "Platform latitude" | |
