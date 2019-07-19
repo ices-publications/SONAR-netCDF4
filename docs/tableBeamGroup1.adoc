@@ -107,7 +107,7 @@
 |:units = "s" | |
 |float :valid_min = 0.0 | |
 | | |
-|float sample_time_offset(ping_time) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample.
+|float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)
 |:long_name = "Time offset that is subtracted from the timestamp of each sample" | |
 |:units = "s" | |
 | | |
@@ -115,8 +115,8 @@
 |:long_name = "Time delay for each transmit beam between the ping time and the transmit time" | |
 |:units = "s" | |
 | | |
-|float blanking_interval(ping_time, beam) |M |Time between first sample in data array and the first valid values.
-|:long_name = "Time between first recorded sample in data array and the first valid value " | |
+|float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded sample is given by blanking_interval*sample_interval.
+|:long_name = "Amount of time during reception where samples are discarded" | |
 |:units = "s" | |
 |:valid_min = "0.0" | |
 | | |
@@ -179,7 +179,7 @@
 |:valid_min = "0" | |
 |:long_name = "Active position sensor index" | |
 | | |
-|float sound_speed_at_transducer(ping_time) |O |Sound speed at tx transducer depth at ping time
+|float sound_speed_at_transducer(ping_time) |O |Sound speed at transducer depth at the time of the ping
 |:long_name = "Indicative sound speed at ping time and transducer depth" | |
 |:units = "m/s" | |
 |float :valid_min = 0.0 | |
