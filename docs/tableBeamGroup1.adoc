@@ -107,12 +107,8 @@
 |:units = "s" | |
 |float :valid_min = 0.0 | |
 | | |
-|float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)
+|float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2
 |:long_name = "Time offset that is subtracted from the timestamp of each sample" | |
-|:units = "s" | |
-| | |
-|float transmit_time_delay(ping_time, tx_beam) |O |Time delay for each transmit beam between the ping time and the transmit time
-|:long_name = "Time delay for each transmit beam between the ping time and the transmit time" | |
 |:units = "s" | |
 | | |
 |float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded sample is given by blanking_interval*sample_interval.
