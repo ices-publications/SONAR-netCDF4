@@ -284,10 +284,10 @@ where latexmath:[P_r] is linearly proportional to the received power (square of 
 
 [stem]
 ++++
-r = \frac{c ( dt \cdot i - t_0 )}{2},
+r = \frac{c ( dt \cdot i - t_0)}{2},
 ++++
 
-where _c_ is sound speed (NetCDF4 variable is sound_speed_indicative, m/s), _dt_ is the time between recorded samples (sample_interval, s), _i_ is the sample number (from zero to one less than the number of samples), and latexmath:[t_0] is a time-offset (sample_time_offset, s).
+where _c_ is sound speed (NetCDF4 variable is sound_speed_indicative, m/s), _dt_ is the time between recorded samples (sample_interval, s), _i_ is the sample number (from zero to one less than the number of samples), and latexmath:[t_0] is a time-offset (sample_time_offset-blanking_interval, s).
 
 The absorption coefficient of sound in water is _α_ (absorption_indicative, dB/m), latexmath:[P_t] is the transmit power (transmit_power, W), latexmath:[\lambda] is the acoustic wavelength (derived from the average of transmit_frequency_start and transmit_frequency_stop, and sound_speed_indicative, m), _G_ is the transducer gain (transducer_gain, dB)_,_ and latexmath:[\gamma] is the beam tilt angle (derived from beam_direction_x, beam_direction_y, beam_direction_z, degrees from horizontal).
 
