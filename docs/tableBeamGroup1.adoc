@@ -68,12 +68,12 @@
 |:units = "1" | |
 |float :valid_range = −1.0, 1.0 | |
 | | |
-|float tx_beam_direction_y(ping_time, beam) |M |The _y_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
+|float tx_beam_direction_y(ping_time, tx_beam) |M |The _y_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
 |:long_name = "_y_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
 |:units = "1" | |
 |float :valid_range = −1.0, 1.0 | |
 | | |
-|float tx_beam_direction_z(ping_time, beam) |M |The _z_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
+|float tx_beam_direction_z(ping_time, tx_beam) |M |The _z_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
 |:long_name = "_z_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
 |:units = "1" | |
 |float :valid_range = −1.0, 1.0 | |

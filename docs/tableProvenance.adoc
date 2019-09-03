@@ -8,5 +8,5 @@
 |filenames = unlimited | |Can be of fixed or unlimited length, as appropriate.
 |Variables | |
 |string source_filenames(filenames) |MA |Vector of datafile names that were used to generate the data in this SONAR-netCDF4 file.
-|:long_name = "Source filenames" | |
+|:long_name = "Source filenames" | |
 |=========================================================================================================================================
