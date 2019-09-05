@@ -214,7 +214,16 @@
 |:units = "arc_degree" | |
 |:long_name = "roll angle" | |
 | | |
-|float platform_vertical_offset(ping_time) |M |Distance from the platform reference point to the water line (distance are positives downwards) . For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.
+|float platform_vertical_offset(ping_time) |M |Distance from the platform reference point to the water line (distance are positives downwards). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.
 |:long_name = "Platform vertical distance from reference point to the water line" | |
 |:units = "m" | |
+| | |
+|float tx_transducer_depth(ping_time) |O |Tx transducer depth below waterline at time of the ping (distance are positives downwards). This variable can be recomputed in most cases by applying lever arm and rotation matrix taking into account for roll and pitch, platform_vertical_offset but can also take into account for drop keel position
+|:long_name = "Tx transducer depth below waterline" | |
+|:units = "m" | |
+| | |
+|float waterline_to_chart_datum(ping_time) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector obtains by adding the tide, the dynamic draught at the time of the ping and allow to position samples in an absolute referential.
+|:long_name = "vertical translation from waterline to chart datum reference " | |
+|:units = "m" | |
+|:vertical_coordinate_reference_system = "MSL depth" | |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
 |=========================================================================================================================================================================================================================================================================================================================================================
