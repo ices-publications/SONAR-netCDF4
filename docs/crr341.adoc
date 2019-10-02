@@ -12,6 +12,8 @@ Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :eqnums:
 :bibtex-file: references.bib
 :bibtex-style: ices-journal-of-marine-science
+:var: {nbsp}{nbsp}{nbsp}{nbsp}
+:attr: {var}{var}
 
 // a future version of Asciidoctor will use the 'untitled' option to now show the heading
 [colophon%untitled]
@@ -170,7 +172,6 @@ An example of a SONAR-netCDF4 file is provided in the Common Data form Language 
 The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<<topLevelTable>>).
 
 .Description of the top-level group.
-[cols=",,",options="header",]
 [[topLevelTable]]
 include::tableToplevel.adoc[]
 
@@ -179,7 +180,6 @@ include::tableToplevel.adoc[]
 The annotation group contains timestamped annotations with optional identification code. Annotations are typically textual notes entered by users relevant to the data at a particular time. Some sonar systems provide an interface for creating manual and programmatic annotations. The netCDF4 group name is */Annotation* and is described in <<annotationTable>>.
 
 .Description of the annotation group.
-[cols=",,",options="header",]
 [[annotationTable]]
 include::tableAnnotation.adoc[]
 
@@ -188,7 +188,6 @@ include::tableAnnotation.adoc[]
 The environment group contains information on environmental conditions, especially the speed of sound in water and acoustic absorption. The netCDF4 group name is */Environment* and is described in <<environmentTable>>. Sound speed, absorption, and current profiles can also be stored in this group, as can profile measurements of salinity, temperature, and pressure. Such profile data should use the NCEI NetCDF “profile” template, v2.0 or greater.
 
 .Description of the environment group.
-[cols=",,",options="header",]
 [[environmentTable]]
 include::tableEnvironment.adoc[]
 
@@ -239,7 +238,6 @@ include::tableNMEA.adoc[]
 The provenance group provides information on how the SONAR-netCDF4 version of the data were created. The netCDF4 group name is */Provenance* and is described in <<provenanceTable>>.
 
 .Description of the provenance group.
-[cols=",,",options="header",]
 [[provenanceTable]]
 include::tableProvenance.adoc[]
 
@@ -252,12 +250,10 @@ Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in
 Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
 
 .Description of the sonar group.
-[cols=",,",options="header",]
 [[sonarGroupTable]]
 include::tableSonar.adoc[]
 
 .Description of the beam mode subgroups of the sonar group.
-[cols=",,",options="header",]
 [[sonarBeammodeTable]]
 include::tableBeamGroup1.adoc[]
 

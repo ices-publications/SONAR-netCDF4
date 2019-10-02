@@ -1,20 +1,23 @@
-|==========================================================================================================================================================================================================================================================================================================================================
+[%autowidth,options="header",]
+|===
 |Description |Obligation |Comment
-|Group attributes | |
-|:sonar_manufacturer |R |Name of the sonar manufacturer.
-|:sonar_model |R |Name of the sonar model.
-|:sonar_serial_number |R |Sonar serial number.
-|:sonar_software_name |R |Sonar software name.
-|:sonar_software_version |R |Sonar software version.
-|:sonar_type = "omni-sonar" |M |Type of sonar, chosen from a defined vocabulary (currently only one value): ”omnisonar” (a sonar with a nominally omnidirectional mode).
-|Types | |
-|byte enum beam_stabilisation_t \{not_stabilised = 0, stabilised = 1} |Whether or not the beam direction is compensated for platform motion. |
-|byte enum beam_t \{single = 0, split_aperture = 1} |Beam type. Split aperture indicates a beam that can detect the arrival angle of echoes, while single beam cannot. |
-|byte enum conversion_equation_t  \{type_1 = 1, type_2 = 2} |The type of equation used to convert backscatter measurements into volume backscattering and target strength. |
-|byte enum transmit_t \{CW = 0, LFM = 1, HFM = 2} | |Type of transmit pulse. CW = continuous wave – a pulse nominally of one frequency, LFM = linear frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a linear manner over the nominal pulse duration (transmit_duration_nominal), HFM = hyperbolic frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a hyperbolic manner over the nominal pulse duration (transmit_duration_nominal).
-|float(*) sample_t | |Variable length vector used to store ragged arrays of backscatter data.
-|Subgroups | |
-|Beam_group1 |M |Example of a beam group. Include as many subgroups as necessary for different beam groups. Use unique group names, preferably of the form Beam_groupX where X is an integer.
-|==========================================================================================================================================================================================================================================================================================================================================
+e|Group attributes | |
+ |{attr}:sonar_manufacturer |R |Name of the sonar manufacturer.
+ |{attr}:sonar_model |R |Name of the sonar model.
+ |{attr}:sonar_serial_number |R |Sonar serial number.
+ |{attr}:sonar_software_name |R |Sonar software name.
+ |{attr}:sonar_software_version |R |Sonar software version.
+ |{attr}:sonar_type = "omni-sonar" |M |Type of sonar, chosen from a defined vocabulary (currently only one value): ”omnisonar” (a sonar with a nominally omnidirectional mode).
+ 
+e|Types | |
+ |{var}byte enum beam_stabilisation_t {not_stabilised = 0, stabilised = 1} ||Whether or not the beam direction is compensated for platform motion.
+ |{var}byte enum beam_t {single = 0, split_aperture = 1} ||Beam type. Split aperture indicates a beam that can detect the arrival angle of echoes, while single beam cannot.
+ |{var}byte enum conversion_equation_t  {type_1 = 1, type_2 = 2} ||The type of equation used to convert backscatter measurements into volume backscattering and target strength.
+ |{var}byte enum transmit_t {CW = 0, LFM = 1, HFM = 2} ||Type of transmit pulse. CW = continuous wave – a pulse nominally of one frequency, LFM = linear frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a linear manner over the nominal pulse duration (transmit_duration_nominal), HFM = hyperbolic frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a hyperbolic manner over the nominal pulse duration (transmit_duration_nominal).
+ |{var}float(*) sample_t | |Variable length vector used to store ragged arrays of backscatter data.
+ 
+e|Subgroups | |
+ |{var}Beam_group1 |M |Example of a beam group. Include as many subgroups as necessary for different beam groups. Use unique group names, preferably of the form Beam_groupX where X is an integer.
+|===
 
 

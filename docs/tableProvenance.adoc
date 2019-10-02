@@ -1,12 +1,15 @@
-|=========================================================================================================================================
+[%autowidth,options="header",]
+|===
 |Description |Obligation |Comment
-|Group attributes | |
-|:conversion_software_name |MA |Name of the software used to do the conversion.
-|:conversion_software_version |MA |Version of the software used to do the conversion.
-|:conversion_time |MA |Date and time of the start of the conversion process in extended ISO8601:2005 extended format, including time zone.
-|Dimensions | |
-|filenames = unlimited | |Can be of fixed or unlimited length, as appropriate.
-|Variables | |
-|string source_filenames(filenames) |MA |Vector of datafile names that were used to generate the data in this SONAR-netCDF4 file.
-|:long_name = "Source filenames" | |
-|=========================================================================================================================================
+e|Group attributes | |
+ |{attr}:conversion_software_name |MA |Name of the software used to do the conversion.
+ |{attr}:conversion_software_version |MA |Version of the software used to do the conversion.
+ |{attr}:conversion_time |MA |Date and time of the start of the conversion process in extended ISO8601:2005 extended format, including time zone.
+ 
+e|Dimensions | |
+ |{var}filenames = unlimited | |Can be of fixed or unlimited length, as appropriate.
+ 
+e|Variables | |
+ |{var}string source_filenames(filenames) |MA |Vector of datafile names that were used to generate the data in this SONAR-netCDF4 file.
+ |{attr}:long_name = "Source filenames" | |
+|===
