@@ -277,14 +277,18 @@ The complex-valued backscatter data are converted into calibrated target strengt
 
 [stem]
 ++++
+\begin{equation}
 TS = 10 \log_{10}(P_{r}) + 40\log_{10}(r) + 2\alpha r - 10\log10_{10}( \frac{P_t\lambda^{2}}{16\pi^2}) - G - 40\log_{10}(\cos\gamma),
+\end{equation}
 ++++
 
 where latexmath:[P_r] is linearly proportional to the received power (square of the magnitude of the complex number given by backscatter_r and backscatter_i, W) and _r_ is the range between the transducer and target, calculated from:
 
 [stem]
 ++++
+\begin{equation} \label{eq:timeToRange}
 r = \frac{c ( dt \cdot i - t_0)}{2},
+\end{equation}
 ++++
 
 where _c_ is sound speed (NetCDF4 variable is sound_speed_indicative, m/s), _dt_ is the time between recorded samples (sample_interval, s), _i_ is the sample number (from zero to one less than the number of samples), and latexmath:[t_0] is a time-offset (sample_time_offset-blanking_interval, s).
@@ -295,7 +299,9 @@ The volume backscatter strength (Sv, citenp:[maclennan2002]) is derived from a s
 
 [stem]
 ++++
+\begin{equation}
 S_{v} = 10\log_{10}(P_{r}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}(\frac{P_t\lambda^{2}c\psi\tau_{e}}{32\pi^{2}}) - G - 40\log_{10}(\cos\gamma),
+\end{equation}
 ++++
 
 where latexmath:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and _G_ is the transducer gain (transducer_gain, dB).
@@ -306,10 +312,12 @@ Type 2 conversion equations are intended for data recorded by Furuno omnisonars.
 
 [stem]
 ++++
+\begin{equation}
 TS = 20\log_{10}(\frac{A}{\sqrt{2}}) + 40\log_{10}(r) + 2\alpha r - (SL + K + \Delta G + G_{T}),
+\end{equation}
 ++++
 
-where _A_ (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , _r_ is the range as given by equation (2), and _α_ is the absorption coefficient of sound in water (absorption_indicative, dB/m). _SL_ is source level (transmit_source_level, dB re 1μPa at 1 m) and _K_ is receiver sensitivity (receiver_sensitivity, dB re 1/μPa). Both parameters may depend on tilt angle of the beam for transmitting and receiving.
+where _A_ (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , _r_ is the range as given by equation \eqref{eq:timeToRange}, and _α_ is the absorption coefficient of sound in water (absorption_indicative, dB/m). _SL_ is source level (transmit_source_level, dB re 1μPa at 1 m) and _K_ is receiver sensitivity (receiver_sensitivity, dB re 1/μPa). Both parameters may depend on tilt angle of the beam for transmitting and receiving.
 
 Gain correction, latexmath:[\Delta G], (gain_correction, dB) is determined by the calibration. Time-varied gain, latexmath:[G_T] (time_varied_gain, dB), is given at each sample number _i_.
 
@@ -317,7 +325,9 @@ The volume backscatter strength is derived from a similar equation:
 
 [stem]
 ++++
+\begin{equation}
 S_v = 20\log_{10}(\frac{A}{\sqrt{2}}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}( \frac{c\tau_e}{2}\Psi ) - (SL + K + \Delta G + G_T),
+\end{equation}
 ++++
 
 where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
