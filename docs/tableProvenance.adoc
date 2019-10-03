@@ -13,5 +13,5 @@ e|Dimensions | |
  
 e|Variables | |
  |{var}string source_filenames(filenames) |MA |Vector of datafile names that were used to generate the data in this SONAR-netCDF4 file.
- |{attr}:long_name = "Source filenames" | |
+ 3+|{attr}:long_name = "Source filenames" 
 |===

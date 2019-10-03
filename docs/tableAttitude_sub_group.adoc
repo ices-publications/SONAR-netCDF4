@@ -13,9 +13,9 @@ e|Coordinate variables | |
  |{var}uint64 time(time) |M |Time from attitude sensor
  |{attr}:axis = "T" | |
  |{attr}:calendar = "gregorian" | |
- |{attr}:long_name = "Timestamps for attitude data" | |
+ 3+|{attr}:long_name = "Timestamps for attitude data" 
  |{attr}:standard_name = "time" | |
- |{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
+ 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
  
 e|Variables | |
  |{var}float heading(time) |MA |Platform heading. Measured clockwise from north.
@@ -51,5 +51,5 @@ e|Variables | |
  
  |{var}float vertical_offset(time) |M |Distance from the nominal water level to the actual water level measured along the _z_axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).
  |{attr}:units = "m" | |
- |{attr}:long_name = "Platform vertical offset from nominal" | |
+ 3+|{attr}:long_name = "Platform vertical offset from nominal"
 |===

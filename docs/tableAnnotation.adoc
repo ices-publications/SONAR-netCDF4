@@ -10,9 +10,9 @@ e|Coordinate variable||
  |{var}uint64 time(time)|MA|
  |{attr}:axis = "T"||
  |{attr}:calendar = "gregorian"||
- |{attr}:long_name = "Timestamps of annotations"||
+ 3+|{attr}:long_name = "Timestamps of annotations"
  |{attr}:standard_name = "time"||
- |{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z"||
+ 3+|{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z"
  
 e|Variables||
  |{var}string annotation_category(time)|O|Optional category for the annotation, for use in grouping annotation types.

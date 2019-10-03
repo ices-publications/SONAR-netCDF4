@@ -27,65 +27,65 @@ e|Coordinate variables | |
  
 e|Variables | |
  |{var}sample_t backscatter_i(ping_time, beam) |MA |Imaginary part of backscatter measurements. Each element in the 2D matrix is a variable length vector (of type sample_t) that contains the samples for that beam and ping time.
- |{attr}:long_name = "Raw backscatter measurements (imaginary part)" | |
+ 3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  |{attr}:units = "as appropriate" | |Use units appropriate for the data.
 
  |{var}sample_t backscatter_r(ping_time, beam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 2D matrix is a variable length vector (of type sample_t) that contains the samples for that beam and ping time.
- |{attr}:long_name = "Raw backscatter measurements (real part)" | |
+ 3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
  |{attr}:units = "as appropriate" | |Use units appropriate for the data.
 
  |{var}float beamwidth_receive_major(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
- |{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" | |
+ 3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 
  |{attr}:units = "arc_degree" | |
  |{attr}float :valid_range = 0.0, 360.0 | |
 
  |{var}float beamwidth_receive_minor(ping_time, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam.
- |{attr}:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam" | |
+ 3+|{attr}:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam"
  |{attr}:units = "arc_degree" | |
  |{attr}float :valid_range = 0.0, 360.0 | |
 
  |{var}float beamwidth_transmit_major(ping_time, tx_beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
- |{attr}:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam" | |
+ 3+|{attr}:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam"
  |{attr}:units = "arc_degree" | |
  |{attr}float :valid_range = 0.0, 360.0 | |
 
  |{var}float beamwidth_transmit_minor(ping_time, tx_beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
- |{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" | |
+ 3+|{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam"
  |{attr}:units = "arc_degree" | |
  |{attr}float :valid_range = 0.0, 360.0 | |
 
  |{var}float beam_direction_x(ping_time, beam) |M |The _x_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.
- |{attr}:long_name = "_x_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
+ 3+|{attr}:long_name = "_x_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system"
  |{attr}:units = "1" | |
  |{attr}float :valid_range = −1.0, 1.0 | |
 
  |{var}float beam_direction_y(ping_time, beam) |M |The _y_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.
- |{attr}:long_name = "_y_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
+ 3+|{attr}:long_name = "_y_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system"
  |{attr}:units = "1" | |
  |{attr}float :valid_range = −1.0, 1.0 | |
 
  |{var}float beam_direction_z(ping_time, beam) |M |The _z_-axis coordinate of a unit vector in the beam direction for each beam and ping, as per the sonar beam coordinate system.
- |{attr}:long_name = "_z_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system" | |
+ 3+|{attr}:long_name = "_z_-component of the vector that gives the pointing direction of the beam, in sonar beam coordinate system"
  |{attr}:units = "1" | |
  |{attr}float :valid_range = −1.0, 1.0 | |
 
  |{var}float tx_beam_direction_x(ping_time, tx_beam) |M |The _x_-axis coordinate of a unit vector in the beam direction for each tx_beam and ping, as per the sonar beam coordinate system.
- |{attr}:long_name = "_x_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
+ 3+|{attr}:long_name = "_x_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system"
  |{attr}:units = "1" | |
  |{attr}float :valid_range = −1.0, 1.0 | |
 
  |{var}float tx_beam_direction_y(ping_time, tx_beam) |M |The _y_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
- |{attr}:long_name = "_y_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
+ 3+|{attr}:long_name = "_y_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system"
  |{attr}:units = "1" | |
  |{attr}float :valid_range = −1.0, 1.0 | |
 
  |{var}float tx_beam_direction_z(ping_time, tx_beam) |M |The _z_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
- |{attr}:long_name = "_z_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" | |
+ 3+|{attr}:long_name = "_z_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system"
  |{attr}:units = "1" | |
  |{attr}float :valid_range = −1.0, 1.0 | |
 
  |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
- |{attr}:long_name = "Beam stabilisation applied (or not)" | |
+ 3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
 
  |{var}beam_t beam_type(ping_time) |M |Type of beam.
  |{attr}:long_name = "Type of beam" | |
@@ -102,23 +102,23 @@ e|Variables | |
  |{var}short non_quantitative_processing(ping_time) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. A value of 0 always indicates no such processing.
  |{attr}:flag_meanings | |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
  |{attr}short :flag_values | |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
- |{attr}:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" | |
+ 3+|{attr}:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" 
 
  |{var}float receiver_sensitivity(ping_time, beam) |MA |Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.
  |{attr}:long_name = "Receiver sensitivity" | |
  |{attr}:units = "dB re 1/μ" | |
  
  |{var}float sample_interval(ping_time) |M |Time between individual samples along a beam. Common for all beams in a ping.
- |{attr}:long_name = "Interval between recorded raw data samples" | |
+ 3+|{attr}:long_name = "Interval between recorded raw data samples" 
  |{attr}:units = "s" | |
  |{attr}float :valid_min = 0.0 | |
 
  |{var}float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2
- |{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" | |
+ 3+|{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" 
  |{attr}:units = "s" | |
  
  |{var}float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded sample is given by blanking_interval*sample_interval.
- |{attr}:long_name = "Amount of time during reception where samples are discarded" | |
+ 3+|{attr}:long_name = "Amount of time during reception where samples are discarded" 
  |{attr}:units = "s" | |
  |{attr}:valid_min = "0.0" | |
  
@@ -131,28 +131,28 @@ e|Variables | |
  |{attr}:units = "dB" | |
  
  |{var}float transmit_bandwidth(ping_time, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
- |{attr}:long_name = "Nominal bandwidth of transmitted pulse" | |
+ 3+|{attr}:long_name = "Nominal bandwidth of transmitted pulse" 
  |{attr}:units = "Hz" | |
  |{attr}float :valid_min = 0.0 | |
  
  |{var}float transmit_duration_equivalent(ping_time, tx_beam) |MA |Equivalent duration of the transmit pulse. This is the square pulse containing the same energy as the actual transmitted pulse. Necessary for both type 1 and 2 conversion equations.
- |{attr}:long_name = "Equivalent duration of transmitted pulse" | |
+ 3+|{attr}:long_name = "Equivalent duration of transmitted pulse" 
  |{attr}:units = "s" | |
  |{attr}float :valid_min = 0.0 | |
  
  |{var}float transmit_duration_nominal(ping_time, tx_beam) |M |Nominal duration of the transmit pulse. This is not the equivalent pulse duration.
- |{attr}:long_name = "Nominal duration of transmitted pulse" | |
+ 3+|{attr}:long_name = "Nominal duration of transmitted pulse" 
  |{attr}:units = "s" | |
  |{attr}float :valid_min = 0.0 | |
  
  |{var}float transmit_frequency_start(ping_time, tx_beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
- |{attr}:long_name = "Start frequency in transmitted pulse" | |
+ 3+|{attr}:long_name = "Start frequency in transmitted pulse" 
  |{attr}:standard_name = "sound_frequency" | |
  |{attr}:units = "Hz" | |
  |{attr}float :valid_min = 0.0 | |
  
  |{var}float transmit_frequency_stop(ping_time, tx_beam) |M |Frequency at the end of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
- |{attr}:long_name = "Stop frequency in transmitted pulse" | |
+ 3+|{attr}:long_name = "Stop frequency in transmitted pulse" 
  |{attr}:standard_name = "sound_frequency" | |
  |{attr}:units = "Hz" | |
  |{attr}float :valid_min = 0.0 | |
@@ -182,7 +182,7 @@ e|Variables | |
  |{attr}:long_name = "Active position sensor index" | |
  
  |{var}float sound_speed_at_transducer(ping_time) |O |Sound speed at transducer depth at the time of the ping
- |{attr}:long_name = "Indicative sound speed at ping time and transducer depth" | |
+ 3+|{attr}:long_name = "Indicative sound speed at ping time and transducer depth" 
  |{attr}:units = "m/s" | |
  |{attr}float :valid_min = 0.0 | |
  |{attr}:standard_name = "speed_of_sound_in_sea_water" | |
@@ -221,15 +221,15 @@ e|Variables | |
  |{attr}:long_name = "roll angle" | |
  
  |{var}float platform_vertical_offset(ping_time) |M |Distance from the platform reference point to the water line (distance are positives downwards). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.
- |{attr}:long_name = "Platform vertical distance from reference point to the water line" | |
+ 3+|{attr}:long_name = "Platform vertical distance from reference point to the water line" 
  |{attr}:units = "m" | |
  
  |{var}float tx_transducer_depth(ping_time) |O |Tx transducer depth below waterline at time of the ping (distance are positives downwards). This variable can be recomputed in most cases by applying lever arm and rotation matrix taking into account for roll and pitch, platform_vertical_offset but can also take into account for drop keel position
- |{attr}:long_name = "Tx transducer depth below waterline" | |
+ 3+|{attr}:long_name = "Tx transducer depth below waterline" 
  |{attr}:units = "m" | |
  
  |{var}float waterline_to_chart_datum(ping_time) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector obtains by adding the tide, the dynamic draught at the time of the ping and allow to position samples in an absolute referential.
- |{attr}:long_name = "vertical translation from waterline to chart datum reference " | |
+ 3+|{attr}:long_name = "vertical translation from waterline to chart datum reference " 
  |{attr}:units = "m" | |
- |{attr}:vertical_coordinate_reference_system = "MSL depth" | |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
+ 2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
 |===
