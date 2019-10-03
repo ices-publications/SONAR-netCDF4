@@ -1,17 +1,22 @@
-|========================================================================
+include::substitutions.adoc[]
+[%autowidth,options="header",]
+|===
 |Description |Obligation |Comment
-|Group attributes | |
-|:description =  "All NMEA sensor datagrams" |M |Description of the subgroup contents.
-|Dimensions | |
-|time = unlimited | |Can be of fixed or unlimited length, as appropriate.
-|Coordinate variables | |
-|uint64 time(time) |M |
-|:axis =  "T" | |
-|:calendar = "gregorian" | |
-|:long_name =  "Timestamps for NMEA datagrams" | |
-|:standard_name = "time" | |
-|:units =  "nanoseconds since 1601-01-01 00:00:00Z" | |
-|Variables | |
-|string NMEA_datagram(time) |O |Example of how to store NMEA datagrams.
-|:long_name = "NMEA datagram" | |
-|========================================================================
+e|Group attributes | |
+ |{attr}:description =  "All NMEA sensor datagrams" |M |Description of the subgroup contents.
+
+e|Dimensions | |
+ |{var}time = unlimited | |Can be of fixed or unlimited length, as appropriate.
+
+e|Coordinate variables | |
+ |{var}uint64 time(time) |M |
+ |{attr}:axis =  "T" | |
+ |{attr}:calendar = "gregorian" | |
+ |{attr}:long_name =  "Timestamps for NMEA datagrams" | |
+ |{attr}:standard_name = "time" | |
+ |{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z" | |
+ 
+e|Variables | |
+ |{var}string NMEA_datagram(time) |O |Example of how to store NMEA datagrams.
+ |{attr}:long_name = "NMEA datagram" | |
+|===

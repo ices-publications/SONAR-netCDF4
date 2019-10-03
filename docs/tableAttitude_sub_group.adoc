@@ -1,49 +1,54 @@
-|==============================================================================================================================================================================================================
-|Description |Obligation |Comment
-|Group attributes | |
-|:string |O |System description
-|Dimensions | |
-|time | |can be fixed or unlimited length, as appropriate
-|Coordinate variables | |
-|uint64 time(time) |M |Time from attitude sensor
-|:axis = "T" | |
-|:calendar = "gregorian" | |
-|:long_name = "Timestamps for attitude data" | |
-|:standard_name = "time" | |
-|:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
-|Variables | |
-|float heading(time) |MA |Platform heading. Measured clockwise from north.
-|:long_name = "Platform heading(true)" | |
-|:standard_name = "platform_orientation" | |
-|:units = "degrees_north" | |
-|float :valid_range = 0.0, 360.0 | |
-| | |
-|float heading_rate(time) |MA |Platform heading rate.
-|:long_name = "Platform heading rate" | |
-|:units = "degree/s" | |
-| | |
-|float pitch(time) |M |Platform pitch. Positive values indicate a bow-up pitch.
-|:standard_name = "platform_pitch_angle" | |
-|:units = "arc_degree" | |
-|:long_name = "pitch angle" | |
-|float :valid_range = −90.0, 90.0 | |
-| | |
-|float pitch_rate(time) |O |Platform pitch rate
-|:standard_name = "platform_pitch_rate" | |
-|:units = "degree/s" | |
-|:long_name = "pitch rate" | |
-| | |
-|float roll(time) |M |Platform roll. Positive values indicate a roll to starboard.
-|:standard_name = "platform_roll_angle" | |
-|:units = "arc_degree" | |
-|:long_name = "roll angle" | |
-| | |
-|float roll_rate(time) |O |Platform roll rate
-|:standard_name = "platform_roll_rate" | |
-|:units = "degree/s" | |
-|:long_name = "roll rate" | |
-| | |
-|float vertical_offset(time) |M |Distance from the nominal water level to the actual water level measured along the _z_axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).
-|:units = "m" | |
-|:long_name = "Platform vertical offset from nominal" | |
-|==============================================================================================================================================================================================================
+include::substitutions.adoc[]
+[%autowidth,options="header",]
+|===
+ |Description |Obligation |Comment
+e|Group attributes | |
+ |{attr}:string |O |System description
+ 
+e|Dimensions | |
+ |{var}time | |can be fixed or unlimited length, as appropriate
+
+e|Coordinate variables | |
+ |{var}uint64 time(time) |M |Time from attitude sensor
+ |{attr}:axis = "T" | |
+ |{attr}:calendar = "gregorian" | |
+ |{attr}:long_name = "Timestamps for attitude data" | |
+ |{attr}:standard_name = "time" | |
+ |{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" | |
+ 
+e|Variables | |
+ |{var}float heading(time) |MA |Platform heading. Measured clockwise from north.
+ |{attr}:long_name = "Platform heading(true)" | |
+ |{attr}:standard_name = "platform_orientation" | |
+ |{attr}:units = "degrees_north" | |
+ |{attr}float :valid_range = 0.0, 360.0 | |
+ 
+ |{var}float heading_rate(time) |MA |Platform heading rate.
+ |{attr}:long_name = "Platform heading rate" | |
+ |{attr}:units = "degree/s" | |
+ 
+ |{var}float pitch(time) |M |Platform pitch. Positive values indicate a bow-up pitch.
+ |{attr}:standard_name = "platform_pitch_angle" | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}:long_name = "pitch angle" | |
+ |{attr}float :valid_range = −90.0, 90.0 | |
+ 
+ |{var}float pitch_rate(time) |O |Platform pitch rate
+ |{attr}:standard_name = "platform_pitch_rate" | |
+ |{attr}:units = "degree/s" | |
+ |{attr}:long_name = "pitch rate" | |
+ 
+ |{var}float roll(time) |M |Platform roll. Positive values indicate a roll to starboard.
+ |{attr}:standard_name = "platform_roll_angle" | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}:long_name = "roll angle" | |
+ 
+ |{var}float roll_rate(time) |O |Platform roll rate
+ |{attr}:standard_name = "platform_roll_rate" | |
+ |{attr}:units = "degree/s" | |
+ |{attr}:long_name = "roll rate" | |
+ 
+ |{var}float vertical_offset(time) |M |Distance from the nominal water level to the actual water level measured along the _z_axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).
+ |{attr}:units = "m" | |
+ |{attr}:long_name = "Platform vertical offset from nominal" | |
+|===

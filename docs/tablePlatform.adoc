@@ -1,97 +1,102 @@
-|==============================================================================================================================================================================================================
+include::substitutions.adoc[]
+[%autowidth,options="header",]
+|===
 |Description |Obligation |Comment
-|Group attributes | |
-|:platform_code_ICES |O |Platform code from the ICES SHIPC vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/SHIPC).
-|:platform_name |O |Platform name of which the sonar is a part.
-|:platform_type |O |Platform type that the sonar is part of. Use the description field from the ICES ”Platform Class” vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/Platform%20Class).
-|Types | |
-|byte enum transducer_type_t {receive_only = 0, transmit_only = 1, monostatic = 3 } | |Transducer function - transmit only, receive only or both (monostatic)
+e|Group attributes | |
+ |{attr}:platform_code_ICES |O |Platform code from the ICES SHIPC vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/SHIPC).
+ |{attr}:platform_name |O |Platform name of which the sonar is a part.
+ |{attr}:platform_type |O |Platform type that the sonar is part of. Use the description field from the ICES ”Platform Class” vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/Platform%20Class).
 
-|Dimensions | |
-|transducer |M |Transducer count
-|position |M |position sensor count
-|MRU |M |MRU attitude sensor count
-|Coordinate variables | |
-|Variables | |
-|float MRU_offset_x(MRU) |R |_x_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
-|:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
-|:units = "m" | |
-| | |
-|float MRU_offset_y(MRU) |R |_y_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
-|:long_name = "Distance along the _y_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
-|:units = "m" | |
-| | |
-|float MRU_offset_z(MRU) |R |_z_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
-|:long_name = "Distance along the _z_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
-|:units = "m" | |
-| | |
-|float MRU_rotation_x(MRU) |R |Extrinsic angular rotation about the _x_-axis from the platform zero angle to the MRU zero angle.
-|:long_name = "Extrinsic rotation about the _x_-axis from the platform to MRU coordinate systems" | |
-|:units = "arc_degree" | |
-|float :valid_range = −180.0, 180.0 | |
-| | |
-|float MRU_rotation_y(MRU) |R |Extrinsic angular rotation about the _y_-axis from the platform zero angle to the MRU zero angle.
-|:long_name = "Extrinsic rotation about the _y_-axis from the platform to MRU coordinate systems" | |
-|:units = "arc_degree" | |
-|float :valid_range = −180.0, 180.0 | |
-| | |
-|float MRU_rotation_z(MRU) |R |Extrinsic angular rotation about the _z_-axis from the platform zero angle to the MRU zero angle.
-|:long_name = "Extrinsic rotation about the _z_-axis from the platform to MRU coordinate systems" | |
-|:units = "arc_degree" | |
-|float :valid_range = −180.0, 180.0 | |
-| | |
-|string MRU_ids(MRU) |MA |MRU serial number or identification name. Must be a valid netCDF4 group name.
-| | |
-|string position_ids(position) |MA |Position sensor serial number or identification name. Must be a valid netCDF4 group name.
-| | |
-|float position_offset_x(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _x_-axis.
-|:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
-|:units = "m" | |
-| | |
-|float position_offset_y(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _y_-axis.
-|:long_name = "Distance along the _y_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
-|:units = "m" | |
-| | |
-|float position_offset_z(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _z_-axis.
-|:long_name = "Distance along the _z_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
-|:units = "m" | |
-| | |
-|float transducer_offset_x(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _x_-axis.
-|:long_name = "_x_-axis distance from the platform coordinate system origin to the sonar transducer" | |
-|:units = "m" | |
-| | |
-|float transducer_offset_y(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _y_-axis.
-|:long_name = "_y_-axis distance from the platform coordinate system origin to the sonar transducer" | |
-|:units = "m" | |
-| | |
-|float transducer_offset_z(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _z_-axis.
-|:long_name = "_z_-axis distance from the platform coordinate system origin to the sonar transducer" | |
-|:units = "m" | |
-| | |
-|string transducer_ids(transducer) |MA |Transducer serial number or identification name
-| | |
-|float transducer_rotation_x(transducer) |R |Extrinsic angular rotation about the _x_-axis from the transducer zero angle to the coordinate system origin zero angle.
-|float :valid_range = −180.0, 180.0 | |
-|:units = "arc_degree" | |
-|:long_name = "Extrinsic rotation about the _x_-axis from the transducer to reference coordinate systems" | |
-| | |
-|float transducer_rotation_y(transducer) |R |Extrinsic angular rotation about the _y_-axis from the transducer zero angle to the coordinate system origin zero angle.
-|float :valid_range = −180.0, 180.0 | |
-|:units = "arc_degree" | |
-|:long_name = "Extrinsic rotation about the _y_-axis from the transducer to reference coordinate systems" | |
-| | |
-|float transducer_rotation_z(transducer) |R |Extrinsic angular rotation about the _z_-axis from the transducer zero angle to the coordinate system origin zero angle.
-|float :valid_range = −180.0, 180.0 | |
-|:units = "arc_degree" | |
-|:long_name = "Extrinsic rotation about the _z_-azis from the transducer to reference coordinate systems" | |
-| | |
-|transducer_type_t transducer_function(transducer) |M |The transducer function (that is, transmit_only, receive_only, or monostatic)
-|:long_name = "Transducer function (transmit_only, receive_only, monostatic)" | |
-| | |
-|float water_level |R |Distance from the origin of the platform coordinate system to the nominal water level measured along the _z_-axis of the platform coordinate system (positive values are below the origin). The distance between the nominal and actual water level is provided by vertical_offset.
-|:long_name = "Distance from the platform coordinate system origin to the nominal water level along the _z_-axis" | |
-|:units = "m" | |
-|Subgroups | |
-|Positions |M |Suggested subgroup to store Position sensor data.
-|Attitudes |M |Suggested subgroup to store MRU sensor data.
-|==============================================================================================================================================================================================================
+e|Types | |
+ |{var}byte enum transducer_type_t {receive_only = 0, transmit_only = 1, monostatic = 3 } | |Transducer function - transmit only, receive only or both (monostatic)
+
+e|Dimensions | |
+ |{var}transducer |M |Transducer count
+ |{var}position |M |position sensor count
+ |{var}MRU |M |MRU attitude sensor count
+
+e|Coordinate variables | |
+e|Variables | |
+ |{var}float MRU_offset_x(MRU) |R |_x_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
+ |{attr}:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
+ |{attr}:units = "m" | |
+ 
+ |{var}float MRU_offset_y(MRU) |R |_y_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
+ |{attr}:long_name = "Distance along the _y_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
+ |{attr}:units = "m" | |
+
+ |{var}float MRU_offset_z(MRU) |R |_z_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
+ |{attr}:long_name = "Distance along the _z_-axis from the platform coordinate system origin to the motion reference unit sensor origin" | |
+ |{attr}:units = "m" | |
+ 
+ |{var}float MRU_rotation_x(MRU) |R |Extrinsic angular rotation about the _x_-axis from the platform zero angle to the MRU zero angle.
+ |{attr}:long_name = "Extrinsic rotation about the _x_-axis from the platform to MRU coordinate systems" | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}float :valid_range = −180.0, 180.0 | |
+
+ |{var}float MRU_rotation_y(MRU) |R |Extrinsic angular rotation about the _y_-axis from the platform zero angle to the MRU zero angle.
+ |{attr}:long_name = "Extrinsic rotation about the _y_-axis from the platform to MRU coordinate systems" | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}float :valid_range = −180.0, 180.0 | |
+
+ |{var}float MRU_rotation_z(MRU) |R |Extrinsic angular rotation about the _z_-axis from the platform zero angle to the MRU zero angle.
+ |{attr}:long_name = "Extrinsic rotation about the _z_-axis from the platform to MRU coordinate systems" | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}float :valid_range = −180.0, 180.0 | |
+
+ |{var}string MRU_ids(MRU) |MA |MRU serial number or identification name. Must be a valid netCDF4 group name.
+
+ |{var}string position_ids(position) |MA |Position sensor serial number or identification name. Must be a valid netCDF4 group name.
+
+ |{var}float position_offset_x(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _x_-axis.
+ |{attr}:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
+ |{attr}:units = "m" | |
+
+ |{var}float position_offset_y(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _y_-axis.
+ |{attr}:long_name = "Distance along the _y_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
+ |{attr}:units = "m" | |
+
+ |{var}float position_offset_z(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _z_-axis.
+ |{attr}:long_name = "Distance along the _z_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" | |
+ |{attr}:units = "m" | |
+
+ |{var}float transducer_offset_x(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _x_-axis.
+ |{attr}:long_name = "_x_-axis distance from the platform coordinate system origin to the sonar transducer" | |
+ |{attr}:units = "m" | |
+
+ |{var}float transducer_offset_y(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _y_-axis.
+ |{attr}:long_name = "_y_-axis distance from the platform coordinate system origin to the sonar transducer" | |
+ |{attr}:units = "m" | |
+
+ |{var}float transducer_offset_z(transducer) |R |Distance from the platform coordinate system origin to the transducer along the _z_-axis.
+ |{attr}:long_name = "_z_-axis distance from the platform coordinate system origin to the sonar transducer" | |
+ |{attr}:units = "m" | |
+
+ |{var}string transducer_ids(transducer) |MA |Transducer serial number or identification name
+
+ |{var}float transducer_rotation_x(transducer) |R |Extrinsic angular rotation about the _x_-axis from the transducer zero angle to the coordinate system origin zero angle.
+ |{attr}float :valid_range = −180.0, 180.0 | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}:long_name = "Extrinsic rotation about the _x_-axis from the transducer to reference coordinate systems" | |
+
+ |{var}float transducer_rotation_y(transducer) |R |Extrinsic angular rotation about the _y_-axis from the transducer zero angle to the coordinate system origin zero angle.
+ |{attr}float :valid_range = −180.0, 180.0 | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}:long_name = "Extrinsic rotation about the _y_-axis from the transducer to reference coordinate systems" | |
+
+ |{var}float transducer_rotation_z(transducer) |R |Extrinsic angular rotation about the _z_-axis from the transducer zero angle to the coordinate system origin zero angle.
+ |{attr}float :valid_range = −180.0, 180.0 | |
+ |{attr}:units = "arc_degree" | |
+ |{attr}:long_name = "Extrinsic rotation about the _z_-azis from the transducer to reference coordinate systems" | |
+
+ |{var}transducer_type_t transducer_function(transducer) |M |The transducer function (that is, transmit_only, receive_only, or monostatic)
+ |{attr}:long_name = "Transducer function (transmit_only, receive_only, monostatic)" | |
+
+ |{var}float water_level |R |Distance from the origin of the platform coordinate system to the nominal water level measured along the _z_-axis of the platform coordinate system (positive values are below the origin). The distance between the nominal and actual water level is provided by vertical_offset.
+ |{attr}:long_name = "Distance from the platform coordinate system origin to the nominal water level along the _z_-axis" | |
+ |{attr}:units = "m" | |
+
+e|Subgroups | |
+ |{var}Positions |M |Suggested subgroup to store Position sensor data.
+ |{var}Attitudes |M |Suggested subgroup to store MRU sensor data.
+|===

@@ -12,8 +12,6 @@ Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :eqnums:
 :bibtex-file: references.bib
 :bibtex-style: ices-journal-of-marine-science
-:var: {nbsp}{nbsp}{nbsp}{nbsp}
-:attr: {var}{var}
 
 // a future version of Asciidoctor will use the 'untitled' option to now show the heading
 [colophon%untitled]
