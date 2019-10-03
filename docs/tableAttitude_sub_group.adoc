@@ -4,7 +4,7 @@
 |===
  |Description |Obligation |Comment
 e|Group attributes | |
- |{attr}:string |O |System description
+ |{attr}string :description |O |System description
  
 e|Dimensions | |
  |{var}time | |can be fixed or unlimited length, as appropriate
