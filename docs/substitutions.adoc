@@ -1,3 +1,0 @@
-// Used to generate indents in the netcdf tables
-:var: {nbsp}{nbsp}{nbsp}{nbsp}
-:attr: {var}{var}
