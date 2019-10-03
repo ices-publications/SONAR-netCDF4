@@ -68,5 +68,5 @@ e|Variables | |
  3+|{attr}float :valid_min = 0.0 
 
 e|Subgroups | |
- |{var}NMEA |O |Suggested subgroup to store raw NMEA data as an example of a Position subgroup.
+ |{var}NMEA |O |Suggested subgroup to store raw NMEA data.
 |===

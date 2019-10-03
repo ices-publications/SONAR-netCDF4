@@ -191,44 +191,40 @@ include::tableEnvironment.adoc[]
 
 ==== Platform group
 
-This group contains information about the sonar platform (e.g. ship). The netCDF4 group name is */Platform* and is described in <<platformGroupTable>>. 
-Optionally, subgroups of /Platform can be used to store data from individual instruments that provide measurements about the platform (note that if those values are relative to the environment around the platform, they should be stored in the Environment group). 
-Each platform can be made up with several instruments belonging to the same category. (For example a platform can associated to several position sensors). Each category is defined as a subgroup of the Platform group and data for each sensor are stored in a subgroup of the sensor category. This structure must be used to store any type of sensor. 
-For example, data from individual position and attitude instruments are stored as subgroups of the */Platform/Position* and */Platform/Attitude* subgroups. The names of those subgroups must match the names of the instrument's serial number or identifier as defined in <<platformGroupTable>>.
-The coordinate system convention, including the definition of pitch and roll, is detailed in <<_coordinate_systems>>.
-Each sensor instance group would also provide a standard place to store unprocessed and unparsed instrument data from multiple GPS sensors, motion reference units, etc. 
-The data format is not prescribed, but could be, for example, be NMEA-style text and/or numeric values. Subgroups must have one attribute called “description” that provides a short description of the contents. Other attributes can be added as desired. The variables under the subgroup should have appropriate names and an attribute that gives the units, where appropriate.
-The following table give the suggested convention recommended to name subgroups for different known kind of sensors or datagrams
+This group contains information about the sonar platform (e.g. ship). The netCDF4 group name is */Platform* and is described in <<platformGroupTable>>. Optionally, subgroups of /Platform can be used to store data from individual instruments that provide measurements about the platform, such as position, attitude, etc (note that if the measurements are about the environment around the platform they should be stored in the /Environment group). This structure must be used to store all instrument data. 
+
+Each platform can contain several instruments of the same type, such as multiple position sensors. Each instrument type is defined as a subgroup of the /Platform group and data for each instrument are stored in a subgroup of the instrument group. Subgroup names for common instrument types are given in <<platformInstrumentsTable>> and how to store data from those instruments are also cross-referenced in <<platformInstrumentsTable>>. For example, data from individual position and attitude instruments are stored as subgroups of the /Platform/Position and /Platform/Attitude subgroups. The names of those subgroups must match the names of the instrument's serial number or identifier as defined in the MRU_ids and position_ids variables in the /Platform group (<<platformGroupTable>>).  Additional instrument type subgroups can be created as required.
+
+Each instrument group can also store unprocessed and unparsed sensor data. The data format for unprocessed and unparsed data is not prescribed, but could, for example, be NMEA-style text and/or numeric values. These subgroups must have one attribute called “description” that provides a short description of the contents. Other attributes can be added as desired. The variables under the subgroup should have appropriate names and an attribute that gives the units, where appropriate.
+
+As a general example, parsed data from a GPS with id _Garmin1234_ would be stored in /Platform/Position/Garmin1234 and if NMEA data from that GPS were also stored, it would be in /Platform/Position/Garmin1234/NMEA.
+
+The coordinate system convention used for the /Platform group variables is detailed in <<_coordinate_systems>>.
+
+.Description of the platform group.
+[[platformGroupTable]]
+include::tablePlatform.adoc[]
 
 .Suggested subgroup names for platform instruments.
 [cols=",,",options="header",]
 [[platformInstrumentsTable]]
-|========================================================================
-|Sensor or datagram |Suggested category or group name | Comment
-|Attitude sensors, MRU |Attitude | 
-|GPS sensors, Position |Position | 
+|===
+|Sensor or datagram |Subgroup name | Comment
+|Attitude sensors, MRU |Attitude | Use data structure described in <<AttitudeSubGroup>>
+|GPS sensors, Position |Position | Use data structure described in <<PositionSubGroup>>
 |Clock or time synchronisation datagrams | Clock | 
-|NMEA telegrams | NMEA | If NMEA telegrams are stored, it is suggested that the group  follows the convention described in <<NMEATable>>.
-|========================================================================
- 
-
-.Description of the platform group.
-[cols=",,",options="header",]
-[[platformGroupTable]]
-include::tablePlatform.adoc[]
-
-.Description of a platform position subgroup.
-[cols=",,",options="header",]
-[[PositionSubGroup]]
-include::tablePosition_sub_group.adoc[]
+|NMEA telegrams | NMEA | Use data structure described in <<NMEATable>>.
+|===
 
 .Description of a platform attitude subgroup.
-[cols=",,",options="header",]
 [[AttitudeSubGroup]]
 include::tableAttitude_sub_group.adoc[]
 
+.Description of a platform position subgroup.
+[[PositionSubGroup]]
+include::tablePosition_sub_group.adoc[]
+
 .Suggested group for storing NMEA datagrams from marine instruments.
-[cols=",,",options="header",]
 [[NMEATable]]
 include::tableNMEA.adoc[]
 

@@ -52,4 +52,7 @@ e|Variables | |
  |{var}float vertical_offset(time) |M |Distance from the nominal water level to the actual water level measured along the _z_axis of the platform coordinate system (positive values are when the actual water level is below the nominal water level). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.This offset is applied at the position given by (MRU_offset_x, MRU_offset_y, MRU_offset_z).
  3+|{attr}:units = "m" 
  3+|{attr}:long_name = "Platform vertical offset from nominal"
+
+e|Subgroups | |
+ |{var}NMEA |O |Suggested subgroup to store raw NMEA data.
 |===
