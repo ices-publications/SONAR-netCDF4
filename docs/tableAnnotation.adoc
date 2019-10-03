@@ -8,16 +8,16 @@ e|Dimensions||
  
 e|Coordinate variable||
  |{var}uint64 time(time)|MA|
- |{attr}:axis = "T"||
- |{attr}:calendar = "gregorian"||
+ 3+|{attr}:axis = "T"
+ 3+|{attr}:calendar = "gregorian"
  3+|{attr}:long_name = "Timestamps of annotations"
- |{attr}:standard_name = "time"||
+ 3+|{attr}:standard_name = "time"
  3+|{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z"
  
 e|Variables||
  |{var}string annotation_category(time)|O|Optional category for the annotation, for use in grouping annotation types.
- |{attr}:long_name = "Annotation category"||
+ 3+|{attr}:long_name = "Annotation category"
  
  |{var}string annotation_text(time)|MA|
- |{attr}:long_name = "Annotation text"||
+ 3+|{attr}:long_name = "Annotation text"
 |===

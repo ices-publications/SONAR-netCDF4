@@ -11,13 +11,13 @@ e|Dimensions | |
 
 e|Coordinate variables | |
  |{var}uint64 time(time) |M |
- |{attr}:axis =  "T" | |
- |{attr}:calendar = "gregorian" | |
- |{attr}:long_name =  "Timestamps for NMEA datagrams" | |
- |{attr}:standard_name = "time" | |
- |{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z" | |
+ 3+|{attr}:axis =  "T" 
+ 3+|{attr}:calendar = "gregorian" 
+ 3+|{attr}:long_name =  "Timestamps for NMEA datagrams" 
+ 3+|{attr}:standard_name = "time" 
+ 3+|{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z" 
  
 e|Variables | |
  |{var}string NMEA_datagram(time) |O |Example of how to store NMEA datagrams.
- |{attr}:long_name = "NMEA datagram" | |
+ 3+|{attr}:long_name = "NMEA datagram" 
 |===
