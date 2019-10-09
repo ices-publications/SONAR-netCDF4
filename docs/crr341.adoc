@@ -323,6 +323,35 @@ S_v = 20\log_{10}(\frac{A}{\sqrt{2}}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}
 
 where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
 
+== Split-aperture beams
+
+Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to provide such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the _beam_type_ variable in each <<sonarBeammodeTable,Beam_groupX>> subgroup. Split-aperture echo arrival angles are always given in the beam coordinate system (see <<Sonar beam coordinate system>>).
+
+When sub-beams from a split-aperture transducer are provided, it is also necessary to combine the sub-beams to give the power or amplitude of the echoes, as received by the whole beam. All known split-aperture systems achieve this by the simple addition of the sub-beams values, noting that the sub-beam data are typically complex power or amplitude values.
+
+=== Angles stored in file
+The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains these angles. These are stored as _electrical_angles_ and are converted by the reading software into physical angles by using an _angle_factor_ conversion:
+
+Note that an _angle_factor_ of 1.0 implies that the angles were stored as physical, not electrical angles.
+
+=== Angles not stored in file
+The sonar does not calculate the echo arrival angle and they must instead be calculated from the split-aperture sub-beams, each of which are hence stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections.
+
+.The split-aperture transducer arrangements supported by SONAR-netCDF4. The axis indicates the orientation of the sonar beam coordinate system (note that the _z_-axis goes into the page).
+[[transducer_types]]
+image::splitAperatureTransducers.svg[]
+
+==== Four equal quadrants
+This arrangement has four equal quadrants (Part A, <<transducer_types>>) in the transducer and the major and minor angles are calculated thus:
+
+==== Three equal sectors
+This arrangement has three equal triangular sectors (Part B, <<transducer_types>>) and the major and minor angles are calculated thus (citenp:[bodholt2001, bjorno2017]):
+
+==== Three equal sectors and one central sector
+The arrangement has three truncated triangular sectors surrounding one central circular sector (Part C, <<transducer_types>>). The major and minor angles are calculated thus:
+
+
+
 == Coordinate systems
 
 === Platform coordinate system
@@ -350,7 +379,26 @@ image::coordinateSystemFigure.svg[]
 
 === Sonar beam coordinate system
 
-The coordinate system for beam direction uses the same convention as the platform coordinate system, but with the origin at the transducer. Sonar beams can be compensated or uncompensated for platform motion. If uncompensated, the sonar beam coordinate system follows the yaw, pitch, and roll of the platform. If beams are compensated, the sonar beam coordinate system is translated and rotated per ping so that the _y_-axis is always horizontal and the _z_-axis is always vertical. The _x_-axis is always parallel to the platform’s _x_-axis. The beam stabilisation variable indicates whether the beams are compensated or uncompensated.
+The sonar beam coordinate systems (_x'_, _y'_, _z'_) are defined by per-beam rotations of the platform coordinate system (_x_, _y_, _z_). A translation may also occur if the origin of the sonar beam coordinate system differs from the platform coordinate system. The _z'_ axis is always the beam axis, with the origin at the transducer.
+
+The rotation is given by three rotation angles (latexmath:[\alpha, \beta, \gamma]), corresponding to a clockwise extrinsic z-x-z rotation of the platform coordinate system. That is, the beam coordinate system is the result of three rotations of the platform coordinate system, performed in this order:
+
+.  Rotate about the _z_-axis by latexmath:[\gamma]
+.  Rotate about the _x_-axis by latexmath:[\beta]
+.  Rotate about the _z_-axis by latexmath:[\alpha]
+
+The SONAR-netCD4 variable names for receive beam rotation angles are _rx_beam_rotation_alpha_, _rx_beam_rotation_beta_, and _rx_beam_rotation_gamma_. Translations are given by the _transducer_offset_x_, _transducer_offset_y_, and _transducer_offset_z_ variables. 
+
+Sonar beams can be compensated or uncompensated for platform motion. If compensated, the sonar beam coordinate system is taken to be relative to the platform coordinate system prior to the effect of any pitch and roll of the platform. If uncompensated, the true orientation of the beam coordinate system can be obtained by applying platform pitch and roll to the platform coordinate system and hence to the beam coordinate system. The _beam_stabilisation_ variable indicates whether the beams are compensated or uncompensated.
+
+Split-aperture echo arrival angles are given as Cartesian angles in the beam coordinate system:
+
+* The _z'_ -axis is always the beam axis with the origin at the receive transducer,
+* The _minor_ arrival angle is given by the angle from the _z'_ axis, measured in the _x'_-_z'_ plane, and
+* The _major_ arrival angle is given by the angle from the _z'_ axis measured in the _y'_-_z'_ plane.
+
+Positive minor angles occur in the positive _x'_ plane and positive major angles occur in the positive _y'_ plane. For conventional downward-looking echosounders mounted on a ship, without motion compensation, it is normal that the beam coordinate system is identical to the platform coordinate system (latexmath:[\alpha = \beta = \gamma = 0]), and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
+
 
 === Coordinate systems offsets and rotations
 
