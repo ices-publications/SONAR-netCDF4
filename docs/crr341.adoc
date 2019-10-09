@@ -323,11 +323,19 @@ S_v = 20\log_{10}(\frac{A}{\sqrt{2}}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}
 
 where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
 
+=== Type 3
+
+Type 3 conversion equations are intended for data recorded by Simrad EK60, ES60, and ES70 echosounders.
+
+=== Type 4
+
+Type 4 conversion equations are intended for data recorded by Simrad EK80 and ES80 broadband echosounders.
+
 == Split-aperture beams
 
 Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to provide such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the _beam_type_ variable in each <<sonarBeammodeTable,Beam_groupX>> subgroup. Split-aperture echo arrival angles are always given in the beam coordinate system (see <<Sonar beam coordinate system>>).
 
-When sub-beams from a split-aperture transducer are provided, it is also necessary to combine the sub-beams to give the power or amplitude of the echoes, as received by the whole beam. All known split-aperture systems achieve this by the simple addition of the sub-beams values, noting that the sub-beam data are typically complex power or amplitude values.
+When sub-beams from a split-aperture transducer are provided, it is also necessary to combine the sub-beams to give the power or amplitude of the echoes, as received by the whole beam. All known split-aperture systems achieve this by the simple addition of the sub-beams value, noting that the sub-beam data are typically complex power or amplitude values.
 
 === Angles stored in file
 The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains these angles. These are stored as _electrical_angles_ and are converted by the reading software into physical angles by using an _angle_factor_ conversion:
@@ -337,20 +345,23 @@ Note that an _angle_factor_ of 1.0 implies that the angles were stored as physic
 === Angles not stored in file
 The sonar does not calculate the echo arrival angle and they must instead be calculated from the split-aperture sub-beams, each of which are hence stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections.
 
-.The split-aperture transducer arrangements supported by SONAR-netCDF4 (A: 4-quadrants; B: 3-sectors; C; 3+1-sectors). The Cartesian coordinates show the orientation of the sonar beam coordinate system relative to the transducer sectors (note that the _z_-axis goes into the page). The numbers indicate the sub/beam labels for each type of transducer.
+.The split-aperture transducer arrangements supported by SONAR-netCDF4 (A: 4-quadrants; B: 3-sectors; C; 3+1-sectors). The Cartesian coordinates show the orientation of the sonar beam coordinate system relative to the transducer sectors (note that the _z_-axis goes into the page). The numbers indicate the sub.beam labels for each type of transducer.
 [[transducer_types]]
 image::splitApertureTransducers.svg[align="center"]
 
-==== Four equal quadrants
-This arrangement has four equal quadrants (Part A, <<transducer_types>>) in the transducer and the major and minor angles are calculated thus:
+==== Four quadrants (type A)
+This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the major and minor angles are calculated thus:
 
-==== Three equal sectors
-This arrangement has three equal triangular sectors (Part B, <<transducer_types>>) and the major and minor angles are calculated thus (citenp:[bodholt2001, bjorno2017]):
+==== Three or four sectors (type B and C)
 
-==== Three equal sectors and one central sector
-The arrangement has three truncated triangular sectors surrounding one central circular sector (Part C, <<transducer_types>>). The major and minor angles are calculated thus:
+This arrangement has either three equal sectors (<<transducer_types>>, partB) or a centre sector and three surrounding sectors. (<<transducer_types>>, part C). Type C can be treated the same as type B once the centre sector signal is added to each of the outer sector signals. The major and minor angles are then calculated thus(citenp:[bodholt2001, bjorno2017]):
 
-
+[stem]
+++++
+\begin{equation}
+u_x = \frac{1}{\sqrt{3\Gamma}} (\theta_{31} + \theta_{32})
+\end{equation}
+++++
 
 == Coordinate systems
 
