@@ -337,9 +337,9 @@ Note that an _angle_factor_ of 1.0 implies that the angles were stored as physic
 === Angles not stored in file
 The sonar does not calculate the echo arrival angle and they must instead be calculated from the split-aperture sub-beams, each of which are hence stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections.
 
-.The split-aperture transducer arrangements supported by SONAR-netCDF4. The axis indicates the orientation of the sonar beam coordinate system (note that the _z_-axis goes into the page).
+.The split-aperture transducer arrangements supported by SONAR-netCDF4 (A: 4-quadrants; B: 3-sectors; C; 3+1-sectors). The Cartesian coordinates show the orientation of the sonar beam coordinate system relative to the transducer sectors (note that the _z_-axis goes into the page). The numbers indicate the sub/beam labels for each type of transducer.
 [[transducer_types]]
-image::splitAperatureTransducers.svg[]
+image::splitApertureTransducers.svg[align="center"]
 
 ==== Four equal quadrants
 This arrangement has four equal quadrants (Part A, <<transducer_types>>) in the transducer and the major and minor angles are calculated thus:
@@ -373,9 +373,9 @@ The platform-heading variable (degrees clockwise from north) can be used to obta
 
 The orientation of the platform is represented using the _z_–_y_’–_x_” Tait-Bryan intrinsic rotation convention (https://en.wikipedia.org/wiki/Euler_angles[en.wikipedia.org/wiki/Euler_angles]), corresponding to yaw, pitch, and roll, respectively. Intrinsic means that rotations about the _y_-axis are measured after any rotation about the _z_-axis, and rotations about the _x_-axis are measured after rotations about the _y_-axis (for comparison, extrinsic angles are applied relative to a fixed-platform orientation). This is the most used rotation convention in the maritime field, and the main effect is that roll is measured relative to the plane tilted by the pitch angle.
 
-.Platform coordinate system. The arrows on the axes indicate the positive direction and the arrows around each axis indicate positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
+.Platform (dot-dash lines) and indicative beam (solid lines) coordinate systems. The arrows on the axes indicate the positive direction and the circular arrows around each platform coordinate system axis indicates positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
 [[coordinate_system_figure]]
-image::coordinateSystemFigure.svg[]
+image::coordinateSystemFigure.svg[align="center"]
 
 === Sonar beam coordinate system
 
