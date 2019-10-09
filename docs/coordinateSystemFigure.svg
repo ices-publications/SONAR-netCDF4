@@ -14,8 +14,8 @@
    viewBox="0 0 170.64949 73.803001"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="coordinate system figure.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="coordinateSystemFigure.svg"
    inkscape:export-filename="C:\Users\gavinj\Google Drive\SONAR-netCDF4\coordinate system figure.png"
    inkscape:export-xdpi="1200.084"
    inkscape:export-ydpi="1200.084">
@@ -236,15 +236,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.7745791"
-     inkscape:cx="298.57202"
-     inkscape:cy="108.47647"
+     inkscape:zoom="2.1311953"
+     inkscape:cx="314"
+     inkscape:cy="139"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer2"
      showgrid="false"
      showguides="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1017"
+     inkscape:window-height="1137"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -363,9 +363,10 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.12, 0.53, 0.265, 0.53;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker4832)"
-       d="m 101.53464,12.673193 0.14909,71.26807"
+       d="m 101.53464,12.673193 c 0,0 0.0256,28.324022 0.0256,28.030025 m 0.0705,27.434212 0.053,15.803833"
        id="path4524"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.08;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker5425)"
        id="path5421"
