@@ -35,15 +35,25 @@ e|Variables | |
  3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
  |{attr}:units = "as appropriate" | |Use units appropriate for the data.
 
- |{var}float echoangle_major(ping_time, beam, sector) |MA |Electrical angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperature.
+ |{var}float echoangle_major(ping_time, beam, sector) |MA |Electrical angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
  3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate"
  3+|{attr}:units = "arc_degree"
  3+|{attr}float :valid_range = -180.0f, 180.0f
 
- |{var}float echoangle_minor(ping_time, beam, sector) |MA |Electrical angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperature.
+ |{var}float echoangle_minor(ping_time, beam, sector) |MA |Electrical angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
  3+|{attr}:long_name = "Echo arrival angle in the minor beam coordinate"
  3+|{attr}:units = "arc_degree"
  3+|{attr}float :valid_range = -180.0f, 180.0f
+ 
+ |{var}float echoangle_major_scaling_factor(ping_time, beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
+ 3+|{attr}:long_name = "Major angle scaling factor"
+ 3+|{attr}:units = "1"
+ 3+|{attr}float :valid_min = 0.0
+
+ |{var}float echoangle_minor_scaling_factor(ping_time, beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
+ 3+|{attr}:long_name = "Minor angle scaling factor"
+ 3+|{attr}:units = "1"
+ 3+|{attr}float :valid_min = 0.0
 
  |{var}float beamwidth_receive_major(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
  3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 

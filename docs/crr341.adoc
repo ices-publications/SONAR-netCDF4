@@ -325,11 +325,11 @@ where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is th
 
 === Type 3
 
-Type 3 conversion equations are intended for data recorded by Simrad EK60, ES60, and ES70 echosounders.
+Type 3 conversion equations are intended for data produced by Simrad EK60, ES60, and ES70 echosounders.
 
 === Type 4
 
-Type 4 conversion equations are intended for data recorded by Simrad EK80 and ES80 broadband echosounders.
+Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders.
 
 == Split-aperture beams
 
@@ -338,9 +338,7 @@ Some sonar beams can estimate the arrival angle of echoes using the split-apertu
 When sub-beams from a split-aperture transducer are provided, it is also necessary to combine the sub-beams to give the power or amplitude of the echoes, as received by the whole beam. All known split-aperture systems achieve this by the simple addition of the sub-beams value, noting that the sub-beam data are typically complex power or amplitude values.
 
 === Angles stored in file
-The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains these angles. These are stored as _electrical_angles_ and are converted by the reading software into physical angles by using an _angle_factor_ conversion:
-
-Note that an _angle_factor_ of 1.0 implies that the angles were stored as physical, not electrical angles.
+The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains these angles. To allow for existing conventions on how these angles are stored, angle scaling factors are provided for, and the physical arrival angle is obtained by dividing by the angle scaling factor (variables _echoangle_major_scaling_factor_ and _echoangle_minor_scaling_factor_).
 
 === Angles not stored in file
 The sonar does not calculate the echo arrival angle and they must instead be calculated from the split-aperture sub-beams, each of which are hence stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections.
@@ -350,16 +348,26 @@ The sonar does not calculate the echo arrival angle and they must instead be cal
 image::splitApertureTransducers.svg[align="center"]
 
 ==== Four quadrants (type A)
-This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the major and minor angles are calculated thus:
-
-==== Three or four sectors (type B and C)
-
-This arrangement has either three equal sectors (<<transducer_types>>, partB) or a centre sector and three surrounding sectors. (<<transducer_types>>, part C). Type C can be treated the same as type B once the centre sector signal is added to each of the outer sector signals. The major and minor angles are then calculated thus(citenp:[bodholt2001, bjorno2017]):
+This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the major (latexmath:[\theta]) and minor (latexmath:[\phi]) angles are calculated thus:
 
 [stem]
 ++++
 \begin{equation}
-u_x = \frac{1}{\sqrt{3\Gamma}} (\theta_{31} + \theta_{32})
+\theta = \tan^{-1} ( \Re(y_1+y_4), \Im((y_2+y_3)^*) ) \\
+\phi = \tan^{-1} ( \Re(y_3+y_4), \Im((y_1+y_2)^*) ) \\
+\end{equation}
+++++
+where latexmath:[\tan^{-1}] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals.
+
+==== Three or four sectors (type B and C)
+
+This arrangement has either three equal sectors (<<transducer_types>>, partB) or a centre sector and three surrounding sectors. (<<transducer_types>>, part C). Type C can be treated the same as type B once the centre sector signal is added to each of the outer sector signals. The major and minor angles are then calculated thus cite:[bodholt2001, bjorno2017]:
+
+[stem]
+++++
+\begin{equation}
+\theta = \\
+\phi = \\
 \end{equation}
 ++++
 
@@ -405,8 +413,8 @@ Sonar beams can be compensated or uncompensated for platform motion. If compensa
 Split-aperture echo arrival angles are given as Cartesian angles in the beam coordinate system:
 
 * The _z'_ -axis is always the beam axis with the origin at the receive transducer,
-* The _minor_ arrival angle is given by the angle from the _z'_ axis, measured in the _x'_-_z'_ plane, and
-* The _major_ arrival angle is given by the angle from the _z'_ axis measured in the _y'_-_z'_ plane.
+* The _minor_ arrival angle (latexmath:[\phi]) is given by the angle from the _z'_ axis, measured in the _x'_-_z'_ plane, and
+* The _major_ arrival angle (latexmath:[\theta]) is given by the angle from the _z'_ axis measured in the _y'_-_z'_ plane.
 
 Positive minor angles occur in the positive _x'_ plane and positive major angles occur in the positive _y'_ plane. For conventional downward-looking echosounders mounted on a ship, without motion compensation, it is normal that the beam coordinate system is identical to the platform coordinate system (latexmath:[\alpha = \beta = \gamma = 0]), and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
 
