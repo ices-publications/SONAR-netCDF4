@@ -370,14 +370,21 @@ The SONAR-netCD4 variable names for receive beam rotation angles are _rx_beam_ro
 
 Sonar beams can be compensated or uncompensated for platform motion. If compensated, the sonar beam coordinate system is taken to be relative to the platform coordinate system prior to the effect of any pitch and roll of the platform. If uncompensated, the true orientation of the beam coordinate system can be obtained by applying platform pitch and roll to the platform coordinate system and hence to the beam coordinate system. The _beam_stabilisation_ variable indicates whether the beams are compensated or uncompensated.
 
-Split-aperture echo arrival angles are given as Cartesian angles in the beam coordinate system:
+==== Split-aperture coordinates
+
+Some sonar beams can estimate the arrival angle of echoes (<<Split-aperture beams>>). These angles are given as _minor_ and _major_ angles in the sonar beam coordinate system (<<split_aperture_angle_figure>>):
 
 * The _z'_ -axis is always the beam axis with the origin at the receive transducer,
 * The _minor_ arrival angle (latexmath:[\phi]) is given by the angle from the _z'_ axis, measured in the _x'_-_z'_ plane, and
 * The _major_ arrival angle (latexmath:[\theta]) is given by the angle from the _z'_ axis measured in the _y'_-_z'_ plane.
 
-Positive minor angles occur in the positive _x'_ plane and positive major angles occur in the positive _y'_ plane. For conventional downward-looking echosounders mounted on a ship, without motion compensation, it is normal that the beam coordinate system is identical to the platform coordinate system (latexmath:[\alpha = \beta = \gamma = 0]), and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
+Positive minor angles occur in the positive _x'_ plane and positive major angles occur in the positive _y'_ plane. 
 
+For conventional downward-looking echosounders mounted on a ship, without motion compensation, it is normal that the beam coordinate system is identical to the platform coordinate system (latexmath:[\alpha = \beta = \gamma = 0]), and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
+
+.The split-aperture minor and major angles in the sonar beam coordinate system.
+[[split_aperture_angle_figure]]
+image::splitApertureAngles.svg[align="center"]
 
 === Coordinate systems offsets and rotations
 
