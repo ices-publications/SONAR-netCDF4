@@ -11,7 +11,7 @@ e|Group attributes | |
 
 e|Dimensions | |
  |{var}beam | |The number of beams in this beam group.
- |{var}sector | |The number of sectors in these beams
+ |{var}subbeam | |The number of sub-beams in these beams
  |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  |{var}tx_beam | |The number of transmit beams in this beam group
  
@@ -27,11 +27,11 @@ e|Coordinate variables | |
  3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
  
 e|Variables | |
- |{var}sample_t backscatter_i(ping_time, beam, sector) |MA |Imaginary part of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally sector.
+ |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  |{attr}:units = "as appropriate" | |Use units appropriate for the data.
 
- |{var}sample_t backscatter_r(ping_time, beam, sector) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally sector.
+ |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
  |{attr}:units = "as appropriate" | |Use units appropriate for the data.
 
@@ -108,7 +108,7 @@ e|Variables | |
  |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
  3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
 
- |{var}beam_t beam_type(ping_time) |M |Type of beam. Determines how to calculate split-aperture angles from multi-sector transducers.
+ |{var}beam_t beam_type(ping_time) |M |Type of split-aperture beam (or not).
  3+|{attr}:long_name = "Type of beam"
 
  |{var}float equivalent_beam_angle(ping_time, beam) |M |Equivalent beam angle.
