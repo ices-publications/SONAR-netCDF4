@@ -35,15 +35,15 @@ e|Variables | |
  3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
  |{attr}:units = "as appropriate" | |Use units appropriate for the data.
 
- |{var}sample_t echoangle_major(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
+ |{var}angle_t echoangle_major(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
  3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate"
  3+|{attr}:units = "arc_degree"
- 3+|{attr}float :valid_range = -180.0f, 180.0f
+ 3+|{attr}float :valid_range = -180.0, 180.0
 
- |{var}sample_t echoangle_minor(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
+ |{var}angle_t echoangle_minor(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
  3+|{attr}:long_name = "Echo arrival angle in the minor beam coordinate"
  3+|{attr}:units = "arc_degree"
- 3+|{attr}float :valid_range = -180.0f, 180.0f
+ 3+|{attr}float :valid_range = -180.0, 180.0
  
  |{var}float echoangle_major_scaling_factor(ping_time, beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
  3+|{attr}:long_name = "Major angle scaling factor"
