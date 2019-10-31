@@ -269,7 +269,7 @@ The complex-valued backscatter data are converted into calibrated target strengt
 [stem]
 ++++
 \begin{equation}
-TS = 10 \log_{10}(P_{r}) + 40\log_{10}(r) + 2\alpha r - 10\log10_{10}( \frac{P_t\lambda^{2}}{16\pi^2}) - G - 40\log_{10}(\cos\gamma),
+TS = 10 \log_{10}(P_{r}) + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2}\right) - G - 40\log_{10}(\cos\gamma),
 \end{equation}
 ++++
 
@@ -291,7 +291,7 @@ The volume backscatter strength (Sv, citenp:[maclennan2002]) is derived from a s
 [stem]
 ++++
 \begin{equation}
-S_{v} = 10\log_{10}(P_{r}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}(\frac{P_t\lambda^{2}c\psi\tau_{e}}{32\pi^{2}}) - G - 40\log_{10}(\cos\gamma),
+S_{v} = 10\log_{10}(P_{r}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t\lambda^{2}c\psi\tau_{e}}{32\pi^{2}}\right) - G - 40\log_{10}(\cos\gamma),
 \end{equation}
 ++++
 
@@ -304,7 +304,7 @@ Type 2 conversion equations are intended for data recorded by Furuno omnisonars.
 [stem]
 ++++
 \begin{equation}
-TS = 20\log_{10}(\frac{A}{\sqrt{2}}) + 40\log_{10}(r) + 2\alpha r - (SL + K + \Delta G + G_{T}),
+TS = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\log_{10}(r) + 2\alpha r - (SL + K + \Delta G + G_{T}),
 \end{equation}
 ++++
 
@@ -317,7 +317,7 @@ The volume backscatter strength is derived from a similar equation:
 [stem]
 ++++
 \begin{equation}
-S_v = 20\log_{10}(\frac{A}{\sqrt{2}}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}( \frac{c\tau_e}{2}\Psi ) - (SL + K + \Delta G + G_T),
+S_v = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{c\tau_e}{2}\Psi \right) - (SL + K + \Delta G + G_T),
 \end{equation}
 ++++
 
@@ -326,6 +326,52 @@ where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is th
 === Type 3
 
 Type 3 conversion equations are intended for data produced by Simrad EK60, ES60, and ES70 echosounders.
+
+The backscatter power values are stored in the _backscatter_r_ variable with data type _short_ (16-bit signed integers) that are converted to logarithmic received power via:
+
+[stem]
+++++
+\begin{equation}
+P_r = \frac{10\log_{10}(2)}{256} P_c, 
+\end{equation}
+++++
+where latexmath:[P_c] is the compressed power value stored in the _backscatter_r_ variable and latexmath:[P_r] the logarithmic received power that is transformed into calibrated target strength via:
+
+[stem]
+++++
+\begin{equation}
+TS = P_r + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2} \right) - 2G_0,
+\end{equation}
+++++
+where latexmath:[r] is the range from the transducer to the target [m], latexmath:[\alpha] the acoustic absorption [dB m^-1^], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable), latexmath:[\lambda] the acoustic wavelength [m], and latexmath:[G_0] the on-axis gain (variable _transducer_gain_). Volume backscatter strength is obtained from a similar equation:
+
+[stem]
+++++
+\begin{equation}
+S_v = P_r + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t \lambda^2 c \psi \tau}{32 \pi^2} \right) - 2G_0 - 2S_{a,corr},
+\end{equation}
+++++
+
+where latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle (variable _equivalent_beam_angle_), latexmath:[\tau] the pulse duration (variable _transmit_duration_nominal_), and latexmath:[S_{a,corr}] a correction term (variable _sa_correction_).
+
+The range from the transducer to the target is given by:
+
+[stem]
+++++
+\begin{equation}
+
+\end{equation}
+++++
+
+.List of equation symbols and the matching SONAR-netCDF4 variable
+[[equationVariables]]
+[%autowidth,options="header",]
+|===
+|Symbol |Variable|Equation type
+a|latexmath:[P_c]|backscatter_r|all
+a|latexmath:[\tau]|transmit_duration_nominal|3
+a|latexmath:[\alpha]|Calculated from ...|
+|===
 
 === Type 4
 
@@ -357,6 +403,13 @@ The orientation of the platform is represented using the _z_–_y_’–_x_” T
 image::coordinateSystemFigure.svg[align="center"]
 
 === Sonar beam coordinate system
+
+The sonar beam coordinate system origin and orientation is given by a set of rotations and translations from the platform coordinate system. These are:
+
+. transducer offset
+. transducer rotation
+. if motion compensated, pitch, roll, and yaw
+. sonar beam rotation
 
 The sonar beam coordinate systems (_x'_, _y'_, _z'_) are defined by per-beam rotations of the platform coordinate system (_x_, _y_, _z_). A translation may also occur if the origin of the sonar beam coordinate system differs from the platform coordinate system. The _z'_ axis is always the beam axis, with the origin at the transducer.
 
