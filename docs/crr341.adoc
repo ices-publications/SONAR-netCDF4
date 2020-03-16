@@ -104,6 +104,8 @@ Exchange of information between different parts in the processing chain is becom
 
 Typical steps in the postprocessing chain of marine sonar data consist of preprocessing and noise removal, bottom detection, classification, and integration (Figure 1). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data from the standard, process the information and write back to the data using the convention, other software can pick it up and process it further. 
 
+Figure 1. Typical steps in a postprocessing chaing for acoustical water column data. (TODO: Link these boxes to the groups in the convention and check if there are other needs)
+
 
 
 == The SONAR-netCDF4 convention
@@ -119,8 +121,6 @@ Datasets can be added to SONAR-netCDF4 files if they do not conflict with the SO
 Each SONAR-netCDF4 file is intended to store data from one sonar mounted on one platform. The storage of data from multiple sonars and multiple platforms in one SONAR-netCDF4 file is not in the scope of the convention.
 
 A design principle of SONAR-netCDF4 has been to focus on describing the acoustic backscatter data, not the overall purpose and context of why the data were collected. Such broader metadata are better stored in separate metadata systems and schema (e.g. citenp:[iso2014,ices2016]).
-
-Figure 1. Typical steps in a postprocessing chaing for acoustical water column data. (TODO: Link these boxes to the groups in the convention and check if there are other needs)
 
 
 
