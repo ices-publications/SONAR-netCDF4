@@ -96,6 +96,16 @@ This document and the convention that it describes will change over time to impl
 
 The convention version number will always be included in the title of the document. The document version number will always be found in <<_revision_history>>.
 
+== The recommended use of the SONAR-netCDF4 convention in post processing software
+
+There are several processing steps that are common among the different postprocessing tools used by the community, and there is a growing need to use the different tools interchangeably. This chapter describes a few standard processing steps and outlines how the standard is intended to be used to facilitate the interchangeability. Note that the steps may be different between software solutions, and the convention only recommend how to store the data for the steps that are most common and we do not address how and which order to process your data.
+
+Exchange of information between different parts in the processing chain is becoming increasingly important. This is particularly relevant for emerging deep learning and machine learning frameworks, that has hardware requirements that often are different than the computers that run the traditional desktop applications. Processing tools to be run on autonomous platforms are also a need, which often require a different suite of software solutions, typically tailored to low power situations. 
+
+Typical steps in the postprocessing chain of marine sonar data consist of preprocessing and noise removal, bottom detection, classification, and integration (Figure 1). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data from the standard, process the information and write back to the data using the convention, other software can pick it up and process it further. 
+
+
+
 == The SONAR-netCDF4 convention
 
 === Introduction
@@ -109,6 +119,10 @@ Datasets can be added to SONAR-netCDF4 files if they do not conflict with the SO
 Each SONAR-netCDF4 file is intended to store data from one sonar mounted on one platform. The storage of data from multiple sonars and multiple platforms in one SONAR-netCDF4 file is not in the scope of the convention.
 
 A design principle of SONAR-netCDF4 has been to focus on describing the acoustic backscatter data, not the overall purpose and context of why the data were collected. Such broader metadata are better stored in separate metadata systems and schema (e.g. citenp:[iso2014,ices2016]).
+
+Figure 1. Typical steps in a postprocessing chaing for acoustical water column data. (TODO: Link these boxes to the groups in the convention and check if there are other needs)
+
+
 
 === Hierarchical structure
 
