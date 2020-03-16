@@ -104,8 +104,30 @@ Exchange of information between different parts in the processing chain is becom
 
 Typical steps in the postprocessing chain of marine sonar data consist of preprocessing and noise removal, bottom detection, classification, and integration (Figure 1). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data from the standard, process the information and write back to the data using the convention, other software can pick it up and process it further. 
 
-Figure 1. Typical steps in a postprocessing chaing for acoustical water column data. (TODO: Link these boxes to the groups in the convention and check if there are other needs)
+Figure 1. Typical steps in a postprocessing chain for acoustical water column data. (TODO: Link these boxes to the groups in the convention and check if there are other needs)
 
+=== Typical processing steps and the associated data models
+
+Two main data models are available in the convention: `Beam_group` and `Grid_group`. The `Beam_group` allows for different sample rates, different ping rates, etc, for each channel. It is a flexible model and able to cope with all echosounders and sonar systems. The `Grid_group` is a storage structure for multi-channel data that has  been re-gridded or have a homogeneous ping times and range bins across the different frequencies.
+
+Depending on the type of processing, both `Beam_group` and `Grid_group` could be used as input and output.
+
+==== Denoising
+
+This step typically use the same data model for the input and output. For speckle de-noising the raw ping data is usually necessary and the  `Beam_group` should be used. 
+
+==== Bottom detection
+Bottom data is needed when integrating biological backscatter close to the sea bed. Different algorithms have been developed and the recommendation is to store the bottom depth in the `Beam_group`.
+
+==== Labelling
+Scrutinizing acoustic data, i.e. allocating the acoustic energy to categories, is traditionally achieved by manually assigning the backscatter. Both `Beam_group` and `Grid_group` support labels. An overview of how different software stores this information can be found here:
+https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Gavins label overview]
+
+==== Machine learning
+Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passins git in to your preferred deep learning framework. The use of the `Grid_group` on a high resolution grid should be used for this purpose.
+
+==== Integrated backscatter
+The reports from the integration process typically goes into statistical paclages that can furhter process the data. It is recommended to use the `Grid_group` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective.
 
 
 == The SONAR-netCDF4 convention
