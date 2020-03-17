@@ -98,11 +98,11 @@ The convention version number will always be included in the title of the docume
 
 == The recommended use of the SONAR-netCDF4 convention in post processing software
 
-There are several processing steps that are common among the different postprocessing tools used by the community, and there is a growing need to use the different tools interchangeably. This chapter describes a few standard processing steps and outlines how the standard is intended to be used to facilitate the interchangeability. Note that the steps may be different between software solutions, and the convention only recommend how to store the data for the steps that are most common and we do not address how and which order to process your data.
+There are several processing steps that are common among the different postprocessing tools used by the community, and there is a growing need to use the different tools interchangeably. This chapter describes a few standard processing steps and outlines how the convention is intended to be used to facilitate the interchangeability. Note that the steps may be different between tools, and the convention only recommends how to store the data for the steps that are most common. We do not address how and in which order to process your data.
 
-Exchange of information between different parts in the processing chain is becoming increasingly important. This is particularly relevant for emerging deep learning and machine learning frameworks, that has hardware requirements that often are different than the computers that run the traditional desktop applications. Processing tools to be run on autonomous platforms are also a need, which often require a different suite of software solutions, typically tailored to low power situations. 
+Exchange of information between different parts in the processing chain is becoming increasingly important. This is particularly relevant for emerging deep learning and machine learning frameworks, that have hardware requirements that are often different to the computers that are used for traditional desktop applications. Processing tools that run on autonomous platforms are also a need, which often require a different suite of software solutions, typically tailored to low power situations. 
 
-Typical steps in the postprocessing chain of marine sonar data consist of preprocessing and noise removal, bottom detection, classification, and integration (Figure 1). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data from the standard, process the information and write back to the data using the convention, other software can pick it up and process it further. 
+Typical steps in the postprocessing chain of marine sonar data consist of preprocessing and noise removal, bottom detection, classification, and integration (<<postprocessing_data_flow_figure>>). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data, process the information and write back to the data using the convention, other software can pick it up and process it further. 
 
 Figure 1. Typical steps in a postprocessing chain for acoustical water column data. (TODO: Link these boxes to the groups in the convention and check if there are other needs)
 
@@ -670,4 +670,3 @@ Simrad, Kongsberg Maritime, Norway
 
 mailto:lars.nonboe.andersen@simrad.com[lars.nonboe.andersen@simrad.com]
 |===
-
