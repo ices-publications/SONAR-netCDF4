@@ -104,7 +104,9 @@ Exchange of information between different parts in the processing chain is becom
 
 Typical steps in the postprocessing chain of marine sonar data consist of preprocessing and noise removal, bottom detection, classification, and integration (<<postprocessing_data_flow_figure>>). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data, process the information and write back to the data using the convention, other software can pick it up and process it further. 
 
-Figure 1. Typical steps in a postprocessing chain for acoustical water column data. (TODO: Link these boxes to the groups in the convention and check if there are other needs)
+.Typical steps in a postprocessing chain for acoustical water column data. The two main groups may be used for several steps depending on the objective, and the `GridGroup` may be seen as a projection of the `BeamGroup` and the conversion to `GridGroup` is typically lossy. The output from the sonars are typically the `BeamGroup` and the report format are typically the `GridGroup`.
+[[postprocessing_data_flow_figure]]
+image::postprocessing_data_flow_figure.svg[]
 
 === Typical processing steps and the associated data models
 
