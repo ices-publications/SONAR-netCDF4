@@ -114,22 +114,7 @@ Depending on the type of processing, both `Beam_group` and `Grid_group` could be
 
 ==== Denoising
 
-This step typically use the same data model for the input and output. For speckle de-noising the raw ping data is usually necessary and the  `Beam_group` should be used. 
-
-==== Bottom detection
-Bottom data is needed when integrating biological backscatter close to the sea bed. Different algorithms have been developed and the recommendation is to store the bottom depth in the `Beam_group`.
-
-==== Labelling
-Scrutinizing acoustic data, i.e. allocating the acoustic energy to categories, is traditionally achieved by manually assigning the backscatter. Both `Beam_group` and `Grid_group` support labels. An overview of how different software stores this information can be found here:
-https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Gavins label overview]
-
-==== Machine learning
-Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passinsg it into your preferred deep learning framework. The use of the `Grid_group` on a high resolution grid should be used for this purpose.
-
-
-==== Integrated backscatter
-The reports from the integration process typically goes into statistical paclages that can furhter process the data. It is recommended to use the `Grid_group` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective.
-
+This step typically use the same data model for the input and output. For speckle de-noising the raw ping data is usually necessary and the
 
 == The SONAR-netCDF4 convention
 
@@ -144,8 +129,6 @@ Datasets can be added to SONAR-netCDF4 files if they do not conflict with the SO
 Each SONAR-netCDF4 file is intended to store data from one sonar mounted on one platform. The storage of data from multiple sonars and multiple platforms in one SONAR-netCDF4 file is not in the scope of the convention.
 
 A design principle of SONAR-netCDF4 has been to focus on describing the acoustic backscatter data, not the overall purpose and context of why the data were collected. Such broader metadata are better stored in separate metadata systems and schema (e.g. citenp:[iso2014,ices2016]).
-
-
 
 === Hierarchical structure
 
