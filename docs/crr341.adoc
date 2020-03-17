@@ -124,7 +124,8 @@ Scrutinizing acoustic data, i.e. allocating the acoustic energy to categories, i
 https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Gavins label overview]
 
 ==== Machine learning
-Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passins git in to your preferred deep learning framework. The use of the `Grid_group` on a high resolution grid should be used for this purpose.
+Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passinsg it into your preferred deep learning framework. The use of the `Grid_group` on a high resolution grid should be used for this purpose.
+
 
 ==== Integrated backscatter
 The reports from the integration process typically goes into statistical paclages that can furhter process the data. It is recommended to use the `Grid_group` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective.
