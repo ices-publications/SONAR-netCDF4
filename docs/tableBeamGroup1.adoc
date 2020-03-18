@@ -45,12 +45,12 @@ e|Variables | |
  3+|{attr}:units = "arc_degree"
  3+|{attr}float :valid_range = -180.0, 180.0
  
- |{var}float echoangle_major_scaling_factor(ping_time, beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
+ |{var}float echoangle_major_sensitivity(beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
  3+|{attr}:long_name = "Major angle scaling factor"
  3+|{attr}:units = "1"
  3+|{attr}float :valid_min = 0.0
 
- |{var}float echoangle_minor_scaling_factor(ping_time, beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
+ |{var}float echoangle_minor_sensitivity(beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
  3+|{attr}:long_name = "Minor angle scaling factor"
  3+|{attr}:units = "1"
  3+|{attr}float :valid_min = 0.0
@@ -108,7 +108,7 @@ e|Variables | |
  |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
  3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
 
- |{var}beam_t beam_type(ping_time) |M |Type of split-aperture beam (or not).
+ |{var}beam_t beam_type |M |Type of split-aperture beam (or not).
  3+|{attr}:long_name = "Type of beam"
 
  |{var}float equivalent_beam_angle(ping_time, beam) |M |Equivalent beam angle.

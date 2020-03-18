@@ -10,6 +10,7 @@ Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :sectnumslevels: 4
 :stem: latexmath
 :eqnums:
+:mathematical-format: svg
 :bibtex-file: references.bib
 :bibtex-style: ices-journal-of-marine-science
 
@@ -451,10 +452,10 @@ Some sonar beams can estimate the arrival angle of echoes using the split-apertu
 
 When sub-beams from a split-aperture transducer are provided, it is also necessary to combine the them to give the power or amplitude of the echoes, as received by the combined beam. All known split-aperture systems achieve this by taking the average of the sub-beam values, noting that the sub-beam data are typically complex power or amplitude values.
 
-To allow for existing conventions on how the split-aperture angles are stored or derived (typically as phase angles between the split-aperture signals), angle scaling factors are given in variables _echoangle_major_scaling_factor_ and _echoangle_minor_scaling_factor_.
+To allow for existing conventions on how the split-aperture angles are stored or derived (typically as phase angles between the split-aperture signals), angle sensitivities are given in variables _echoangle_major_sensitivity_ and _echoangle_minor_sensitivity_.
 
 === Angles stored in file
-The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains either physical arrival angles or phase angles. For the latter, the major (latexmath:[\theta]) and minor (latexmath:[\phi]) physical arrival angles are obtained by dividing by the major latexmath:[\eta_\theta] and minor latexmath:[\eta_\phi] angle scaling factors respectively. For consistency, when physical arrival angles are stored in the file, latexmath:[\eta_\theta] and latexmath:[\eta_\phi] should still be present and be set to 1.0.
+The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains either physical arrival angles or phase angles. For the latter, the major (latexmath:[\theta]) and minor (latexmath:[\phi]) physical arrival angles are obtained by dividing by the major latexmath:[\eta_\theta] and minor latexmath:[\eta_\phi] angle sensitivities respectively. For consistency, when physical arrival angles are stored in the file, latexmath:[\eta_\theta] and latexmath:[\eta_\phi] should still be present and be set to 1.0.
 
 === Angles not stored in file
 The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeammodeTable>>, in the same order as labelled in <<transducer_types>>.
@@ -469,11 +470,11 @@ This arrangement has four equal quadrants in the transducer (<<transducer_types>
 [stem]
 ++++
 \begin{equation}
-\theta = \arctan \left( \frac{\Im((y_2+y_3)^*)}{\Re(y_1+y_4)} \right) \frac{1}{\eta_\theta}\\
-\phi = \arctan \left( \frac{\Im((y_1+y_2)^*)}{\Re(y_3+y_4)}  \right) \frac{1}{\eta_\phi} 
+\theta = \frac{\arctan \left( \Im((y_2+y_3)^*), \Re(y_1+y_4) \right)}{\eta_\theta}\\
+\phi =   \frac{\arctan \left( \Im((y_1+y_2)^*), \Re(y_3+y_4) \right)}{\eta_\phi} 
 \end{equation}
 ++++
-where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The angle scaling factors are latexmath:[\eta_\theta] for the major axis and latexmath:[\eta_\phi] for the minor axis.
+where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The angle sensitivities are latexmath:[\eta_\theta] for the major axis and latexmath:[\eta_\phi] for the minor axis.
 
 
 ==== Three or four sub-beams (type B and C)
@@ -483,8 +484,8 @@ This arrangement has either three equal sub-beams (<<transducer_types>>, partB) 
 [stem]
 ++++
 \begin{equation}
-\omega_{31} = \arctan \left( \frac{\Im((y_3+y_1)^*)}{\Re(y_3+y_1)}   \right) \\
-\omega_{32} = \arctan \left( \frac{\Im((y_3+y_2)^*)}{\Re(y_3+y_1)}   \right)
+\omega_{31} = \arctan \left( \Im((y_3+y_1)^*), \Re(y_3+y_1) \right) \\
+\omega_{32} = \arctan \left( \Im((y_3+y_2)^*), \Re(y_3+y_1) \right)
 \end{equation}
 ++++
 where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The major (latexmath:[\theta]) and minor (latexmath:[\phi]) angles are then:
@@ -493,10 +494,10 @@ where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] 
 ++++
 \begin{equation}
 \theta = \frac{1}{\sqrt{3}\eta_\theta} (\omega_{31} + \omega_{32})\\
-\phi = \frac{1}{\sqrt{3}\eta_\phi} (\omega_{32} - \omega_{31})\\
+\phi = \frac{1}{\eta_\phi} (\omega_{32} - \omega_{31})\\
 \end{equation}
 ++++
-where latexmath:[\eta_\theta] is the angle scaling factor for the major axis and latexmath:[\eta_\phi] the angle scaling factor for the minor axis.
+where latexmath:[\eta_\theta] is the angle sensitivity for the major axis and latexmath:[\eta_\phi] the angle sensitivity for the minor axis.
 
 == Revision history
 
