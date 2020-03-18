@@ -10,7 +10,6 @@ Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :sectnumslevels: 4
 :stem: latexmath
 :eqnums:
-:mathematical-format: svg
 :bibtex-file: references.bib
 :bibtex-style: ices-journal-of-marine-science
 
