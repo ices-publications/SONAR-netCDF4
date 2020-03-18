@@ -10,7 +10,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-This directory contains the text and source files necessary to generate the https://github.com/ices-eg/wg_WGFAST/blob/master/SONAR-netCDF4/README.adoc[SONAR-netCDF4 convention document]. It is also the place where new versions of the convention are discussed and developed.
+This directory contains the text and source files necessary to generate the https://github.com/ices-eg/wg_WGFAST/blob/master/SONAR-netCDF4/README.adoc[SONAR-netCDF4 convention]. It is also the place where new versions of the convention are discussed and developed.
 
 Version 1.0 of the SONAR-netCDF4 convention (as ICES CRR No. 341) is available http://www.ices.dk/sites/pub/Publication%20Reports/Cooperative%20Research%20Report%20(CRR)/CRR341.pdf[here].
 
