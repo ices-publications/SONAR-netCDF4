@@ -1,20 +1,29 @@
 = The SONAR-netCDF4 convention for sonar data
+:imagesdir: images\
+:toc: preamble
+:toclevels: 4
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
-This directory contains the text, source files, and utilities that are necessary to generate the https://github.com/ices-eg/wg_WGFAST/blob/master/SONAR-netCDF4/README.adoc[SONAR-netCDF4 convention document]. It is also the place where new versions of the convention are discussed and developed.
+This directory contains the text and source files necessary to generate the https://github.com/ices-eg/wg_WGFAST/blob/master/SONAR-netCDF4/README.adoc[SONAR-netCDF4 convention document]. It is also the place where new versions of the convention are discussed and developed.
 
 Version 1.0 of the SONAR-netCDF4 convention (as ICES CRR No. 341) is available http://www.ices.dk/sites/pub/Publication%20Reports/Cooperative%20Research%20Report%20(CRR)/CRR341.pdf[here].
 
-== Suggestions and contributions welcome
 
+== Suggestions and contributions welcome
 WGFAST welcomes suggestions, discussion, and contributions to this SONAR netCDF-4 convention.
 
-Before submitting a pull request, please take a moment to find out whether your idea fits within the scope and aims of the convention, and whether your idea can be achieved within the existing metadata convention. It is your role to adequately explain and justify the merits of what you want. Please provide as much detail and context as possible. Good pull requests remain focused in scope and avoid containing unrelated commits.
+Before submitting a pull request, please take a moment to find out whether your idea fits within the scope and aims of the convention, and whether your idea can be achieved within the existing SONAR netCDF-4 convention. It is your role to adequately explain and justify the merits of what you want. Please provide as much detail and context as possible. Good pull requests remain focused in scope and avoid containing unrelated commits.
 
 *Please ask the convention coordinators before starting on any _significant_ edits*. Otherwise you risk spending a lot of time working on something that the convention coordinators might not want to merge into the project.
 
-_Need to add GH handles of convention coordinators_.
 
 == How to contribute
-The convention is stored in the AsciiDoc markup language in this GitHub repository. Suggestions, discussions and contributions are done through the facilities provided by GitHub. Please use the https://github.com/ices-eg/wg_WGFAST/issues[issue tracker] for suggestions and discussions, and create https://github.com/ices-eg/wg_WGFAST/pulls[pull requests] for contributions.
+The metadata convention is written in AsciiDoc markup language. Suggestions, discussions, and contributions are done through the facilities provided by GitHub. Please use the https://github.com/ices-eg/wg_WGFAST/issues[issue tracker] for suggestions and discussions, and create https://github.com/ices-eg/wg_WGFAST/pulls[pull requests] for contributions.
 
-For guidance on Git, GitHub, and the syntax for AsciiDoc, as well as the suggested Git workflow for contributors, please refer to the documents in https://github.com/ices-eg/wg_WGFAST/tree/master/How_to_contribute[How to contribute] folder.
+For guidance on Git, GitHub, and AsciiDoc syntax, as well as the suggested Git workflow for contributors, please refer to documents in the https://github.com/ices-eg/wg_WGFAST/tree/master/How_to_contribute[How to contribute] folder.
