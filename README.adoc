@@ -1,59 +1,29 @@
 = The SONAR-netCDF4 convention for sonar data
+:imagesdir: images\
+:toc: preamble
+:toclevels: 4
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
-This directory contains the text, source files, and utilities that are necessary to generate the SONAR-netCDF4 convention document. It is also the place where new versions of the convention are discussed and developed.
+This directory contains the text and source files necessary to generate the https://github.com/ices-eg/wg_WGFAST/blob/master/SONAR-netCDF4/README.adoc[SONAR-netCDF4 convention]. It is also the place where new versions of the convention are discussed and developed.
 
 Version 1.0 of the SONAR-netCDF4 convention (as ICES CRR No. 341) is available http://www.ices.dk/sites/pub/Publication%20Reports/Cooperative%20Research%20Report%20(CRR)/CRR341.pdf[here].
 
-== Contributing to this convention
 
-WGFAST welcomes suggestions, discussion, and contributions to this sonar data convention.
-Please take a moment to review this document in order to make the process easy and effective for everyone involved.
+== Suggestions and contributions welcome
+WGFAST welcomes suggestions, discussion, and contributions to this SONAR netCDF-4 convention.
 
-The convention is stored in the AsciiDoc markup language and stored on this github repository. Suggestions, discussions and contributions are done through the facilities provided by github - use the issue tracker for suggestions and discussions. Create pull requests for contributions.
+Before submitting a pull request, please take a moment to find out whether your idea fits within the scope and aims of the convention, and whether your idea can be achieved within the existing SONAR netCDF-4 convention. It is your role to adequately explain and justify the merits of what you want. Please provide as much detail and context as possible. Good pull requests remain focused in scope and avoid containing unrelated commits.
 
-Enhancement requests are welcome. But take a moment to find out whether your idea
-fits with the scope and aims of the convention and whether your idea can be achieved within the existing convention. It is your role to adequately explain and justify the merits of what you want. Please provide as much detail and context as possible.
+*Please ask the convention coordinators before starting on any _significant_ edits*. Otherwise you risk spending a lot of time working on something that the convention coordinators might not want to merge into the project.
 
-Good pull requests - corrections, improvements, etc are a great help. They should remain focused in scope and avoid containing unrelated commits.
 
-*Please ask first* before starting on any significant pull request,
-otherwise you risk spending a lot of time working on something that the
-convention's coordinators might not want to merge into the project.
+== How to contribute
+The metadata convention is written in AsciiDoc markup language. Suggestions, discussions, and contributions are done through the facilities provided by GitHub. Please use the https://github.com/ices-eg/wg_WGFAST/issues[issue tracker] for suggestions and discussions, and create https://github.com/ices-eg/wg_WGFAST/pulls[pull requests] for contributions.
 
-=== AsciiDoc tools
-
-Contributors to this convention may not be familiar with Git, GitHub, and AsciiDoc, so we provide here some starting points and suggestions.
-
-==== Git & GitHub
-
-Git is a version control system used to manage and keep track of edits while GitHub is a cloud-based hosting service used to manages Git repositories. wg_WGFAST is a repository within the https://github.com/ices-eg[ICES Expert Groups] workspace.
-
-If you wish to edit the document, fork the repository, clone it locally (or edit the forked version online), commit your changes, then create a pull request. There are plenty of Git and https://guides.github.com/[GitHub tutorials] and explanations online to help you with this.
-
-The https://www.sourcetreeapp.com/[Sourcetree] program for Windows and Mac is a useful tool for working with Git repositories. https://tortoisehg.bitbucket.io/[TortoiseHg] for Windows and Linux is another option. You can of course also use the Git command line interface.
-
-==== Real-time rendering of the document
-
-When editing the convention file, it is useful to see the rendered version of the document as changes are made. Ways to achieve this are explained https://asciidoctor.org/docs/editing-asciidoc-with-live-preview/[here]. We find that
-https://github.com/asciidoctor/asciidoctor-browser-extension[Asciidoctor.js Live Preview] works well, but note that it does not currently do the bibliography in the AcMeta document.
-
-==== Off-line rendering of the document
-
-This requires installing AsciiDoctor onto your computer and can be somewhat complicated. Instructions are https://asciidoctor.org/docs/install-toolchain/[here]. Remember to also install the asciidoctor-bibtex extension. Once all installed, the convention can be rendered in several formats with these commands.
-
-HTML files:: Generates one or more files (images are kept separate):
-
- asciidoctor -r asciidoctor-bibtex acmeta.adoc
-
-HTML (single file):: For a single html file (including the images, which makes it easier to distribute):
-
- asciidoctor -r asciidoctor-bibtex --backend html5 -a data-uri acmeta.adoc
-
-PDF:: Note that the asciidoctor-mathematical extension must be installed to get the mathematical equations correctly rendered:
-
- asciidoctor-pdf -r asciidoctor-bibtex  acmeta.adoc
-
-Word (.docx):: First convert to docbook format, then install and use https://pandoc.org/[pandoc] to convert to Word:
-
- asciidoctor -r asciidoctor-bibtex --backend docbook acmeta.adoc
- pandoc --from docbook --to docx -o acmeta.docx acmeta.xml
+For guidance on Git, GitHub, and AsciiDoc syntax, as well as the suggested Git workflow for contributors, please refer to documents in the https://github.com/ices-eg/wg_WGFAST/tree/master/How_to_contribute[How to contribute] folder.
