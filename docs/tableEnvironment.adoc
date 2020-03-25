@@ -4,13 +4,13 @@
 |===
 |Description |Obligation |Comment
 e|Dimensions | |
- |{var}frequency = unlimited | |Can be of fixed or unlimited length, as appropriate.
+ |{var}frequency = unlimited | |Can be of fixed or unlimited length, as appropriate.
  
 e|Coordinate variables | |
  |{var}float frequency(frequency) |M |
  3+|{attr}:long_name = "Acoustic frequency" 
- 3+|{attr}:standard_name = "sound_frequency"
- 3+|{attr}:units = "Hz"
+ 3+|{attr}:standard_name = "sound_frequency" 
+ 3+|{attr}:units = "Hz" 
  3+|{attr}float :valid_min = 0.0 
  
 e|Variables | |

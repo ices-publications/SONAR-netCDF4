@@ -8,17 +8,17 @@ e|Group attributes | |
  |{attr}conversion_equation_t :conversion_equation_type |M |Type of equation used to convert backscatter measurements into volume backscattering strength and target strength.
  |{attr}int :preferred_MRU |MA |Index of the MRU sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_MRU. Index matches the ones used in the Platform MRU sensors variables.
  |{attr}int :preferred_position |MA |Index of the position sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_position_sensor. Index matches the ones used in the Platform position sensors variables.
-
+ 
 e|Dimensions | |
  |{var}beam | |The number of beams in this beam group.
- |{var}subbeam | |The number of sub-beams in these beams
- |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
+ |{var}subbeam | |The number of sub-beams in these beams.
+ |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  |{var}tx_beam | |The number of transmit beams in this beam group
  
 e|Coordinate variables | |
  |{var}string beam(beam) |M |Beam name (or number or identification code).
  3+|{attr}:long_name = "Beam name" 
-
+ 
  |{var}uint64 ping_time(ping_time) |M |Timestamp at which each ping occurred.
  3+|{attr}:axis = "T" 
  3+|{attr}:calendar = "gregorian" 
@@ -29,102 +29,102 @@ e|Coordinate variables | |
 e|Variables | |
  |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
- |{attr}:units = "as appropriate" | |Use units appropriate for the data.
-
+ 2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
+ 
  |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
- |{attr}:units = "as appropriate" | |Use units appropriate for the data.
-
+ 2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
+ 
  |{var}angle_t echoangle_major(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
- 3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate"
- 3+|{attr}:units = "arc_degree"
- 3+|{attr}float :valid_range = -180.0, 180.0
-
+ 3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
  |{var}angle_t echoangle_minor(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
- 3+|{attr}:long_name = "Echo arrival angle in the minor beam coordinate"
- 3+|{attr}:units = "arc_degree"
- 3+|{attr}float :valid_range = -180.0, 180.0
+ 3+|{attr}:long_name = "Echo arrival angle in the minor beam coordinate" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
  
  |{var}float echoangle_major_sensitivity(beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
- 3+|{attr}:long_name = "Major angle scaling factor"
- 3+|{attr}:units = "1"
- 3+|{attr}float :valid_min = 0.0
-
+ 3+|{attr}:long_name = "Major angle scaling factor" 
+ 3+|{attr}:units = "1" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
  |{var}float echoangle_minor_sensitivity(beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
- 3+|{attr}:long_name = "Minor angle scaling factor"
- 3+|{attr}:units = "1"
- 3+|{attr}float :valid_min = 0.0
-
+ 3+|{attr}:long_name = "Minor angle scaling factor" 
+ 3+|{attr}:units = "1" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
  |{var}float beamwidth_receive_major(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
  3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 
- 3+|{attr}:units = "arc_degree"
+ 3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
-
+ 
  |{var}float beamwidth_receive_minor(ping_time, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam.
- 3+|{attr}:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam"
+ 3+|{attr}:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
-
+ 
  |{var}float beamwidth_transmit_major(ping_time, tx_beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
- 3+|{attr}:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam"
+ 3+|{attr}:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
-
+ 
  |{var}float beamwidth_transmit_minor(ping_time, tx_beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
- 3+|{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam"
+ 3+|{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
-
+ 
  |{var}float rx_beam_rotation_alpha(ping_time, beam) |M |The extrinsic z-x-z clockwise rotation about the _z_-axis of the platform coordinate system needed to give the beam coordinate system.
- 3+|{attr}:long_name = "angular rotation about the _z_ axis"
+ 3+|{attr}:long_name = "angular rotation about the _z_ axis" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
-
+ 
  |{var}float rx_beam_rotation_beta(ping_time, beam) |M |The extrinsic z-x-z clockwise rotation about the _x_-axis of the platform coordinate system needed to give the beam coordinate system.
- 3+|{attr}:long_name = "angular rotation about the _x_ axis"
+ 3+|{attr}:long_name = "angular rotation about the _x_ axis" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
-
+ 
  |{var}float rx_beam_rotation_gamma(ping_time, beam) |M |The extrinsic z-x-z clockwise rotation about the _z_-axis of the platform coordinate system needed to give the beam coordinate system.
- 3+|{attr}:long_name = "angular rotation about the _z_ axis"
+ 3+|{attr}:long_name = "angular rotation about the _z_ axis" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
-
+ 
  |{var}float tx_beam_direction_x(ping_time, tx_beam) |M |The _x_-axis coordinate of a unit vector in the beam direction for each tx_beam and ping, as per the sonar beam coordinate system.
- 3+|{attr}:long_name = "_x_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system"
- 3+|{attr}:units = "1"
- 3+|{attr}float :valid_range = −1.0, 1.0 
-
- |{var}float tx_beam_direction_y(ping_time, tx_beam) |M |The _y_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
- 3+|{attr}:long_name = "_y_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system"
+ 3+|{attr}:long_name = "_x_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" 
  3+|{attr}:units = "1" 
  3+|{attr}float :valid_range = −1.0, 1.0 
-
- |{var}float tx_beam_direction_z(ping_time, tx_beam) |M |The _z_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
- 3+|{attr}:long_name = "_z_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system"
- 3+|{attr}:units = "1"
+ 
+ |{var}float tx_beam_direction_y(ping_time, tx_beam) |M |The _y_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
+ 3+|{attr}:long_name = "_y_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" 
+ 3+|{attr}:units = "1" 
  3+|{attr}float :valid_range = −1.0, 1.0 
-
+ 
+ |{var}float tx_beam_direction_z(ping_time, tx_beam) |M |The _z_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
+ 3+|{attr}:long_name = "_z_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" 
+ 3+|{attr}:units = "1" 
+ 3+|{attr}float :valid_range = −1.0, 1.0 
+ 
  |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
  3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
-
+ 
  |{var}beam_t beam_type |M |Type of split-aperture beam (or not).
- 3+|{attr}:long_name = "Type of beam"
-
+ 3+|{attr}:long_name = "Type of beam" 
+ 
  |{var}float equivalent_beam_angle(ping_time, beam) |M |Equivalent beam angle.
  3+|{attr}:long_name = "Equivalent beam angle" 
  3+|{attr}:units = "sr" 
- 2+|{attr}float :valid_range = 0.0, 12.56637061435917295385 | Maximum value is equivalent to 4π.
-
+ 2+|{attr}float :valid_range = 0.0, 12.56637061435917295385 |Maximum value is equivalent to 4π.
+ 
  |{var}float gain_correction(ping_time, beam) |MA |Gain correction. This parameter is set from a calibration exercise. Necessary for type 2 conversion equation.
  3+|{attr}:long_name = "Gain correction" 
  3+|{attr}:units = "dB" 
-
+ 
  |{var}short non_quantitative_processing(ping_time) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. A value of 0 always indicates no such processing.
- |{attr}:flag_meanings | |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
- |{attr}short :flag_values | |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
+ 2+|{attr}:flag_meanings |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
+ 2+|{attr}short :flag_values |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
  3+|{attr}:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" 
-
+ 
  |{var}float receiver_sensitivity(ping_time, beam) |MA |Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.
  3+|{attr}:long_name = "Receiver sensitivity" 
  3+|{attr}:units = "dB re 1/μ" 
@@ -133,14 +133,14 @@ e|Variables | |
  3+|{attr}:long_name = "Interval between recorded raw data samples" 
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
-
+ 
  |{var}float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2
  3+|{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" 
  3+|{attr}:units = "s" 
  
- |{var}float sa_correction(ping_time, tx_beam) |MA| XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
- 3+|{attr}:long_name = ""
- 3+|{attr}:units = ""
+ |{var}float sa_correction(ping_time, tx_beam) |MA | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ 3+|{attr}:long_name = "" 
+ 3+|{attr}:units = "" 
  
  |{var}float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded sample is given by blanking_interval*sample_interval.
  3+|{attr}:long_name = "Amount of time during reception where samples are discarded" 
@@ -203,7 +203,7 @@ e|Variables | |
  3+|{attr}:long_name = "Active MRU sensor index" 
  
  |{var}int active_position_sensor(ping_time) |MA |Indicate the index of the position sensor used at the time of the ping to compute the platform position.
- 3+|{attr}:valid_min = "0"
+ 3+|{attr}:valid_min = "0" 
  3+|{attr}:long_name = "Active position sensor index" 
  
  |{var}float sound_speed_at_transducer(ping_time) |O |Sound speed at transducer depth at the time of the ping
@@ -215,7 +215,7 @@ e|Variables | |
  |{var}double platform_latitude(ping_time) |M |Latitude of the platform reference point in WGS-84 reference system at the time of the ping.
  3+|{attr}double :valid_range = −90.0, 90.0 
  3+|{attr}:standard_name = "Platform latitude" 
- 3+|{attr}:units = "degrees_north"
+ 3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "latitude" 
  3+|{attr}double :_FillValue = Double.NaN 
  
@@ -233,14 +233,12 @@ e|Variables | |
  3+|{attr}float :valid_range = 0, 360.0 
  
  |{var}float platform_pitch(ping_time) |M |Platform pitch at the time of the ping.
- 3+|{attr}:crs = "VCS" 
  3+|{attr}:standard_name = "platform_pitch_angle" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}:long_name = "pitch angle" 
  3+|{attr}float :valid_range = −90.0, 90.0 
  
  |{var}float platform_roll(ping_time) |M |Platform roll at the time of the ping.
- 3+|{attr}:crs = "VCS" 
  3+|{attr}:standard_name = "platform_roll_angle" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}:long_name = "roll angle" 

@@ -5,8 +5,10 @@
 |Description |Obligation |Comment
 e|Group attributes | |
  |{attr}string :description |O |System description
+ 
 e|Dimensions | |
  |{var}time | |can be fixed or unlimited length, as appropriate
+ 
 e|Coordinate variables | |
  |{var}uint64 time(time) |M |Time from position sensor
  3+|{attr}:axis = "T" 
@@ -14,7 +16,7 @@ e|Coordinate variables | |
  3+|{attr}:long_name = "Timestamps for position data" 
  3+|{attr}:standard_name = "time" 
  3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
-
+ 
 e|Variables | |
  |{var}double latitude(time) |M |Latitude of the platform reference point in WGS-84 reference system
  3+|{attr}double :valid_range = −90.0, 90.0 
@@ -22,46 +24,46 @@ e|Variables | |
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "latitude" 
  3+|{attr}double :_FillValue = Double.NaN 
-
+ 
  |{var}double longitude(time) |M |Longitude of the platform reference point in WGS-84 reference system
  3+|{attr}double :valid_range = −180.0, 180.0 
  3+|{attr}:standard_name = "Platform longitude" 
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "longitude" 
  3+|{attr}double :_FillValue = Double.NaN 
-
+ 
  |{var}float heading(time) |MA |Heading refers to the direction a platform is pointing. This may or may not be the direction that the platform actually travels, which is known as its course or track. Any difference between course and heading is due to the motion of the underlying medium, the air or water, or other effects like skidding or slipping. Heading is typically based on compass directions, so 0° (or 360°) indicates a direction toward true North, 90° indicates a direction toward true East, 180° is true South, and 270° is true West.  
  3+|{attr}:standard_name = "platform_orientation" 
  3+|{attr}:units = "degree" 
  3+|{attr}:long_name = "Platform heading(true)" 
-
+ 
  |{var}float course_over_ground(time) |O |a platform course is the cardinal direction along which the platform is to be steered
  3+|{attr}:standard_name = "platform_course" 
  3+|{attr}:units = "m/s" 
- 3+|{attr}:long_name = "degree"
-
+ 3+|{attr}:long_name = "degree" 
+ 
  |{var}float speed_over_ground(time) |MA |Speed is the magnitude of velocity. The platform speed with respect to ground is relative to the solid Earth beneath it, i.e. the sea floor for a ship.  
  3+|{attr}:standard_name = "platform_speed_wrt_ground" 
  3+|{attr}:units = "m/s" 
  3+|{attr}:long_name = "speed_over_ground" 
  3+|{attr}float :valid_min = 0.0 
-
+ 
  |{var}float speed_relative(time) |MA |Platform speed relative to water.
  3+|{attr}:long_name = "Platform speed relative to water" 
  3+|{attr}:standard_name = "platform_speed_wrt_seawater" 
  3+|{attr}:units = "m/s" 
  3+|{attr}float :valid_min = 0.0 
-
+ 
  |{var}float height_above_reference_ellipsoid(time) |MA |Height of the platform reference point above the WGS-84 ellipsoid
  3+|{attr}:standard_name = "height_above_reference_ellipsoid" 
  3+|{attr}:units = "m" 
  3+|{attr}:long_name = "height_above_reference_ellipsoid" 
-
+ 
  |{var}float altitude(time) |MA |Altitude is the (geometric) height of the platform reference point above the reference WGS-84 geoid. The geoid is similar to mean sea level.
  3+|{attr}:standard_name = "altitude" 
  3+|{attr}:units = "m" 
  3+|{attr}:long_name = "altitude" 
-
+ 
  |{var}float distance(time) |O |Distance travelled by the platform from an arbitrary location.
  3+|{attr}:long_name = "Distance travelled by the platform" 
  3+|{attr}:units = "m" 
