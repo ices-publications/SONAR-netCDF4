@@ -25,6 +25,7 @@ e|Coordinate variables | |
  3+|{attr}:long_name = "Time-stamp of each ping" 
  3+|{attr}:standard_name = "time" 
  3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
 e|Variables | |
  |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
@@ -107,6 +108,7 @@ e|Variables | |
  
  |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
  3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}beam_t beam_type |M |Type of split-aperture beam (or not).
  3+|{attr}:long_name = "Type of beam" 
@@ -124,6 +126,7 @@ e|Variables | |
  2+|{attr}:flag_meanings |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
  2+|{attr}short :flag_values |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
  3+|{attr}:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float receiver_sensitivity(ping_time, beam) |MA |Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.
  3+|{attr}:long_name = "Receiver sensitivity" 
@@ -133,6 +136,7 @@ e|Variables | |
  3+|{attr}:long_name = "Interval between recorded raw data samples" 
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2
  3+|{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" 
@@ -150,6 +154,7 @@ e|Variables | |
  |{var}sample_t time_varied_gain(ping_time) |MA |Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.
  3+|{attr}:long_name = "Time-varied-gain coefficients" 
  3+|{attr}:units = "dB" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float transducer_gain(ping_time, beam) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1.
  3+|{attr}:long_name = "Gain of transducer" 
@@ -201,22 +206,26 @@ e|Variables | |
  |{var}int active_MRU(ping_time) |MA |Indicate the index of the MRU sensor used at the time of the ping to compute the platform attitude.
  3+|{attr}:valid_min = "0" 
  3+|{attr}:long_name = "Active MRU sensor index" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}int active_position_sensor(ping_time) |MA |Indicate the index of the position sensor used at the time of the ping to compute the platform position.
  3+|{attr}:valid_min = "0" 
  3+|{attr}:long_name = "Active position sensor index" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float sound_speed_at_transducer(ping_time) |O |Sound speed at transducer depth at the time of the ping
  3+|{attr}:long_name = "Indicative sound speed at ping time and transducer depth" 
  3+|{attr}:units = "m/s" 
  3+|{attr}float :valid_min = 0.0 
  3+|{attr}:standard_name = "speed_of_sound_in_sea_water" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}double platform_latitude(ping_time) |M |Latitude of the platform reference point in WGS-84 reference system at the time of the ping.
  3+|{attr}double :valid_range = −90.0, 90.0 
  3+|{attr}:standard_name = "Platform latitude" 
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "latitude" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}double platform_longitude(ping_time) |M |Longitude of the platform reference point in WGS-84 reference system at the time of the ping.
@@ -224,6 +233,7 @@ e|Variables | |
  3+|{attr}:standard_name = "Platform longitude" 
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "longitude" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}float platform_heading(ping_time) |M |Heading of the platform at time of the ping.
@@ -231,28 +241,34 @@ e|Variables | |
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "Platform heading(true)" 
  3+|{attr}float :valid_range = 0, 360.0 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float platform_pitch(ping_time) |M |Platform pitch at the time of the ping.
  3+|{attr}:standard_name = "platform_pitch_angle" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}:long_name = "pitch angle" 
  3+|{attr}float :valid_range = −90.0, 90.0 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float platform_roll(ping_time) |M |Platform roll at the time of the ping.
  3+|{attr}:standard_name = "platform_roll_angle" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}:long_name = "roll angle" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float platform_vertical_offset(ping_time) |M |Distance from the platform reference point to the water line (distance are positives downwards). For ships and similar, this is called heave, but the concept applies equally well to underwater vehicle depth.
  3+|{attr}:long_name = "Platform vertical distance from reference point to the water line" 
  3+|{attr}:units = "m" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float tx_transducer_depth(ping_time) |O |Tx transducer depth below waterline at time of the ping (distance are positives downwards). This variable can be recomputed in most cases by applying lever arm and rotation matrix taking into account for roll and pitch, platform_vertical_offset but can also take into account for drop keel position
  3+|{attr}:long_name = "Tx transducer depth below waterline" 
  3+|{attr}:units = "m" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float waterline_to_chart_datum(ping_time) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector obtains by adding the tide, the dynamic draught at the time of the ping and allow to position samples in an absolute referential.
  3+|{attr}:long_name = "vertical translation from waterline to chart datum reference " 
  3+|{attr}:units = "m" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
 |===
