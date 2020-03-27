@@ -196,7 +196,7 @@ e|Variables | |
  3+|{attr}:long_name = "Transmit source level" 
  3+|{attr}:units = "dB re 1 μPa at 1m" 
  
- |{var}transmit_t transmit_type(ping_time) |M |Type of transmit pulse.
+ |{var}transmit_t transmit_type(ping_time, tx_beam) |M |Type of transmit pulse.
  3+|{attr}:long_name = "Type of transmitted pulse" 
  
  |{var}int receive_transducer_index(beam) |MA |Receiving or monostatic transducer index associated with the given beam
