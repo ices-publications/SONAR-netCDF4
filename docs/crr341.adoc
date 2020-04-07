@@ -415,9 +415,11 @@ Type 4 conversion equations are intended for data produced by Simrad EK80 and ES
 
 == Coordinate systems
 
-This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a fixed global coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.
+This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a geographic coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.
 
-There are five right-handed Cartesian coordinate systems (<<coordinateSystemList>>) and one Cartesian angular coordinate system used to specify the physical location of received echoes. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Rotation angles are as per the right-hand rule.
+There are four right-handed Cartesian coordinate systems (<<coordinateSystemList>>, <<coordinate_system_figure>>) associated with the platform, transducer(s), and acoustic beams, and one Cartesian angular coordinate system used to specify the physical location of received echoes with a sonar beam. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Rotation angles are as per the right-hand rule.
+
+There is also a geographic coordinate system that provides for location of the platform on Earth and also the height above a datum (e.g. mean sea level). The platform heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in the geographic coordinate system (this applies to both stationary and mobile sonar platforms).
 
 
 .List of coordinate systems used to physically locate the position of received echoes.
@@ -426,22 +428,19 @@ There are five right-handed Cartesian coordinate systems (<<coordinateSystemList
 |===
 |Coordinate system name|Origin|_x_-axis|_y_-axis|_z_-axis
 
-|Fixed coordinate system|Fixed somewhere on the nominal sea surface|Pointing North|Pointing East|Pointing down with gravity
 |Surface coordinate system|Platform origin|Forward along horizontal projection of platform main axis|Pointing horizontally to starboard orthogonal to horizontal projection of platform main axis|Pointing down with gravity
 |Platform coordinate system|Platform origin|Parallel to the main axis of the platform, positive values toward the front of the platform|Perpendicular to the main axis of the platform, positive values to the starboard side|Pointing down parallel to platform mast
 |Transducer coordinate system|Centre of transducer face|Pointing forward along transducer plane|Pointing starboard along transducer plane|Pointing down orthogonal to transducer plane
 |Sonar beam coordinate system|Centre of transducer face|Arbitrary|Orthogonal to the _x_-axis|Pointing along the beam axis
 |===
 
-The surface coordinate system (SCS) is obtained from the fixed coordinate system (FCS) through a translation of the origin (e.g., latitude and longitude assuming the FCS has latitude of 0 degrees and longitude of 0 degrees) and a rotation about the _z_-axis (typically the platform heading).
+The platform coordinate system (PCS) is obtained from the surface coordinate system (SCS) through a rotation that corresponds to the pitch and roll of the platform. No translation is necessary. Platform heave is applied in this coordinate system.
 
-The platform coordinate system (PCS) is obtained from the SCS through a rotation that corresponds to the pitch, roll of the platform. No translation is necessary.
+The transducer coordinate system (TCS) is obtained from the PCS through a translation of the PCS origin and a rotation to align with the transducer face. Transducer depth is applied in this coordinate system.
 
-The transducer coordinate system (TCS) is obtained from the PCS through a translation of the PCS origin and a rotation to align with the transducer face.
+The sonar beam coordinate system (BCS) is obtained from the TCS through a rotation that specifies any difference in transducer pointing direction and beam pointing direction. In many cases there will be no rotation necessary. Note that split-aperture coordinates (minor and major angles) are defined by the BCS and a rotation may be necessary to give the desired minor and major angle directions.
 
-The sonar beam coordinate system (BCS) is obtained from the TCS through a rotation that specifies any difference in transducer pointing direction and beam pointing direction. In many cases there will be no rotation necessary. Note that split-aperture coordinates (minor and major angles) are defined in terms of the BCS and a rotation may be necessary.
-
-If a sonar actively alters beam pointing directions to compensate for motion of the platform, the rotations to get from the TCS to the BCS will be identical to those given to get from SCS to PCS, but with opposite sign (_is this correct? should there be a flag to avoid having to store these pitch, roll, heading values twice?_).
+If a sonar actively alters beam pointing directions to compensate for motion of the platform, the rotations to get from the TCS to the BCS will be identical to those given to get from SCS to PCS, but with opposite sign. The _beam_stabilisation_ variable indicates whether the beams were compensated or uncompensated and serves as information only (the rotation matrices are still used in the same way).
 
 _Need to specify how the draft and heave stuff comes into the translations_
 
@@ -454,7 +453,7 @@ M_{AB} = M_z(h) \cdot M_y(p) \cdot M_z(r)
 \end{equation}
 ++++
 
-and is used:
+noting that the order of the matrices is important, and is used:
 
 [stem]
 ++++
@@ -492,23 +491,13 @@ M_z(h) =
 \end{eqnarray}
 ++++
 
-
-=== Platform coordinate system (_to be removed_)
-
-The coordinate system for the platform uses the right-handed Cartesian convention (<<coordinate_system_figure>>) with:
-
-* _x_-axis parallel to the main axis of the platform, positive values toward the front of the platform (e.g. toward the bow of a ship),
-* _y_-axis perpendicular to the main axis of the platform, positive values to the starboard side of the platform,
-* _z_-axis vertical, positive values down from the platform,
-* the origin is the common reference point where all three axes meet and is arbitrary.
-
-Roll is positive with port side up, pitch is positive with bow up, and heading/yaw is positive clockwise. More specifically:
+To be clear, the right-hand rule when applied to roll, pitch, and heave means that:
 
 * looking along the positive _x_-axis, a positive rotation (roll) is clockwise (to starboard),
 * looking along the positive _y_-axis, a positive rotation (pitch) is clockwise (bow up),
 * looking along the positive _z_-axis, a positive rotation (yaw) is clockwise (to starboard).
 
-The platform-heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in world coordinates. This applies to both stationary and mobile sonar platforms.
+The _platform_heading_ variable (degrees clockwise from north) can be used to obtain the sonar orientation in world coordinates. This applies to both stationary and mobile sonar platforms.
 
 The orientation of the platform is represented using the _z_–_y_’–_x_” Tait-Bryan intrinsic rotation convention (https://en.wikipedia.org/wiki/Euler_angles[en.wikipedia.org/wiki/Euler_angles]), corresponding to yaw, pitch, and roll, respectively. Intrinsic means that rotations about the _y_-axis are measured after any rotation about the _z_-axis, and rotations about the _x_-axis are measured after rotations about the _y_-axis (for comparison, extrinsic angles are applied relative to a fixed-platform orientation). This is the most used rotation convention in the maritime field, and the main effect is that roll is measured relative to the plane tilted by the pitch angle.
 
@@ -516,44 +505,25 @@ The orientation of the platform is represented using the _z_–_y_’–_x_” T
 [[coordinate_system_figure]]
 image::coordinateSystemFigure.svg[align="center"]
 
-=== Sonar beam coordinate system (_to be removed_)
-
-The sonar beam coordinate system origin and orientation is given by a set of rotations and translations from the platform coordinate system. These are:
-
-. transducer offset
-. transducer rotation
-. if motion compensated, pitch, roll, and yaw
-. sonar beam rotation
-
-The sonar beam coordinate systems (_x'_, _y'_, _z'_) are defined by per-beam rotations of the platform coordinate system (_x_, _y_, _z_). A translation may also occur if the origin of the sonar beam coordinate system differs from the platform coordinate system. The _z'_ axis is always the beam axis, with the origin at the transducer.
-
-The rotation is given by three rotation angles (latexmath:[\alpha, \beta, \gamma]), corresponding to a clockwise extrinsic z-x-z rotation of the platform coordinate system. That is, the beam coordinate system is the result of three rotations of the platform coordinate system, performed in this order:
-
-.  Rotate about the _z_-axis by latexmath:[\gamma]
-.  Rotate about the _x_-axis by latexmath:[\beta]
-.  Rotate about the _z_-axis by latexmath:[\alpha]
-
 The SONAR-netCD4 variable names for receive beam rotation angles are _rx_beam_rotation_alpha_, _rx_beam_rotation_beta_, and _rx_beam_rotation_gamma_. Translations are given by the _transducer_offset_x_, _transducer_offset_y_, and _transducer_offset_z_ variables. 
 
-Sonar beams can be compensated or uncompensated for platform motion. If compensated, the sonar beam coordinate system is taken to be relative to the platform coordinate system prior to the effect of any pitch and roll of the platform. If uncompensated, the true orientation of the beam coordinate system can be obtained by applying platform pitch and roll to the platform coordinate system and hence to the beam coordinate system. The _beam_stabilisation_ variable indicates whether the beams are compensated or uncompensated.
-
-==== Split-aperture coordinates
+=== Split-aperture coordinates
 
 Some sonar beams can estimate the arrival angle of echoes (<<Split-aperture beams>>). These angles are given as _minor_ and _major_ angles in the sonar beam coordinate system (<<split_aperture_angle_figure>>):
 
-* The _z'_ -axis is always the beam axis with the origin at the receive transducer,
-* The _minor_ arrival angle (latexmath:[\phi]) is given by the angle from the _z'_ axis, measured in the _x'_-_z'_ plane, and
-* The _major_ arrival angle (latexmath:[\theta]) is given by the angle from the _z'_ axis measured in the _y'_-_z'_ plane.
+* The _z_-axis is always the beam axis with the origin at the receive transducer,
+* The _minor_ arrival angle (latexmath:[\phi]) is given by the angle from the _z_ axis, measured in the _x_-_z_ plane, and
+* The _major_ arrival angle (latexmath:[\theta]) is given by the angle from the _z_ axis measured in the _y_-_z_ plane.
 
-Positive minor angles occur in the positive _x'_ plane and positive major angles occur in the positive _y'_ plane. 
+Positive minor angles occur in the positive _x_ plane and positive major angles occur in the positive _y_ plane. 
 
-For conventional downward-looking echosounders mounted on a ship it is normal that the sonar beam coordinate system is identical to the platform coordinate system (latexmath:[\alpha = \beta = \gamma = 0]), and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
+For conventional downward-looking echosounders mounted on a ship it is normal that the sonar beam coordinate system is identical to the transducer coordinate system and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
 
 .The split-aperture minor and major angles in the sonar beam coordinate system.
 [[split_aperture_angle_figure]]
 image::splitApertureAngles.svg[align="center"]
 
-=== Coordinate systems offsets and rotations
+=== Coordinate system offsets and rotations
 
 Several coordinate system offsets can be given in the Platform group. These allow for precise specification of the origin of sensors, such as the position and attitude sensors, and sonar transducer. The offset is a (x,y,z) tuple in the platform coordinate system. Offsets are to be interpreted as a vector that starts at the platform coordinate system origin and ends at the sensor position. For example, an offset of (1, 2, –3) indicates a position that is 1 m toward the bow, 2 m to starboard, and 3 m above the origin of the platform coordinate system.
 
@@ -561,9 +531,9 @@ Some sensors (e.g. the attitude sensor) can have a rotation relative to the plat
 
 == Split-aperture beams
 
-Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to provide such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the _beam_type_ variable in each <<sonarBeammodeTable,Beam_groupX>> subgroup. Split-aperture echo arrival angles are always given in the beam coordinate system (see <<Sonar beam coordinate system>>).
+Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to store such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the _beam_type_ variable in each <<sonarBeammodeTable,Beam_groupX>> subgroup. Split-aperture echo arrival angles are always given in the sonar beam coordinate system (see <<Coordinate systems>>).
 
-When sub-beams from a split-aperture transducer are provided, it is also necessary to combine the them to give the power or amplitude of the echoes, as received by the combined beam. All known split-aperture systems achieve this by taking the average of the sub-beam values, noting that the sub-beam data are typically complex power or amplitude values.
+When sub-beams from a split-aperture transducer are provided, it is also necessary to combine them to give the power or amplitude of the echoes, as received by the combined beam. All known split-aperture systems achieve this by taking the average of the sub-beam values, noting that the sub-beam data are typically complex power or amplitude values.
 
 To allow for existing conventions on how the split-aperture angles are stored or derived (typically as phase angles between the split-aperture signals), angle sensitivities are given in variables _echoangle_major_sensitivity_ and _echoangle_minor_sensitivity_.
 
