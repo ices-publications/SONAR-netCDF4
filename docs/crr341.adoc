@@ -417,9 +417,9 @@ Type 4 conversion equations are intended for data produced by Simrad EK80 and ES
 
 This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a geographic coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.
 
-There are four right-handed Cartesian coordinate systems (<<coordinateSystemList>>, <<coordinate_system_figure>>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Rotation angles are as per the right-hand rule.
+There are four right-handed Cartesian coordinate systems (<<coordinateSystemList>>, <<coordinate_system_figure_all>>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Rotation angles are as per the right-hand rule.
 
-There is also a geographic coordinate system that provides for location of the platform on Earth and also the height above a datum (e.g. mean sea level). The platform heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in the geographic coordinate system (this applies to both stationary and mobile sonar platforms).
+There is also a geographic coordinate system (<<coordinate_system_figure_all>>) that provides for location of the platform on Earth and also the height above a datum (e.g. mean sea level). The platform heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in the geographic coordinate system (this applies to both stationary and mobile sonar platforms).
 
 
 .List of coordinate systems used to physically locate the position of received echoes.
@@ -442,14 +442,18 @@ If a sonar actively alters beam pointing directions to compensate for motion of 
 
 Note that a coordinate in the SCS can be converted to a geographical coordinate by applying latitude and longitude to the origin.
 
+.Coordinate systems used to physically position an echo in an absolute geographical system. The arrows on the axes indicate the positive direction and the circular arrows around each platform coordinate system axis indicates positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
+[[coordinate_system_figure_all]]
+image::coordinateSystemFigureAll.svg[align="center"]
+
 _Need to specify how the draft and heave stuff comes into the translations_
 
-Rotation of one coordinate system into another is specified via three rotations variables and can be implemented via matrix multiplication. The matrix that will convert a coordinate from coordinate system A to coordinate system B is defined by:
+Rotation of one coordinate system into another is specified via three rotations variables and can be implemented via matrix multiplication. As an example, the matrix that will convert a coordinate from coordinate system SCS to coordinate system PCS is defined by:
 
 [stem]
 ++++
 \begin{equation}
-M_{AB} = M_z(h) \cdot M_y(p) \cdot M_z(r)
+M_{SCS/PCS} = M_z(h) \cdot M_y(p) \cdot M_z(r)
 \end{equation}
 ++++
 
@@ -458,7 +462,15 @@ noting that the order of the matrices is important, and is used:
 [stem]
 ++++
 \begin{equation}
-B = M_{AB} \cdot A
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{PCS} = M_{SCS/PCS} \cdot \begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{SCS}
 \end{equation}
 ++++
 
@@ -467,25 +479,25 @@ where latexmath:[M_z(h)] is the rotation about the _z_-axis by _h_ degrees, etc.
 [stem]
 ++++
 \begin{eqnarray}
-M_x(r) = 
+M_x(r) =
 \begin{bmatrix}
 1 & 0 & 0 \\
 0 & \cos(r) & -\sin(r) \\
-0 & \sin(r) & \cos(r) 
+0 & \sin(r) & \cos(r)
 \end{bmatrix} \\
 
-M_y(p) = 
+M_y(p) =
 \begin{bmatrix}
 \cos(p) & 0 & \sin(p) \\
 0 & 1 & 0 \\
--\sin(p) & 0 & cos(p) 
+-\sin(p) & 0 & cos(p)
 \end{bmatrix} \\
 
-M_z(h) = 
+M_z(h) =
 \begin{bmatrix}
 \cos(h) & -\sin(h) & 0 \\
 \sin(h) & \cos(h) & 0 \\
-0 & 0 & 1 
+0 & 0 & 1
 \end{bmatrix}
 
 \end{eqnarray}
@@ -497,15 +509,11 @@ To be clear, the right-hand rule when applied to roll, pitch, and heave means th
 * looking along the positive _y_-axis, a positive rotation (pitch) is clockwise (bow up),
 * looking along the positive _z_-axis, a positive rotation (yaw) is clockwise (to starboard).
 
-The _platform_heading_ variable (degrees clockwise from north) can be used to obtain the sonar orientation in world coordinates. This applies to both stationary and mobile sonar platforms.
-
 The orientation of the platform is represented using the _z_–_y_’–_x_” Tait-Bryan intrinsic rotation convention (https://en.wikipedia.org/wiki/Euler_angles[en.wikipedia.org/wiki/Euler_angles]), corresponding to yaw, pitch, and roll, respectively. Intrinsic means that rotations about the _y_-axis are measured after any rotation about the _z_-axis, and rotations about the _x_-axis are measured after rotations about the _y_-axis (for comparison, extrinsic angles are applied relative to a fixed-platform orientation). This is the most used rotation convention in the maritime field, and the main effect is that roll is measured relative to the plane tilted by the pitch angle.
 
-.Platform (dot-dash lines) and indicative beam (solid lines) coordinate systems. The arrows on the axes indicate the positive direction and the circular arrows around each platform coordinate system axis indicates positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
-[[coordinate_system_figure]]
-image::coordinateSystemFigure.svg[align="center"]
+Several coordinate system offsets can be given in the Platform group. These allow for precise specification of the origin of sensors, such as the position and attitude sensors, and sonar transducer. The offset is a (x,y,z) tuple in the platform coordinate system. Offsets are to be interpreted as a vector that starts at the platform coordinate system origin and ends at the sensor position. For example, an offset of (1, 2, –3) indicates a position that is 1 m toward the bow, 2 m to starboard, and 3 m above the origin of the platform coordinate system.
 
-The SONAR-netCD4 variable names for receive beam rotation angles are _rx_beam_rotation_alpha_, _rx_beam_rotation_beta_, and _rx_beam_rotation_gamma_. Translations are given by the _transducer_offset_x_, _transducer_offset_y_, and _transducer_offset_z_ variables. 
+Some sensors (e.g. the attitude sensor) can have a rotation relative to the platform-coordinate system. This is represented as the extrinsic rotation required from the platform coordinate system’s _x_-, _y_-, and _z_-axes to arrive at the sensor’s _x_-, _y_-, and _z_-axes.
 
 === Split-aperture coordinates
 
@@ -523,11 +531,10 @@ For conventional downward-looking echosounders mounted on a ship it is normal th
 [[split_aperture_angle_figure]]
 image::splitApertureAngles.svg[align="center"]
 
-=== Coordinate system offsets and rotations
 
-Several coordinate system offsets can be given in the Platform group. These allow for precise specification of the origin of sensors, such as the position and attitude sensors, and sonar transducer. The offset is a (x,y,z) tuple in the platform coordinate system. Offsets are to be interpreted as a vector that starts at the platform coordinate system origin and ends at the sensor position. For example, an offset of (1, 2, –3) indicates a position that is 1 m toward the bow, 2 m to starboard, and 3 m above the origin of the platform coordinate system.
-
-Some sensors (e.g. the attitude sensor) can have a rotation relative to the platform-coordinate system. This is represented as the extrinsic rotation required from the platform coordinate system’s _x_-, _y_-, and _z_-axes to arrive at the sensor’s _x_-, _y_-, and _z_-axes.
+=== Equations for positioning echoes in a geographical coordinate system
+==== Beams are stabilised by the sonar and beam pointing angles are relative to SCS
+==== Beams are not stabilised by the sonar and beam pointing angles are relative to TCS
 
 == Split-aperture beams
 
