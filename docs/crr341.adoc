@@ -451,24 +451,15 @@ image::coordinateSystemFigureAll.svg[align="center"]
 
 
 === Coordinate System Transforms
-Coordinate system transforms  stem:[F_{a->b}] can be expressed as a combination of a Rotation and a Translation of one coordinate system a into another b.
+Coordinate system transforms  stem:[F_{A->B}] can be expressed as a combination of a Rotation and a Translation of one coordinate system A into another B.
 [stem]
 ++++
 \begin{equation}
-F_{a->b} = R_{a->b} \cdot Position_a + T_{a->b}
+F_{A->B} = R_{A->B} + T_{A->B}
 \end{equation}
 ++++
 
-Rotation is specified via three rotations variables and can be implemented via matrix multiplication. As an example, the matrix that will convert a coordinate from coordinate system PCS to coordinate system SCS is defined by:
-
-[stem]
-++++
-\begin{equation}
-R_{PCS/SCS} = R_z(h) \cdot R_y(p) \cdot R_z(r)
-\end{equation}
-++++
-
-noting that the order of the matrices is important and should follow this order:
+Transformation of coordinates from A to B can then be implemented as:
 
 [stem]
 ++++
@@ -477,13 +468,28 @@ noting that the order of the matrices is important and should follow this order:
 x\\
 y\\
 z
-\end{bmatrix}_{PCS} = R_{PCS/SCS} \cdot \begin{bmatrix}
+\end{bmatrix}_{B} = R_{A->B} \cdot \begin{bmatrix}
 x\\
 y\\
 z
-\end{bmatrix}_{PCS}
+\end{bmatrix}_{A} +
+T_{A->B} \cdot \begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{A}
 \end{equation}
 ++++
+
+Rotation is specified via three rotations variables and can be implemented via matrix multiplication. As an example, the matrix that will convert a coordinate from coordinate system PCS to coordinate system SCS is defined by:
+
+[stem]
+++++
+\begin{equation}
+R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_z(r)
+\end{equation}
+++++
+
 
 where latexmath:[R_z(h)] is the rotation about the _z_-axis by _h_ degrees, etc. The rotation symbols are chosen to reflect their common nautical names: _h_ for heading, _p_ for pitch, and _r_ for roll and used thus:
 
@@ -514,6 +520,8 @@ R_x(r) =
 
 \end{eqnarray}
 ++++
+
+noting that the order of the matrices is important and should follow this order.
 
 To be clear, the right-hand rule when applied to roll, pitch, and heave means that:
 
@@ -556,8 +564,8 @@ These example make some assumptions and approximations :
 * Sound travel time are supposed to be symetrical, ie the travel time from transmitting position to echo and travel time from echo to receiving position are the same
 * Positionning is computed with respect to rx_beam only, meaning we do not make any computation for intersection between tx_beam and rx_beam and taking into account for the ship displacement between emission and reception
 
-Two main categories of system are considered as example : system with beam stabilisation and pointing angle relative to SCS (typically ME70) and system where beam are not stabilised and
-and beam pointing angles relative to TCS.
+Two main categories of system are considered as case studies : system with beam stabilisation and pointing angle relative to SCS (typically ME70) and system where beam are not stabilised and
+beam pointing angles relative to TCS.
 
 More complex equations and algorithm for more precise positioning or for other sensors are out of scope of this section
 
@@ -584,30 +592,17 @@ The position of the echo can be defined as :
 [stem]
 ++++
 \begin{equation}
-Position_{SCS} =R_{PCS/TCS}(t_i) \cdot T_{installation\_TCS} + R_{heading}(t_i) \cdot R_{BCS/TBS} \cdot R_{BCS/TCS} \cdot \begin{bmatrix}
-0 \\
-0 \\
-r
-\end{bmatrix}
-\end{equation}
-++++
-
-
-
-With stem:[R_{SBS/TCS}] the transform coordinates matrix from TCS to SBS as :
-
-[stem]
-++++
-\begin{equation} \label{eq:bcs2tcs}
-R_{BCS/TCS}(beam,i) =R_{beam\_to\_tcs}(beam) \cdot R_{range\_to\_beam}(beam,i) \\
-\end{equation}
-++++
-with
-[stem]
-++++
-\begin{equation}
-R_{range\_to\_beam}(beam,i) =
 \begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{SCS} =R_{TCS->PCS}(t_i) \cdot T_{TCS->PCS} \cdot
+\begin{bmatrix}
+0\\
+0\\
+0
+\end{bmatrix}_{PCS}
++ R_{heading}(t_i) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
 \cos(\phi) & 0 & \sin(\phi) \\
 0 & 1 & 0 \\
 -\sin(\phi) & 0 & cos(\phi)
@@ -618,14 +613,23 @@ R_{range\_to\_beam}(beam,i) =
 0 & \cos(\theta) & -\sin(\theta) \\
 0 & \sin(\theta) & \cos(\theta)
 \end{bmatrix}
+\cdot
+\begin{bmatrix}
+0\\
+0\\
+r_i
+\end{bmatrix}_{BCS}
 \end{equation}
 ++++
+
+with latexmath:[\phi] and latexmath:[\theta] the split-aperture coordinates as defined in <<Split-aperture coordinates>>:
+
 
 and
 [stem]
 ++++
 \begin{equation}
-R_{beam\_to\_tcs}(beam) =
+R_{BCS->TCS} =
 \begin{bmatrix}
 \cos(\alpha) & -\sin(\alpha) & 0 \\
 \sin(\alpha) & \cos(\alpha) & 0 \\
@@ -647,98 +651,147 @@ R_{beam\_to\_tcs}(beam) =
 ++++
 
 
-where
-
-* stem:[\theta(beam,i)] is the _major_ arrival angle , stem:[\phi(beam,i)] is the _minor_ arrival angle as defined in <<Split-aperture coordinates>>
-* stem:[\alpha(beam),\beta(beam),\gamma(beam)] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables
+where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group [[sonarBeammodeTable]]
 
 [WARNING]
 _TODO need to update the  definition of these angle in beamGroups as a consequence of the change of Euler convention_
 
-and
+and:
 
 [stem]
 ++++
 \begin{equation}
-R_{PCS/SCS}(t_i) = R_{heading}(t_i) \cdot R_{pitch}(t_i) \cdot R_{roll}(t_i)
+R_{PCS/SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
 
+where stem:[h,p,r] are the heading, pitch and roll as given in the  platform_heading,  platform_pitch,  platform_roll variables of the beam mode subgroups of the sonar group [[sonarBeammodeTable]]
 
+and:
+
+[stem]
+++++
+\begin{equation}
+T_{TCS->PCS} = \begin{bmatrix}
+transducer\_offset\_x \\
+transducer\_offset\_y \\
+transducer\_offset\_z
+\end{bmatrix}
+\end{equation}
+++++
+with transducer_offset_x, transducer_offset_y and transducer_offset_z the installation offsets of the transducer associated
+with the echo, defined in the platform group [[platformGroupTable]]
 
 
 ==== Beams are not stabilised by the sonar and beam pointing angles are relative to TCS
-When beam are not stabilised by the sonar their will be given as relative to the TCS,
-the sonar will not change the beam angles relatively to dynamically follow ship movement during an emission reception cycle.
-The global equation is defined as this stem:[F_{BCS/SCS} = F_{PCS/SCS}(F_{TCS/PCS}(F_{BCS/TCS}(
+When beam are not stabilised by the sonar, the beam angles  are given as relative to the TCS and
+the sonar will not change the beam angles to follow dynamically ship movement during an emission reception cycle.
+
+The position of the echo can be defined as :
+[stem]
+++++
+\begin{equation}
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{SCS} = R_{PCS->SCS}(t_i)  \cdot T_{TCS->PCS} \cdot
+\begin{bmatrix}
+0\\
+0\\
+0
+\end{bmatrix}_{PCS} +
+R_{PCS->SCS}(t_i)  \cdot
+R_{TCS->PCS} \cdot
+R_{BCS->TCS} \cdot \begin{bmatrix}
+\cos(\phi) & 0 & \sin(\phi) \\
+0 & 1 & 0 \\
+-\sin(\phi) & 0 & cos(\phi)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\theta) & -\sin(\theta) \\
+0 & \sin(\theta) & \cos(\theta)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+0\\
+0\\
 r_i
-))
-]
-With
+\end{bmatrix}_{BCS}
+\end{equation}
+++++
 
-* stem:[F_{BCS/TCS}] as defined in equation stem:[\eqref{eq:bcs2tcs}]
+with latexmath:[\phi] and latexmath:[\theta] the split-aperture coordinates as defined in <<Split-aperture coordinates>>:
 
-* stem:[F_{TCS/PCS}] the transformation from TCS crs to PCS given by :
-====
+and:
+
 [stem]
 ++++
 \begin{equation}
-F_{TCS/PCS} = R_{TCS/PCS}(a_i) \cdot X_{tcs}(i) + T_{TCS/PCS}(a_i)
+R_{BCS->TCS} =
+\begin{bmatrix}
+\cos(\alpha) & -\sin(\alpha) & 0 \\
+\sin(\alpha) & \cos(\alpha) & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\cos(\beta) & 0 & \sin(\beta) \\
+0 & 1 & 0 \\
+-\sin(\beta) & 0 & cos(\beta)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\gamma) & -\sin(\gamma) \\
+0 & \sin(\gamma) & \cos(\gamma)
+\end{bmatrix}
 \end{equation}
 ++++
-where
 
-* stem:[R_{TCS/PCS}](a_i) is the rotation matrix  filled with the installation angles of the transducer associated
-with the echo _i_. Installation angle are given in the variables transducer_rotation_x, transducer_rotation_y and transducer_rotation_z of the /Platform group.
+where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group [[sonarBeammodeTable]]
+
+and:
+
+[stem]
+++++
+\begin{equation}
+R_{TCS->PCS} = R_z(transducer\_rotation\_z) \cdot R_y(transducer\_rotation\_y) \cdot R_x(transducer\_rotation\_x)
+\end{equation}
+++++
+
+with transducer_rotation_x, transducer_rotation_y and transducer_rotation_z,  the installation angles of the transducer associated
+with the echo, defined in the platform group [[platformGroupTable]]
 (Note that calibration angles are supposed to be integrated in these variables)
-[stem]
-++++
-\begin{equation}
-R_{TCS/PCS}(a_i) = R_z(transducer\_rotation\_z(a_i)) \cdot R_y(transducer\_rotation\_y(a_i)) \cdot R_x(transducer\_rotation\_x(a_i))
-\end{equation}
-++++
 
-* Translation vector values are given in the variables transducer_offset_x, transducer_offset_y and transducer_offset_z of the /Platform group.
+and:
+
 [stem]
 ++++
 \begin{equation}
-T_{TCS/PCS}(a_i) = \begin{bmatrix}
-transducer\_offset\_x(a_i) \\
-transducer\_offset\_y(a_i) \\
-transducer\_offset\_z(a_i)
+T_{TCS->PCS} = \begin{bmatrix}
+transducer\_offset\_x \\
+transducer\_offset\_y \\
+transducer\_offset\_z
 \end{bmatrix}
 \end{equation}
 ++++
+with transducer_offset_x, transducer_offset_y and transducer_offset_z the installation offsets of the transducer associated
+with the echo, defined in the platform group [[platformGroupTable]]
 
-====
-
-
-* stem:[F_{PCS/SCS}] the transformation from PCS to SCS given by
+and:
 
 [stem]
 ++++
 \begin{equation}
-F_{PCS/SCS} = R_{PCS/SCS}(t_i) \cdot X(i) = R_{heading}(t_i) \cdot R_{pitch}(t_i) \cdot R_{roll}(t_i) \cdot X(i)
+R_{PCS->SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
+where stem:[h,p,r] are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group [[sonarBeammodeTable]]
 
-As such
-[stem]
-++++
-\begin{equation}
-F_{BCS/SCS} =
-R_{PCS/SCS}(t_i)  \cdot
-R_{TCS/PCS}(a_i) \cdot
-R_{BCS/TCS}(beam,i)
-\cdot \begin{bmatrix}
-0 \\
-0 \\
-r(i)
-\end{bmatrix}
-+
-R_{PCS/SCS}(t_i)  \cdot T_{TCS/PCS}(a_i)
-\end{equation}
-++++
+
 === Equations for positioning echoes in a Geographical Coordinate System
 The Surface Coordinate system is a coordinate system oriented with platform heave with origin the platform origin.
 In order to define an absolute positioning, the coordinate should be converted to a Terrestrial Geographic System coordinate and take into account for heave, draft, tide and so on.
