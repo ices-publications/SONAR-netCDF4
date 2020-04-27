@@ -801,10 +801,11 @@ The surface reference could be the WGS84 ellipsoid, or surface like MSL (Mean Se
 
 Switching from SCS system to TGS is done by applying a vertical translation from the platform origin to the surface reference of the TGS
 The vertical translation at each time is a vector is obtained by adding the variables :
+
 * waterline_to_chart_datum matching the distance from the surface reference to the waterline. This variable take into account for the tide and the surface definition for ship or similar
 * platform_vertical_offset containing the heave and draft for ship or similar
 
-Each translated coordinate can be then expressed as latitude-longitude coordinates given the platform position retrieved from gps and the coordinates expressed in SCS system.
+Each translated coordinate can be then expressed as latitude-longitude coordinates given the platform position retrieved from GPS and the coordinates expressed in SCS system.
 
 
 == Split-aperture beams
