@@ -436,12 +436,11 @@ There is also a geographic coordinate system (<<coordinate_system_figure_all>>) 
 |Sonar Beam coordinate system (BCS) |Centre of transducer face|Arbitrary|Orthogonal to the _x_-axis|Pointing along the beam axis
 |===
 
+The platform coordinate system (PCS) is obtained from the transducer coordinate system (TCS) through a translation of the PCS origin and a rotation to align with the transducer face. Transducer depth and lever arms are applied in this coordinate system.
 
-The platform coordinate system (PCS) is obtained from the surface coordinate system (SCS) through a rotation that corresponds to the yaw/heading, pitch and roll of the platform. No translation is necessary. Platform heave is applied in this coordinate system.
+The surface coordinate system (SCS) is obtained from the platform coordinate system (PCS)  through a rotation that corresponds to the yaw/heading, pitch and roll of the platform. No translation is necessary. Platform heave is not applied in this coordinate system.
 
-The transducer coordinate system (TCS) is obtained from the PCS through a translation of the PCS origin and a rotation to align with the transducer face. Transducer depth and lever arms are applied in this coordinate system.
-
-[WARNING]
+[NOTE]
 If a sonar actively alters beam pointing directions to compensate for motion of the platform, the _beam_stabilisation_ variable is set to True, otherwise to False.
 If True, the transducer coordinate system (TCS) is obtained from the SCS only through a translation of SCS origin, the transducer adapts its beam in order to compensate for ship movements
 
@@ -473,11 +472,7 @@ x\\
 y\\
 z
 \end{bmatrix}_{A} +
-T_{A->B} \cdot \begin{bmatrix}
-x\\
-y\\
-z
-\end{bmatrix}_{A}
+T_{A->B}
 \end{equation}
 ++++
 
@@ -527,9 +522,9 @@ To be clear, the right-hand rule when applied to roll, pitch, and heave means th
 
 * looking along the positive _x_-axis, a positive rotation (roll) is clockwise (to starboard),
 * looking along the positive _y_-axis, a positive rotation (pitch) is clockwise (bow up),
-* looking along the positive _z_-axis, a positive rotation (yaw) is clockwise (to starboard).
+* looking along the positive _z_-axis, a positive rotation (heading) is clockwise (to starboard).
 
-The orientation of the platform is represented using the _z_–_y_’–_x_” Tait-Bryan intrinsic rotation convention (https://en.wikipedia.org/wiki/Euler_angles[en.wikipedia.org/wiki/Euler_angles]), corresponding to yaw, pitch, and roll, respectively. Intrinsic means that rotations about the _y_-axis are measured after any rotation about the _z_-axis, and rotations about the _x_-axis are measured after rotations about the _y_-axis (for comparison, extrinsic angles are applied relative to a fixed-platform orientation). This is the most used rotation convention in the maritime field, and the main effect is that roll is measured relative to the plane tilted by the pitch angle.
+The orientation of the platform is represented using the _z_–_y_’–_x_” Tait-Bryan intrinsic rotation convention (https://en.wikipedia.org/wiki/Euler_angles[en.wikipedia.org/wiki/Euler_angles]), corresponding to heading, pitch, and roll, respectively. Intrinsic means that rotations about the _y_-axis are measured after any rotation about the _z_-axis, and rotations about the _x_-axis are measured after rotations about the _y_-axis (for comparison, extrinsic angles are applied relative to a fixed-platform orientation). This is the most used rotation convention in the maritime field, and the main effect is that roll is measured relative to the plane tilted by the pitch angle.
 
 Translation are linked to a change of system origin, namely from platform origin and the transducer origins.
 The coordinate system offsets of the transducer are given in the Platform group.
@@ -564,14 +559,14 @@ These example make some assumptions and approximations :
 * Sound travel time are supposed to be symetrical, ie the travel time from transmitting position to echo and travel time from echo to receiving position are the same
 * Positionning is computed with respect to rx_beam only, meaning we do not make any computation for intersection between tx_beam and rx_beam and taking into account for the ship displacement between emission and reception
 
-Two main categories of system are considered as case studies : system with beam stabilisation and pointing angle relative to SCS (typically ME70) and system where beam are not stabilised and
+Two main categories of system are considered as case studies : system with beam stabilization and pointing angle relative to SCS (typically ME70) and system where beam are not stabilised and
 beam pointing angles relative to TCS.
 
-More complex equations and algorithm for more precise positioning or for other sensors are out of scope of this section
+More complex equations and algorithm for more precise positioning or for other sensors are out of scope of this section.
 
 Given an echo _E(beam,i)_ where _i_ is the sample number (from zero to one less than the number of samples) and _beam_ the receiving beam considered, several values can be associated with this echo :
 
-* it will be associated with a time stamp given by
+* A time stamp given by
 [stem]
 ++++
 \begin{equation}
@@ -579,13 +574,11 @@ t_i=ping\_time+\frac{i\cdot sample\_interval + blanking\_interval- sample\_time\
 \end{equation}
 ++++
 
-* Its range stem:[r_i] is given by equation \eqref{eq:timeToRange}
-* Its associated transducer stem:[a_i] is given by the receive_transducer_index variable in /Sonar/Beam_group1
+* Its range stem:[r_i] given by equation \eqref{eq:timeToRange}
 
-
-==== Beams are stabilised by the sonar and beam pointing angles are relative to SCS
-When beam are stabilised by the sonar their angles are relative to SCS, the sonar will change beam angles relatively to TCS dynamically to follow ship movement and get maintain beam angle constants with respect to the SCS coordinate system
-The coordinates system change from TCS to SCS is composed by a translation from transducer origin to platform origin taking into account for lever arms, and a rotation taking into account for heading
+==== Beams are stabilized by the sonar and beam pointing angles are relative to SCS
+When beam are stabilized by the sonar their angles are relative to SCS, the sonar will change beam angles relatively to TCS dynamically to follow ship movement and maintain beam angle constants with respect to the SCS coordinate system.
+The coordinates system change from TCS to SCS is composed by a translation from transducer origin to platform origin taking into account lever arms, and a rotation taking into account heading
 
 The position of the echo can be defined as :
 
@@ -596,12 +589,7 @@ The position of the echo can be defined as :
 x\\
 y\\
 z
-\end{bmatrix}_{SCS} =R_{TCS->PCS}(t_i) \cdot T_{TCS->PCS} \cdot
-\begin{bmatrix}
-0\\
-0\\
-0
-\end{bmatrix}_{PCS}
+\end{bmatrix}_{SCS} =R_{TCS->PCS}(t_i) \cdot T_{TCS->PCS}
 + R_{heading}(t_i) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
 \cos(\phi) & 0 & \sin(\phi) \\
 0 & 1 & 0 \\
@@ -618,7 +606,7 @@ z
 0\\
 0\\
 r_i
-\end{bmatrix}_{BCS}
+\end{bmatrix}
 \end{equation}
 ++++
 
@@ -651,10 +639,7 @@ R_{BCS->TCS} =
 ++++
 
 
-where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group [[sonarBeammodeTable]]
-
-[WARNING]
-_TODO need to update the  definition of these angle in beamGroups as a consequence of the change of Euler convention_
+where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
 
 and:
 
@@ -665,7 +650,8 @@ R_{PCS/SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
 
-where stem:[h,p,r] are the heading, pitch and roll as given in the  platform_heading,  platform_pitch,  platform_roll variables of the beam mode subgroups of the sonar group [[sonarBeammodeTable]]
+where stem:[h,p,r] are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>).
+(_Those variables can also be defined at a higher frame rate in the platform group  (see <<platformGroupTable>>)_)
 
 and:
 
@@ -679,12 +665,12 @@ transducer\_offset\_z
 \end{bmatrix}
 \end{equation}
 ++++
-with transducer_offset_x, transducer_offset_y and transducer_offset_z the installation offsets of the transducer associated
-with the echo, defined in the platform group [[platformGroupTable]]
+where transducer_offset_x, transducer_offset_y and transducer_offset_z are the installation offsets of the transducer associated
+with the echo, defined in the platform group  (see <<platformGroupTable>>)
 
 
-==== Beams are not stabilised by the sonar and beam pointing angles are relative to TCS
-When beam are not stabilised by the sonar, the beam angles  are given as relative to the TCS and
+==== Beams are not stabilized by the sonar and beam pointing angles are relative to TCS
+When beam are not stabilized by the sonar, the beam angles  are given as relative to the TCS and
 the sonar will not change the beam angles to follow dynamically ship movement during an emission reception cycle.
 
 The position of the echo can be defined as :
@@ -695,12 +681,7 @@ The position of the echo can be defined as :
 x\\
 y\\
 z
-\end{bmatrix}_{SCS} = R_{PCS->SCS}(t_i)  \cdot T_{TCS->PCS} \cdot
-\begin{bmatrix}
-0\\
-0\\
-0
-\end{bmatrix}_{PCS} +
+\end{bmatrix}_{SCS} = R_{PCS->SCS}(t_i)  \cdot T_{TCS->PCS}  +
 R_{PCS->SCS}(t_i)  \cdot
 R_{TCS->PCS} \cdot
 R_{BCS->TCS} \cdot \begin{bmatrix}
@@ -719,7 +700,7 @@ R_{BCS->TCS} \cdot \begin{bmatrix}
 0\\
 0\\
 r_i
-\end{bmatrix}_{BCS}
+\end{bmatrix}
 \end{equation}
 ++++
 
@@ -751,7 +732,7 @@ R_{BCS->TCS} =
 \end{equation}
 ++++
 
-where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group [[sonarBeammodeTable]]
+where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
 
 and:
 
@@ -763,7 +744,7 @@ R_{TCS->PCS} = R_z(transducer\_rotation\_z) \cdot R_y(transducer\_rotation\_y) \
 ++++
 
 with transducer_rotation_x, transducer_rotation_y and transducer_rotation_z,  the installation angles of the transducer associated
-with the echo, defined in the platform group [[platformGroupTable]]
+with the echo, defined in the platform group (see <<platformGroupTable>>)
 (Note that calibration angles are supposed to be integrated in these variables)
 
 and:
@@ -779,7 +760,7 @@ transducer\_offset\_z
 \end{equation}
 ++++
 with transducer_offset_x, transducer_offset_y and transducer_offset_z the installation offsets of the transducer associated
-with the echo, defined in the platform group [[platformGroupTable]]
+with the echo, defined in the platform group (see <<platformGroupTable>>)
 
 and:
 
@@ -789,7 +770,7 @@ and:
 R_{PCS->SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
-where stem:[h,p,r] are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group [[sonarBeammodeTable]]
+where stem:[h,p,r] are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <<sonarBeammodeTable>>) or platform group (see <<platformGroupTable>>)
 
 
 === Equations for positioning echoes in a Geographical Coordinate System
@@ -802,7 +783,7 @@ The surface reference could be the WGS84 ellipsoid, or surface like MSL (Mean Se
 Switching from SCS system to TGS is done by applying a vertical translation from the platform origin to the surface reference of the TGS
 The vertical translation at each time is a vector is obtained by adding the variables :
 
-* waterline_to_chart_datum matching the distance from the surface reference to the waterline. This variable take into account for the tide and the surface definition for ship or similar
+* waterline_to_chart_datum matching the distance from the surface reference to the waterline. This variable takes into account the tide and the surface definition for ship or similar
 * platform_vertical_offset containing the heave and draft for ship or similar
 
 Each translated coordinate can be then expressed as latitude-longitude coordinates given the platform position retrieved from GPS and the coordinates expressed in SCS system.

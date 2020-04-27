@@ -76,36 +76,36 @@ e|Variables | |
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
  
- |{var}float rx_beam_rotation_alpha(ping_time, beam) |M |The extrinsic z-x-z clockwise rotation about the _z_-axis of the platform coordinate system needed to give the beam coordinate system.
- 3+|{attr}:long_name = "angular rotation about the _z_ axis" 
+ |{var}float rx_beam_rotation_alpha(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation rotation about the _z_-axis of the platform coordinate system needed to give the rx beams coordinate system.
+ 3+|{attr}:long_name = "rx beam angular rotation about the _z_ axis"
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
  
- |{var}float rx_beam_rotation_beta(ping_time, beam) |M |The extrinsic z-x-z clockwise rotation about the _x_-axis of the platform coordinate system needed to give the beam coordinate system.
- 3+|{attr}:long_name = "angular rotation about the _x_ axis" 
+ |{var}float rx_beam_rotation_beta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _x_-axis of the platform coordinate system needed to give the rx beams coordinate system.
+ 3+|{attr}:long_name = "rx beam angular rotation about the _x_ axis"
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
  
- |{var}float rx_beam_rotation_gamma(ping_time, beam) |M |The extrinsic z-x-z clockwise rotation about the _z_-axis of the platform coordinate system needed to give the beam coordinate system.
- 3+|{attr}:long_name = "angular rotation about the _z_ axis" 
+ |{var}float rx_beam_rotation_gamma(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the rx beams coordinate system.
+ 3+|{attr}:long_name = "rx beam angular rotation about the _z_ axis"
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
  
- |{var}float tx_beam_direction_x(ping_time, tx_beam) |M |The _x_-axis coordinate of a unit vector in the beam direction for each tx_beam and ping, as per the sonar beam coordinate system.
- 3+|{attr}:long_name = "_x_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" 
- 3+|{attr}:units = "1" 
- 3+|{attr}float :valid_range = −1.0, 1.0 
- 
- |{var}float tx_beam_direction_y(ping_time, tx_beam) |M |The _y_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
- 3+|{attr}:long_name = "_y_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" 
- 3+|{attr}:units = "1" 
- 3+|{attr}float :valid_range = −1.0, 1.0 
- 
- |{var}float tx_beam_direction_z(ping_time, tx_beam) |M |The _z_-axis coordinate of a unit vector in the tx_beam direction for each beam and ping, as per the sonar beam coordinate system.
- 3+|{attr}:long_name = "_z_-component of the vector that gives the pointing direction of the tx_beam, in sonar beam coordinate system" 
- 3+|{attr}:units = "1" 
- 3+|{attr}float :valid_range = −1.0, 1.0 
- 
+ |{var}float tx_beam_rotation_alpha(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation  rotation about the _z_-axis of the platform coordinate system needed to give the tx beams coordinate system.
+ 3+|{attr}:long_name = "tx beam angular rotation about the _z_ axis"
+ 3+|{attr}:units = "arc_degree"
+ 3+|{attr}float :valid_range = −180.0, 180.0
+
+ |{var}float tx_beam_rotation_beta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _x_-axis of the platform coordinate system needed to give the tx beams coordinate system.
+ 3+|{attr}:long_name = "tx beam angular rotation about the _x_ axis"
+ 3+|{attr}:units = "arc_degree"
+ 3+|{attr}float :valid_range = −180.0, 180.0
+
+ |{var}float tx_beam_rotation_gamma(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the tx beams coordinate system.
+ 3+|{attr}:long_name = "tx beam angular rotation about the _z_ axis"
+ 3+|{attr}:units = "arc_degree"
+ 3+|{attr}float :valid_range = −180.0, 180.0
+
  |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
  3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
