@@ -780,7 +780,7 @@ In order to define an absolute positioning, the coordinate should be converted t
 The Terrestrial Geographic System coordinate will use latitude and longitude to define its' position with respect to Earth and elevation will be defined with respect to a absolute surface reference.
 The absolute surface reference could be the WGS84 ellipsoid, or a surface such as MSL (Mean Sea Level) or LAT (Lowest Astronomical Tide)
 
-Switching from SCS system to TGS is done by applying a vertical translation from the platform origin to the surface reference of the TGS
+Switching from SCS system to TGS is achieved by applying a vertical translation from the platform origin to the surface reference of the TGS
 The vertical translation at each time is a vector is obtained by adding the variables :
 
 * waterline_to_chart_datum matching the distance from the surface reference to the waterline. This variable takes into account the tide and the surface definition for ship or similar
