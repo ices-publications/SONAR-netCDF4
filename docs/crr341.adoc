@@ -775,7 +775,7 @@ where stem:[h,p,r] are the heading, pitch and roll as given in the platform_head
 
 === Equations for positioning echoes in a Geographical Coordinate System
 The Surface Coordinate system is a coordinate system oriented with platform heave at the origin of the platform origin.
-In order to define an absolute positioning, the coordinate should be converted to a Terrestrial Geographic System coordinate and take into account for heave, draft, tide and so on.
+In order to define an absolute position, the coordinate should be converted to a Terrestrial Geographic System coordinate and take into account heave, draft, tide and so on.
 
 The Terrestrial Geographic System coordinate will use latitude and longitude to define its' position with respect to Earth and elevation will be defined with respect to a absolute surface reference.
 The absolute surface reference could be the WGS84 ellipsoid, or a surface such as MSL (Mean Sea Level) or LAT (Lowest Astronomical Tide)
