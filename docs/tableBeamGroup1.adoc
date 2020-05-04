@@ -266,7 +266,7 @@ e|Variables | |
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
- |{var}float waterline_to_chart_datum(ping_time) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector contains the tide and allow to position samples in an absolute referential.
+ |{var}float waterline_to_chart_datum(ping_time) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector that contains the tide and allows for the positioning of samples in an absolute reference system.
  3+|{attr}:long_name = "vertical translation from waterline to chart datum reference " 
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
