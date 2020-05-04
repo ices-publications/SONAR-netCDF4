@@ -777,7 +777,7 @@ where stem:[h,p,r] are the heading, pitch and roll as given in the platform_head
 The Surface Coordinate system is a coordinate system oriented with platform heave at the origin of the platform origin.
 In order to define an absolute positioning, the coordinate should be converted to a Terrestrial Geographic System coordinate and take into account for heave, draft, tide and so on.
 
-The Terrestrial Geographic System coordinate will use latitude and longitude to define it positions with respect to Earth, and elevation will be defined with respect to a absolute surface reference.
+The Terrestrial Geographic System coordinate will use latitude and longitude to define its' position with respect to Earth and elevation will be defined with respect to a absolute surface reference.
 The surface reference could be the WGS84 ellipsoid, or surface like MSL (Mean Sea Level) or LAT (Lowest astronomical tide)
 
 Switching from SCS system to TGS is done by applying a vertical translation from the platform origin to the surface reference of the TGS
