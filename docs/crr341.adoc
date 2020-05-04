@@ -778,7 +778,7 @@ The Surface Coordinate system is a coordinate system oriented with platform heav
 In order to define an absolute positioning, the coordinate should be converted to a Terrestrial Geographic System coordinate and take into account for heave, draft, tide and so on.
 
 The Terrestrial Geographic System coordinate will use latitude and longitude to define its' position with respect to Earth and elevation will be defined with respect to a absolute surface reference.
-The surface reference could be the WGS84 ellipsoid, or surface like MSL (Mean Sea Level) or LAT (Lowest astronomical tide)
+The absolute surface reference could be the WGS84 ellipsoid, or a surface such as MSL (Mean Sea Level) or LAT (Lowest Astronomical Tide)
 
 Switching from SCS system to TGS is done by applying a vertical translation from the platform origin to the surface reference of the TGS
 The vertical translation at each time is a vector is obtained by adding the variables :
