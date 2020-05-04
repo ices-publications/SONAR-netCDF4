@@ -96,7 +96,7 @@ e|Variables | |
  3+|{attr}:units = "arc_degree"
  3+|{attr}float :valid_range = −180.0, 180.0
 
- |{var}float tx_beam_rotation_beta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _x_-axis of the platform coordinate system needed to give the tx beams coordinate system.
+ |{var}float tx_beam_rotation_beta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _y_-axis of the platform coordinate system needed to give the tx beams coordinate system.
  3+|{attr}:long_name = "tx beam angular rotation about the _x_ axis"
  3+|{attr}:units = "arc_degree"
  3+|{attr}float :valid_range = −180.0, 180.0
