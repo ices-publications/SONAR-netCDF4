@@ -651,7 +651,7 @@ R_{PCS/SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 ++++
 
 where stem:[h,p,r] are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>).
-(_Those variables can also be defined at a higher frame rate in the platform group  (see <<platformGroupTable>>)_)
+(_Those variables can also be defined at a higher sample rate in the platform group  (see <<platformGroupTable>>)_)
 
 and:
 
