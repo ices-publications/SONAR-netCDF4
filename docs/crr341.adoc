@@ -476,7 +476,7 @@ T_{A->B}
 \end{equation}
 ++++
 
-Rotation is specified via three rotations variables and can be implemented via matrix multiplication. As an example, the matrix that will convert a coordinate from coordinate system PCS to coordinate system SCS is defined by:
+Rotation is specified via three rotation variables and can be implemented via matrix multiplication. As an example, the matrix that will convert a coordinate from coordinate system PCS to coordinate system SCS is defined by:
 
 [stem]
 ++++
