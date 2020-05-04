@@ -670,7 +670,7 @@ with the echo, defined in the platform group  (see <<platformGroupTable>>)
 
 
 ==== Beams are not stabilized by the sonar and beam pointing angles are relative to TCS
-When beam are not stabilized by the sonar, the beam angles  are given as relative to the TCS and
+When beam are not stabilized by the sonar, the beam angles  are given relative to the TCS and
 the sonar will not change the beam angles to follow dynamically ship movement during an emission reception cycle.
 
 The position of the echo can be defined as :
