@@ -256,7 +256,7 @@ e|Variables | |
  3+|{attr}:long_name = "roll angle" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
- |{var}float platform_vertical_offset(ping_time) |M |Distance from the platform reference point to the water line (distance are positives downwards). For ships and similar, this is called heave added to the dynamic draught at the time of the ping but the concept applies equally well to underwater vehicle depth.
+ |{var}float platform_vertical_offset(ping_time) |M |Distance from the platform reference point to the water line (distance are positives downwards). For ships and similar, this is called heave and is added to the dynamic draught at the time of the ping but the concept applies equally well to underwater vehicle depth.
  3+|{attr}:long_name = "Platform vertical distance from reference point to the water line" 
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
