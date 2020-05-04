@@ -578,7 +578,7 @@ t_i=ping\_time+\frac{i\cdot sample\_interval + blanking\_interval- sample\_time\
 
 ==== Beams are stabilized by the sonar and beam pointing angles are relative to SCS
 When beam are stabilized by the sonar their angles are relative to SCS the sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
-The coordinates system change from TCS to SCS is composed by a translation from transducer origin to platform origin taking into account lever arms, and a rotation taking into account heading
+The change from TCS to SCS is composed of a translation from transducer origin to platform origin, taking into account lever arms, and a rotation taking into account platform heading
 
 The position of the echo can be defined as :
 
