@@ -1,0 +1,43 @@
+name: BuildDocuments
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: asciidoctor/docker-asciidoctor
+    
+    steps:
+        
+    - name: install git
+      run: apk add --update git 
+        
+    - name: install asciidoctor-bibtex
+      run: gem install asciidoctor-bibtex
+      
+    - name: checkout 
+      uses: actions/checkout@master
+
+    - name: build SONARnetCDF4.adoc
+      run: asciidoctor -r asciidoctor-bibtex --backend html5 -a data-uri crr341.adoc  
+      working-directory: docs
+    
+    - name: move crr341 file to report folder
+      run: |
+        mkdir -p Formatted_docs
+        mv docs/crr341.html Formatted_docs/
+        
+    - name: Git stuff
+      run: |
+        git config --local user.email "github@ices.dk"
+        git config --local user.name "ices-github-bot"
+        git status
+        git add Formatted_docs/crr341.html
+        git commit --allow-empty -m "Push triggered asciidoc build"
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
