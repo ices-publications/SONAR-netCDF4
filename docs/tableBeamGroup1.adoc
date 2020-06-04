@@ -101,7 +101,7 @@ e|Variables | |
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −90.0, 90.0
  
- |{var}float tx_beam_rotation_psi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For most cases this angle is set to zero
+ |{var}float tx_beam_rotation_psi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For most cases this angle is set to zero.
  3+|{attr}:long_name = "transmit beam angular rotation about the _z_ axis" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
