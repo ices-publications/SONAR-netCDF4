@@ -441,7 +441,7 @@ There is also a geographic coordinate system (<<coordinate_system_figure_all>>) 
 |Platform coordinate system (PCS) |Platform origin|Parallel to the main axis of the platform, positive values toward the front of the platform|Perpendicular to the main axis of the platform, positive values to the starboard side|Pointing down parallel to platform mast
 |Transducer coordinate system (TCS) |Centre of transducer face|||
 2+|_not stabilized_ |Pointing forward along transducer plane|Pointing starboard along transducer plane|Pointing down orthogonal to transducer plane
-2+|_stabilized_ |Pointing forward along transducer plane|Pointing horizontally and perpendicular to x-axis|Pointing down with gravity
+2+|_stabilized_ |Pointing forward horizontally|Pointing horizontally and perpendicular to x-axis|Pointing down with gravity
 |Sonar Beam coordinate system (BCS) |Centre of transducer face|Arbitrary|Orthogonal to the _x_-axis|Pointing along the beam axis
 |===
 

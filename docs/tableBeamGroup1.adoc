@@ -76,36 +76,36 @@ e|Variables | |
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
  
- |{var}float rx_beam_rotation_phi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the receive beam coordinate system.
- 3+|{attr}:long_name = "receive beam angular rotation about the _x_ axis"
- 3+|{attr}:units = "arc_degree" 
+ |{var}float rx_beam_rotation_phi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
+ 3+|{attr}:long_name = "receive beam angular rotation about the _x_ axis" 
+ 3+|{attr}:units = "arc_degree"
  3+|{attr}float :valid_range = −180.0, 180.0 
  
- |{var}float rx_beam_rotation_theta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _y_-axis of the platform coordinate system needed to give the receive beam coordinate system.
+ |{var}float rx_beam_rotation_theta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _y_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction (also called tilt angle).
  3+|{attr}:long_name = "receive beam angular rotation about the _y_ axis"
  3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −90.0, 90.0
+ 3+|{attr}float :valid_range = −90.0, 90.0 
  
- |{var}float rx_beam_rotation_psi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the receive beam coordinate system.
- 3+|{attr}:long_name = "receive beam angular rotation about the _z_ axis"
+ |{var}float rx_beam_rotation_psi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the receive beam coordinate system. For most cases this angle is set to zero.
+ 3+|{attr}:long_name = "receive beam angular rotation about the _z_ axis" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
  
- |{var}float tx_beam_rotation_phi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the transmit beam coordinate system.
- 3+|{attr}:long_name = "transmit beam angular rotation about the _x_ axis"
- 3+|{attr}:units = "arc_degree"
- 3+|{attr}float :valid_range = −180.0, 180.0
-
- |{var}float tx_beam_rotation_theta(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _y_-axis of the platform coordinate system needed to give the transmit beam coordinate system.
+ |{var}float tx_beam_rotation_phi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _x_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
+ |{var}float tx_beam_rotation_theta(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _y_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction (also called tilt angle).
  3+|{attr}:long_name = "transmit beam angular rotation about the _y_ axis"
- 3+|{attr}:units = "arc_degree"
+ 3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −90.0, 90.0
-
- |{var}float tx_beam_rotation_psi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the transmit beam coordinate system.
- 3+|{attr}:long_name = "transmit beam angular rotation about the _z_ axis"
- 3+|{attr}:units = "arc_degree"
- 3+|{attr}float :valid_range = −180.0, 180.0
-
+ 
+ |{var}float tx_beam_rotation_psi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For most cases this angle is set to zero.
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _z_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
  |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
  3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
