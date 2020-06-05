@@ -357,7 +357,7 @@ S_v = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\log_{10}(r) + 2\alpha r - 
 \end{equation}
 ++++
 
-where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (_receive_duration_effective, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
+where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (receive_duration_effective, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
 
 === Type 3
 
