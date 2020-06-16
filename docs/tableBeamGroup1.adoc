@@ -166,8 +166,8 @@ e|Variables | |
  3+|{attr}:units = "s"
  3+|{attr}float :valid_min = 0.0
 
- |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the receive pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.
- 3+|{attr}:long_name = "Effective duration of transmitted pulse"
+ |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.
+ 3+|{attr}:long_name = "Effective duration of received pulse"
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0
 
