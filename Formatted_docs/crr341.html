@@ -2634,10 +2634,10 @@ ISSN 1017-6195</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float receive_duration_effective(ping_time, tx_beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Effective duration of the receive pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Effective duration of transmitted pulse"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Effective duration of received pulse"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "s"</p></td>
@@ -3054,12 +3054,12 @@ S_v = P_r + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t \lambda^2 c 
 <p>where \(c\) is sound speed [m s<sup>-1</sup>], \(\psi\) the equivalent beam angle (variable <em>equivalent_beam_angle</em>), and \(\tau_e\) the effective pulse duration (variable <em>receive_duration_effective</em>).</p>
 </div>
 <div class="paragraph">
-<p>The effective pulse duration is computed for EK60, ES60 and ES70 from the nominal transmit pulse duration (variable <em>transmit_duration_nominal</em>) and the Simrad term \(S_{a,corr}\) from the calibration exercise as :</p>
+<p>The effective pulse duration is computed for EK60, ES60 and ES70 from the nominal transmit pulse duration (variable <em>transmit_duration_nominal</em>) and the Simrad term \(S_{a,corr}\) in dB from the calibration exercise as :</p>
 </div>
 <div class="stemblock">
 <div class="content">
 \[\begin{equation}
-\tau_e = \tau + 2S_{a,corr},
+\tau_e = \tau * 10^{\frac{2S_{a,corr}}{10}},
 \end{equation}\]
 </div>
 </div>
@@ -4222,7 +4222,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2020-06-08 00:38:09 UTC
+Last updated 2020-06-18 09:54:54 UTC
 </div>
 </div>
 <link rel="stylesheet" href="highlight/styles/github.min.css">
