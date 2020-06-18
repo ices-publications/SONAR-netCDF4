@@ -390,12 +390,12 @@ S_v = P_r + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t \lambda^2 c 
 
 where latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle (variable _equivalent_beam_angle_), and latexmath:[\tau_e] the effective pulse duration (variable _receive_duration_effective_).
 
-The effective pulse duration is computed for EK60, ES60 and ES70 from the nominal transmit pulse duration (variable _transmit_duration_nominal_) and the Simrad term latexmath:[S_{a,corr}] from the calibration exercise as :
+The effective pulse duration is computed for EK60, ES60 and ES70 from the nominal transmit pulse duration (variable _transmit_duration_nominal_) and the Simrad term latexmath:[S_{a,corr}] in dB from the calibration exercise as :
 
 [stem]
 ++++
 \begin{equation}
-\tau_e = \tau + 2S_{a,corr},
+\tau_e = \tau * 10^{\frac{2S_{a,corr}}{10}},
 \end{equation}
 ++++
 
