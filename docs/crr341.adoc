@@ -812,7 +812,7 @@ The sonar does not calculate the echo arrival angle - they are calculated from t
 image::splitApertureTransducers.svg[align="center"]
 
 ==== Four quadrants (type A)
-This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the major (latexmath:[\theta]) and minor (latexmath:[\phi]) angles are calculated thus:
+This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are calculated thus:
 
 [stem]
 ++++
