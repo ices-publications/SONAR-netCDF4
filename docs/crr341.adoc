@@ -331,7 +331,7 @@ S_{v} = 10\log_{10}(P_{r}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac
 \end{equation}
 ++++
 
-where latexmath:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and _G_ is the transducer gain (transducer_gain, dB).
+where latexmath:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr), latexmath:[\tau_e] is the effective pulse duration (_receive_duration_effective, s), and _G_ is the transducer gain (transducer_gain, dB).
 
 === Type 2
 
@@ -357,7 +357,7 @@ S_v = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\log_{10}(r) + 2\alpha r - 
 \end{equation}
 ++++
 
-where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (transmit_duration_equivalent, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
+where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (receive_duration_effective, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
 
 === Type 3
 
@@ -379,23 +379,32 @@ where latexmath:[P_c] is the compressed power value stored in the _backscatter_r
 TS = P_r + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2} \right) - 2G_0,
 \end{equation}
 ++++
-where latexmath:[r] is the range from the transducer to the target [m], latexmath:[\alpha] the acoustic absorption [dB m^-1^], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable), latexmath:[\lambda] the acoustic wavelength [m], and latexmath:[G_0] the on-axis gain (variable _transducer_gain_). Volume backscatter strength is obtained from a similar equation:
+where latexmath:[r] is the range from the transducer to the target [m], latexmath:[\alpha] the acoustic absorption [dB m^-1^], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable), latexmath:[\lambda] the acoustic wavelength [m], and latexmath:[G_0] the on-axis gain (variable _transducer_gain_). Beam pattern compensation for echoes that do not arrive on the transducer axis is done in addition to this equation (if such angles can be estimated, as can be done with split-aperture transducers). Volume backscatter strength is obtained from a similar equation:
 
 [stem]
 ++++
 \begin{equation}
-S_v = P_r + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t \lambda^2 c \psi \tau}{32 \pi^2} \right) - 2G_0 - 2S_{a,corr},
+S_v = P_r + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t \lambda^2 c \psi \tau_e}{32 \pi^2} \right) - 2G_0,
 \end{equation}
 ++++
 
-where latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle (variable _equivalent_beam_angle_), latexmath:[\tau] the pulse duration (variable _transmit_duration_nominal_), and latexmath:[S_{a,corr}] a correction term (variable _sa_correction_).
+where latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle (variable _equivalent_beam_angle_), and latexmath:[\tau_e] the effective pulse duration (variable _receive_duration_effective_).
+
+The effective pulse duration is computed for EK60, ES60 and ES70 from the nominal transmit pulse duration (variable _transmit_duration_nominal_) and the Simrad term latexmath:[S_{a,corr}] in dB from the calibration exercise as :
+
+[stem]
+++++
+\begin{equation}
+\tau_e = \tau * 10^{\frac{2S_{a,corr}}{10}},
+\end{equation}
+++++
 
 The range from the transducer to the target is given by:
 
 [stem]
 ++++
 \begin{equation}
-
+tbd.
 \end{equation}
 ++++
 
@@ -417,7 +426,7 @@ Type 4 conversion equations are intended for data produced by Simrad EK80 and ES
 
 This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a geographic coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.
 
-There are four right-handed Cartesian coordinate systems (<<coordinateSystemList>>, <<coordinate_system_figure_all>>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Rotation angles are as per the right-hand rule.
+There are four right-handed Cartesian coordinate systems (<<coordinateSystemList>>, <<coordinate_system_figure_all>>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Coordinate system rotation angles are as per the right-hand rule.
 
 There is also a geographic coordinate system (<<coordinate_system_figure_all>>) that provides for location of the platform on Earth and also the height above a datum (e.g. mean sea level). The platform heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in the geographic coordinate system (this applies to both stationary and mobile sonar platforms).
 
@@ -535,20 +544,15 @@ Some sensors (e.g. the position, attitude sensor) can have their installation of
 
 === Split-aperture coordinates
 
-Some sonar beams can estimate the arrival angle of echoes (<<Split-aperture beams>>). These angles are given as _minor_ and _major_ angles in the sonar beam coordinate system (<<split_aperture_angle_figure>>):
+Some sonar beams can estimate the arrival angle of echoes (<<Split-aperture beams>>). These angles are given as _minor_ and _major_ angles in the sonar beam coordinate system (BCS in <<coordinate_system_figure_all>>):
 
 * The _z_-axis is always the beam axis with the origin at the receive transducer,
-* The _minor_ arrival angle (latexmath:[\phi]) is given by the angle from the _z_ axis, measured in the _x_-_z_ plane, and
-* The _major_ arrival angle (latexmath:[\theta]) is given by the angle from the _z_ axis measured in the _y_-_z_ plane.
+* The _minor_ arrival angle (latexmath:[\theta]) is given by the angle from the _z_ axis, measured in the _x_-_z_ plane, and
+* The _major_ arrival angle (latexmath:[\phi]) is given by the angle from the _z_ axis measured in the _y_-_z_ plane.
 
-Positive minor angles occur in the positive _x_ plane and positive major angles occur in the positive _y_ plane. 
+Positive minor angles occur in the positive _x_ plane and positive major angles occur in the positive _y_ plane. Note that this convention does not follow the right-hand-rule for major angles.
 
 For conventional downward-looking echosounders mounted on a ship it is normal that the sonar beam coordinate system is identical to the transducer coordinate system and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
-
-.The split-aperture minor and major angles in the sonar beam coordinate system.
-[[split_aperture_angle_figure]]
-image::splitApertureAngles.svg[align="center"]
-
 
 === Equations for positioning echoes in a Surface coordinate system
 
@@ -798,7 +802,7 @@ When sub-beams from a split-aperture transducer are provided, it is also necessa
 To allow for existing conventions on how the split-aperture angles are stored or derived (typically as phase angles between the split-aperture signals), angle sensitivities are given in variables _echoangle_major_sensitivity_ and _echoangle_minor_sensitivity_.
 
 === Angles stored in file
-The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains either physical arrival angles or phase angles. For the latter, the major (latexmath:[\theta]) and minor (latexmath:[\phi]) physical arrival angles are obtained by dividing by the major latexmath:[\eta_\theta] and minor latexmath:[\eta_\phi] angle sensitivities respectively. For consistency, when physical arrival angles are stored in the file, latexmath:[\eta_\theta] and latexmath:[\eta_\phi] should still be present and be set to 1.0.
+The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains either physical arrival angles or phase angles. For the latter, the minor (latexmath:[\theta]) and major (latexmath:[\phi]) physical arrival angles are obtained by dividing by the minor latexmath:[\eta_\theta] and major latexmath:[\eta_\phi] angle sensitivities respectively. For consistency, when physical arrival angles are stored in the file, latexmath:[\eta_\theta] and latexmath:[\eta_\phi] should still be present and be set to 1.0.
 
 === Angles not stored in file
 The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeammodeTable>>, in the same order as labelled in <<transducer_types>>.
@@ -808,21 +812,23 @@ The sonar does not calculate the echo arrival angle - they are calculated from t
 image::splitApertureTransducers.svg[align="center"]
 
 ==== Four quadrants (type A)
-This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the major (latexmath:[\theta]) and minor (latexmath:[\phi]) angles are calculated thus:
+This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are calculated thus:
 
 [stem]
 ++++
 \begin{equation}
-\theta = \frac{\arctan \left( \Im((y_2+y_3)^*), \Re(y_1+y_4) \right)}{\eta_\theta}\\
-\phi =   \frac{\arctan \left( \Im((y_1+y_2)^*), \Re(y_3+y_4) \right)}{\eta_\phi} 
+y_\theta = (y_3 + y_4) \cdot (y_1 + y_2)^*,\\
+y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
+\theta = \frac{\arctan \left( \Im(y_\theta), \Re(y_\theta) \right)}{\eta_\theta},\\
+\phi =   \frac{\arctan \left( \Im(y_\phi), \Re(y_\phi) \right)}{\eta_\phi} 
 \end{equation}
 ++++
-where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The angle sensitivities are latexmath:[\eta_\theta] for the major axis and latexmath:[\eta_\phi] for the minor axis.
+where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate, latexmath:[y_\theta] the phase angle in the minor axis,  latexmath:[y_\phi] the phase angle in the major axis, and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The angle sensitivities are latexmath:[\eta_\phi] for the major axis and latexmath:[\eta_\theta] for the minor axis.
 
 
 ==== Three or four sub-beams (type B and C)
 
-This arrangement has either three equal sub-beams (<<transducer_types>>, partB) or a centre sub-beam and three surrounding sub-beams. (<<transducer_types>>, part C). Type C can be treated the same as type B once the centre sub-beam signal is added to each of the outer sub-beam signals. The phase angles between two pairs of the three sub-beams are then given by cite:[bodholt2001, bjorno2017]:
+This arrangement has either three equal sub-beams (<<transducer_types>>, part B) or a centre sub-beam and three surrounding sub-beams. (<<transducer_types>>, part C). Type C can be treated the same as type B once the centre sub-beam signal is added to each of the outer sub-beam signals. The phase angles between two pairs of the three sub-beams are then given by cite:[bodholt2001, bjorno2017]:
 
 [stem]
 ++++
@@ -831,13 +837,13 @@ This arrangement has either three equal sub-beams (<<transducer_types>>, partB) 
 \omega_{32} = \arctan \left( \Im((y_3+y_2)^*), \Re(y_3+y_1) \right)
 \end{equation}
 ++++
-where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The major (latexmath:[\theta]) and minor (latexmath:[\phi]) angles are then:
+where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are then:
 
 [stem]
 ++++
 \begin{equation}
-\theta = \frac{1}{\sqrt{3}\eta_\theta} (\omega_{31} + \omega_{32})\\
-\phi = \frac{1}{\eta_\phi} (\omega_{32} - \omega_{31})\\
+\theta = \frac{1}{\eta_\theta} (\omega_{32} - \omega_{31})\\
+\phi = \frac{1}{\sqrt{3}\eta_\phi} (\omega_{31} + \omega_{32})\\
 \end{equation}
 ++++
 where latexmath:[\eta_\theta] is the angle sensitivity for the major axis and latexmath:[\eta_\phi] the angle sensitivity for the minor axis.
