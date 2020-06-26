@@ -150,35 +150,15 @@ A design principle of SONAR-netCDF4 has been to focus on describing the acoustic
 
 NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy.
 
-[plantuml, format=svg, opts="inline"]
-----
-legend
-Top-level
-|_ Annotation
-|_ Environment
-|_ Platform
-|_ Provenance
-|_ Sonar
-  |_ Beam_group
-  |_ Grid_group
-  |_ Interpretation
-|_ Vendor_specific
-end legend
-----
-
-SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:
+SONAR-netCDF4 divides sonar data into seven netCDF4 groups:
 
 . *Top-level –* contains metadata about the SONAR-netCDF4 file format;
-.. *Annotation –* contains time-stamped annotations;
-.. *Environment –* contains information relevant to acoustic propagation through water;
-.. *Platform* *–* contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.
-.. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained;
-.. *Sonar –* contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;
-... *Beam_group –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;
-... *Grid_group –* contains gridded backscatter  data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;
-... *Interpretation –* contains the interpretation regions; the intepretation mask is independent from the backscatter groups;
-.. *Vendor specific –* contains vendor-specific information about the sonar and the data.
-
+. *Annotation –* contains time-stamped annotations;
+. *Environment –* contains information relevant to acoustic propagation through water;
+. *Platform* *–* contains information about the platform on which the sonar is installed;
+. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained;
+. *Sonar –* contains the backscatter and associated metadata; groups under Sonar are used for storing data from different sonar operating modes;
+. *Vendor specific –* contains vendor-specific information about the sonar and the data.
 
 These groups contain variables and variable attributes with prescribed names and contents.
 
@@ -220,6 +200,8 @@ SONAR-netCDF4 files should always end with a “.nc” suffix to indicate that t
 An example of a SONAR-netCDF4 file is provided in the Common Data form Language (CDL). This provides a more formalized and structured representation of the data format. A CDL file can be converted into a NetCDF file using the “ncgen” utility (available as part of the netCDF software distribution) and then used as a template for creating populated SONAR-netCDF4 files.
 
 === Groups
+
+==== Top-level group
 
 The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<<topLevelTable>>).
 
@@ -292,10 +274,7 @@ include::tableProvenance.adoc[]
 
 ==== Sonar group
 
-The netCDF4 group name is */Sonar* and contains three subgroups.
-
-===== Beam_group
-This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>.  
+This group contains the sonar backscatter data and associated metadata. The netCDF4 group name is */Sonar* and is described in <<sonarGroupTable>>.
 
 Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeammodeTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
 
@@ -308,15 +287,6 @@ include::tableSonar.adoc[]
 .Description of the beam mode subgroups of the sonar group.
 [[sonarBeammodeTable]]
 include::tableBeamGroup1.adoc[]
-
-+===== Grid_group
-
-This sub group contains gridded sonar backscatter data and associated metadata. 
-
-===== Interpretation
-This sub group contains the interpretation masks. the interpretation mask is independent on the ping or grid, and can be used interchangeable between Grid_group and Beam_group.
-
-The interpretaion masks are based on time and range, for a given a sound speed.
 
 ==== Vendor specific group
 
