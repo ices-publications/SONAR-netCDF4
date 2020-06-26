@@ -595,15 +595,15 @@ y\\
 z
 \end{bmatrix}_{SCS} =R_{TCS->PCS}(t_i) \cdot T_{TCS->PCS}
 + R_{heading}(t_i) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
-\cos(\phi) & 0 & \sin(\phi) \\
+\cos(\theta) & 0 & \sin(\theta) \\
 0 & 1 & 0 \\
--\sin(\phi) & 0 & cos(\phi)
+-\sin(\theta) & 0 & cos(\theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 & 0 & 0 \\
-0 & \cos(\theta) & -\sin(\theta) \\
-0 & \sin(\theta) & \cos(\theta)
+0 & \cos(\phi) & \sin(\phi) \\
+0 & -\sin(\phi) & \cos(\phi)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
@@ -689,15 +689,15 @@ z
 R_{PCS->SCS}(t_i)  \cdot
 R_{TCS->PCS} \cdot
 R_{BCS->TCS} \cdot \begin{bmatrix}
-\cos(\phi) & 0 & \sin(\phi) \\
+\cos(\theta) & 0 & \sin(\theta) \\
 0 & 1 & 0 \\
--\sin(\phi) & 0 & cos(\phi)
+-\sin(\theta) & 0 & cos(\theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 & 0 & 0 \\
-0 & \cos(\theta) & -\sin(\theta) \\
-0 & \sin(\theta) & \cos(\theta)
+0 & \cos(\phi) & \sin(\phi) \\
+0 & -\sin(\phi) & \cos(\phi)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
