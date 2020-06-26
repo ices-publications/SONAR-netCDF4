@@ -484,13 +484,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_cdl_version_of_sonar_netcdf4">3.9. CDL version of SONAR-netCDF4</a></li>
 <li><a href="#_groups">3.10. Groups</a>
 <ul class="sectlevel3">
-<li><a href="#_top_level_group">3.10.1. Top-level group</a></li>
-<li><a href="#_annotation_group">3.10.2. Annotation group</a></li>
-<li><a href="#_environment_group">3.10.3. Environment group</a></li>
-<li><a href="#_platform_group">3.10.4. Platform group</a></li>
-<li><a href="#_provenance_group">3.10.5. Provenance group</a></li>
-<li><a href="#_sonar_group">3.10.6. Sonar group</a></li>
-<li><a href="#_vendor_specific_group">3.10.7. Vendor specific group</a></li>
+<li><a href="#_annotation_group">3.10.1. Annotation group</a></li>
+<li><a href="#_environment_group">3.10.2. Environment group</a></li>
+<li><a href="#_platform_group">3.10.3. Platform group</a></li>
+<li><a href="#_provenance_group">3.10.4. Provenance group</a></li>
+<li><a href="#_sonar_group">3.10.5. Sonar group</a></li>
+<li><a href="#_vendor_specific_group">3.10.6. Vendor specific group</a></li>
 </ul>
 </li>
 </ul>
@@ -762,14 +761,31 @@ ISSN 1017-6195</p>
 <div class="paragraph">
 <p>NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy.</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre>legend
+Top-level
+|_ Annotation
+|_ Environment
+|_ Platform
+|_ Provenance
+|_ Sonar
+  |_ Beam_group
+  |_ Grid_group
+  |_ Interpretation
+|_ Vendor_specific
+end legend</pre>
+</div>
+</div>
 <div class="paragraph">
-<p>SONAR-netCDF4 divides sonar data into seven netCDF4 groups:</p>
+<p>SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p><strong>Top-level –</strong> contains metadata about the SONAR-netCDF4 file format;</p>
-</li>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
 <p><strong>Annotation –</strong> contains time-stamped annotations;</p>
 </li>
@@ -777,16 +793,32 @@ ISSN 1017-6195</p>
 <p><strong>Environment –</strong> contains information relevant to acoustic propagation through water;</p>
 </li>
 <li>
-<p><strong>Platform</strong> <strong>–</strong> contains information about the platform on which the sonar is installed;</p>
+<p><strong>Platform</strong> <strong>–</strong> contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.</p>
 </li>
 <li>
 <p><strong>Provenance –</strong> contains metadata about how the SONAR-netCDF4 version of the data were obtained;</p>
 </li>
 <li>
-<p><strong>Sonar –</strong> contains the backscatter and associated metadata; groups under Sonar are used for storing data from different sonar operating modes;</p>
+<p><strong>Sonar –</strong> contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><strong>Beam_group –</strong> contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;</p>
+</li>
+<li>
+<p><strong>Grid_group –</strong> contains gridded backscatter  data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;</p>
+</li>
+<li>
+<p><strong>Interpretation –</strong> contains the interpretation regions; the intepretation mask is independent from the backscatter groups;</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p><strong>Vendor specific –</strong> contains vendor-specific information about the sonar and the data.</p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
@@ -860,8 +892,6 @@ ISSN 1017-6195</p>
 </div>
 <div class="sect2">
 <h3 id="_groups">3.10. Groups</h3>
-<div class="sect3">
-<h4 id="_top_level_group">3.10.1. Top-level group</h4>
 <div class="paragraph">
 <p>The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<a href="#topLevelTable">Table 1</a>).</p>
 </div>
@@ -937,9 +967,8 @@ ISSN 1017-6195</p>
 </tr>
 </tbody>
 </table>
-</div>
 <div class="sect3">
-<h4 id="_annotation_group">3.10.2. Annotation group</h4>
+<h4 id="_annotation_group">3.10.1. Annotation group</h4>
 <div class="paragraph">
 <p>The annotation group contains timestamped annotations with optional identification code. Annotations are typically textual notes entered by users relevant to the data at a particular time. Some sonar systems provide an interface for creating manual and programmatic annotations. The netCDF4 group name is <strong>/Annotation</strong> and is described in <a href="#annotationTable">Table 2</a>.</p>
 </div>
@@ -1018,7 +1047,7 @@ ISSN 1017-6195</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_environment_group">3.10.3. Environment group</h4>
+<h4 id="_environment_group">3.10.2. Environment group</h4>
 <div class="paragraph">
 <p>The environment group contains information on environmental conditions, especially the speed of sound in water and acoustic absorption. The netCDF4 group name is <strong>/Environment</strong> and is described in <a href="#environmentTable">Table 3</a>. Sound speed, absorption, and current profiles can also be stored in this group, as can profile measurements of salinity, temperature, and pressure. Such profile data should use the NCEI NetCDF “profile” template, v2.0 or greater.</p>
 </div>
@@ -1109,7 +1138,7 @@ ISSN 1017-6195</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_platform_group">3.10.4. Platform group</h4>
+<h4 id="_platform_group">3.10.3. Platform group</h4>
 <div class="paragraph">
 <p>This group contains information about the sonar platform (e.g. ship). The netCDF4 group name is <strong>/Platform</strong> and is described in <a href="#platformGroupTable">Table 4</a>. Optionally, subgroups of /Platform can be used to store data from individual instruments that provide measurements about the platform, such as position, attitude, etc (note that if the measurements are about the environment around the platform they should be stored in the /Environment group). This structure must be used to store all instrument data.</p>
 </div>
@@ -1968,7 +1997,7 @@ ISSN 1017-6195</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_provenance_group">3.10.5. Provenance group</h4>
+<h4 id="_provenance_group">3.10.4. Provenance group</h4>
 <div class="paragraph">
 <p>The provenance group provides information on how the SONAR-netCDF4 version of the data were created. The netCDF4 group name is <strong>/Provenance</strong> and is described in <a href="#provenanceTable">Table 9</a>.</p>
 </div>
@@ -2034,9 +2063,14 @@ ISSN 1017-6195</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_sonar_group">3.10.6. Sonar group</h4>
+<h4 id="_sonar_group">3.10.5. Sonar group</h4>
 <div class="paragraph">
-<p>This group contains the sonar backscatter data and associated metadata. The netCDF4 group name is <strong>/Sonar</strong> and is described in <a href="#sonarGroupTable">Table 10</a>.</p>
+<p>The netCDF4 group name is <strong>/Sonar</strong> and contains three subgroups.</p>
+</div>
+<div class="sect4">
+<h5 id="_beam_group">Beam_group</h5>
+<div class="paragraph">
+<p>This group contains ping based sonar backscatter data and associated metadata and is described in <a href="#sonarGroupTable">Table 10</a>.</p>
 </div>
 <div class="paragraph">
 <p>Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <a href="#sonarBeammodeTable">Table 11</a>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.</p>
@@ -2922,9 +2956,25 @@ ISSN 1017-6195</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>+===== Grid_group</p>
+</div>
+<div class="paragraph">
+<p>This sub group contains gridded sonar backscatter data and associated metadata.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_interpretation">Interpretation</h5>
+<div class="paragraph">
+<p>This sub group contains the interpretation masks. the interpretation mask is independent on the ping or grid, and can be used interchangeable between Grid_group and Beam_group.</p>
+</div>
+<div class="paragraph">
+<p>The interpretaion masks are based on time and range, for a given a sound speed.</p>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_vendor_specific_group">3.10.7. Vendor specific group</h4>
+<h4 id="_vendor_specific_group">3.10.6. Vendor specific group</h4>
 <div class="paragraph">
 <p>The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is <strong>/Vendor_specific</strong>. Currently, there is no mandatory information for the vendor specific group.</p>
 </div>
@@ -4222,7 +4272,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2020-06-25 08:38:39 UTC
+Last updated 2020-06-26 00:48:15 UTC
 </div>
 </div>
 <link rel="stylesheet" href="highlight/styles/github.min.css">
