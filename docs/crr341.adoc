@@ -595,15 +595,15 @@ y\\
 z
 \end{bmatrix}_{SCS} =R_{TCS->PCS}(t_i) \cdot T_{TCS->PCS}
 + R_{heading}(t_i) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
-\cos(\phi) & 0 & \sin(\phi) \\
+\cos(\theta) & 0 & \sin(\theta) \\
 0 & 1 & 0 \\
--\sin(\phi) & 0 & cos(\phi)
+-\sin(\theta) & 0 & cos(\theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 & 0 & 0 \\
-0 & \cos(\theta) & -\sin(\theta) \\
-0 & \sin(\theta) & \cos(\theta)
+0 & \cos(\phi) & \sin(\phi) \\
+0 & -\sin(\phi) & \cos(\phi)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
@@ -623,27 +623,27 @@ and
 \begin{equation}
 R_{BCS->TCS} =
 \begin{bmatrix}
-\cos(\alpha) & -\sin(\alpha) & 0 \\
-\sin(\alpha) & \cos(\alpha) & 0 \\
+\cos(\Psi) & -\sin(\Psi) & 0 \\
+\sin(\Psi) & \cos(\Psi) & 0 \\
 0 & 0 & 1
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\cos(\beta) & 0 & \sin(\beta) \\
+\cos(\Theta) & 0 & \sin(\Theta) \\
 0 & 1 & 0 \\
--\sin(\beta) & 0 & cos(\beta)
+-\sin(\Theta) & 0 & cos(\Theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 & 0 & 0 \\
-0 & \cos(\gamma) & -\sin(\gamma) \\
-0 & \sin(\gamma) & \cos(\gamma)
+0 & \cos(\Phi) & -\sin(\Phi) \\
+0 & \sin(\Phi) & \cos(\Phi)
 \end{bmatrix}
 \end{equation}
 ++++
 
 
-where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
+where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
 
 and:
 
@@ -689,15 +689,15 @@ z
 R_{PCS->SCS}(t_i)  \cdot
 R_{TCS->PCS} \cdot
 R_{BCS->TCS} \cdot \begin{bmatrix}
-\cos(\phi) & 0 & \sin(\phi) \\
+\cos(\theta) & 0 & \sin(\theta) \\
 0 & 1 & 0 \\
--\sin(\phi) & 0 & cos(\phi)
+-\sin(\theta) & 0 & cos(\theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 & 0 & 0 \\
-0 & \cos(\theta) & -\sin(\theta) \\
-0 & \sin(\theta) & \cos(\theta)
+0 & \cos(\phi) & \sin(\phi) \\
+0 & -\sin(\phi) & \cos(\phi)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
@@ -717,26 +717,26 @@ and:
 \begin{equation}
 R_{BCS->TCS} =
 \begin{bmatrix}
-\cos(\alpha) & -\sin(\alpha) & 0 \\
-\sin(\alpha) & \cos(\alpha) & 0 \\
+\cos(\Psi) & -\sin(\Psi) & 0 \\
+\sin(\Psi) & \cos(\Psi) & 0 \\
 0 & 0 & 1
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\cos(\beta) & 0 & \sin(\beta) \\
+\cos(\Theta) & 0 & \sin(\Theta) \\
 0 & 1 & 0 \\
--\sin(\beta) & 0 & cos(\beta)
+-\sin(\Theta) & 0 & cos(\Theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 & 0 & 0 \\
-0 & \cos(\gamma) & -\sin(\gamma) \\
-0 & \sin(\gamma) & \cos(\gamma)
+0 & \cos(\Phi) & -\sin(\Phi) \\
+0 & \sin(\Phi) & \cos(\Phi)
 \end{bmatrix}
 \end{equation}
 ++++
 
-where stem:[\alpha,\beta,\gamma] are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
+where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
 
 and:
 
