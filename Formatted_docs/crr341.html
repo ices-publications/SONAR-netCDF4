@@ -3411,15 +3411,15 @@ y\\
 z
 \end{bmatrix}_{SCS} =R_{TCS-&gt;PCS}(t_i) \cdot T_{TCS-&gt;PCS}
 + R_{heading}(t_i) \cdot R_{BCS-&gt;TCS} \cdot \begin{bmatrix}
-\cos(\phi) &amp; 0 &amp; \sin(\phi) \\
+\cos(\theta) &amp; 0 &amp; \sin(\theta) \\
 0 &amp; 1 &amp; 0 \\
--\sin(\phi) &amp; 0 &amp; cos(\phi)
+-\sin(\theta) &amp; 0 &amp; cos(\theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 &amp; 0 &amp; 0 \\
-0 &amp; \cos(\theta) &amp; -\sin(\theta) \\
-0 &amp; \sin(\theta) &amp; \cos(\theta)
+0 &amp; \cos(\phi) &amp; \sin(\phi) \\
+0 &amp; -\sin(\phi) &amp; \cos(\phi)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
@@ -3441,27 +3441,27 @@ r_i
 \[\begin{equation}
 R_{BCS-&gt;TCS} =
 \begin{bmatrix}
-\cos(\alpha) &amp; -\sin(\alpha) &amp; 0 \\
-\sin(\alpha) &amp; \cos(\alpha) &amp; 0 \\
+\cos(\Psi) &amp; -\sin(\Psi) &amp; 0 \\
+\sin(\Psi) &amp; \cos(\Psi) &amp; 0 \\
 0 &amp; 0 &amp; 1
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\cos(\beta) &amp; 0 &amp; \sin(\beta) \\
+\cos(\Theta) &amp; 0 &amp; \sin(\Theta) \\
 0 &amp; 1 &amp; 0 \\
--\sin(\beta) &amp; 0 &amp; cos(\beta)
+-\sin(\Theta) &amp; 0 &amp; cos(\Theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 &amp; 0 &amp; 0 \\
-0 &amp; \cos(\gamma) &amp; -\sin(\gamma) \\
-0 &amp; \sin(\gamma) &amp; \cos(\gamma)
+0 &amp; \cos(\Phi) &amp; -\sin(\Phi) \\
+0 &amp; \sin(\Phi) &amp; \cos(\Phi)
 \end{bmatrix}
 \end{equation}\]
 </div>
 </div>
 <div class="paragraph">
-<p>where \(\alpha,\beta,\gamma\) are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>)</p>
+<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>)</p>
 </div>
 <div class="paragraph">
 <p>and:</p>
@@ -3516,15 +3516,15 @@ z
 R_{PCS-&gt;SCS}(t_i)  \cdot
 R_{TCS-&gt;PCS} \cdot
 R_{BCS-&gt;TCS} \cdot \begin{bmatrix}
-\cos(\phi) &amp; 0 &amp; \sin(\phi) \\
+\cos(\theta) &amp; 0 &amp; \sin(\theta) \\
 0 &amp; 1 &amp; 0 \\
--\sin(\phi) &amp; 0 &amp; cos(\phi)
+-\sin(\theta) &amp; 0 &amp; cos(\theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 &amp; 0 &amp; 0 \\
-0 &amp; \cos(\theta) &amp; -\sin(\theta) \\
-0 &amp; \sin(\theta) &amp; \cos(\theta)
+0 &amp; \cos(\phi) &amp; \sin(\phi) \\
+0 &amp; -\sin(\phi) &amp; \cos(\phi)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
@@ -3546,27 +3546,27 @@ r_i
 \[\begin{equation}
 R_{BCS-&gt;TCS} =
 \begin{bmatrix}
-\cos(\alpha) &amp; -\sin(\alpha) &amp; 0 \\
-\sin(\alpha) &amp; \cos(\alpha) &amp; 0 \\
+\cos(\Psi) &amp; -\sin(\Psi) &amp; 0 \\
+\sin(\Psi) &amp; \cos(\Psi) &amp; 0 \\
 0 &amp; 0 &amp; 1
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\cos(\beta) &amp; 0 &amp; \sin(\beta) \\
+\cos(\Theta) &amp; 0 &amp; \sin(\Theta) \\
 0 &amp; 1 &amp; 0 \\
--\sin(\beta) &amp; 0 &amp; cos(\beta)
+-\sin(\Theta) &amp; 0 &amp; cos(\Theta)
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
 1 &amp; 0 &amp; 0 \\
-0 &amp; \cos(\gamma) &amp; -\sin(\gamma) \\
-0 &amp; \sin(\gamma) &amp; \cos(\gamma)
+0 &amp; \cos(\Phi) &amp; -\sin(\Phi) \\
+0 &amp; \sin(\Phi) &amp; \cos(\Phi)
 \end{bmatrix}
 \end{equation}\]
 </div>
 </div>
 <div class="paragraph">
-<p>where \(\alpha,\beta,\gamma\) are the beam pointings angles as given in the rx_beam_rotation_alpha, rx_beam_rotation_beta, rx_beam_rotation_gamma variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>)</p>
+<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>)</p>
 </div>
 <div class="paragraph">
 <p>and:</p>
@@ -4222,7 +4222,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2020-06-25 08:38:39 UTC
+Last updated 2020-06-29 23:36:19 UTC
 </div>
 </div>
 <link rel="stylesheet" href="highlight/styles/github.min.css">
