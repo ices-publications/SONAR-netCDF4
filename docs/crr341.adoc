@@ -110,9 +110,9 @@ image::postprocessing_data_flow_figure.svg[]
 
 === Typical processing steps and the associated data models
 
-Two main data models are available in the convention: `Beam_group` and `Grid_group`. The `Beam_group` allows for different sample rates, different ping rates, etc, for each channel. It is a flexible model and able to cope with all sonar systems. The `Grid_group` is a storage structure for multi-channel data that has been re-gridded or has homogeneous ping times and range bins across all channels (i.e., frequencies).
+Two main data models are available in the convention: `Beam_group` and `Gridded`. The `Beam_group` allows for different sample rates, different ping rates, etc, for each channel. It is a flexible model and able to cope with all sonar systems. The `Gridded` is a storage structure for multi-channel data that has been re-gridded or has homogeneous ping times and range bins across all channels (i.e., frequencies).
 
-Depending on the type of processing, both `Beam_group` and `Grid_group` could be used as input and output.
+Depending on the type of processing, both `Beam_group` and `Gridded` could be used as input and output.
 
 ==== Noise removal
 _to come_
@@ -127,10 +127,10 @@ An earlier overview of how different echo-integration software stores this infor
 https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Label overview]
 
 ==== Machine learning
-Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passing it to a deep learning framework. The use of the `Grid_group` on a high resolution grid should be used for this purpose.
+Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passing it to a deep learning framework. The use of `Gridded` on a high resolution grid should be used for this purpose.
 
 ==== Integrated backscatter
-The output from the echo-integration process is typically further processed to yield distribution and abundance estimates of selected species. It is recommended to use the `Grid_group` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective.
+The output from the echo-integration process is typically further processed to yield distribution and abundance estimates of selected species. It is recommended to use the `Gridded` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective.
 
 == The SONAR-netCDF4 convention
 
@@ -161,9 +161,9 @@ Top-level
 |_ Platform
 |_ Provenance
 |_ Sonar
-  |_ Beam_group
-  |_ Grid_group
-  |_ Interpretation
+  |_ Beam_groupX
+  |_ GriddedX
+  |_ InterpretationX
 |_ Vendor_specific
 end legend
 ----
@@ -176,11 +176,12 @@ SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:
 .. *Platform* *–* contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.
 .. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained;
 .. *Sonar –* contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;
-... *Beam_group –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;
-... *Grid_group –* contains gridded backscatter  data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;
-... *Interpretation –* contains the interpretation regions; the intepretation mask is independent from the backscatter groups;
+... *Beam_groupX –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;
+... *GriddedX –* contains gridded backscatter data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;
+... *InterpretationX –* contains the interpretation regions; the intepretation mask is independent from the backscatter groups;
 .. *Vendor specific –* contains vendor-specific information about the sonar and the data.
 
+The 'X' suffix on some group names indicates that there can be multiple of these type of groups and that the true group name will have a trailing number.
 
 These groups contain variables and variable attributes with prescribed names and contents.
 
@@ -297,11 +298,11 @@ include::tableProvenance.adoc[]
 The netCDF4 group name is */Sonar* and contains three subgroups.
 
 ===== Beam group
-This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_group*. 
+This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_groupX*, where *X* is an integer.
 
 Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeammodeTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
 
-Subroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
+Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
 
 .Description of the sonar group.
 [[sonarGroupTable]]
@@ -311,14 +312,14 @@ include::tableSonar.adoc[]
 [[sonarBeammodeTable]]
 include::tableBeamGroup1.adoc[]
 
-===== Grid group
+===== Gridded group
 
-This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *Grid_group*.
+This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
 
 _more to come_
 
 ===== Interpretation
-This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Grid_group and Beam_group. The netCDF4 group name is *Interpretation*.
+This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Gridded and Beam_group. The netCDF4 group name is *InterpretationX*, where *X* is an integer.
 
 The interpretation masks are based on a time and range, for a given a sound speed.
 
