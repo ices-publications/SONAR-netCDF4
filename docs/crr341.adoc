@@ -296,12 +296,12 @@ include::tableProvenance.adoc[]
 
 The netCDF4 group name is */Sonar* and contains three subgroups.
 
-===== Beam_group
-This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>.  
+===== Beam group
+This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_group*. 
 
 Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeammodeTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
 
-Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
+Subroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
 
 .Description of the sonar group.
 [[sonarGroupTable]]
@@ -311,14 +311,20 @@ include::tableSonar.adoc[]
 [[sonarBeammodeTable]]
 include::tableBeamGroup1.adoc[]
 
-===== Grid_group
+===== Grid group
 
-This sub group contains gridded sonar backscatter data and associated metadata. 
+This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *Grid_group*.
+
+_more to come_
 
 ===== Interpretation
-This sub group contains the interpretation masks. the interpretation mask is independent on the ping or grid, and can be used interchangeable between Grid_group and Beam_group.
+This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Grid_group and Beam_group. The netCDF4 group name is *Interpretation*.
 
-The interpretation masks are based on time and range, for a given a sound speed.
+The interpretation masks are based on a time and range, for a given a sound speed.
+
+An proposal for storing interpretation masks in a netCDF4 structure is being developed https://github.com/nilsolav/EchosounderNetCDF[here], with the actual netCDF4 structure provided as an example https://github.com/nilsolav/EchosounderNetCDF/blob/master/docs/demo_mask.cdl[here].
+
+_more to come_
 
 ==== Vendor specific group
 
