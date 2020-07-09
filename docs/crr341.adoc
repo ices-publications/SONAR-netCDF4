@@ -490,7 +490,7 @@ Rotation is specified via three rotation variables and can be implemented via ma
 [stem]
 ++++
 \begin{equation}
-R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_z(r)
+R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_x(r)
 \end{equation}
 ++++
 
@@ -593,8 +593,8 @@ The position of the echo can be defined as :
 x\\
 y\\
 z
-\end{bmatrix}_{SCS} =R_{TCS->PCS}(t_i) \cdot T_{TCS->PCS}
-+ R_{heading}(t_i) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
+\end{bmatrix}_{SCS} =R_{PCS->SCS}(t_i) \cdot T_{TCS->PCS}
++ R_{z}(h(t_i)) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
 \cos(\theta) & 0 & \sin(\theta) \\
 0 & 1 & 0 \\
 -\sin(\theta) & 0 & cos(\theta)
@@ -650,7 +650,7 @@ and:
 [stem]
 ++++
 \begin{equation}
-R_{PCS/SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
+R_{PCS->SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
 
