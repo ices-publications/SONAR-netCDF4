@@ -3255,7 +3255,7 @@ T_{A-&gt;B}
 <div class="stemblock">
 <div class="content">
 \[\begin{equation}
-R_{PCS-&gt;SCS} = R_z(h) \cdot R_y(p) \cdot R_z(r)
+R_{PCS-&gt;SCS} = R_z(h) \cdot R_y(p) \cdot R_x(r)
 \end{equation}\]
 </div>
 </div>
@@ -3409,8 +3409,8 @@ The change from TCS to SCS is composed of a translation from transducer origin t
 x\\
 y\\
 z
-\end{bmatrix}_{SCS} =R_{TCS-&gt;PCS}(t_i) \cdot T_{TCS-&gt;PCS}
-+ R_{heading}(t_i) \cdot R_{BCS-&gt;TCS} \cdot \begin{bmatrix}
+\end{bmatrix}_{SCS} =R_{PCS-&gt;SCS}(t_i) \cdot T_{TCS-&gt;PCS}
++ R_{z}(h(t_i)) \cdot R_{BCS-&gt;TCS} \cdot \begin{bmatrix}
 \cos(\theta) &amp; 0 &amp; \sin(\theta) \\
 0 &amp; 1 &amp; 0 \\
 -\sin(\theta) &amp; 0 &amp; cos(\theta)
@@ -3469,7 +3469,7 @@ R_{BCS-&gt;TCS} =
 <div class="stemblock">
 <div class="content">
 \[\begin{equation}
-R_{PCS/SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
+R_{PCS-&gt;SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}\]
 </div>
 </div>
@@ -4222,7 +4222,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2020-06-29 23:36:19 UTC
+Last updated 2020-07-09 21:41:59 UTC
 </div>
 </div>
 <link rel="stylesheet" href="highlight/styles/github.min.css">
