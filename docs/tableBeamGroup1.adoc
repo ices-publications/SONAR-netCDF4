@@ -147,6 +147,11 @@ e|Variables | |
  3+|{attr}:units = "s" 
  3+|{attr}:valid_min = "0.0" 
  
+ |{var}float detected_bottom_range(ping_time, beam) |0 |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
+ 3+|{attr}:long_name = "Detected range of the bottom" 
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:valid_min = "0.0" 
+ 
  |{var}sample_t time_varied_gain(ping_time) |MA |Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.
  3+|{attr}:long_name = "Time-varied-gain coefficients" 
  3+|{attr}:units = "dB" 
