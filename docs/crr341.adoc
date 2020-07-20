@@ -833,8 +833,8 @@ This arrangement has either three equal sub-beams (<<transducer_types>>, part B)
 [stem]
 ++++
 \begin{equation}
-\omega_{31} = \arctan \left( \Im((y_3+y_1)^*), \Re(y_3+y_1) \right) \\
-\omega_{32} = \arctan \left( \Im((y_3+y_2)^*), \Re(y_3+y_1) \right)
+\omega_{31} = \arctan \left( \Im(y_3 \cdot y_1^*), \Re(y_3 \cdot y_1^*) \right) \\
+\omega_{32} = \arctan \left( \Im(y_3 \cdot y_2^*), \Re(y_3 \cdot y_2^*) \right)
 \end{equation}
 ++++
 where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are then:
@@ -846,7 +846,7 @@ where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] 
 \phi = \frac{1}{\sqrt{3}\eta_\phi} (\omega_{31} + \omega_{32})\\
 \end{equation}
 ++++
-where latexmath:[\eta_\theta] is the angle sensitivity for the major axis and latexmath:[\eta_\phi] the angle sensitivity for the minor axis.
+where latexmath:[\eta_\theta] is the angle sensitivity for the minor axis and latexmath:[\eta_\phi] the angle sensitivity for the major axis.
 
 == Revision history
 
