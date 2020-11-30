@@ -450,7 +450,7 @@ The platform coordinate system (PCS) is obtained from the transducer coordinate 
 The surface coordinate system (SCS) is obtained from the platform coordinate system (PCS)  through a rotation that corresponds to the yaw/heading, pitch and roll of the platform. No translation is necessary. Platform heave is not applied in this coordinate system.
 
 [NOTE]
-If a sonar actively alters beam pointing directions to compensate for motion of the platform, the _beam_stabilisation_ variable is set to True, otherwise to False.
+If a sonar actively alters beam pointing directions to compensate for motion of the platform including static installation offsets, the _beam_stabilisation_ variable is set to True, otherwise to False.
 If True, the transducer coordinate system (TCS) is obtained from the SCS only through a translation of SCS origin, the transducer adapts its beam in order to compensate for ship movements
 
 .Coordinate systems used to physically position an echo in an absolute geographical system. The arrows on the axes indicate the positive direction and the circular arrows around each platform coordinate system axis indicates positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
@@ -581,7 +581,7 @@ t_i=ping\_time+\frac{i\cdot sample\_interval + blanking\_interval- sample\_time\
 * Its range stem:[r_i] given by equation \eqref{eq:timeToRange}
 
 ==== Beams are stabilized by the sonar and beam pointing angles are relative to SCS
-When beam are stabilized by the sonar their angles are relative to SCS the sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
+When beam are stabilized and installation angle offsets are compensated by the sonar their angles are relative to SCS. The sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
 The change from TCS to SCS is composed of a translation from transducer origin to platform origin, taking into account lever arms, and a rotation taking into account platform heading
 
 The position of the echo can be defined as :
