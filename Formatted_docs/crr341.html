@@ -3220,7 +3220,7 @@ tbd.
 <div class="title">Note</div>
 </td>
 <td class="content">
-If a sonar actively alters beam pointing directions to compensate for motion of the platform, the <em>beam_stabilisation</em> variable is set to True, otherwise to False.
+If a sonar actively alters beam pointing directions to compensate for motion of the platform including static installation offsets, the <em>beam_stabilisation</em> variable is set to True, otherwise to False.
 If True, the transducer coordinate system (TCS) is obtained from the SCS only through a translation of SCS origin, the transducer adapts its beam in order to compensate for ship movements
 </td>
 </tr>
@@ -3410,7 +3410,7 @@ t_i=ping\_time+\frac{i\cdot sample\_interval + blanking\_interval- sample\_time\
 <div class="sect3">
 <h4 id="_beams_are_stabilized_by_the_sonar_and_beam_pointing_angles_are_relative_to_scs">5.3.1. Beams are stabilized by the sonar and beam pointing angles are relative to SCS</h4>
 <div class="paragraph">
-<p>When beam are stabilized by the sonar their angles are relative to SCS the sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
+<p>When beam are stabilized and installation angle offsets are compensated by the sonar their angles are relative to SCS. The sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
 The change from TCS to SCS is composed of a translation from transducer origin to platform origin, taking into account lever arms, and a rotation taking into account platform heading</p>
 </div>
 <div class="paragraph">
@@ -4236,7 +4236,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2020-07-20 10:14:04 UTC
+Last updated 2020-11-30 00:18:14 UTC
 </div>
 </div>
 <link rel="stylesheet" href="highlight/styles/github.min.css">
