@@ -16,7 +16,9 @@ e|Types | |
  2+|{var}byte enum beam_t {single = 0, split_aperture_angles = 1, split_aperture_4_subbeams = 2, split_aperture_3_subbeams = 3, split_aperture_3_1_subbeams = 4} |Beam type. Split aperture indicates a beam that can detect the arrival angle of echoes, while single beam cannot.
  2+|{var}byte enum conversion_equation_t {type_1 = 1, type_2 = 2, type_3 = 3, type_4 = 4} |The type of equation used to convert backscatter measurements into volume backscattering and target strength.
  2+|{var}byte enum transmit_t {CW = 0, LFM = 1, HFM = 2} |Type of transmit pulse. CW = continuous wave – a pulse nominally of one frequency, LFM = linear frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a linear manner over the nominal pulse duration (transmit_duration_nominal), HFM = hyperbolic frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a hyperbolic manner over the nominal pulse duration (transmit_duration_nominal).
+ 2+|{var}ping_time(*) ping_t |Variable length vector used to store ping time of pings used in averaging. Type added for ADCP.
  2+|{var}float(*) sample_t |Variable length vector used to store ragged arrays of backscatter data. Data type can be varied to suit data storage needs.
+ 2+|{var}float(*) sample_v |Variable length vector used to store ragged arrays of velocity data. Type added for ADCP.
  2+|{var}float(*) angle_t |Variable length vector used to store ragged arrays of split-aperture angles. Data type can varied to suit data storage needs.
 
 e|Subgroups | |

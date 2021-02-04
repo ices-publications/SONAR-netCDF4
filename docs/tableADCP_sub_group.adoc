@@ -1,0 +1,144 @@
+:var: {nbsp}{nbsp}{nbsp}{nbsp}
+:attr: {var}{var}
+[%autowidth,options="header",]
+|===
+|Description |Obligation |Comment
+e|Variables | |
+ |{var}float backscatter_at_bottom_i(ping_time, beam) |MA |Backscatter value(imaginary part) at detected bottom, in each beam.
+ 3+|{attr}:units = "W" 
+ 3+|{attr}:long_name = "Raw backscatter at bottom (imaginary part)" 
+
+ |{var}float backscatter_at_bottom_r(ping_time, beam) |MA |Backscatter value(real part) at detected bottom, in each beam.
+ 3+|{attr}:units = "W" 
+ 3+|{attr}:long_name = "Raw backscatter at bottom (real part)" 
+
+ |{var}float bin_lenght(ping_time) |MA |Distance covered by transmit pulse.
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:long_name = "Distance covered by transmit pulse" 
+ 3+|{attr}float :valid_range = 0.0, 20.0 
+
+ |{var}float bottom_track_velocity_vessel_x(ping_time) |MA |Calculated bottom track velocity, pos in vessel coordinate x direction, forward.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated bottom track velocity value relative own vessel, direction x" 
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}float bottom_track_velocity_vessel_y(ping_time) |MA |Calculated bottom track velocity, pos in vessel coordinate y direction, starboard.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated bottom track velocity value relative own vessel, direction y" 
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}float bottom_track_velocity_vessel_z(ping_time) |MA |Calculated bottom track velocity, pos in vessel coordinate z direction, down.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated bottom track velocity value relative own vessel, direction z" 
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}sample_t correlation(ping_time, beam) |MA |Calculated beam correlation. Each element in the 2D
+matrix is a variable length vector (of type sample_t)
+that contains the calculated correlation along that
+beam and ping time. 
+ 3+|{attr}:units = "%" 
+ 3+|{attr}:long_name = "Calculated beam correlation" 
+ 3+|{attr}float :valid_range = 0.0, 100.0 
+
+ |{var}int correlation_at_bottom(ping_time, beam) |MA |Correlation at detected bottom, in each beam.
+ 3+|{attr}:units = "%" 
+ 3+|{attr}:long_name = "Calculated beam correlation at bottom depth" 
+ 3+|{attr}int :valid_range = 0, 100 
+
+ |{var}float correlation_factor_limit(ping_time) |MA |Filtering parameter. Element discarded if correlation below given limit.
+ 3+|{attr}:units = "%" 
+ 3+|{attr}:long_name = "Correlation minimum limit used for filtering current ping" 
+ 3+|{attr}float :valid_range = 0.0, 100.0 
+
+ |{var}sample_v current_velocity_geographical_down(ping_time) |MA |Calculated water column current velocity, pos in down direction.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated water current velocity values for the geographical down direction" 
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}sample_v current_velocity_geographical_east(ping_time) |MA |Calculated water column current velocity, pos in east direction.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated water current velocity values for the geographical east direction" 
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}sample_v current_velocity_geographical_north(ping_time) |MA |Calculated water column current velocity, pos in north direction.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated water current velocity values for the geographical north direction" 
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}sample_v current_velocity_vessel_x(ping_time) |MA |Calculated vessel relative water column current velocity, in x direction.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated water current velocity values relative own vessel, direction x"
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}sample_v current_velocity_vessel_y(ping_time) |MA |Calculated vessel relative water column current velocity, in y direction.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated water current velocity values relative own vessel, direction y"
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}sample_v current_velocity_vessel_z(ping_time) |MA |Calculated vessel relative water column current velocity, in z direction.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated water current velocity values relative own vessel, direction z"
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}float depth_first_sample_center(ping_time) |MA |Depth from surface to first valid sample center.
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:long_name = "Depth from surface to first valid sample center"
+
+ |{var}float error_velocity_limit(ping_time) |MA |Filtering parameter. Element discarded if error velocity is above given limit.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Error velocity maximum limit used for filtering current ping"
+ 3+|{attr}float :valid_range = 0.0, 100.0 
+
+ |{var}float transmit_duration_nominal_sub_pulse(ping_time) |MA |Nominal duration of the transmit sub-pulse. This is in the case where the transmitted pulse consists of a series of sub-pulses. ADCP specific.
+ 3+|{attr}:units = "s" 
+ 3+|{attr}:long_name = "Nominal duration of the transmitted sub-pulse"
+ 3+|{attr}float :valid_min = 0.0 
+
+ |{var}float transmit_lag_interval_sub_pulse(ping_time) |MA |Lag interval between the transmitted sub-pulse.This is in the case where the transmitted pulse consists of a series of sub-pulses. ADCP specific.
+ 3+|{attr}:units = "s" 
+ 3+|{attr}:long_name = "Lag interval of the transmitted sub-pulse"
+ 3+|{attr}float :valid_min = 0.0 
+
+ |{var}int quality(ping_time) |MA |Quality percent for each depth cell.
+ 3+|{attr}:units = "%" 
+ 3+|{attr}:long_name = "Quality indicator for the water current velocity calculation" 
+ 3+|{attr}int :valid_range = 0, 100 
+
+ |{var}float scaling_factor |MA |Scaling factor from ADCP calibration used in velocity calculations.
+ 3+|{attr}:long_name = "Scaling factor for velocity calculations" 
+ 3+|{attr}float :valid_range = 0.0, 2.0 
+
+ |{var}float slant_range_to_bottom(ping_time, beam) |MA |Detected bottom in each beam.
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:long_name = "Slant range to bottom for each beam" 
+
+ |{var}int sv_dbw_high_limit(ping_time) |MA |Filtering parameter. Element discarded if backscatter is above given limit.
+ 3+|{attr}:units = "dB" 
+ 3+|{attr}:long_name = "Sv maximum limit used for filtering current ping" 
+ 3+|{attr}int :valid_range = -235, 0 
+
+ |{var}int sv_dbw_low_limit(ping_time) |MA |Filtering parameter. Element discarded if backscatter is below given limit.
+ 3+|{attr}:units = "dB" 
+ 3+|{attr}:long_name = "Sv minimum limit used for filtering current ping" 
+ 3+|{attr}int :valid_range = -235, 0 
+
+ |{var}sample_v velocity(ping_time, beam) |MA |Calculated beam velocity. Each element in the 2D matrix is a variable length vector that contains the calculated velocity along that beam and ping time.
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}:long_name = "Calculated beam velocity"
+ 3+|{attr}float :valid_range = -50.0, 50.0 
+
+ |{var}beam_stabilisation_t velocity_depth_stabilisation(ping_time) |MA |Indicates whether samples used for velocity vector calculation have been compensated for platform motion.
+ 3+|{attr}:long_name = "Velocity depth stabilization applied (or not) "
+
+ |{var}beam_stabilisation_t velocity_motion_stabilisation(ping_time) |MA |Indicates whether beam velocities have been compensated for platform motion.
+ 3+|{attr}:long_name = "Velocity motion stabilization applied (or not) "
+
+ |{var}float vertical_sample_interval(ping_time) |M |Distance between samples.
+ 3+|{attr}:units = "s" 
+ 3+|{attr}:long_name = "Interval between recorded data samples" 
+ 3+|{attr}float :valid_min = 0.0 
+
+e|Subgroups | |
+ |{var}Mean_current |O |Calculated averaged current velocities.
+  3+|{attr}:long_name = "Sonar/Beam_group1/ADCP/Mean_current" 
+|===

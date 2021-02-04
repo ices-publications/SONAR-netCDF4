@@ -280,4 +280,8 @@ e|Variables | |
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
+
+e|Subgroups | |
+ |{var}ADCP |MA |Calculated current velocities.
+  3+|{attr}:long_name = "Sonar/Beam_group1/ADCP" 
 |===
