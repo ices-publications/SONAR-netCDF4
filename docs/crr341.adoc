@@ -291,14 +291,14 @@ include::tableBeamGroup1.adoc[]
 ==== Proposed ADCP additions
 
 This group contains the ADCP beam data, single ping calculations and associated metadata.
-The netCDF4 group name is /ADCP.
+The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.
 
 .Description of the ADCP subgroup of the BeamGroup1 group.
 [[sonarADCPTable]]
 include::tableADCP_sub_group.adoc[]
 
 This group contains the calculated averaged current velocity data and associated metadata.
-The netCDF4 group name is /ADCP/Mean-current.
+The netCDF4 group name is Mean-current and is a subgroup of ADCP group.
 
 .Description of the Mean current subgroup of the ADCP group.
 [[sonarMeanCurrentTable]]

@@ -14,6 +14,9 @@ e|Dimensions | |
  |{var}subbeam | |The number of sub-beams in these beams.
  |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  |{var}tx_beam | |The number of transmit beams in this beam group
+ |{var}mean_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
+
+
  
 e|Coordinate variables | |
  |{var}string beam(beam) |M |Beam name (or number or identification code).
@@ -23,6 +26,14 @@ e|Coordinate variables | |
  3+|{attr}:axis = "T" 
  3+|{attr}:calendar = "gregorian" 
  3+|{attr}:long_name = "Time-stamp of each ping" 
+ 3+|{attr}:standard_name = "time" 
+ 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}uint64 mean_time(mean_time) |M |Timestamp for the center of an averaging period.
+ 3+|{attr}:axis = "T" 
+ 3+|{attr}:calendar = "gregorian" 
+ 3+|{attr}:long_name = "Time-stamp for the center of each averaged value" 
  3+|{attr}:standard_name = "time" 
  3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
@@ -282,6 +293,5 @@ e|Variables | |
  2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
 
 e|Subgroups | |
- |{var}ADCP |MA |Calculated current velocities.
-  3+|{attr}:long_name = "Sonar/Beam_group1/ADCP" 
+ |{var}ADCP |O |Subgroup containing ADCP calculated current velocity data.
 |===

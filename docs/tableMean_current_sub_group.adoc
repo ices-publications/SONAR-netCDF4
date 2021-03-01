@@ -3,9 +3,6 @@
 [%autowidth,options="header",]
 |===
 |Description |Obligation |Comment
-e|Dimensions | |
- |{var}mean_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
-
 e|Variables | |
   |{var}int averaging(mean_time) |M |Number of ping averages.
  3+|{attr}:long_name = "Number of ping averages" 
@@ -86,7 +83,7 @@ e|Variables | |
  3+|{attr}:long_name = "Calculated mean roll for the averaging period." 
  3+|{attr}float :valid_range = -90.0, 90.0 
 
- |{var}double mean_platform_vertical(mean_time) |MA |Calculated mean vertical for the averaging period.
+ |{var}double mean_platform_vertical(mean_time) |MA |Calculated mean vertical offset for the averaging period.
  3+|{attr}:units = "m" 
  3+|{attr}:long_name = "Calculated mean vertical offset for the averaging period. Zero if velocity_depth_stabilisation is true." 
 
