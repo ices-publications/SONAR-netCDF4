@@ -284,9 +284,13 @@ Subgroups under /Sonar each have a coordinate variable that contains ping timest
 [[sonarGroupTable]]
 include::tableSonar.adoc[]
 
-.Description of the beam mode subgroups of the sonar group.
-[[sonarBeammodeTable]]
+.Description of the beam subgroups of the sonar group.
+[[sonarBeamGroupTable]]
 include::tableBeamGroup1.adoc[]
+
+.Description of the beam grid subgroups of the sonar group.
+[[sonarGridGroupTable]]
+include::tableBeamGridGroup1.adoc[]
 
 ==== Vendor specific group
 

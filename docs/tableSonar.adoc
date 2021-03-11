@@ -19,6 +19,7 @@ e|Types | |
 
 e|Subgroups | |
  |{var}Beam_group1 |M |Example of a beam group. Include as many subgroups as necessary for different beam groups. Use unique group names, preferably of the form Beam_groupX where X is an integer.
+ |{var}Grid_group1 |M |Example of a grid group. Include as many subgroups as necessary for different grid groups containing different beam groups resampled on a user defined regular grid. Use unique group names, preferably of the form Grid_groupX where X is an integer.
 |===
 
 

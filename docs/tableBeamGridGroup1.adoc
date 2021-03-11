@@ -1,0 +1,246 @@
+:var: {nbsp}{nbsp}{nbsp}{nbsp}
+:attr: {var}{var}
+[%autowidth,options="header",]
+|===
+|Description |Obligation |Comment
+e|Group attributes | |
+ |{attr}:beam_mode |M |Mode of the beam in this subgroup, taken from the defined vocabulary of: “vertical” (a set of beams that form a vertical slice through the water), ”horizontal” (a set of beams that form a nominally horizontal plane through the water), and ”inspection” (a set of beams with arbitrary pointing directions).
+ |{attr}conversion_equation_t :conversion_equation_type |M |Type of equation used to convert backscatter measurements into volume backscattering strength and target strength.
+ 
+e|Types | |
+ 2+|{var}byte enum backscatter_type_t {Sv = 0, Sa = 1} |In what form is the acoustic data stored? Controlled vocabulary options include : Sv, Volume backscattering strength (dB re 1 m-1) and Sa, Nautical area scattering coefficient (m2 nmi-2).
+ 2+|{var}byte enum range_axis_interval_type_t {Range = 0, Depth = 1} |Range axis interval by which data have been regridded. Controlled vocabulary includes: Range (metres), Depth relative to waterline (metres).
+ 2+|{var}byte enum ping_axis_interval_type_t {Time_seconds = 0, Distance_nautical_miles = 1, Distance_meters = 2, Number_of_ping = 3} | Ping axis interval by which data have been regridded. Controlled vocabulary includes: Time based intervals (  Time (seconds) ), Distance based intervals ( Distance (nautical miles); Distance (metres) ), Ping based intervals (Number of pings).
+
+e|Dimensions | |
+ |{var}beam | |The number of receive beams in this grid group.
+ |{var}tx_beam | |The number of transmit beams in this grid group.
+ |{var}frequency | |The number of frequencies in this grid group.
+ |{var}ping_axis | |Number of cells in ping dimension.
+ |{var}range_axis | |Number of cells in range dimension.
+ 
+e|Variables | |
+ |{var}string beam(beam) |M |Beam name (or number or identification code).
+ 3+|{attr}:long_name = "Beam name" 
+ 
+ |{var}float frequency(frequency) |M |Frequency.
+ 3+|{attr}:long_name = "Frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse." 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}string beam_reference(frequency) |M |Beam name used for a given frequency.
+ 3+|{attr}:long_name = "Reference to the beam for a given frequency" 
+ 
+ |{var}backscatter_type_t backscatter_type(frequency) |M |Standard definition of backscatter unit.
+ 3+|{attr}:long_name = "Backscatter type for gridded data" 
+ 
+ |{var}ping_axis_interval_type_t ping_axis_interval_type |MA |Reference for regridding data in ping axis.
+ 3+|{attr}:long_name = "Interval type for regridding the data in ping axis" 
+ 
+ |{var}float ping_axis_interval_value |M |Value for data ping axis interval according to its specified type.
+ 3+|{attr}:long_name = "Ping axis interval for regridding the data" 
+ 
+ |{var}range_axis_interval_type_t range_axis_interval_type |M |Reference for regridding the data in range or depth axis.
+ 3+|{attr}:long_name = "Interval type for regridding the data in range axis" 
+ 
+ |{var}float range_axis_interval_value |M |Value for data range axis interval according to its specified type.
+ 3+|{attr}:long_name = "Range axis interval for regridding the data" 
+ 
+ |{var}uint64 cell_ping_time(ping_axis, tx_beam) |M |Mean timestamp of the pings contributing to the cell.
+ 3+|{attr}:axis = "T" 
+ 3+|{attr}:calendar = "gregorian" 
+ 3+|{attr}:long_name = "Mean time-stamp of each cell" 
+ 3+|{attr}:standard_name = "time" 
+ 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
+ 
+ |{var}float integrated_backscatter(ping_axis, range_axis, frequency) |M |Integrated backscatter measurement.
+ 3+|{attr}:long_name = "Integrated backscatter of the raw backscatter measurements sampled in this cell for each frequency." 
+ 2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
+ 
+ |{var}float beamwidth_receive_major(ping_axis, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
+ 3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = 0.0, 360.0 
+ 
+ |{var}float beamwidth_receive_minor(ping_axis, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam.
+ 3+|{attr}:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = 0.0, 360.0 
+ 
+ |{var}float beamwidth_transmit_major(ping_axis, tx_beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
+ 3+|{attr}:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = 0.0, 360.0 
+ 
+ |{var}float beamwidth_transmit_minor(ping_axis, tx_beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
+ 3+|{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = 0.0, 360.0 
+ 
+ |{var}float rx_beam_rotation_phi(ping_axis, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
+ 3+|{attr}:long_name = "receive beam angular rotation about the _x_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
+ |{var}float rx_beam_rotation_theta(ping_axis, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _y_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction (also called tilt angle).
+ 3+|{attr}:long_name = "receive beam angular rotation about the _y_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −90.0, 90.0 
+ 
+ |{var}float rx_beam_rotation_psi(ping_axis, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the receive beam coordinate system. For most cases this angle is set to zero.
+ 3+|{attr}:long_name = "receive beam angular rotation about the _z_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
+ |{var}float tx_beam_rotation_phi(ping_axis, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _x_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
+ |{var}float tx_beam_rotation_theta(ping_axis, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _y_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction (also called tilt angle).
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _y_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −90.0, 90.0 
+ 
+ |{var}float tx_beam_rotation_psi(ping_axis, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For most cases this angle is set to zero.
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _z_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
+ |{var}beam_stabilisation_t beam_stabilisation(ping_axis) |M |Indicates whether or not sonar beams have been compensated for platform motion.
+ 3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
+ 
+ |{var}beam_t beam_type(beam) |M |Type of split-aperture beam (or not).
+ 3+|{attr}:long_name = "Type of beam" 
+ 
+ |{var}float equivalent_beam_angle(ping_axis, beam) |M |Equivalent beam angle.
+ 3+|{attr}:long_name = "Equivalent beam angle" 
+ 3+|{attr}:units = "sr" 
+ 2+|{attr}float :valid_range = 0.0, 12.56637061435917295385 |Maximum value is equivalent to 4π.
+ 
+ |{var}float gain_correction(ping_axis, beam) |MA |Gain correction. This parameter is set from a calibration exercise. Necessary for type 2 conversion equation.
+ 3+|{attr}:long_name = "Gain correction" 
+ 3+|{attr}:units = "dB" 
+ 
+ |{var}short non_quantitative_processing(ping_axis) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. A value of 0 always indicates no such processing.
+ 2+|{attr}:flag_meanings |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
+ 2+|{attr}short :flag_values |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
+ 3+|{attr}:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" 
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
+ 
+ |{var}float receiver_sensitivity(ping_axis, beam) |MA |Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.
+ 3+|{attr}:long_name = "Receiver sensitivity" 
+ 3+|{attr}:units = "dB re 1/μ" 
+ 
+ |{var}float sample_interval(ping_axis, beam) |M |Time between individual samples along a beam. Common for all beams in a ping.
+ 3+|{attr}:long_name = "Interval between recorded raw data samples" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
+ 
+ |{var}float sample_time_offset(ping_axis, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2
+ 3+|{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" 
+ 3+|{attr}:units = "s" 
+ 
+ |{var}float blanking_interval(ping_axis, beam) |M |Amount of time during reception where samples are discarded. The number of discarded sample is given by blanking_interval*sample_interval.
+ 3+|{attr}:long_name = "Amount of time during reception where samples are discarded" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}:valid_min = "0.0" 
+ 
+ |{var}float detected_bottom_range(ping_axis, beam) |O |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
+ 3+|{attr}:long_name = "Detected range of the bottom" 
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:valid_min = "0.0" 
+ 
+ |{var}sample_t time_varied_gain(ping_axis) |MA |Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.
+ 3+|{attr}:long_name = "Time-varied-gain coefficients" 
+ 3+|{attr}:units = "dB" 
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
+ 
+ |{var}float transducer_gain(ping_axis, frequency) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1.
+ 3+|{attr}:long_name = "Gain of transducer" 
+ 3+|{attr}:units = "dB" 
+ 
+ |{var}float transmit_bandwidth(ping_axis, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
+ 3+|{attr}:long_name = "Nominal bandwidth of transmitted pulse" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float transmit_duration_nominal(ping_axis, tx_beam) |M |Nominal duration of the transmit pulse. This is not the effective pulse duration.
+ 3+|{attr}:long_name = "Nominal duration of transmitted pulse" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float receive_duration_effective(ping_axis, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.
+ 3+|{attr}:long_name = "Effective duration of received pulse" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float transmit_frequency_start(ping_axis, tx_beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
+ 3+|{attr}:long_name = "Start frequency in transmitted pulse" 
+ 3+|{attr}:standard_name = "sound_frequency" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float transmit_frequency_stop(ping_axis, tx_beam) |M |Frequency at the end of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
+ 3+|{attr}:long_name = "Stop frequency in transmitted pulse" 
+ 3+|{attr}:standard_name = "sound_frequency" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float transmit_power(ping_axis, tx_beam) |MA |Electrical transmit power used for the ping. Necessary for type 1 conversion equations
+ 3+|{attr}:long_name = "Nominal transmit power" 
+ 3+|{attr}:units = "W" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float transmit_source_level(ping_axis, tx_beam) |MA |Source level generated by the transmit ping. Necessary for type 2 conversion equations.
+ 3+|{attr}:long_name = "Transmit source level" 
+ 3+|{attr}:units = "dB re 1 μPa at 1m" 
+ 
+ |{var}transmit_t transmit_type(ping_axis, tx_beam) |M |Type of transmit pulse.
+ 3+|{attr}:long_name = "Type of transmitted pulse" 
+ 
+ |{var}int receive_transducer_index(beam) |MA |Receiving or monostatic transducer index associated with the given beam
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Receive transducer index" 
+ 
+ |{var}float sound_speed_at_transducer(ping_axis) |O |Sound speed at transducer depth at the time of the ping
+ 3+|{attr}:long_name = "Indicative sound speed at ping time and transducer depth" 
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 3+|{attr}:standard_name = "speed_of_sound_in_sea_water" 
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
+ 
+ |{var}double cell_latitude(ping_axis, range_axis, beam) |M |Mean latitude of the echoes contributing to the cell in WGS-84 reference system.
+ 3+|{attr}double :valid_range = −90.0, 90.0 
+ 3+|{attr}:standard_name = "Platform latitude" 
+ 3+|{attr}:units = "degrees_north" 
+ 3+|{attr}:long_name = "latitude" 
+ 3+|{attr}:coordinates = "ping_axis cell_latitude cell_longitude" 
+ 3+|{attr}double :_FillValue = Double.NaN 
+ 
+ |{var}double cell_longitude(ping_axis, range_axis, beam) |M |Mean longitude of the echoes contributing to the cell in WGS-84 reference system.
+ 3+|{attr}double :valid_range = −180.0, 180.0 
+ 3+|{attr}:standard_name = "Platform longitude" 
+ 3+|{attr}:units = "degrees_east" 
+ 3+|{attr}:long_name = "longitude" 
+ 3+|{attr}:coordinates = "ping_axis cell_latitude cell_longitude" 
+ 3+|{attr}double :_FillValue = Double.NaN 
+ 
+ |{var}float cell_depth(range_axis, beam) |M |Depth of the  cell to the water line (distance are positives downwards).
+ 3+|{attr}:long_name = "Cell depth below water line"
+ 3+|{attr}:units = "m" 
+ 
+ |{var}float tx_transducer_depth(ping_axis) |O |Tx transducer depth below waterline at time of the cell (distance are positives downwards).
+ 3+|{attr}:long_name = "Tx transducer depth below waterline" 
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude"
+
+ |{var}float waterline_to_chart_datum(ping_axis) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector that contains the tide and allows for the positioning of samples in an absolute reference system.
+ 3+|{attr}:long_name = "vertical translation from waterline to chart datum reference "
+ 3+|{attr}:units = "m"
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude"
+ 2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
+|===
