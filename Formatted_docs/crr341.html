@@ -493,7 +493,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_platform_group">3.10.4. Platform group</a></li>
 <li><a href="#_provenance_group">3.10.5. Provenance group</a></li>
 <li><a href="#_sonar_group">3.10.6. Sonar group</a></li>
-<li><a href="#_vendor_specific_group">3.10.7. Vendor specific group</a></li>
+<li><a href="#_proposed_adcp_additions">3.10.7. Proposed ADCP additions</a></li>
+<li><a href="#_vendor_specific_group">3.10.8. Vendor specific group</a></li>
 </ul>
 </li>
 </ul>
@@ -2204,6 +2205,11 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of transmit beams in this beam group</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;mean_time = unlimited</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be of fixed or unlimited length, as appropriate.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Coordinate variables</em></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2229,6 +2235,29 @@ ISSN 1017-6195</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Time-stamp of each ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "ping_time platform_latitude platform_longitude"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;uint64 mean_time(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp for the center of an averaging period.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:axis = "T"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:calendar = "gregorian"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Time-stamp for the center of each averaged value"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
@@ -2959,11 +2988,769 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:vertical_coordinate_reference_system = "MSL depth"</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Subgroups</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;ADCP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subgroup containing ADCP calculated current velocity data.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_vendor_specific_group">3.10.7. Vendor specific group</h4>
+<h4 id="_proposed_adcp_additions">3.10.7. Proposed ADCP additions</h4>
+<div class="paragraph">
+<p>This group contains the ADCP beam data, single ping calculations and associated metadata.
+The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.</p>
+</div>
+<table id="sonarADCPTable" class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 12. Description of the ADCP subgroup of the BeamGroup1 group.</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Obligation</th>
+<th class="tableblock halign-left valign-top">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Types</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;ping_time(*) ping_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ping time of pings used in averaging. Type added for ADCP.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;float(*) sample_v</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ragged arrays of velocity data. Type added for ADCP.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Variables</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float backscatter_at_bottom_i(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Backscatter value(imaginary part) at detected bottom, in each beam.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "W"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Raw backscatter at bottom (imaginary part)"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float backscatter_at_bottom_r(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Backscatter value(real part) at detected bottom, in each beam.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "W"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Raw backscatter at bottom (real part)"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float bin_lenght(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Distance covered by transmit pulse.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Distance covered by transmit pulse"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 20.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float bottom_track_velocity_vessel_x(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated bottom track velocity, pos in vessel coordinate x direction, forward.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated bottom track velocity value relative own vessel, direction x"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float bottom_track_velocity_vessel_y(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated bottom track velocity, pos in vessel coordinate y direction, starboard.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated bottom track velocity value relative own vessel, direction y"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float bottom_track_velocity_vessel_z(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated bottom track velocity, pos in vessel coordinate z direction, down.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated bottom track velocity value relative own vessel, direction z"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_t correlation(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated beam correlation. Each element in the 2D
+matrix is a variable length vector (of type sample_t)
+that contains the calculated correlation along that
+beam and ping time.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "%"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated beam correlation"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 100.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int correlation_at_bottom(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correlation at detected bottom, in each beam.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "%"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated beam correlation at bottom depth"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_range = 0, 100</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float correlation_factor_limit(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtering parameter. Element discarded if correlation below given limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "%"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Correlation minimum limit used for filtering current ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 100.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_geographical_down(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated water column current velocity, pos in down direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated water current velocity values for the geographical down direction"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_geographical_east(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated water column current velocity, pos in east direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated water current velocity values for the geographical east direction"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_geographical_north(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated water column current velocity, pos in north direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated water current velocity values for the geographical north direction"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_vessel_x(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated vessel relative water column current velocity, in x direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated water current velocity values relative own vessel, direction x"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_vessel_y(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated vessel relative water column current velocity, in y direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated water current velocity values relative own vessel, direction y"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_vessel_z(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated vessel relative water column current velocity, in z direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated water current velocity values relative own vessel, direction z"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float depth_first_sample_center(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Depth from surface to first valid sample center.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Depth from surface to first valid sample center"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v error_velocity(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated error velocity, Quality factor, low value indicates homogenous water current layer and high measurement quality.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated error velocity"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float error_velocity_limit(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtering parameter. Vessel and geographical current velocity sample discarded if error velocity is above given limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Error velocity maximum limit used for filtering current ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 100.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transmit_duration_nominal_sub_pulse(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nominal duration of the transmit sub-pulse. This is in the case where the transmitted pulse consists of a series of sub-pulses. ADCP specific.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Nominal duration of the transmitted sub-pulse"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transmit_lag_interval_sub_pulse(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lag interval between the transmitted sub-pulse.This is in the case where the transmitted pulse consists of a series of sub-pulses. ADCP specific.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Lag interval of the transmitted sub-pulse"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int quality(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quality percent for each depth cell.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "%"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Quality indicator for the water current velocity calculation"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_range = 0, 100</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float scaling_factor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scaling factor from ADCP calibration used in velocity calculations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Scaling factor for velocity calculations"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 2.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float slant_range_to_bottom(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detected bottom in each beam.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Slant range to bottom for each beam"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int sv_dbw_high_limit(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtering parameter. Element discarded if backscatter is above given limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Sv maximum limit used for filtering current ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_range = -235, 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int sv_dbw_low_limit(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtering parameter. Element discarded if backscatter is below given limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Sv minimum limit used for filtering current ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_range = -235, 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v velocity(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated beam velocity. Each element in the 2D matrix is a variable length vector that contains the calculated velocity along that beam and ping time.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated beam velocity"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;beam_stabilisation_t velocity_depth_stabilisation(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether samples used for velocity vector calculation have been compensated for platform motion.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Velocity depth stabilization applied (or not) "</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;beam_stabilisation_t velocity_motion_stabilisation(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether beam velocities have been compensated for platform motion.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Velocity motion stabilization applied (or not) "</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float vertical_sample_interval(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True vertical distance between calculated geographical or vessel relative current values.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Distance between recorded data samples"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Subgroups</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;Mean_current</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subgroup containing calculated averaged current velocity data.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This group contains the calculated averaged current velocity data and associated metadata.
+The netCDF4 group name is Mean-current and is a subgroup of ADCP group.</p>
+</div>
+<table id="sonarMeanCurrentTable" class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 13. Description of the Mean current subgroup of the ADCP group.</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Obligation</th>
+<th class="tableblock halign-left valign-top">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Variables</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int averaging(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of ping averages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Number of ping averages"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_min = 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float bottom_track_velocity_vessel_x(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated bottom track velocity, pos in vessel coordinate x direction, forward.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean bottom track velocity value relative own vessel, direction x"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float bottom_track_velocity_vessel_y(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated bottom track velocity, pos in vessel coordinate y direction, starboard.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean bottom track velocity value relative own vessel, direction y"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float bottom_track_velocity_vessel_z(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated bottom track velocity, pos in vessel coordinate z direction, down.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean bottom track velocity value relative own vessel, direction z"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_geographical_down(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated water column current velocity, pos in down direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean water current velocity values for the geographical down direction"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_geographical_east(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated water column current velocity, pos in east direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean water current velocity values for the geographical east direction"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_geographical_north(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated water column current velocity, pos in north direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean water current velocity values for the geographical north direction"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_vessel_x(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated vessel relative water column current velocity, in x direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean water current velocity values relative own vessel, direction x"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_vessel_y(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated vessel relative water column current velocity, in y direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean water current velocity values relative own vessel, direction y"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_v current_velocity_vessel_z(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated vessel relative water column current velocity, in z direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m/s"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean water current velocity values relative own vessel, direction z"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -50.0, 50.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float mean_bin_lenght(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Distance covered by transmit pulse.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Distance covered by transmit pulse"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 20.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double mean_platform_heading(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated mean heading for the averaging period.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "degrees_north"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean heading for the averaging period."</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 360.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double mean_platform_latitude(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Latitude representing the averaging period.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "degrees_north"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Latitude representing the averaging period."</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -90.0, 90.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double mean_platform_longitude(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Longitude representing the averaging period.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "degrees_east"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Longitude representing the averaging period."</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -180.0, 180.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double mean_platform_pitch(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated mean pitch for the averaging period.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "arc_degree"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean pitch for the averaging period."</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -90.0, 90.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double mean_platform_roll(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated mean roll for the averaging period.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "arc_degree"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean roll for the averaging period."</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = -90.0, 90.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double mean_platform_vertical(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated mean vertical offset for the averaging period.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "m"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated mean vertical offset for the averaging period. Zero if velocity_depth_stabilisation is true."</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;uint64 mean_time(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp at which each ping occurred.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:axis = "T"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:calendar = "gregorian"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "TBD"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float percent_good_limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtering parameter. Mean velocity value disgarded if quality below given limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "%"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Percent good limit used to filter the water current velocities"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 100.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;Ping_t ping_averaged(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to pings (by ping_time) used for averaging to find start-end of lat, lon, vessel speed, heading etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Time reference to pings used for averaging"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int quality(mean_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Averaged quality in percent for each depth cell.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "%"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Quality indicator for the water current velocity calculation"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_range = 0, 100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_vendor_specific_group">3.10.8. Vendor specific group</h4>
 <div class="paragraph">
 <p>The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is <strong>/Vendor_specific</strong>. Currently, there is no mandatory information for the vendor specific group.</p>
 </div>
@@ -3113,7 +3900,7 @@ tbd.
 </div>
 </div>
 <table id="equationVariables" class="tableblock frame-all grid-all fit-content">
-<caption class="title">Table 12. List of equation symbols and the matching SONAR-netCDF4 variable</caption>
+<caption class="title">Table 14. List of equation symbols and the matching SONAR-netCDF4 variable</caption>
 <colgroup>
 <col>
 <col>
@@ -3166,13 +3953,13 @@ tbd.
 <p>This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a geographic coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.</p>
 </div>
 <div class="paragraph">
-<p>There are four right-handed Cartesian coordinate systems (<a href="#coordinateSystemList">Table 13</a>, <a href="#coordinate_system_figure_all">Figure 2</a>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Coordinate system rotation angles are as per the right-hand rule.</p>
+<p>There are four right-handed Cartesian coordinate systems (<a href="#coordinateSystemList">Table 15</a>, <a href="#coordinate_system_figure_all">Figure 2</a>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Coordinate system rotation angles are as per the right-hand rule.</p>
 </div>
 <div class="paragraph">
 <p>There is also a geographic coordinate system (<a href="#coordinate_system_figure_all">Figure 2</a>) that provides for location of the platform on Earth and also the height above a datum (e.g. mean sea level). The platform heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in the geographic coordinate system (this applies to both stationary and mobile sonar platforms).</p>
 </div>
 <table id="coordinateSystemList" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. List of coordinate systems used to physically locate the position of received echoes.</caption>
+<caption class="title">Table 15. List of coordinate systems used to physically locate the position of received echoes.</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -4261,7 +5048,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-01-18 08:38:25 UTC
+Last updated 2021-04-09 00:51:38 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
