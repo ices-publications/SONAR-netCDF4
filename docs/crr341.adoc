@@ -183,6 +183,19 @@ The fisheries acoustics community has developed a metadata convention for proces
 
 All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package cite:[ucar2014]. Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention.
 
+==== Time units
+Even if netcdf and conventions of the UDUNITS-2 allows to specify any valid time unit, to prevent any extra complication to software that reads the SONAR-netCDF4 files only two time units are supported in this convention.
+
+* nanoseconds since 1601-01-01 00:00:00Z
+
+* nanoseconds since 1970-01-01 00:00:00Z
+
+The choice of nanoseconds is due to the sonar system timestamp precision that can be less than one millisecond. Since other forms of units like 100 nanoseconds are not well supported by the various tools that read CF-formatted time units, nanoseconds units is retained.
+
+Epoch time 1601 is because it is the epoch time unit used in Simrad .raw files but also in Windows32/64  systems.
+
+Epoch time 1970 is because it is the epoch time widely used in Unix and most programming langages.
+
 === Datatypes
 
 Each item has a suggested datatype, chosen to have sufficient range and precision to contain the expected data. Alternative datatypes can be used if necessary, but are discouraged. The “string” type should contain text in the UTF-8 encoding and should be treated as case-sensitive during any comparisons. Enumerated datatypes are used for some of the controlled vocabularies.
