@@ -288,6 +288,23 @@ include::tableSonar.adoc[]
 [[sonarBeammodeTable]]
 include::tableBeamGroup1.adoc[]
 
+==== Proposed ADCP additions
+
+This group contains the ADCP beam data, single ping calculations and associated metadata.
+The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.
+
+.Description of the ADCP subgroup of the BeamGroup1 group.
+[[sonarADCPTable]]
+include::tableADCP_sub_group.adoc[]
+
+This group contains the calculated averaged current velocity data and associated metadata.
+The netCDF4 group name is Mean-current and is a subgroup of ADCP group.
+
+.Description of the Mean current subgroup of the ADCP group.
+[[sonarMeanCurrentTable]]
+include::tableMean_current_sub_group.adoc[]
+
+
 ==== Vendor specific group
 
 The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is */Vendor_specific*. Currently, there is no mandatory information for the vendor specific group.
