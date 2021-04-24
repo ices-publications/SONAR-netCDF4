@@ -98,7 +98,7 @@ The convention version number will always be included in the title of the docume
 
 == The recommended use of the SONAR-netCDF4 convention in post processing software
 
-There are several processing steps that are common among the different postprocessing tools used by the community, and there is a growing need to use the different tools interchangeably. This chapter describes a few standard processing steps and outlines how the convention is intended to be used to facilitate the interchangeability. Note that the steps may be different between tools, and the convention only recommends how to store the data for the steps that are most common. We do not address how and in which order to process your data.
+There are several processing steps that are common among the different postprocessing tools used by the community, and there is a growing need to use the different tools interchangeably. This chapter describes standard processing steps and outlines how the convention is intended to be used to facilitate the interchangeability.
 
 Exchange of information between different parts in the processing chain is becoming increasingly important. This is particularly relevant for emerging deep learning and machine learning frameworks, that have hardware requirements that are often different to the computers that are used for traditional desktop applications. Processing tools that run on autonomous platforms are also a need, which often require a different suite of software solutions, typically tailored to low power situations. 
 
@@ -110,25 +110,52 @@ image::postprocessing_data_flow_figure.svg[]
 
 === Typical processing steps and the associated data models
 
-Two main data models are available in the convention: `Beam_group` and `Grid_group`. The `Beam_group` allows for different sample rates, different ping rates, etc, for each channel. It is a flexible model and able to cope with all echosounders and sonar systems. The `Grid_group` is a storage structure for multi-channel data that has  been re-gridded or have a homogeneous ping times and range bins across the different frequencies.
+Two main data models are available in the convention: `Beam_group` and `Grid_group`. The `Beam_group` stores the data from each ping separately, and allows for different sample rates, different ping rates, different range etc, for each ping and each channel. It is a flexible model and able to cope with all echosounders and sonar systems. The `Grid_group` is a storage structure where the data is stored in an array allowing efficient data access.
 
 Depending on the type of processing, both `Beam_group` and `Grid_group` could be used as input and output.
 
-==== Denoising
+==== Step 1. Raw data
+This is the proprietary native format from the manufacturer. The format is defined by the manufacturer, but it is highly recommended that the format is well documented, versioned and contains the mandatory metadata data.
 
-==== Bottom detection
+==== Step 2. The beam data (`Beam_group`)
+The beam group is a lossless conversion from step 1, but uses the `Beam_group` as s standard and open format.
+
+==== Step 3. Lossless or near lossless time and range 2D array per channel (2D `Grid_group`)
+This step casts the individual ping from step 2 into a time and range array per channel. The `Grid_group` is used to store the data, and one group is used per channel. The data can be any of the standard units. For complex FM data the array extends to 3D (or use 4 separate arrays?), c.f. the `Grid_group` definition, where each of the 4 complex raw data values are stored.
+
+This step allows for different ping rates, ping group configurations (e.g. sequential pinging typically used for FM), ping dropouts, and different range resolution. If range is changed during the time span, NaN's are used to pad the missing samples in range. It is a gridded format, but no regridding is performed unless pulse length/sample interval changes. In that case the data will be flagged as lossy; otherwise it is lossless. The step does not allow slicing across channels, and any processing using this step need to use each channel as separate inputs.
+
+This step allow algorithms to access the data with no or minimal loss. There are indications that the performance of CNN's are affected by regridding the data, and that is the reason for adding this step to the convention.
+
+==== Step 4. Time, range and freqeuncy 3D array (3D `Grid_group`)
+This step combines the channels and align the frequency dimension in a time-range-frequency array, but no interpolation occurs in time. For conventional multifrequency data this means that this is lossless if the range resolution are simiar across frequencies. NaN's are used for missig pings. If pinging by groups is used, the union of the the time points could be used and NaNs could be filled in for the "missing" pings. This may require gridding in range, and any gridding algorithm should be specified and should also preserve the echo integral.
+
+This is a convenient format for deep learning algorithms since standard image analysis algorithms can be applied, i.e. the frequency dimension can be treated as color channels. The method will need to address a variable ping repetition interval.
+
+
+==== Step 5. Regrid to any resolution (3D `Grid_group`)
+This is a lossy operation, and can be used for generating a uniform time and range/depth grid. This is very similar to step 4 but allows regridding in time and typically include regridding in range. The regridding algorithm must be specified and should preserve echo energy.
+
+This is the most convenient format for a standard out of the box Convolutional Neural Networks, but the lossy operation may affect the perfomance.
+
+==== Step 6. Grid by acoustic categories (4D `Grid_group`)
+This is similar to Step 5 except that the backscatter is distributed to acoustic categoreis. A fourth dimension is added and the sum across this dimension should be equal to Step 5 on the same time-range resolution.
+
+The data are typically regridded to a reduced resolution that can be used furhter in the procesing pipeline, e.g. reports that support the input to the ICES acosutic data base.
+
+==== Note to self
+The reason for the fine granularity in the steps above is that we do not know to what degree the processing of the data affects automated methods. There are some indications that this affected the result from Brautaset et al, but it has not yet been adequately tested. Setting up these steps initially will allow us to test various algorithms and assess the effect, and future versions of the standard may remove some of the steps from the standard.
+
+=== Associated data models
+
+==== Navigational data
+
+==== Bottom depth
 Bottom data is needed when integrating biological backscatter close to the sea bed. Different algorithms have been developed and the recommendation is to store the bottom depth in the `Beam_group`.
 
 ==== Labelling
 Scrutinizing acoustic data, i.e. allocating the acoustic energy to categories, is traditionally achieved by manually assigning the backscatter. Both `Beam_group` and `Grid_group` support labels. An overview of how different software stores this information can be found here:
 https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Gavins label overview]
-
-==== Machine learning
-Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passinsg it into your preferred deep learning framework. The use of the `Grid_group` on a high resolution grid should be used for this purpose.
-
-
-==== Integrated backscatter
-The reports from the integration process typically goes into statistical paclages that can furhter process the data. It is recommended to use the `Grid_group` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective
 
 == The SONAR-netCDF4 convention
 
