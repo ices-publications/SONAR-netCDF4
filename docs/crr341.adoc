@@ -194,7 +194,7 @@ The choice of nanoseconds is due to the sonar system timestamp precision that ca
 
 The year 1601 is used because it is the epoch year unit used in Simrad .raw files and Windows32/64  systems.
 
-Epoch time 1970 is because it is the epoch time widely used in Unix and most programming langages.
+The year 1970 is used because it is the epoch time widely used in Unix and most programming languages.
 
 === Datatypes
 
