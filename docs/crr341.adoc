@@ -190,7 +190,7 @@ Even if netcdf and conventions of the UDUNITS-2 allows to specify any valid time
 
 * nanoseconds since 1970-01-01 00:00:00Z
 
-The choice of nanoseconds is due to the sonar system timestamp precision that can be less than one millisecond. Since other forms of units like 100 nanoseconds are not well supported by the various tools that read CF-formatted time units, nanoseconds units is retained.
+The choice of nanoseconds is because sonar system timestamp precision can be less than one millisecond. Other forms of time units, such as 100 nanoseconds, are not well supported by the various tools that read CF-formatted time units, and nanoseconds units is retained.
 
 The year 1601 is used because it is the epoch year unit used in Simrad .raw files and Windows32/64  systems.
 
