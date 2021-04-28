@@ -27,7 +27,7 @@ e|Coordinate variables | |
  3+|{attr}:calendar = "gregorian" 
  3+|{attr}:long_name = "Time-stamp of each ping" 
  3+|{attr}:standard_name = "time" 
- 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}uint64 mean_time(mean_time) |M |Timestamp for the center of an averaging period.
@@ -35,7 +35,7 @@ e|Coordinate variables | |
  3+|{attr}:calendar = "gregorian" 
  3+|{attr}:long_name = "Time-stamp for the center of each averaged value" 
  3+|{attr}:standard_name = "time" 
- 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
 e|Variables | |
