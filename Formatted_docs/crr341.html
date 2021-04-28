@@ -480,7 +480,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_hierarchical_structure">3.2. Hierarchical structure</a></li>
 <li><a href="#_obligations_and_missing_data">3.3. Obligations and missing data</a></li>
 <li><a href="#_metadata_and_authorities">3.4. Metadata and authorities</a></li>
-<li><a href="#_units">3.5. Units</a></li>
+<li><a href="#_units">3.5. Units</a>
+<ul class="sectlevel3">
+<li><a href="#_time_units">3.5.1. Time units</a></li>
+</ul>
+</li>
 <li><a href="#_datatypes">3.6. Datatypes</a></li>
 <li><a href="#_vocabularies">3.7. Vocabularies</a></li>
 <li><a href="#_file_naming_convention">3.8. File-naming convention</a></li>
@@ -836,6 +840,31 @@ ISSN 1017-6195</p>
 <h3 id="_units">3.5. Units</h3>
 <div class="paragraph">
 <p>All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package (<a href="#ucar2014">UCAR&#44; 2014</a>). Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention.</p>
+</div>
+<div class="sect3">
+<h4 id="_time_units">3.5.1. Time units</h4>
+<div class="paragraph">
+<p>Even though NetCDF and the UDUNITS-2 part of the CF conventions allow for the specification any valid time unit, to prevent any extra complication in software that reads the SONAR-netCDF4 files, only two time units are supported in this convention.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>nanoseconds since 1601-01-01 00:00:00Z</p>
+</li>
+<li>
+<p>nanoseconds since 1970-01-01 00:00:00Z</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The choice of nanoseconds is because sonar system timestamp precision can be less than one millisecond. Other forms of time units, such as 100 nanoseconds, are not well supported by the various tools that read CF-formatted time units, and nanoseconds units is retained.</p>
+</div>
+<div class="paragraph">
+<p>The year 1601 is used because it is the epoch year unit used in Simrad .raw files and Windows32/64  systems.</p>
+</div>
+<div class="paragraph">
+<p>The year 1970 is used because it is the epoch time widely used in Unix and most programming languages.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1702,7 +1731,7 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "time latitude longitude"</p></td>
@@ -1916,7 +1945,7 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:description =  "All NMEA sensor datagrams"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:description = "All NMEA sensor datagrams"</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Description of the subgroup contents.</p></td>
 </tr>
@@ -1926,9 +1955,9 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;time = unlimited</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;time</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Can be of fixed or unlimited length, as appropriate.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be fixed or unlimited length, as appropriate.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Coordinate variables</em></p></td>
@@ -1941,19 +1970,19 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:axis =  "T"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:axis = "T"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:calendar = "gregorian"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name =  "Timestamps for NMEA datagrams"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Timestamps for NMEA datagrams"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units =  "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Variables</em></p></td>
@@ -2240,7 +2269,7 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "ping_time platform_latitude platform_longitude"</p></td>
@@ -2263,7 +2292,7 @@ ISSN 1017-6195</p>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "ping_time platform_latitude platform_longitude"</p></td>
@@ -5048,7 +5077,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-04-09 00:51:38 UTC
+Last updated 2021-04-28 00:06:02 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
