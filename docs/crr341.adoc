@@ -206,6 +206,19 @@ The fisheries acoustics community has developed a metadata convention for proces
 
 All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package cite:[ucar2014]. Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention.
 
+==== Time units
+Even though NetCDF and the UDUNITS-2 part of the CF conventions allow for the specification any valid time unit, to prevent any extra complication in software that reads the SONAR-netCDF4 files, only two time units are supported in this convention.
+
+* nanoseconds since 1601-01-01 00:00:00Z
+
+* nanoseconds since 1970-01-01 00:00:00Z
+
+The choice of nanoseconds is because sonar system timestamp precision can be less than one millisecond. Other forms of time units, such as 100 nanoseconds, are not well supported by the various tools that read CF-formatted time units, and nanoseconds units is retained.
+
+The year 1601 is used because it is the epoch year unit used in Simrad .raw files and Windows32/64  systems.
+
+The year 1970 is used because it is the epoch time widely used in Unix and most programming languages.
+
 === Datatypes
 
 Each item has a suggested datatype, chosen to have sufficient range and precision to contain the expected data. Alternative datatypes can be used if necessary, but are discouraged. The “string” type should contain text in the UTF-8 encoding and should be treated as case-sensitive during any comparisons. Enumerated datatypes are used for some of the controlled vocabularies.
@@ -311,6 +324,22 @@ include::tableSonar.adoc[]
 .Description of the beam mode subgroups of the sonar group.
 [[sonarBeammodeTable]]
 include::tableBeamGroup1.adoc[]
+
+==== Proposed ADCP additions
+
+This group contains the ADCP beam data, single ping calculations and associated metadata.
+The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.
+
+.Description of the ADCP subgroup of the BeamGroup1 group.
+[[sonarADCPTable]]
+include::tableADCP_sub_group.adoc[]
+
+This group contains the calculated averaged current velocity data and associated metadata.
+The netCDF4 group name is Mean-current and is a subgroup of ADCP group.
+
+.Description of the Mean current subgroup of the ADCP group.
+[[sonarMeanCurrentTable]]
+include::tableMean_current_sub_group.adoc[]
 
 ===== Gridded group
 
@@ -489,7 +518,7 @@ The platform coordinate system (PCS) is obtained from the transducer coordinate 
 The surface coordinate system (SCS) is obtained from the platform coordinate system (PCS)  through a rotation that corresponds to the yaw/heading, pitch and roll of the platform. No translation is necessary. Platform heave is not applied in this coordinate system.
 
 [NOTE]
-If a sonar actively alters beam pointing directions to compensate for motion of the platform, the _beam_stabilisation_ variable is set to True, otherwise to False.
+If a sonar actively alters beam pointing directions to compensate for motion of the platform including static installation offsets, the _beam_stabilisation_ variable is set to True, otherwise to False.
 If True, the transducer coordinate system (TCS) is obtained from the SCS only through a translation of SCS origin, the transducer adapts its beam in order to compensate for ship movements
 
 .Coordinate systems used to physically position an echo in an absolute geographical system. The arrows on the axes indicate the positive direction and the circular arrows around each platform coordinate system axis indicates positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
@@ -529,7 +558,7 @@ Rotation is specified via three rotation variables and can be implemented via ma
 [stem]
 ++++
 \begin{equation}
-R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_z(r)
+R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_x(r)
 \end{equation}
 ++++
 
@@ -620,7 +649,7 @@ t_i=ping\_time+\frac{i\cdot sample\_interval + blanking\_interval- sample\_time\
 * Its range stem:[r_i] given by equation \eqref{eq:timeToRange}
 
 ==== Beams are stabilized by the sonar and beam pointing angles are relative to SCS
-When beam are stabilized by the sonar their angles are relative to SCS the sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
+When beam are stabilized and installation angle offsets are compensated by the sonar their angles are relative to SCS. The sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
 The change from TCS to SCS is composed of a translation from transducer origin to platform origin, taking into account lever arms, and a rotation taking into account platform heading
 
 The position of the echo can be defined as :
@@ -632,8 +661,8 @@ The position of the echo can be defined as :
 x\\
 y\\
 z
-\end{bmatrix}_{SCS} =R_{TCS->PCS}(t_i) \cdot T_{TCS->PCS}
-+ R_{heading}(t_i) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
+\end{bmatrix}_{SCS} =R_{PCS->SCS}(t_i) \cdot T_{TCS->PCS}
++ R_{z}(h(t_i)) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
 \cos(\theta) & 0 & \sin(\theta) \\
 0 & 1 & 0 \\
 -\sin(\theta) & 0 & cos(\theta)
@@ -689,7 +718,7 @@ and:
 [stem]
 ++++
 \begin{equation}
-R_{PCS/SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
+R_{PCS->SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
 
@@ -872,8 +901,8 @@ This arrangement has either three equal sub-beams (<<transducer_types>>, part B)
 [stem]
 ++++
 \begin{equation}
-\omega_{31} = \arctan \left( \Im((y_3+y_1)^*), \Re(y_3+y_1) \right) \\
-\omega_{32} = \arctan \left( \Im((y_3+y_2)^*), \Re(y_3+y_1) \right)
+\omega_{31} = \arctan \left( \Im(y_3 \cdot y_1^*), \Re(y_3 \cdot y_1^*) \right) \\
+\omega_{32} = \arctan \left( \Im(y_3 \cdot y_2^*), \Re(y_3 \cdot y_2^*) \right)
 \end{equation}
 ++++
 where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are then:
@@ -885,7 +914,7 @@ where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] 
 \phi = \frac{1}{\sqrt{3}\eta_\phi} (\omega_{31} + \omega_{32})\\
 \end{equation}
 ++++
-where latexmath:[\eta_\theta] is the angle sensitivity for the major axis and latexmath:[\eta_\phi] the angle sensitivity for the minor axis.
+where latexmath:[\eta_\theta] is the angle sensitivity for the minor axis and latexmath:[\eta_\phi] the angle sensitivity for the major axis.
 
 == Revision history
 
