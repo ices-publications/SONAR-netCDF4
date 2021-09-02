@@ -7,6 +7,20 @@ It is also the place where new versions of the convention are discussed and deve
 
 Version 1.0 of the SONAR-netCDF4 convention (as ICES CRR No. 341) is available http://www.ices.dk/sites/pub/Publication%20Reports/Cooperative%20Research%20Report%20(CRR)/CRR341.pdf[here].
 
+== Ongoing and future developments
+
+A version 2 of the convention is currently under development to support more types of active acoustic equipment and to store summarised versions of the acoustic data. The additional types of equipment that will be supported are:
+
+- multi-beam bathymetric sonars, 
+- acoustic doppler current profilers (ADCP), and 
+- echosounders.
+
+Support for split-aperture, multi-frequency/channel, and broadband data is also under development.
+
+Support for summarised versions of acoustic data are currently focused on gridded datasets from echosounders, intended to make large scale processing of data easier (e.g., machine learning).
+
+As these changes are added to the main convention document, the *Ongoing and future developments* section of that document is updated to provide a summmary of what has changed.
+
 A preview of the latest working draft is available https://gitcdn.link/repo/ices-publications/SONAR-netCDF4/master/Formatted_docs/crr341.html[here] (note that it can take up to 2 hours for changes to show).
 
 image::https://github.com/ices-publications/SONAR-netCDF4/workflows/BuildDocuments/badge.svg[Embedded]
