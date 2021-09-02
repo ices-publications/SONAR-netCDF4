@@ -918,6 +918,16 @@ where latexmath:[\eta_\theta] is the angle sensitivity for the minor axis and la
 
 == Revision history
 
+=== Significant changes from version 1 to version 2
+
+Version 2 of this document makes some significant changes to the convention presented in version 1. These are summarised here:
+
+Beam pointing:: The method used to specify the beam pointing direction has changed from angles to vectors. A number of coordinate systems and translations and rotations have also been added to enable the flexible and complete definition of beam pointing directions.
+
+Platform attributes:: Some platform attributes (e.g., geographic position) have moved to different groups.
+
+=== Changes within a document version 
+
 [cols=",,,",options="header",]
 |===
 |Document version |SONAR-netCDF4 version |Date |Changes
