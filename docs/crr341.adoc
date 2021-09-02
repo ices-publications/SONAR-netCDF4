@@ -1,7 +1,7 @@
 = The SONAR-netCDF4 convention for sonar data, Version 1.1
 Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :toc: left
-:toclevels: 3
+:toclevels: 4
 :doctype: book
 :revnumber: 1.8
 :xrefstyle: short
@@ -96,39 +96,41 @@ This document and the convention that it describes will change over time to impl
 
 The convention version number will always be included in the title of the document. The document version number will always be found in <<_revision_history>>.
 
-== The recommended use of the SONAR-netCDF4 convention in post processing software
+== Use of the SONAR-netCDF4 convention in echo-integration processing
 
-There are several processing steps that are common among the different postprocessing tools used by the community, and there is a growing need to use the different tools interchangeably. This chapter describes a few standard processing steps and outlines how the convention is intended to be used to facilitate the interchangeability. Note that the steps may be different between tools, and the convention only recommends how to store the data for the steps that are most common. We do not address how and in which order to process your data.
+There are several processing steps that are common among the echo-integration postprocessing programs, and there is a need to ease the use of such programs interchangeably. This section describes a few standard processing steps and outlines how the convention is intended to be used to facilitate this. Note that the steps may be different between programs, and the convention only recommends how to store the data for the steps that are most common. We do not address how and in which order to process the data.
 
-Exchange of information between different parts in the processing chain is becoming increasingly important. This is particularly relevant for emerging deep learning and machine learning frameworks, that have hardware requirements that are often different to the computers that are used for traditional desktop applications. Processing tools that run on autonomous platforms are also a need, which often require a different suite of software solutions, typically tailored to low power situations. 
+Exchange of information between different parts in the processing chain is increasingly important. This is particularly relevant for deep learning and machine learning frameworks, which have hardware requirements that are often different to the computers that are used for traditional desktop applications. Processing tools that run on autonomous platforms are also a need, which often require a different suite of software solutions, typically tailored to low power situations. 
 
-Typical steps in the postprocessing chain of marine sonar data consist of preprocessing and noise removal, bottom detection, classification, and integration (<<postprocessing_data_flow_figure>>). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data, process the information and write back to the data using the convention, other software can pick it up and process it further. 
+Typical steps in the postprocessing chain of sonar data include noise removal, seabed detection, target classification, and echo-integration (<<postprocessing_data_flow_figure>>). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data, process the information and write back to the data using the convention, other software can pick it up and process it further. 
 
-.Typical steps in a postprocessing chain for acoustical water column data. The two main groups may be used for several steps depending on the objective, and the `GridGroup` may be seen as a projection of the `BeamGroup` and the conversion to `GridGroup` is typically lossy. The output from the sonars are typically the `BeamGroup` and the report format are typically the `GridGroup`.
+.Typical steps in an echo-integration processing chain for water column data. The two main groups may be used for several steps depending on the objective, and the `GridGroup` may be seen as a projection of the `BeamGroup` and the conversion to `GridGroup` is typically lossy. The output from the sonars are typically the `BeamGroup` and the report format are typically the `GridGroup`.
 [[postprocessing_data_flow_figure]]
 image::postprocessing_data_flow_figure.svg[]
 
 === Typical processing steps and the associated data models
 
-Two main data models are available in the convention: `Beam_group` and `Grid_group`. The `Beam_group` allows for different sample rates, different ping rates, etc, for each channel. It is a flexible model and able to cope with all echosounders and sonar systems. The `Grid_group` is a storage structure for multi-channel data that has  been re-gridded or have a homogeneous ping times and range bins across the different frequencies.
+Two main data models are available in the convention: `Beam_group` and `Gridded`. The `Beam_group` allows for different sample rates, different ping rates, etc, for each channel. It is a flexible model and able to cope with all sonar systems. The `Gridded` is a storage structure for multi-channel data that has been re-gridded or has homogeneous ping times and range bins across all channels (i.e., frequencies).
 
-Depending on the type of processing, both `Beam_group` and `Grid_group` could be used as input and output.
+Depending on the type of processing, both `Beam_group` and `Gridded` could be used as input and output.
 
-==== Denoising
+==== Noise removal
+_to come_
 
-==== Bottom detection
-Bottom data is needed when integrating biological backscatter close to the sea bed. Different algorithms have been developed and the recommendation is to store the bottom depth in the `Beam_group`.
+==== Seabed detection
+Range to the seabed is needed when echo-integrating biological backscatter close to the seabed. Different algorithms have been developed and the recommendation is to store the range to the seabed in the `Beam_group`.
 
-==== Labelling
-Scrutinizing acoustic data, i.e. allocating the acoustic energy to categories, is traditionally achieved by manually assigning the backscatter. Both `Beam_group` and `Grid_group` support labels. An overview of how different software stores this information can be found here:
-https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Gavins label overview]
+==== Labeling
+Labeling acoustic data, i.e. scrutinizing and allocating the acoustic energy to categories, is traditionally achieved by manually assigning backscatter. A data structure to contain such labels is detailed in <<Interpretation>>.
+
+An earlier overview of how different echo-integration software stores this information can be found here:
+https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Label overview]
 
 ==== Machine learning
-Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passinsg it into your preferred deep learning framework. The use of the `Grid_group` on a high resolution grid should be used for this purpose.
-
+Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passing it to a deep learning framework. The use of `Gridded` on a high resolution grid should be used for this purpose.
 
 ==== Integrated backscatter
-The reports from the integration process typically goes into statistical paclages that can furhter process the data. It is recommended to use the `Grid_group` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective
+The output from the echo-integration process is typically further processed to yield distribution and abundance estimates of selected species. It is recommended to use the `Gridded` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective.
 
 == The SONAR-netCDF4 convention
 
@@ -150,15 +152,36 @@ A design principle of SONAR-netCDF4 has been to focus on describing the acoustic
 
 NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy.
 
-SONAR-netCDF4 divides sonar data into seven netCDF4 groups:
+[plantuml, format=svg, opts="inline"]
+----
+legend
+Top-level
+|_ Annotation
+|_ Environment
+|_ Platform
+|_ Provenance
+|_ Sonar
+  |_ Beam_groupX
+  |_ GriddedX
+  |_ InterpretationX
+|_ Vendor_specific
+end legend
+----
+
+SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:
 
 . *Top-level –* contains metadata about the SONAR-netCDF4 file format;
-. *Annotation –* contains time-stamped annotations;
-. *Environment –* contains information relevant to acoustic propagation through water;
-. *Platform* *–* contains information about the platform on which the sonar is installed;
-. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained;
-. *Sonar –* contains the backscatter and associated metadata; groups under Sonar are used for storing data from different sonar operating modes;
-. *Vendor specific –* contains vendor-specific information about the sonar and the data.
+.. *Annotation –* contains time-stamped annotations;
+.. *Environment –* contains information relevant to acoustic propagation through water;
+.. *Platform* *–* contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.
+.. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained;
+.. *Sonar –* contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;
+... *Beam_groupX –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;
+... *GriddedX –* contains gridded backscatter data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;
+... *InterpretationX –* contains the interpretation regions; the intepretation mask is independent from the backscatter groups;
+.. *Vendor specific –* contains vendor-specific information about the sonar and the data.
+
+The 'X' suffix on some group names indicates that there can be multiple of these type of groups and that the true group name will have a trailing number.
 
 These groups contain variables and variable attributes with prescribed names and contents.
 
@@ -213,8 +236,6 @@ SONAR-netCDF4 files should always end with a “.nc” suffix to indicate that t
 An example of a SONAR-netCDF4 file is provided in the Common Data form Language (CDL). This provides a more formalized and structured representation of the data format. A CDL file can be converted into a NetCDF file using the “ncgen” utility (available as part of the netCDF software distribution) and then used as a template for creating populated SONAR-netCDF4 files.
 
 === Groups
-
-==== Top-level group
 
 The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<<topLevelTable>>).
 
@@ -287,7 +308,10 @@ include::tableProvenance.adoc[]
 
 ==== Sonar group
 
-This group contains the sonar backscatter data and associated metadata. The netCDF4 group name is */Sonar* and is described in <<sonarGroupTable>>.
+The netCDF4 group name is */Sonar* and contains three subgroups.
+
+===== Beam group
+This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_groupX*, where *X* is an integer.
 
 Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeammodeTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
 
@@ -317,6 +341,20 @@ The netCDF4 group name is Mean-current and is a subgroup of ADCP group.
 [[sonarMeanCurrentTable]]
 include::tableMean_current_sub_group.adoc[]
 
+===== Gridded group
+
+This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
+
+_more to come_
+
+===== Interpretation
+This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Gridded and Beam_group. The netCDF4 group name is *InterpretationX*, where *X* is an integer.
+
+The interpretation masks are based on a time and range, for a given a sound speed.
+
+An proposal for storing interpretation masks in a netCDF4 structure is being developed https://github.com/nilsolav/EchosounderNetCDF[here], with the actual netCDF4 structure provided as an example https://github.com/nilsolav/EchosounderNetCDF/blob/master/docs/demo_mask.cdl[here].
+
+_more to come_
 
 ==== Vendor specific group
 
