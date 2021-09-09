@@ -542,7 +542,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#_revision_history">7. Revision history</a></li>
+<li><a href="#_revision_history">7. Revision history</a>
+<ul class="sectlevel2">
+<li><a href="#_significant_changes_from_version_1_to_version_2">7.1. Significant changes from version 1 to version 2</a></li>
+<li><a href="#_changes_within_a_document_version">7.2. Changes within a document version</a></li>
+</ul>
+</li>
 <li><a href="#_acknowledgements">8. Acknowledgements</a></li>
 <li><a href="#_references">9. References</a></li>
 <li><a href="#_annex_1_working_with_netcdf4_files">Annex 1: Working with netCDF4 files</a></li>
@@ -4658,6 +4663,46 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <div class="sect1">
 <h2 id="_revision_history">7. Revision history</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_significant_changes_from_version_1_to_version_2">7.1. Significant changes from version 1 to version 2</h3>
+<div class="paragraph">
+<p>Version 2 of this document makes some significant changes to the convention presented in version 1. These are summarised here:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beam pointing</dt>
+<dd>
+<p>The method used to specify the beam pointing direction has changed from angles to vectors. A number of coordinate systems and translations and rotations have also been added to enable the flexible and complete definition of beam pointing directions.</p>
+</dd>
+<dt class="hdlist1">Platform attributes</dt>
+<dd>
+<p>Added variables to the Sonar groups to enable storage of geographic position of the platform interpolated to ping timestamps.</p>
+</dd>
+<dt class="hdlist1">Platform</dt>
+<dd>
+<p>The platform group can now store data from multiple sensors of the same type.</p>
+</dd>
+<dt class="hdlist1">Platform and Sonar</dt>
+<dd>
+<p>The transducer description now allows for separate emitting and receiving antennas (as used by some bathymetric sonars). The sonar beam variable names and descriptions have been updated to distinguish between transmit and receive beams.</p>
+</dd>
+<dt class="hdlist1">Beam</dt>
+<dd>
+<p>Added variables for the description and storage of data from split-aperture beams via a subbeam dimension added in the Sonar group.</p>
+</dd>
+<dt class="hdlist1">Gridded</dt>
+<dd>
+<p>A new subgroup, Gridded is added to allow for gridded backscatter data (i.e., resampled onto a consistent time/range grid).</p>
+</dd>
+<dt class="hdlist1">ADCP</dt>
+<dd>
+<p>A new subgroup, ADCP, has been added to store data from acoustic Doppler current profilers.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_changes_within_a_document_version">7.2. Changes within a document version</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4730,6 +4775,7 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -5152,7 +5198,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-09-02 03:18:33 UTC
+Last updated 2021-09-09 22:24:07 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
