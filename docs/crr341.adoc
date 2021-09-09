@@ -918,6 +918,26 @@ where latexmath:[\eta_\theta] is the angle sensitivity for the minor axis and la
 
 == Revision history
 
+=== Significant changes from version 1 to version 2
+
+Version 2 of this document makes some significant changes to the convention presented in version 1. These are summarised here:
+
+Beam pointing:: The method used to specify the beam pointing direction has changed from angles to vectors. A number of coordinate systems and translations and rotations have also been added to enable the flexible and complete definition of beam pointing directions.
+
+Platform attributes:: Added variables to the Sonar groups to enable storage of geographic position of the platform interpolated to ping timestamps.
+
+Platform:: The platform group can now store data from multiple sensors of the same type.
+
+Platform and Sonar:: The transducer description now allows for separate emitting and receiving antennas (as used by some bathymetric sonars). The sonar beam variable names and descriptions have been updated to distinguish between transmit and receive beams.
+
+Beam:: Added variables for the description and storage of data from split-aperture beams via a subbeam dimension added in the Sonar group.
+
+Gridded:: A new subgroup, Gridded is added to allow for gridded backscatter data (i.e., resampled onto a consistent time/range grid).
+
+ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler current profilers.
+
+=== Changes within a document version 
+
 [cols=",,,",options="header",]
 |===
 |Document version |SONAR-netCDF4 version |Date |Changes
