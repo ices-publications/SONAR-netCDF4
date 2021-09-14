@@ -516,6 +516,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_type_2">4.2. Type 2</a></li>
 <li><a href="#_type_3">4.3. Type 3</a></li>
 <li><a href="#_type_4">4.4. Type 4</a></li>
+<li><a href="#_type_5">4.5. Type 5</a></li>
 </ul>
 </li>
 <li><a href="#_coordinate_systems">5. Coordinate systems</a>
@@ -2127,7 +2128,7 @@ end legend</pre>
 <p>This group contains ping based sonar backscatter data and associated metadata and is described in <a href="#sonarGroupTable">Table 10</a>. The netCDF4 group name is <strong>Beam_groupX</strong>, where <strong>X</strong> is an integer.</p>
 </div>
 <div class="paragraph">
-<p>Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <a href="#sonarBeammodeTable">Table 11</a>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.</p>
+<p>Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.</p>
 </div>
 <div class="paragraph">
 <p>Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group.</p>
@@ -2196,20 +2197,12 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Beam type. Split aperture indicates a beam that can detect the arrival angle of echoes, while single beam cannot.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;byte enum conversion_equation_t {type_1 = 1, type_2 = 2, type_3 = 3, type_4 = 4}</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;byte enum conversion_equation_t {type_1 = 1, type_2 = 2, type_3 = 3, type_4 = 4, type_5 = 5}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The type of equation used to convert backscatter measurements into volume backscattering and target strength.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;byte enum transmit_t {CW = 0, LFM = 1, HFM = 2}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type of transmit pulse. CW = continuous wave – a pulse nominally of one frequency, LFM = linear frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a linear manner over the nominal pulse duration (transmit_duration_nominal), HFM = hyperbolic frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a hyperbolic manner over the nominal pulse duration (transmit_duration_nominal).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;float(*) sample_t</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ragged arrays of backscatter data. Data type can be varied to suit data storage needs.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;float(*) angle_t</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ragged arrays of split-aperture angles. Data type can varied to suit data storage needs.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Subgroups</em></p></td>
@@ -2221,10 +2214,15 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Example of a beam group. Include as many subgroups as necessary for different beam groups. Use unique group names, preferably of the form Beam_groupX where X is an integer.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;Grid_group1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Example of a grid group. Include as many subgroups as necessary for different grid groups containing different beam groups resampled on a user defined regular grid. Use unique group names, preferably of the form Grid_groupX where X is an integer.</p></td>
+</tr>
 </tbody>
 </table>
-<table id="sonarBeammodeTable" class="tableblock frame-all grid-all fit-content">
-<caption class="title">Table 11. Description of the beam mode subgroups of the sonar group.</caption>
+<table id="sonarBeamGroupTable" class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 11. Description of the beam subgroups of the sonar group.</caption>
 <colgroup>
 <col>
 <col>
@@ -2262,6 +2260,19 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :preferred_position</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Index of the position sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_position_sensor. Index matches the ones used in the Platform position sensors variables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Types</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;float(*) sample_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ragged arrays of backscatter data. Data type can be varied to suit data storage needs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;float(*) angle_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ragged arrays of split-aperture angles. Data type can varied to suit data storage needs.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Dimensions</em></p></td>
@@ -3521,7 +3532,7 @@ beam and ping time.</p></td>
 </table>
 <div class="paragraph">
 <p>This group contains the calculated averaged current velocity data and associated metadata.
-The netCDF4 group name is Mean-current and is a subgroup of ADCP group.</p>
+The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 </div>
 <table id="sonarMeanCurrentTable" class="tableblock frame-all grid-all fit-content">
 <caption class="title">Table 13. Description of the Mean current subgroup of the ADCP group.</caption>
@@ -3838,6 +3849,10 @@ The netCDF4 group name is Mean-current and is a subgroup of ADCP group.</p>
 <div class="paragraph">
 <p>This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is <strong>GriddedX</strong>, where <strong>X</strong> is an integer.</p>
 </div>
+<div id="sonarGridGroupTable" class="paragraph">
+<div class="title">Description of the beam grid subgroups of the sonar group.</div>
+<p>Unresolved directive in crr341.adoc - include::tableBeamGridGroup1.adoc[]</p>
+</div>
 <div class="paragraph">
 <p><em>more to come</em></p>
 </div>
@@ -4051,6 +4066,15 @@ tbd.
 <h3 id="_type_4">4.4. Type 4</h3>
 <div class="paragraph">
 <p>Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_type_5">4.5. Type 5</h3>
+<div class="paragraph">
+<p>Type 5 conversion equation is intended for sonars for which the sonar manufacturer computes standard TS and Sv values as defined in  MacLennan et al. (2002).</p>
+</div>
+<div class="paragraph">
+<p>Using equation 5, the Sv value is directly stored in the <em>backscatter_r</em> variable and/or the TS value is directly stored in the <em>backscatter_i</em> variable</p>
 </div>
 </div>
 </div>
@@ -4396,7 +4420,7 @@ R_{BCS-&gt;TCS} =
 </div>
 </div>
 <div class="paragraph">
-<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>)</p>
+<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>)</p>
 </div>
 <div class="paragraph">
 <p>and:</p>
@@ -4409,7 +4433,7 @@ R_{PCS-&gt;SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 </div>
 </div>
 <div class="paragraph">
-<p>where \(h,p,r\) are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>).
+<p>where \(h,p,r\) are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>).
 (<em>Those variables can also be defined at a higher sample rate in the platform group  (see <a href="#platformGroupTable">Table 4</a>)</em>)</p>
 </div>
 <div class="paragraph">
@@ -4501,7 +4525,7 @@ R_{BCS-&gt;TCS} =
 </div>
 </div>
 <div class="paragraph">
-<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>)</p>
+<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>)</p>
 </div>
 <div class="paragraph">
 <p>and:</p>
@@ -4547,7 +4571,7 @@ R_{PCS-&gt;SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 </div>
 </div>
 <div class="paragraph">
-<p>where \(h,p,r\) are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <a href="#sonarBeammodeTable">Table 11</a>) or platform group (see <a href="#platformGroupTable">Table 4</a>)</p>
+<p>where \(h,p,r\) are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>) or platform group (see <a href="#platformGroupTable">Table 4</a>)</p>
 </div>
 </div>
 </div>
@@ -4602,7 +4626,7 @@ The vertical translation at each time is a vector obtained by adding the variabl
 <div class="sect2">
 <h3 id="_angles_not_stored_in_file">6.2. Angles not stored in file</h3>
 <div class="paragraph">
-<p>The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<a href="#transducer_types">Figure 3</a>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the <em>subbeam</em> dimension in the backscatter variables in <a href="#sonarBeammodeTable">Table 11</a>, in the same order as labelled in <a href="#transducer_types">Figure 3</a>.</p>
+<p>The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<a href="#transducer_types">Figure 3</a>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the <em>subbeam</em> dimension in the backscatter variables in <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>, in the same order as labelled in <a href="#transducer_types">Figure 3</a>.</p>
 </div>
 <div id="transducer_types" class="imageblock text-center">
 <div class="content">
@@ -5198,7 +5222,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-09-09 22:24:07 UTC
+Last updated 2021-09-14 04:42:31 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
