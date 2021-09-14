@@ -345,10 +345,6 @@ include::tableMean_current_sub_group.adoc[]
 
 This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
 
-.Description of the beam grid subgroups of the sonar group.
-[[sonarGridGroupTable]]
-include::tableBeamGridGroup1.adoc[]
-
 _more to come_
 
 ===== Interpretation
