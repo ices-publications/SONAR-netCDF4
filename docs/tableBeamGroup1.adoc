@@ -18,6 +18,9 @@ e|Dimensions | |
  |{var}subbeam | |The number of sub-beams in these beams.
  |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  |{var}tx_beam | |The number of transmit beams in this beam group
+ |{var}mean_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
+
+
  
 e|Coordinate variables | |
  |{var}string beam(beam) |M |Beam name (or number or identification code).
@@ -28,7 +31,15 @@ e|Coordinate variables | |
  3+|{attr}:calendar = "gregorian" 
  3+|{attr}:long_name = "Time-stamp of each ping" 
  3+|{attr}:standard_name = "time" 
- 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}uint64 mean_time(mean_time) |M |Timestamp for the center of an averaging period.
+ 3+|{attr}:axis = "T" 
+ 3+|{attr}:calendar = "gregorian" 
+ 3+|{attr}:long_name = "Time-stamp for the center of each averaged value" 
+ 3+|{attr}:standard_name = "time" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
 e|Variables | |
@@ -151,7 +162,7 @@ e|Variables | |
  3+|{attr}:units = "s" 
  3+|{attr}:valid_min = "0.0" 
  
- |{var}float detected_bottom_range(ping_time, beam) |0 |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
+ |{var}float detected_bottom_range(ping_time, beam) |O |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
  3+|{attr}:long_name = "Detected range of the bottom" 
  3+|{attr}:units = "m" 
  3+|{attr}:valid_min = "0.0" 
@@ -207,6 +218,14 @@ e|Variables | |
  |{var}int receive_transducer_index(beam) |MA |Receiving or monostatic transducer index associated with the given beam
  3+|{attr}:valid_min = "0" 
  3+|{attr}:long_name = "Receive transducer index" 
+ 
+ |{var}int transmit_transducer_index(ping_time, beam) |MA |Transmitting or monostatic transducer index associated with the given receiving beam
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Transmit transducer index" 
+ 
+ |{var}int transmit_beam_index(ping_time, beam) |MA |Transmit beam index associated with the given beam
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Transmit beam index associated with the given beam" 
  
  |{var}int active_MRU(ping_time) |MA |Indicate the index of the MRU sensor used at the time of the ping to compute the platform attitude.
  3+|{attr}:valid_min = "0" 
@@ -276,4 +295,7 @@ e|Variables | |
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
+
+e|Subgroups | |
+ |{var}ADCP |O |Subgroup containing ADCP calculated current velocity data.
 |===

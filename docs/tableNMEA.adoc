@@ -4,18 +4,18 @@
 |===
 |Description |Obligation |Comment
 e|Group attributes | |
- |{attr}:description =  "All NMEA sensor datagrams" |M |Description of the subgroup contents.
-
+ |{attr}:description = "All NMEA sensor datagrams" |M |Description of the subgroup contents.
+ 
 e|Dimensions | |
- |{var}time = unlimited | |Can be of fixed or unlimited length, as appropriate.
-
+ |{var}time | |Can be fixed or unlimited length, as appropriate.
+ 
 e|Coordinate variables | |
  |{var}uint64 time(time) |M |
- 3+|{attr}:axis =  "T" 
+ 3+|{attr}:axis = "T" 
  3+|{attr}:calendar = "gregorian" 
- 3+|{attr}:long_name =  "Timestamps for NMEA datagrams" 
+ 3+|{attr}:long_name = "Timestamps for NMEA datagrams" 
  3+|{attr}:standard_name = "time" 
- 3+|{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  
 e|Variables | |
  |{var}string NMEA_datagram(time) |O |Example of how to store NMEA datagrams.
