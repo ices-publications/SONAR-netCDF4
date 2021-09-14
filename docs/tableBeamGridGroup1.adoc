@@ -51,7 +51,7 @@ e|Variables | |
  3+|{attr}:calendar = "gregorian" 
  3+|{attr}:long_name = "Mean time-stamp of each cell" 
  3+|{attr}:standard_name = "time" 
- 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
  
  |{var}float integrated_backscatter(ping_axis, range_axis, frequency) |M |Integrated backscatter measurement.
@@ -229,18 +229,18 @@ e|Variables | |
  3+|{attr}:coordinates = "ping_axis cell_latitude cell_longitude" 
  3+|{attr}double :_FillValue = Double.NaN 
  
- |{var}float cell_depth(range_axis, beam) |M |Depth of the  cell to the water line (distance are positives downwards).
- 3+|{attr}:long_name = "Cell depth below water line"
+ |{var}float cell_depth(range_axis, beam) |M |Depth of the cell to the water line (distance are positives downwards).
+ 3+|{attr}:long_name = "Cell depth below water line" 
  3+|{attr}:units = "m" 
  
  |{var}float tx_transducer_depth(ping_axis) |O |Tx transducer depth below waterline at time of the cell (distance are positives downwards).
  3+|{attr}:long_name = "Tx transducer depth below waterline" 
  3+|{attr}:units = "m" 
- 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude"
-
+ 3+|{attr}:coordinates = "ping_axis platform_latitude platform_longitude" 
+ 
  |{var}float waterline_to_chart_datum(ping_axis) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector that contains the tide and allows for the positioning of samples in an absolute reference system.
- 3+|{attr}:long_name = "vertical translation from waterline to chart datum reference "
- 3+|{attr}:units = "m"
- 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude"
+ 3+|{attr}:long_name = "vertical translation from waterline to chart datum reference " 
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
 |===
