@@ -321,8 +321,8 @@ Subgroups under /Sonar each have a coordinate variable that contains ping timest
 [[sonarGroupTable]]
 include::tableSonar.adoc[]
 
-.Description of the beam mode subgroups of the sonar group.
-[[sonarBeammodeTable]]
+.Description of the beam subgroups of the sonar group.
+[[sonarBeamGroupTable]]
 include::tableBeamGroup1.adoc[]
 
 ==== Proposed ADCP additions
@@ -335,7 +335,7 @@ The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.
 include::tableADCP_sub_group.adoc[]
 
 This group contains the calculated averaged current velocity data and associated metadata.
-The netCDF4 group name is Mean-current and is a subgroup of ADCP group.
+The netCDF4 group name is Mean_current and is a subgroup of ADCP group.
 
 .Description of the Mean current subgroup of the ADCP group.
 [[sonarMeanCurrentTable]]
@@ -344,6 +344,10 @@ include::tableMean_current_sub_group.adoc[]
 ===== Gridded group
 
 This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
+
+.Description of the beam grid subgroups of the sonar group.
+[[sonarGridGroupTable]]
+include::tableBeamGridGroup1.adoc[]
 
 _more to come_
 
@@ -489,6 +493,12 @@ a|latexmath:[\alpha]|Calculated from ...|
 === Type 4
 
 Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders.
+
+=== Type 5
+
+Type 5 conversion equation is intended for sonars for which the sonar manufacturer computes standard TS and Sv values as defined in  MacLennan et al. (2002).
+
+Using equation 5, the Sv value is directly stored in the _backscatter_r_ variable and/or the TS value is directly stored in the _backscatter_i_ variable
 
 == Coordinate systems
 
