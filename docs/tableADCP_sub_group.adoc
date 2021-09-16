@@ -4,7 +4,6 @@
 |===
 |Description |Obligation |Comment
 e|Types | |
- 2+|{var}ping_time(*) ping_t |Variable length vector used to store ping time of pings used in averaging. Type added for ADCP.
  2+|{var}float(*) sample_v |Variable length vector used to store ragged arrays of velocity data. Type added for ADCP.
 
 e|Variables | |
