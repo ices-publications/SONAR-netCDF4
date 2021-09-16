@@ -18,6 +18,6 @@ e|Variables | |
  |{var}string annotation_category(time) |O |Optional category for the annotation, for use in grouping annotation types.
  3+|{attr}:long_name = "Annotation category" 
  
- |{var}string annotation_text(time) |O |
+ |{var}string annotation_text(time) |MA |
  3+|{attr}:long_name = "Annotation text" 
 |===
