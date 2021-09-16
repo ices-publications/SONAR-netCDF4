@@ -3,6 +3,20 @@
 [%autowidth,options="header",]
 |===
 |Description |Obligation |Comment
+e|Types | |
+ 2+|{var}uint64(*) ping_t |Variable length vector used to store ping time of pings used in averaging.
+
+e|Dimensions | |
+ |{var}mean_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
+ 
+e|Coordinate variables | |
+ |{var}uint64 mean_time(mean_time) |M |Timestamp for the center of an averaging period.
+ 3+|{attr}:axis = "T" 
+ 3+|{attr}:calendar = "gregorian" 
+ 3+|{attr}:long_name = "Time-stamp of each ping" 
+ 3+|{attr}:standard_name = "time" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
+ 
 e|Variables | |
  |{var}int averaging(mean_time) |M |Number of ping averages.
  3+|{attr}:long_name = "Number of ping averages" 
@@ -61,45 +75,38 @@ e|Variables | |
  |{var}double mean_platform_heading(mean_time) |MA |Calculated mean heading for the averaging period.
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "Calculated mean heading for the averaging period." 
- 3+|{attr}float :valid_range = 0.0, 360.0 
+ 3+|{attr}double :valid_range = 0.0, 360.0 
  
  |{var}double mean_platform_latitude(mean_time) |MA |Latitude representing the averaging period.
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "Latitude representing the averaging period." 
- 3+|{attr}float :valid_range = -90.0, 90.0 
+ 3+|{attr}double :valid_range = -90.0, 90.0 
  
  |{var}double mean_platform_longitude(mean_time) |MA |Longitude representing the averaging period.
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "Longitude representing the averaging period." 
- 3+|{attr}float :valid_range = -180.0, 180.0 
+ 3+|{attr}double :valid_range = -180.0, 180.0 
  
  |{var}double mean_platform_pitch(mean_time) |MA |Calculated mean pitch for the averaging period.
  3+|{attr}:units = "arc_degree" 
  3+|{attr}:long_name = "Calculated mean pitch for the averaging period." 
- 3+|{attr}float :valid_range = -90.0, 90.0 
+ 3+|{attr}double :valid_range = -90.0, 90.0 
  
  |{var}double mean_platform_roll(mean_time) |MA |Calculated mean roll for the averaging period.
  3+|{attr}:units = "arc_degree" 
  3+|{attr}:long_name = "Calculated mean roll for the averaging period." 
- 3+|{attr}float :valid_range = -90.0, 90.0 
+ 3+|{attr}double :valid_range = -90.0, 90.0 
  
  |{var}double mean_platform_vertical(mean_time) |MA |Calculated mean vertical offset for the averaging period.
  3+|{attr}:units = "m" 
  3+|{attr}:long_name = "Calculated mean vertical offset for the averaging period. Zero if velocity_depth_stabilisation is true." 
- 
- |{var}uint64 mean_time(mean_time) |MA |Timestamp at which each ping occurred.
- 3+|{attr}:axis = "T" 
- 3+|{attr}:calendar = "gregorian" 
- 3+|{attr}:long_name = "TBD" 
- 3+|{attr}:standard_name = "time" 
- 3+|{attr}:units = "nanoseconds since 1601-01-01 00:00:00Z" 
  
  |{var}float percent_good_limit |MA |Filtering parameter. Mean velocity value disgarded if quality below given limit.
  3+|{attr}:units = "%" 
  3+|{attr}:long_name = "Percent good limit used to filter the water current velocities" 
  3+|{attr}float :valid_range = 0.0, 100.0 
  
- |{var}Ping_t ping_averaged(mean_time) |MA |Reference to pings (by ping_time) used for averaging to find start-end of lat, lon, vessel speed, heading etc.
+ |{var}ping_t ping_averaged(mean_time) |MA |Reference to pings (by ping_time) used for averaging to find start-end of lat, lon, vessel speed, heading etc.
  3+|{attr}:long_name = "Time reference to pings used for averaging" 
  
  |{var}int quality(mean_time) |MA |Averaged quality in percent for each depth cell.
