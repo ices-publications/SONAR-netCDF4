@@ -25,7 +25,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "latitude" 
  3+|{attr}:coordinates = "time latitude longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}double longitude(time) |M |Longitude of the platform reference point in WGS-84 reference system
  3+|{attr}double :valid_range = −180.0, 180.0 
@@ -33,7 +32,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "longitude" 
  3+|{attr}:coordinates = "time latitude longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}float heading(time) |MA |Heading refers to the direction a platform is pointing. This may or may not be the direction that the platform actually travels, which is known as its course or track. Any difference between course and heading is due to the motion of the underlying medium, the air or water, or other effects like skidding or slipping. Heading is typically based on compass directions, so 0° (or 360°) indicates a direction toward true North, 90° indicates a direction toward true East, 180° is true South, and 270° is true West.  
  3+|{attr}:standard_name = "platform_orientation" 

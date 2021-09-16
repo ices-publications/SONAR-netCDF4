@@ -219,7 +219,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "latitude" 
  3+|{attr}:coordinates = "ping_axis cell_latitude cell_longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}double cell_longitude(ping_axis, range_axis, beam) |M |Mean longitude of the echoes contributing to the cell in WGS-84 reference system.
  3+|{attr}double :valid_range = −180.0, 180.0 
@@ -227,7 +226,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "longitude" 
  3+|{attr}:coordinates = "ping_axis cell_latitude cell_longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}float cell_depth(range_axis, beam) |M |Depth of the cell to the water line (distance are positives downwards).
  3+|{attr}:long_name = "Cell depth below water line" 

@@ -250,7 +250,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "latitude" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}double platform_longitude(ping_time) |M |Longitude of the platform reference point in WGS-84 reference system at the time of the ping.
  3+|{attr}double :valid_range = −180.0, 180.0 
@@ -258,7 +257,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "longitude" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}float platform_heading(ping_time) |M |Heading of the platform at time of the ping.
  3+|{attr}:standard_name = "platform_orientation" 
