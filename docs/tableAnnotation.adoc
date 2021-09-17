@@ -2,22 +2,22 @@
 :attr: {var}{var}
 [%autowidth,options="header",]
 |===
- |Description|Obligation|Comment
-e|Dimensions||
- |{var}time = unlimited||Can be of fixed or unlimited length, as appropriate.
+|Description |Obligation |Comment
+e|Dimensions | |
+ |{var}time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  
-e|Coordinate variable||
- |{var}uint64 time(time)|MA|
- 3+|{attr}:axis = "T"
- 3+|{attr}:calendar = "gregorian"
- 3+|{attr}:long_name = "Timestamps of annotations"
- 3+|{attr}:standard_name = "time"
- 3+|{attr}:units =  "nanoseconds since 1601-01-01 00:00:00Z"
+e|Coordinate variables | |
+ |{var}uint64 time(time) |MA |
+ 3+|{attr}:axis = "T" 
+ 3+|{attr}:calendar = "gregorian" 
+ 3+|{attr}:long_name = "Timestamps of annotations" 
+ 3+|{attr}:standard_name = "time" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  
-e|Variables||
- |{var}string annotation_category(time)|O|Optional category for the annotation, for use in grouping annotation types.
- 3+|{attr}:long_name = "Annotation category"
+e|Variables | |
+ |{var}string annotation_category(time) |O |Optional category for the annotation, for use in grouping annotation types.
+ 3+|{attr}:long_name = "Annotation category" 
  
- |{var}string annotation_text(time)|MA|
- 3+|{attr}:long_name = "Annotation text"
+ |{var}string annotation_text(time) |MA |
+ 3+|{attr}:long_name = "Annotation text" 
 |===

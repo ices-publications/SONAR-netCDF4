@@ -8,7 +8,7 @@ e|Group attributes | |
  |{attr}conversion_equation_t :conversion_equation_type |M |Type of equation used to convert backscatter measurements into volume backscattering strength and target strength.
  |{attr}int :preferred_MRU |MA |Index of the MRU sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_MRU. Index matches the ones used in the Platform MRU sensors variables.
  |{attr}int :preferred_position |MA |Index of the position sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_position_sensor. Index matches the ones used in the Platform position sensors variables.
-
+ 
 e|Types | |
  2+|{var}float(*) sample_t |Variable length vector used to store ragged arrays of backscatter data. Data type can be varied to suit data storage needs.
  2+|{var}float(*) angle_t |Variable length vector used to store ragged arrays of split-aperture angles. Data type can varied to suit data storage needs.
@@ -250,7 +250,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_north" 
  3+|{attr}:long_name = "latitude" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}double platform_longitude(ping_time) |M |Longitude of the platform reference point in WGS-84 reference system at the time of the ping.
  3+|{attr}double :valid_range = −180.0, 180.0 
@@ -258,7 +257,6 @@ e|Variables | |
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "longitude" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 3+|{attr}double :_FillValue = Double.NaN 
  
  |{var}float platform_heading(ping_time) |M |Heading of the platform at time of the ping.
  3+|{attr}:standard_name = "platform_orientation" 
