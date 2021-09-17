@@ -21,7 +21,7 @@ Support for summarised versions of acoustic data are currently focused on gridde
 
 As these changes are added to the main convention document, the *Ongoing and future developments* section of that document is updated to provide a summmary of what has changed.
 
-A preview of the latest working draft is available https://gitcdn.link/repo/ices-publications/SONAR-netCDF4/master/Formatted_docs/crr341.html[here] (note that it can take up to 2 hours for changes to show).
+A preview of the latest working draft is available https://gitcdn.link/repo/ices-publications/SONAR-netCDF4/master/Formatted_docs/crr341.html[here] (note that it can take up to 2 hours for new changes to appear).
 
 image::https://github.com/ices-publications/SONAR-netCDF4/workflows/BuildDocuments/badge.svg[Embedded]
  
