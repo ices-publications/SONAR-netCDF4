@@ -1048,12 +1048,12 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;time = unlimited</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;time = unlimited</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Can be of fixed or unlimited length, as appropriate.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Coordinate variable</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Coordinate variables</em></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -1069,13 +1069,13 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:calendar = "gregorian"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Timestamps of annotations"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Timestamps of annotations"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units =  "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Variables</em></p></td>
@@ -1096,7 +1096,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Annotation text"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Annotation text"</p></td>
 </tr>
 </tbody>
 </table>
@@ -1607,7 +1607,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Variables</em></p></td>
@@ -1813,9 +1813,6 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "time latitude longitude"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;double :_FillValue = Double.NaN</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double longitude(time)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Longitude of the platform reference point in WGS-84 reference system</p></td>
@@ -1834,9 +1831,6 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "time latitude longitude"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;double :_FillValue = Double.NaN</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float heading(time)</p></td>
@@ -2955,9 +2949,6 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "ping_time platform_latitude platform_longitude"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;double :_FillValue = Double.NaN</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;double platform_longitude(ping_time)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Longitude of the platform reference point in WGS-84 reference system at the time of the ping.</p></td>
@@ -2976,9 +2967,6 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "ping_time platform_latitude platform_longitude"</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;double :_FillValue = Double.NaN</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float platform_heading(ping_time)</p></td>
@@ -3217,10 +3205,7 @@ The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_t correlation(ping_time, beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated beam correlation. Each element in the 2D
-matrix is a variable length vector (of type sample_t)
-that contains the calculated correlation along that
-beam and ping time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculated beam correlation. Each element in the 2D matrix is a variable length vector (of type sample_t)that contains the calculated correlation along that beam and ping time</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "%"</p></td>
@@ -5218,7 +5203,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-09-14 08:22:04 UTC
+Last updated 2021-09-17 02:15:22 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
