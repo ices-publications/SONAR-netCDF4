@@ -496,6 +496,69 @@ Type 5 conversion equation is intended for sonars for which the sonar manufactur
 
 Using equation 5, the Sv value is directly stored in the _backscatter_r_ variable and/or the TS value is directly stored in the _backscatter_i_ variable
 
+=== Type 6
+
+Type 6 conversion equations are intended for data recorded by Furuno FCV-38 echosounder.
+
+The echosouder has a split-aperture transducer with type A arrangement (see Section 6.2.1). It outputs four complex backscatter signals (backscatter_r, backscatter_i, 1) from beam number 0, 1, 2, and 3. The signals from beam number 0 and 1 are defined by stem:[z_0 = y_3 + y_4] and stem:[z_1 = y_1 + y_2], respectively, where stem:[y_x] is the complex signal from quadrant stem:[x]. Similarly, the signals from beam number 2 and 3 are defined by stem:[z_2 = y_2 + y_3] and stem:[z_3 = y_1 + y_4], respectively.
+
+Two complex signals, stem:[z_0] and stem:[z_1], are converted into the calibrated target strength via:
+
+[stem]
+++++
+\begin{equation} \label{eq:FCV38TS}
+TS = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\ \log_{10}\left(r\right) + 2\alpha r - \left(TR + \Delta G\right),
+\end{equation}
+++++
+
+where stem:[A] is the amplitude or envelope of the received voltage signal (V), calculated from:
+
+[stem]
+++++
+\begin{equation}
+I = \mathrm{Re}\left(z_0\right) + \mathrm{Re}\left(z_1\right),
+\end{equation}
+++++
+
+[stem]
+++++
+\begin{equation}
+Q = \mathrm{Im}\left(z_0\right) + \mathrm{Im}\left(z_1\right),
+\end{equation}
+++++
+
+[stem]
+++++
+\begin{equation}
+A = \frac{4\sqrt{I^2 + Q^2}}{2^{32} - 1}.
+\end{equation}
+++++
+
+The range between the transducer and target is stem:[r], calculated from:
+
+[stem]
+++++
+\begin{equation}
+r = \frac{c\left(dt \cdot i - t_0\right)}{2},
+\end{equation}
+++++
+
+where stem:[c] is the sound speed (sound_speed_indicative, m/s), stem:[dt] is the time between recorded samples (sample_interval, s),  stem:[i] is the sample number (from zero to one less than the number of samples), and stem:[t_0] is the time-offset (sample_time_offset - blanking_interval, s).
+
+The absorption coefficient of sound in water is stem:[\alpha] (absorption_indicative, dB/m). stem:[TR] is the transmitter and receiver coefficient (transmitter_and_receiver_coefficient, dB). The gain correction, stem:[\Delta G] (gain_correction, dB), is determined by the calibration. Beam pattern compensation for echoes that do not arrive on the transducer axis is done in addition to equation \eqref{eq:FCV38TS}.
+
+The volume backscatter strength is derived from a similar equation:
+
+[stem]
+++++
+\begin{equation}
+S_v = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\ \log_{10}\left(r\right) + 2\alpha r - 10\ \log_{10}\left(\frac{c \ \tau_e \ \psi}{2}\right) - \left(TR + \Delta G\right),
+\end{equation}
+++++
+
+where stem:[\tau_e] is the effective pulse duration (receive_duration_effective, s) and stem:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr). 
+
+
 == Coordinate systems
 
 This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a geographic coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.
