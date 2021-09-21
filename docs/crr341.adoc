@@ -500,7 +500,7 @@ Using equation 5, the Sv value is directly stored in the _backscatter_r_ variabl
 
 Type 6 conversion equations are intended for data recorded by Furuno FCV-38 echosounder.
 
-The echosouder has a split-aperture transducer with type A arrangement (see Section 6.2.1). It outputs four complex backscatter signals (backscatter_r, backscatter_i, 1) from beam number 0, 1, 2, and 3. The signals from beam number 0 and 1 are defined by stem:[z_0 = y_3 + y_4] and stem:[z_1 = y_1 + y_2], respectively, where stem:[y_x] is the complex signal from quadrant stem:[x]. Similarly, the signals from beam number 2 and 3 are defined by stem:[z_2 = y_2 + y_3] and stem:[z_3 = y_1 + y_4], respectively.
+The echosouder has a split-aperture transducer with type A arrangement (see <<_four_quadrants_type_a>>). It outputs four complex backscatter signals (backscatter_r, backscatter_i, 1) from beam number 0, 1, 2, and 3. The signals from beam number 0 and 1 are defined by stem:[z_0 = y_3 + y_4] and stem:[z_1 = y_1 + y_2], respectively, where stem:[y_x] is the complex signal from quadrant stem:[x]. Similarly, the signals from beam number 2 and 3 are defined by stem:[z_2 = y_2 + y_3] and stem:[z_3 = y_1 + y_4], respectively.
 
 Two complex signals, stem:[z_0] and stem:[z_1], are converted into the calibrated target strength via:
 
