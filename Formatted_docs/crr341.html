@@ -517,6 +517,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_type_3">4.3. Type 3</a></li>
 <li><a href="#_type_4">4.4. Type 4</a></li>
 <li><a href="#_type_5">4.5. Type 5</a></li>
+<li><a href="#_type_6">4.6. Type 6</a></li>
 </ul>
 </li>
 <li><a href="#_coordinate_systems">5. Coordinate systems</a>
@@ -2812,6 +2813,17 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1 μPa at 1m"</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transmitter_and_receiver_coefficient(ping_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sum of transmit source level (dB re 1 μPa at 1 m), voltage sensitivity (dB re 1 V/μPa), and system gain (dB). Necessary for type 6 conversion equations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transmitter and receiver coefficient"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;transmit_t transmit_type(ping_time, tx_beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type of transmit pulse.</p></td>
@@ -4050,6 +4062,78 @@ tbd.
 <p>Using equation 5, the Sv value is directly stored in the <em>backscatter_r</em> variable and/or the TS value is directly stored in the <em>backscatter_i</em> variable</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_type_6">4.6. Type 6</h3>
+<div class="paragraph">
+<p>Type 6 conversion equations are intended for data recorded by Furuno FCV-38 echosounder.</p>
+</div>
+<div class="paragraph">
+<p>The echosouder has a split-aperture transducer with type A arrangement (see <a href="#_four_quadrants_type_a">Section 6.2.1</a>). It outputs four complex backscatter signals (backscatter_r, backscatter_i, 1) from beam number 0, 1, 2, and 3. The signals from beam number 0 and 1 are defined by \(z_0 = y_3 + y_4\) and \(z_1 = y_1 + y_2\), respectively, where \(y_x\) is the complex signal from quadrant \(x\). Similarly, the signals from beam number 2 and 3 are defined by \(z_2 = y_2 + y_3\) and \(z_3 = y_1 + y_4\), respectively.</p>
+</div>
+<div class="paragraph">
+<p>Two complex signals, \(z_0\) and \(z_1\), are converted into the calibrated target strength via:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation} \label{eq:FCV38TS}
+TS = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\ \log_{10}\left(r\right) + 2\alpha r - \left(TR + \Delta G\right),
+\end{equation}\]
+</div>
+</div>
+<div class="paragraph">
+<p>where \(A\) is the amplitude or envelope of the received voltage signal (V), calculated from:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation}
+I = \mathrm{Re}\left(z_0\right) + \mathrm{Re}\left(z_1\right),
+\end{equation}\]
+</div>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation}
+Q = \mathrm{Im}\left(z_0\right) + \mathrm{Im}\left(z_1\right),
+\end{equation}\]
+</div>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation}
+A = \frac{4\sqrt{I^2 + Q^2}}{2^{32} - 1}.
+\end{equation}\]
+</div>
+</div>
+<div class="paragraph">
+<p>The range between the transducer and target is \(r\), calculated from:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation}
+r = \frac{c\left(dt \cdot i - t_0\right)}{2},
+\end{equation}\]
+</div>
+</div>
+<div class="paragraph">
+<p>where \(c\) is the sound speed (sound_speed_indicative, m/s), \(dt\) is the time between recorded samples (sample_interval, s),  \(i\) is the sample number (from zero to one less than the number of samples), and \(t_0\) is the time-offset (sample_time_offset - blanking_interval, s).</p>
+</div>
+<div class="paragraph">
+<p>The absorption coefficient of sound in water is \(\alpha\) (absorption_indicative, dB/m). \(TR\) is the transmitter and receiver coefficient (transmitter_and_receiver_coefficient, dB). The gain correction, \(\Delta G\) (gain_correction, dB), is determined by the calibration. Beam pattern compensation for echoes that do not arrive on the transducer axis is done in addition to equation \eqref{eq:FCV38TS}.</p>
+</div>
+<div class="paragraph">
+<p>The volume backscatter strength is derived from a similar equation:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation}
+S_v = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\ \log_{10}\left(r\right) + 2\alpha r - 10\ \log_{10}\left(\frac{c \ \tau_e \ \psi}{2}\right) - \left(TR + \Delta G\right),
+\end{equation}\]
+</div>
+</div>
+<div class="paragraph">
+<p>where \(\tau_e\) is the effective pulse duration (receive_duration_effective, s) and \(\psi\) is the equivalent beam angle (equivalent_beam_angle, sr).</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -5195,7 +5279,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-09-17 02:33:13 UTC
+Last updated 2021-09-21 05:15:29 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
