@@ -1,4 +1,4 @@
-= The SONAR-netCDF4 convention for sonar data, Version 1.1
+= The SONAR-netCDF4 convention for sonar data, Version 2.0
 Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
 :toc: left
 :toclevels: 4
@@ -29,7 +29,7 @@ info@ices.dk
 
 Recommended format for purposes of citation:
 
-Macaulay, G. and Peña, H. (Eds.). 2018. The SONAR-netCDF4 convention for sonar data, Version 1.0. ICES Cooperative Research Report No. 341. 33 pp. http://doi.org/10.17895/ices.pub.4392
+_to be filled in once a new version is published_
 
 Series Editor: Emory D. Anderson
 
@@ -1012,7 +1012,7 @@ ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler 
 [cols=",,,",options="header",]
 |===
 |Document version |SONAR-netCDF4 version |Date |Changes
-|{revnumber}|1.0 | |
+|{revnumber}|2.0 | Work in progress...|
 |1.7 |1.0 |29 May 2018 |Modifications due to ICES CRR review and editorial process.
 |1.6 |1.0 |7 Feburary 2018 |Modifications due to further Topic Group input.
 |1.5 |1.0 |20 December 2017 |Formatted to ICES CRR style
