@@ -4769,7 +4769,16 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 </dd>
 <dt class="hdlist1">Beam</dt>
 <dd>
+<div class="ulist">
+<ul>
+<li>
 <p>Added variables for the description and storage of data from split-aperture beams via a subbeam dimension added in the Sonar group.</p>
+</li>
+<li>
+<p>transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)</p>
+</li>
+</ul>
+</div>
 </dd>
 <dt class="hdlist1">Gridded</dt>
 <dd>
@@ -5279,7 +5288,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-09-23 04:24:12 UTC
+Last updated 2021-10-04 02:57:57 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
