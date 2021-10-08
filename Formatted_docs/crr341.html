@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.16">
 <meta name="author" content="Gavin Macaulay, Héctor Peña">
-<title>The SONAR-netCDF4 convention for sonar data, Version 1.1</title>
+<title>The SONAR-netCDF4 convention for sonar data, Version 2.0</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>The SONAR-netCDF4 convention for sonar data, Version 1.1</h1>
+<h1>The SONAR-netCDF4 convention for sonar data, Version 2.0</h1>
 <div class="details">
 <span id="author" class="author">Gavin Macaulay</span><br>
 <span id="email" class="email"><a href="mailto:gavin.macaulay@hi.no">gavin.macaulay@hi.no</a></span><br>
@@ -578,7 +578,7 @@ Telefax (+45) 33 93 42 15<br>
 <p>Recommended format for purposes of citation:</p>
 </div>
 <div class="paragraph">
-<p>Macaulay, G. and Peña, H. (Eds.). 2018. The SONAR-netCDF4 convention for sonar data, Version 1.0. ICES Cooperative Research Report No. 341. 33 pp. <a href="http://doi.org/10.17895/ices.pub.4392" class="bare">http://doi.org/10.17895/ices.pub.4392</a></p>
+<p><em>to be filled in once a new version is published</em></p>
 </div>
 <div class="paragraph">
 <p>Series Editor: Emory D. Anderson</p>
@@ -2346,6 +2346,20 @@ end legend</pre>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "as appropriate"</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use units appropriate for the data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_count(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of samples in each beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Number of samples in each beam, per ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "1"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:int valid_min = 0</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_t backscatter_r(ping_time, beam, subbeam)</p></td>
@@ -4777,6 +4791,9 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <li>
 <p>transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)</p>
 </li>
+<li>
+<p>add an optional variable to hold the number of samples in each beam, for each ping. This can be used to speed up loading/processing of data files.</p>
+</li>
 </ul>
 </div>
 </dd>
@@ -4811,8 +4828,8 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.0</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Work in progress&#8230;&#8203;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -5288,7 +5305,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-10-04 02:57:57 UTC
+Last updated 2021-10-08 19:46:09 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
