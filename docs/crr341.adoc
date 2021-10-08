@@ -1002,6 +1002,7 @@ Platform and Sonar:: The transducer description now allows for separate emitting
 Beam:: 
 * Added variables for the description and storage of data from split-aperture beams via a subbeam dimension added in the Sonar group.
 * transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)
+* added default_value attribute to some variables to indicate whether the variable has a nominal/default value in it, or an actual measured/calibrated value in it. This is useful for when a value for a mandatory variable is not available.
 
 Gridded:: A new subgroup, Gridded is added to allow for gridded backscatter data (i.e., resampled onto a consistent time/range grid).
 
