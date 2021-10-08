@@ -32,11 +32,11 @@ e|Coordinate variables | |
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
 e|Variables | |
- |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
+ |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements (or for type 5 equations, TS values). Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
  
- |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
+ |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements (or for type 5 equations, Sv values). Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
  
