@@ -36,6 +36,12 @@ e|Variables | |
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
  
+|{var}sample_count(ping_time, beam)|O|The number of samples in each beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.
+3+|{attr}:long_name = "Number of samples in each beam, per ping"
+3+|{attr}:units = "1"
+3+|{attr}:int valid_min = 0
+
+
  |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
