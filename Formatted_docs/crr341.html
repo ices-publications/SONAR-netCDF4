@@ -2348,6 +2348,20 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use units appropriate for the data.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int sample_count(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of samples in each beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Number of samples in each beam, per ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "1"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:int valid_min = 0</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_t backscatter_r(ping_time, beam, subbeam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.</p></td>
@@ -2430,6 +2444,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 360.0</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float beamwidth_receive_minor(ping_time, beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One-way beam width at half power down in the vertical direction of the receive beam.</p></td>
@@ -2442,6 +2460,10 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 360.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float beamwidth_transmit_major(ping_time, tx_beam)</p></td>
@@ -2590,6 +2612,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maximum value is equivalent to 4π.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float gain_correction(ping_time, beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gain correction. This parameter is set from a calibration exercise. Necessary for type 2 conversion equation.</p></td>
@@ -2599,6 +2625,10 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;short non_quantitative_processing(ping_time)</p></td>
@@ -2629,6 +2659,10 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1/μ"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float sample_interval(ping_time)</p></td>
@@ -2712,6 +2746,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transmit_bandwidth(ping_time, tx_beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.</p></td>
@@ -2740,6 +2778,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float receive_duration_effective(ping_time, tx_beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.</p></td>
@@ -2752,6 +2794,10 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transmit_frequency_start(ping_time, tx_beam)</p></td>
@@ -2813,6 +2859,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1 μPa at 1m"</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transmitter_and_receiver_coefficient(ping_time)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sum of transmit source level (dB re 1 μPa at 1 m), voltage sensitivity (dB re 1 V/μPa), and system gain (dB). Necessary for type 6 conversion equations.</p></td>
@@ -2822,6 +2872,10 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;transmit_t transmit_type(ping_time, tx_beam)</p></td>
@@ -4777,6 +4831,12 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <li>
 <p>transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)</p>
 </li>
+<li>
+<p>added substitute_value_used attribute to some variables to indicate whether the variable has a nominal/default value in it, or an actual measured/calibrated value in it. This is useful for when a value for a mandatory variable is not available.</p>
+</li>
+<li>
+<p>add an optional variable to hold the number of samples in each beam, for each ping. This can be used to speed up loading/processing of data files.</p>
+</li>
 </ul>
 </div>
 </dd>
@@ -5288,7 +5348,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-10-04 03:05:07 UTC
+Last updated 2021-10-14 07:36:59 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
