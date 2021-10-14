@@ -45,7 +45,6 @@ e|Variables | |
  3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
 
-
  |{var}angle_t echoangle_major(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
  3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate" 
  3+|{attr}:units = "arc_degree" 
