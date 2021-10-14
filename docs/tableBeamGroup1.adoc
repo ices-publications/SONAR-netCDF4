@@ -12,6 +12,7 @@ e|Group attributes | |
 e|Types | |
  2+|{var}float(*) sample_t |Variable length vector used to store ragged arrays of backscatter data. Data type can be varied to suit data storage needs.
  2+|{var}float(*) angle_t |Variable length vector used to store ragged arrays of split-aperture angles. Data type can varied to suit data storage needs.
+ 2+|{var}float(*) pulse_t |Variable length vector used to store arrays of modeled transmit pulse samples.
 
 e|Dimensions | |
  |{var}beam | |The number of beams in this beam group.
@@ -186,12 +187,23 @@ e|Variables | |
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
+
+ |{var}pulse_t transmit_pulse_model_r(ping_time, tx_beam) |MA |Real part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate as the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
+ 3+|{attr}:long_name = "Real part of the model of the transmit pulse"
+ 3+|{attr}float :valid_min = -1.0
+ 3+|{attr}float :valid_max = 1.0
+
+ |{var}pulse_t transmit_pulse_model_i(ping_time, tx_beam) |MA |Imaginary part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate as the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
+ 3+|{attr}:long_name = "Imaginary part of the model of the transmit pulse"
+ 3+|{attr}float :valid_min = -1.0
+ 3+|{attr}float :valid_max = 1.0
+
  |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.
  3+|{attr}:long_name = "Effective duration of received pulse" 
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  
  |{var}float transmit_frequency_start(ping_time, tx_beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
  3+|{attr}:long_name = "Start frequency in transmitted pulse" 
