@@ -25,6 +25,18 @@ A preview of the latest working draft is available https://gitcdn.link/repo/ices
 
 image::https://github.com/ices-publications/SONAR-netCDF4/workflows/BuildDocuments/badge.svg[Embedded]
  
+=== Procedures for publishing a new version of the convention
+
+The convention receives changes through submission and acceptance of Github pull requests to the convention document. When these changes make up a coherent and consistent set of new or changed features, a new version of the convention can be released.
+
+The following procedures should be followed prior to the release of a new version:
+
+- Notify contributors and interested parties that a new version is planned and request that pending additions or changes be submitted as pull requests within 2 weeks,
+- Review these pull requests and accept, reject, or delay all such pull requests within 2 weeks,
+- Obtain reviews of the convention and accept only corrections and clarifications within a 3 week period,
+- Publish the convention (__needs a list of more specific steps here__)
+
+
 == Suggestions and contributions welcome
 WGFAST welcomes suggestions, discussion, and contributions to this SONAR netCDF-4 convention.
 
