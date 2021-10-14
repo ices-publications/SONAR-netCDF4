@@ -203,7 +203,6 @@ e|Variables | |
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
-
  
  |{var}float transmit_frequency_start(ping_time, tx_beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
  3+|{attr}:long_name = "Start frequency in transmitted pulse" 
