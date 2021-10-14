@@ -494,7 +494,7 @@ Type 4 conversion equations are intended for data produced by Simrad EK80 and ES
 
 Type 5 conversion equation is intended for sonars for which the sonar manufacturer computes standard TS and Sv values as defined in  MacLennan et al. (2002).
 
-Using equation 5, the Sv value is directly stored in the _backscatter_r_ variable and/or the TS value is directly stored in the _backscatter_i_ variable
+Using equation 5, the Sv value is directly stored in the _backscatter_r_ variable and/or the TS value is directly stored in the _backscatter_i_ variable. It is permitted to store only Sv or only TS values, meaning that a file could have just a _backscatter_r_ variable, just a _backscatter_i_ variable, or both.
 
 === Type 6
 
@@ -1002,6 +1002,7 @@ Platform and Sonar:: The transducer description now allows for separate emitting
 Beam:: 
 * Added variables for the description and storage of data from split-aperture beams via a subbeam dimension added in the Sonar group.
 * transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)
+* Explicitly allow for type 5 data to have only Sv, only TS, or both in a file.
 * added substitute_value_used attribute to some variables to indicate whether the variable has a nominal/default value in it, or an actual measured/calibrated value in it. This is useful for when a value for a mandatory variable is not available.
 * add an optional variable to hold the number of samples in each beam, for each ping. This can be used to speed up loading/processing of data files.
 
