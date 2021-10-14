@@ -174,7 +174,7 @@ SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:
 .. *Annotation –* contains time-stamped annotations;
 .. *Environment –* contains information relevant to acoustic propagation through water;
 .. *Platform* *–* contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.
-.. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained;
+.. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained and processed;
 .. *Sonar –* contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;
 ... *Beam_groupX –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;
 ... *GriddedX –* contains gridded backscatter data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;
@@ -300,7 +300,7 @@ include::tableNMEA.adoc[]
 
 ==== Provenance group
 
-The provenance group provides information on how the SONAR-netCDF4 version of the data were created. The netCDF4 group name is */Provenance* and is described in <<provenanceTable>>.
+The provenance group provides information on how the SONAR-netCDF4 version of the data were created and what processes were applied to this data. The netCDF4 group name is */Provenance* and is described in <<provenanceTable>>.
 
 .Description of the provenance group.
 [[provenanceTable]]
