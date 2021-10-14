@@ -2338,7 +2338,7 @@ end legend</pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_t backscatter_i(ping_time, beam, subbeam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Imaginary part of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imaginary part of backscatter measurements (or for type 5 equations, TS values). Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Raw backscatter measurements (imaginary part)"</p></td>
@@ -4113,7 +4113,7 @@ tbd.
 <p>Type 5 conversion equation is intended for sonars for which the sonar manufacturer computes standard TS and Sv values as defined in  MacLennan et al. (2002).</p>
 </div>
 <div class="paragraph">
-<p>Using equation 5, the Sv value is directly stored in the <em>backscatter_r</em> variable and/or the TS value is directly stored in the <em>backscatter_i</em> variable</p>
+<p>Using equation 5, the Sv value is directly stored in the <em>backscatter_r</em> variable and/or the TS value is directly stored in the <em>backscatter_i</em> variable. It is permitted to store only Sv or only TS values, meaning that a file could have just a <em>backscatter_r</em> variable, just a <em>backscatter_i</em> variable, or both.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4832,6 +4832,9 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <p>transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)</p>
 </li>
 <li>
+<p>Explicitly allow for type 5 data to have only Sv, only TS, or both in a file.</p>
+</li>
+<li>
 <p>added substitute_value_used attribute to some variables to indicate whether the variable has a nominal/default value in it, or an actual measured/calibrated value in it. This is useful for when a value for a mandatory variable is not available.</p>
 </li>
 <li>
@@ -5348,7 +5351,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-10-14 07:36:59 UTC
+Last updated 2021-10-14 07:45:25 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
