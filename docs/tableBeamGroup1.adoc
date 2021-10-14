@@ -70,12 +70,14 @@ e|Variables | |
  3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}float beamwidth_receive_minor(ping_time, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam.
  3+|{attr}:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}float beamwidth_transmit_major(ping_time, tx_beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
  3+|{attr}:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam" 
  3+|{attr}:units = "arc_degree" 
@@ -127,10 +129,12 @@ e|Variables | |
  3+|{attr}:long_name = "Equivalent beam angle" 
  3+|{attr}:units = "sr" 
  2+|{attr}float :valid_range = 0.0, 12.56637061435917295385 |Maximum value is equivalent to 4π.
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}float gain_correction(ping_time, beam) |MA |Gain correction. This parameter is set from a calibration exercise. Necessary for type 2 conversion equation.
  3+|{attr}:long_name = "Gain correction" 
  3+|{attr}:units = "dB" 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
  
  |{var}short non_quantitative_processing(ping_time) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. A value of 0 always indicates no such processing.
  2+|{attr}:flag_meanings |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
@@ -141,7 +145,8 @@ e|Variables | |
  |{var}float receiver_sensitivity(ping_time, beam) |MA |Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.
  3+|{attr}:long_name = "Receiver sensitivity" 
  3+|{attr}:units = "dB re 1/μ" 
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}float sample_interval(ping_time) |M |Time between individual samples along a beam. Common for all beams in a ping.
  3+|{attr}:long_name = "Interval between recorded raw data samples" 
  3+|{attr}:units = "s" 
@@ -170,6 +175,7 @@ e|Variables | |
  |{var}float transducer_gain(ping_time, beam) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1.
  3+|{attr}:long_name = "Gain of transducer" 
  3+|{attr}:units = "dB" 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
  
  |{var}float transmit_bandwidth(ping_time, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
  3+|{attr}:long_name = "Nominal bandwidth of transmitted pulse" 
@@ -180,12 +186,14 @@ e|Variables | |
  3+|{attr}:long_name = "Nominal duration of transmitted pulse" 
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.
  3+|{attr}:long_name = "Effective duration of received pulse" 
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}float transmit_frequency_start(ping_time, tx_beam) |M |Frequency at the start of the transmit pulse. The beam dimension can be omitted, in which case the value apples to all beams in the ping.
  3+|{attr}:long_name = "Start frequency in transmitted pulse" 
  3+|{attr}:standard_name = "sound_frequency" 
@@ -206,11 +214,13 @@ e|Variables | |
  |{var}float transmit_source_level(ping_time, tx_beam) |MA |Source level generated by the transmit ping. Necessary for type 2 conversion equations.
  3+|{attr}:long_name = "Transmit source level" 
  3+|{attr}:units = "dB re 1 μPa at 1m" 
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}float transmitter_and_receiver_coefficient(ping_time) |MA |Sum of transmit source level (dB re 1 μPa at 1 m), voltage sensitivity (dB re 1 V/μPa), and system gain (dB). Necessary for type 6 conversion equations.
  3+|{attr}:long_name = "Transmitter and receiver coefficient" 
  3+|{attr}:units = "dB" 
- 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
  |{var}transmit_t transmit_type(ping_time, tx_beam) |M |Type of transmit pulse.
  3+|{attr}:long_name = "Type of transmitted pulse" 
  
