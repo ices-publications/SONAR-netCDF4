@@ -175,7 +175,7 @@ e|Variables | |
  |{var}float transducer_gain(ping_time, beam) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1.
  3+|{attr}:long_name = "Gain of transducer" 
  3+|{attr}:units = "dB" 
-2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
  
  |{var}float transmit_bandwidth(ping_time, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
  3+|{attr}:long_name = "Nominal bandwidth of transmitted pulse" 
