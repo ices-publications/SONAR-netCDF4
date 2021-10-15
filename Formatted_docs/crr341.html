@@ -824,7 +824,7 @@ end legend</pre>
 <p><strong>Platform</strong> <strong>–</strong> contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.</p>
 </li>
 <li>
-<p><strong>Provenance –</strong> contains metadata about how the SONAR-netCDF4 version of the data were obtained;</p>
+<p><strong>Provenance –</strong> contains metadata about how the SONAR-netCDF4 version of the data were obtained and processed;</p>
 </li>
 <li>
 <p><strong>Sonar –</strong> contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;</p>
@@ -2049,7 +2049,7 @@ end legend</pre>
 <div class="sect3">
 <h4 id="_provenance_group">3.10.4. Provenance group</h4>
 <div class="paragraph">
-<p>The provenance group provides information on how the SONAR-netCDF4 version of the data were created. The netCDF4 group name is <strong>/Provenance</strong> and is described in <a href="#provenanceTable">Table 9</a>.</p>
+<p>The provenance group provides information on how the SONAR-netCDF4 version of the data were created and what processes were applied to this data. The netCDF4 group name is <strong>/Provenance</strong> and is described in <a href="#provenanceTable">Table 9</a>.</p>
 </div>
 <table id="provenanceTable" class="tableblock frame-all grid-all fit-content">
 <caption class="title">Table 9. Description of the provenance group.</caption>
@@ -2087,13 +2087,18 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Date and time of the start of the conversion process in extended ISO8601:2005 extended format, including time zone.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides an audit trail for modifications to the original data. It should contain a separate line for each modification, with each line beginning with a timestamp and including user name, modification name and modification arguments. for example  2019-09-07T15:50+00Z (John Doe) File conversion by XXX software</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Dimensions</em></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;filenames = unlimited</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Can be of fixed or unlimited length, as appropriate.</p></td>
 </tr>
 <tr>
@@ -2353,13 +2358,13 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of samples in each beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Number of samples in each beam, per ping"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Number of samples in each beam, per ping"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "1"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "1"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:int valid_min = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_min = 0</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_t backscatter_r(ping_time, beam, subbeam)</p></td>
@@ -2444,7 +2449,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 360.0</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2462,7 +2467,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_range = 0.0, 360.0</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2612,7 +2617,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maximum value is equivalent to 4π.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2627,7 +2632,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2661,7 +2666,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1/μ"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2746,7 +2751,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2778,7 +2783,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2796,7 +2801,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2859,7 +2864,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1 μPa at 1m"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -2874,7 +2879,7 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
@@ -5351,7 +5356,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-10-14 07:46:25 UTC
+Last updated 2021-10-15 01:50:06 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
