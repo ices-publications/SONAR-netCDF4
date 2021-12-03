@@ -313,7 +313,7 @@ The netCDF4 group name is */Sonar* and contains three subgroups.
 ===== Beam group
 This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_groupX*, where *X* is an integer.
 
-Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeammodeTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
+Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeamGroupTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
 
 Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
 
@@ -488,7 +488,56 @@ a|latexmath:[\alpha]|Calculated from ...|
 
 === Type 4
 
-Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders.
+Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders when data is recorded with complex samples.
+
+EK80 and ES80 can record data using EK60 Power and Angle format and Type 3 equations can then be used.
+
+In order to take advantage of the broadband mode of the EK80 echosounder, the backscatter complex amplitude samples are stored in the _backscatter_r_ and the _backscatter_i_ variable with data type _float_ for each sub-beam corresponding to each sub-array of the transducer (<<Split-aperture beams>>).
+
+In order to increase signal-to-noise ratio and resolution along the beam axis, pulse compression is used for each sub-beam by convolving the complex backscatter received signal with a complex conjugated and time reversed version of the theoretical transmit and filtered pulse  (_transmit_pulse_model_)
+
+Noting latexmath:[n], the sample index in the discrete time domain, the pulse compressed complex samples for each sub-beam denoted latexmath:[y_{pc}] are then equal to:
+
+[stem]
+++++
+\begin{equation}
+y_{pc}(n) = \frac{y_{rx}(n)*y_{tx,th}^*(-n)}{||y_{tx,th}||^2_2},
+\end{equation}
+++++
+where latexmath:[y_{rx}] is the complex received signal stored in he _backscatter_r_ and the _backscatter_i_ variables and latexmath:[y_{tx,th}] is the complex theoretical transmit and filtered signal stored in _transmit_pulse_model_r_ and _transmit_pulse_model_i_ variables
+
+The transceiver measures voltage over a load, latexmath:[z_{\textrm{rx,e}}], connected in series with the transducer impedance, latexmath:[z_{\textrm{td,e}}]. The number of sub-beams latexmath:[N_{u}] are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeamGroupTable>> and the matched filter received electric power is then equal to :
+
+[stem]
+++++
+\begin{equation}
+p_{\textrm{rx,e}}(n)= \left( \frac{| \sum_{u = 1}^{N_{u}} y_{pc}(n,u)|}{2\sqrt{2}} \right)^2 \left( \frac{|z_{\textrm{rx,e}}+z_{\textrm{td,e}}|}{z_{\textrm{rx,e}}} \right)^2 \frac{1}{|z_{\textrm{td,e}}|}.
+\end{equation}
+++++
+
+match filtered recieved electric power is transformed into calibrated target strength using:
+
+++++
+
+\begin{equation}
+TS(f) = 10\log_{10}(p_{\textrm{rx,e}}(f)) + 40\log_{10}(r) + 2\alpha(f) r
+- 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2} \right)- 2G_0(f),
+\end{equation}
+
+++++
+where p_{\textrm{rx,e}}(f) is the Fourier transform of the match filtered recieved electric power at frequency f, latexmath:[r] is the range from the transducer to the target [m], latexmath:[\alpha] the acoustic absorption at the frequency f [dB m^-1^], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable), latexmath:[\lambda] the acoustic wavelength [m], and latexmath:[G_0] the on-axis gain (variable _transducer_gain_) at the frequency f from the calibration exercise. Beam pattern compensation for echoes that do not arrive on the transducer axis is done in addition to this equation (if such angles can be estimated, as can be done with split-aperture transducers). Volume backscatter strength is obtained from a similar equation:
+
+[stem]
+++++
+\begin{equation}
+S_v(f))= 10\log_{10}(p_{\textrm{rx,e}}(f)) + 20\log_{10}(r) + 2\alpha(f) r - 10\log_{10}\left(\frac{P_t \lambda^2 c \psi (\frac{f_n}{f})^2 \tau_e}{32 \pi^2} \right) - 2G_0(f),
+\end{equation}
+++++
+
+where latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle at the nominal frequency (variable _equivalent_beam_angle_), and latexmath:[\tau_e] the effective pulse duration (variable _receive_duration_effective_).
+
+The effective pulse duration is computed for EK80 and ES80 from ....
+
 
 === Type 5
 
@@ -780,7 +829,7 @@ R_{BCS->TCS} =
 ++++
 
 
-where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
+where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeamGroupTable>>)
 
 and:
 
@@ -791,7 +840,7 @@ R_{PCS->SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
 
-where stem:[h,p,r] are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>).
+where stem:[h,p,r] are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <<sonarBeamGroupTable>>).
 (_Those variables can also be defined at a higher sample rate in the platform group  (see <<platformGroupTable>>)_)
 
 and:
@@ -873,7 +922,7 @@ R_{BCS->TCS} =
 \end{equation}
 ++++
 
-where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeammodeTable>>)
+where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeamGroupTable>>)
 
 and:
 
@@ -911,7 +960,7 @@ and:
 R_{PCS->SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 \end{equation}
 ++++
-where stem:[h,p,r] are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <<sonarBeammodeTable>>) or platform group (see <<platformGroupTable>>)
+where stem:[h,p,r] are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <<sonarBeamGroupTable>>) or platform group (see <<platformGroupTable>>)
 
 
 === Equations for positioning echoes in a Geographical Coordinate System
@@ -932,7 +981,7 @@ Each translated coordinate can be then expressed as latitude-longitude coordinat
 
 == Split-aperture beams
 
-Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to store such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the _beam_type_ variable in each <<sonarBeammodeTable,Beam_groupX>> subgroup. Split-aperture echo arrival angles are always given in the sonar beam coordinate system (see <<Coordinate systems>>).
+Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to store such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the _beam_type_ variable in each <<sonarBeamGroupTable,Beam_groupX>> subgroup. Split-aperture echo arrival angles are always given in the sonar beam coordinate system (see <<Coordinate systems>>).
 
 When sub-beams from a split-aperture transducer are provided, it is also necessary to combine them to give the power or amplitude of the echoes, as received by the combined beam. All known split-aperture systems achieve this by taking the average of the sub-beam values, noting that the sub-beam data are typically complex power or amplitude values.
 
@@ -942,7 +991,7 @@ To allow for existing conventions on how the split-aperture angles are stored or
 The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains either physical arrival angles or phase angles. For the latter, the minor (latexmath:[\theta]) and major (latexmath:[\phi]) physical arrival angles are obtained by dividing by the minor latexmath:[\eta_\theta] and major latexmath:[\eta_\phi] angle sensitivities respectively. For consistency, when physical arrival angles are stored in the file, latexmath:[\eta_\theta] and latexmath:[\eta_\phi] should still be present and be set to 1.0.
 
 === Angles not stored in file
-The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeammodeTable>>, in the same order as labelled in <<transducer_types>>.
+The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeamGroupTable>>, in the same order as labelled in <<transducer_types>>.
 
 .The split-aperture transducer arrangements supported by SONAR-netCDF4 (A: 4 quadrants; B: 3 sub-beams; C; 3+1 sub-beams). The Cartesian coordinates show the orientation of the sonar beam coordinate system relative to the transducer sub-beams (note that the _z'_-axis points into the page). The numbers indicate the sub-beam labels for each type of transducer.
 [[transducer_types]]

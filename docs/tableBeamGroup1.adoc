@@ -19,6 +19,7 @@ e|Dimensions | |
  |{var}subbeam | |The number of sub-beams in these beams.
  |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  |{var}tx_beam | |The number of transmit beams in this beam group
+ |{var}frequency | |The number of frequencies during the calibration exercise of the FM mode.
  
 e|Coordinate variables | |
  |{var}string beam(beam) |M |Beam name (or number or identification code).
@@ -165,14 +166,22 @@ e|Variables | |
  |{var}float detected_bottom_range(ping_time, beam) |O |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
  3+|{attr}:long_name = "Detected range of the bottom" 
  3+|{attr}:units = "m" 
- 3+|{attr}:valid_min = "0.0" 
+ 3+|{attr}:valid_min = "0.0"
+
+ |{var}float transducer_impedance(ping_time, subbeam) |MA |Impedance of the transducer. This is the impedance of the load over which the transceiver measures voltage on the transducer subbeam. Necessary for conversion equation type 4.
+ 3+|{attr}:long_name = "Impedance of transducer"
+ 3+|{attr}:units = "ohm"
+
+ |{var}float transceiver_impedance(ping_time, subbeam) |MA |Impedance of the transceiver. This is the impedance of the transducer subbeam. Necessary for conversion equation type 4.
+ 3+|{attr}:long_name = "Impedance of transceiver"
+ 3+|{attr}:units = "ohm"
  
  |{var}sample_t time_varied_gain(ping_time) |MA |Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.
  3+|{attr}:long_name = "Time-varied-gain coefficients" 
  3+|{attr}:units = "dB" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
- |{var}float transducer_gain(ping_time, beam) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1.
+ |{var}float transducer_gain(ping_time, beam, frequency) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1, 3 and 4.
  3+|{attr}:long_name = "Gain of transducer" 
  3+|{attr}:units = "dB" 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
@@ -188,17 +197,17 @@ e|Variables | |
  3+|{attr}float :valid_min = 0.0 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
 
- |{var}pulse_t transmit_pulse_model_r(ping_time, tx_beam) |MA |Real part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate as the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
+ |{var}pulse_t transmit_pulse_model_r(ping_time, tx_beam) |MA |Real part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate of the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
  3+|{attr}:long_name = "Real part of the model of the transmit pulse"
  3+|{attr}float :valid_min = -1.0 
  3+|{attr}float :valid_max = 1.0 
 
- |{var}pulse_t transmit_pulse_model_i(ping_time, tx_beam) |MA |Imaginary part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate as the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
+ |{var}pulse_t transmit_pulse_model_i(ping_time, tx_beam) |MA |Imaginary part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate of the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
  3+|{attr}:long_name = "Imaginary part of the model of the transmit pulse"
  3+|{attr}float :valid_min = -1.0
  3+|{attr}float :valid_max = 1.0
-
- |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.
+ 
+ |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2, 3 and 4 conversion equations.
  3+|{attr}:long_name = "Effective duration of received pulse" 
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
