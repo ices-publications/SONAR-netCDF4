@@ -1010,6 +1010,8 @@ Gridded:: A new subgroup, Gridded is added to allow for gridded backscatter data
 
 ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler current profilers.
 
+Provenance:: Changed the required timestamp format to match that used elsewhere in the convention.
+
 === Changes within a document version 
 
 [cols=",,,",options="header",]
