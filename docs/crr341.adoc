@@ -1085,6 +1085,11 @@ Platform:: The platform group can now store data from multiple sensors of the sa
 
 Platform and Sonar:: The transducer description now allows for separate emitting and receiving antennas (as used by some bathymetric sonars). The sonar beam variable names and descriptions have been updated to distinguish between transmit and receive beams.
 
+Equation type::
+* Type 3 and 4 data have been added in order to handle backscatter data from respectively Simrad EK60 and EK80 echosounders.
+* Type 5 data has been added for handling sonars that directly store Sv and/or TS data as defined in MacLennan et al. (2002).
+* Type 6 data has been added for handling data recorded by Furuno FCV-38 echosounder.
+
 Beam:: 
 * Added variables for the description and storage of data from split-aperture beams via a subbeam dimension added in the Sonar group.
 * transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)
