@@ -36,8 +36,8 @@ e|Variables | |
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
  
- |{var}int sample_count(ping_time, beam) |O |The number of samples in each beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.
- 3+|{attr}:long_name = "Number of samples in each beam, per ping" 
+ |{var}int sample_count(ping_time, beam, subbeam) |O |The number of samples in each beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.
+ 3+|{attr}:long_name = "Number of samples per ping in each beam, and optionally subbeam" 
  3+|{attr}:units = "1" 
  3+|{attr}int :valid_min = 0 
  
