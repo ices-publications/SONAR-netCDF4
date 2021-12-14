@@ -2128,7 +2128,7 @@ end legend</pre>
 <p>This group contains ping based sonar backscatter data and associated metadata and is described in <a href="#sonarGroupTable">Table 10</a>. The netCDF4 group name is <strong>Beam_groupX</strong>, where <strong>X</strong> is an integer.</p>
 </div>
 <div class="paragraph">
-<p>Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.</p>
+<p>Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <a href="#sonarBeamGroupTable">Table 11</a>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.</p>
 </div>
 <div class="paragraph">
 <p>Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group.</p>
@@ -2275,6 +2275,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ragged arrays of split-aperture angles. Data type can varied to suit data storage needs.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;float(*) pulse_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store arrays of modeled transmit pulse samples.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Dimensions</em></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2298,6 +2302,11 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;tx_beam</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of transmit beams in this beam group</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;frequency</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of frequencies during the calibration exercise of the FM mode.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Coordinate variables</em></p></td>
@@ -2334,6 +2343,20 @@ end legend</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "ping_time platform_latitude platform_longitude"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float frequency(frequency)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frequencies for which transducer gain values have been estimated during the calibration exercise.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calibration gain frequencies"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "Hz"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Variables</em></p></td>
@@ -2726,6 +2749,28 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:valid_min = "0.0"</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transducer_impedance(ping_time, subbeam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Impedance of the transducer. This is the impedance of the load over which the transceiver measures voltage on the transducer subbeam. Necessary for conversion equation type 4.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Impedance of transducer"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "ohm"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transceiver_impedance(ping_time, subbeam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Impedance of the transceiver. This is the impedance of the transducer subbeam. Necessary for conversion equation type 4.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Impedance of transceiver"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "ohm"</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;sample_t time_varied_gain(ping_time)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.</p></td>
@@ -2740,9 +2785,9 @@ end legend</pre>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:coordinates = "ping_time platform_latitude platform_longitude"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transducer_gain(ping_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transducer_gain(ping_time, beam, frequency)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1, 3 and 4.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Gain of transducer"</p></td>
@@ -2753,6 +2798,20 @@ end legend</pre>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float calibrated_frequency(frequency)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frequencies for which transducer gain values have been estimated during the calibration exercise.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calibration gain frequencies"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "Hz"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = 0.0</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transmit_bandwidth(ping_time, tx_beam)</p></td>
@@ -2787,9 +2846,37 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;pulse_t transmit_pulse_model_r(ping_time, tx_beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate of the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Real part of the model of the transmit pulse"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = -1.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_max = 1.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;pulse_t transmit_pulse_model_i(ping_time, tx_beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imaginary part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate as the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Imaginary part of the model of the transmit pulse"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_min = -1.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;float :valid_max = 1.0</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float receive_duration_effective(ping_time, tx_beam)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2,3 and 4 conversion equations.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2, 3 and 4 conversion equations.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Effective duration of received pulse"</p></td>
@@ -4109,7 +4196,101 @@ tbd.
 <div class="sect2">
 <h3 id="_type_4">4.4. Type 4</h3>
 <div class="paragraph">
-<p>Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders.</p>
+<p>Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders when data is recorded with complex samples.</p>
+</div>
+<div class="paragraph">
+<p>EK80 and ES80 can record data using EK60 Power and Angle format and Type 3 equations can then be used.</p>
+</div>
+<div class="paragraph">
+<p>In order to take advantage of the broadband mode of the EK80 echosounder, the backscatter complex amplitude samples are stored in the <em>backscatter_r</em> and the <em>backscatter_i</em> variable with data type <em>float</em> for each sub-beam corresponding to each sub-array of the transducer (<a href="#_split_aperture_beams">Chapter 6</a>).</p>
+</div>
+<div class="paragraph">
+<p>For FM transmission mode, in order to increase signal-to-noise ratio and resolution along the beam axis, pulse compression is used for each sub-beam by convolving the complex backscatter received signal with a complex conjugated and time reversed version of the theoretical transmit and filtered pulse  (<em>transmit_pulse_model</em>).</p>
+</div>
+<div class="paragraph">
+<p>Noting \(n\), the sample index in the discrete time domain, the pulse compressed complex samples for each sub-beam denoted \(y_{pc}\) are then equal to:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation}
+y_{pc}(n) = \frac{y_{rx}(n)*y_{tx,th}^*(-n)}{||y_{tx,th}||^2_2},
+\end{equation}\]
+</div>
+</div>
+<div class="paragraph">
+<p>where \(y_{rx}\) is the complex received signal stored in the <em>backscatter_r</em> and <em>backscatter_i</em> variables and \(y_{tx,th}\) is the complex theoretical transmit and filtered signal stored in <em>transmit_pulse_model_r</em> and <em>transmit_pulse_model_i</em> variables</p>
+</div>
+<div class="paragraph">
+<p>The transceiver measures voltage over a load, \(z_{\textrm{rx,e}}\), connected in series with the transducer impedance, \(z_{\textrm{td,e}}\). The number of sub-beams \(N_{u}\) are stored as the <em>subbeam</em> dimension in the backscatter variables in <a href="#sonarBeamGroupTable">Table 11</a> and received electric power is then equal to :</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{equation}
+p_{\textrm{rx,e}}(n)= \frac{1}{N_{u}}\left( \frac{| \sum_{u = 1}^{N_{u}} y(n,u)|}{2\sqrt{2}} \right)^2 \left( \frac{|z_{\textrm{rx,e}}+z_{\textrm{td,e}}|}{|z_{\textrm{rx,e}|}} \right)^2 \frac{1}{|z_{\textrm{td,e}}|}.
+\end{equation}\]
+</div>
+</div>
+<div class="paragraph">
+<p>with \(y\) taken as \(y_{rx}\) for CW transmission and as \(y_{pc}\) for FM transmission.</p>
+</div>
+<div class="paragraph">
+<p>For CW transmission, Type 3 equations can then be applied, taking logarithmic received power \(P_r\) as:</p>
+</div>
+\begin{equation}
+P_r = 10\log_{10}(p_{\textrm{rx,e}})
+\end{equation}
+<div class="paragraph">
+<p>and the nominal transmit pulse duration \(\tau\) as:</p>
+</div>
+\begin{equation}
+\tau = T_{tx,th}\frac{mean|y_{tx,th}|^2}{max|y_{tx,th}|^2}
+\end{equation}
+<div class="paragraph">
+<p>with \(T_{tx,th}\) the duration [s] of the complex theoretical transmit and filtered signal \(y_{tx,th}\).</p>
+</div>
+<div class="paragraph">
+<p>For FM transmission, match filtered received electric power is transformed into volume backscatter strength using:</p>
+</div>
+\begin{equation}
+S_v(n) = 10\log_{10}(p_{\textrm{rx,e}}(n)) + 20\log_{10}(r) + 2\alpha(f_c) r
+- 10\log_{10}\left(\frac{P_t \lambda^2 c \psi (\frac{f_c}{f_n})^2 \tau_e}{32 \pi^2} \right) - 2G_0(f_c),
+\end{equation}
+<div class="paragraph">
+<p>where  \(r\) is the range from the transducer to the sample \(n\) [m], \(\alpha\) the acoustic absorption at the frequency f [dB m<sup>-1</sup>], \(f_c\) the central frequency of the pulse bandwidth [Hz], \(P_t\) the transmitted power setting (<em>transmit_power</em> variable) [W], \(\lambda\) the acoustic wavelength [m], \(c\) is sound speed [m s<sup>-1</sup>], \(\psi\) the equivalent beam angle at the transducer nominal frequency \(f_n\) (variable <em>equivalent_beam_angle</em>), \(\tau_e\) the effective pulse duration (variable <em>receive_duration_effective</em>) and \(G_0\) the on-axis gain (variable <em>transducer_gain</em>) from the calibration exercise at the frequency \(f_c\).</p>
+</div>
+<div class="paragraph">
+<p>The match filtered effective pulse duration \(\tau_e\) is computed for EK80 and ES80 from</p>
+</div>
+\begin{equation}
+\tau_e = T_{tx,pc}.\frac{mean|y_{tx,pc}|^2}{max|y_{tx,pc}|^2},
+\end{equation}
+<div class="paragraph">
+<p>where \(y_{tx,pc}\) is the autocorrelation of the theoretical transmit pulse</p>
+</div>
+\begin{equation}
+y_{tx,pc}(n)=\frac{y_{tx,th}(n)*y_{tx,th}^*(-n)}{||y_{tx,th}||^2_2},
+\end{equation}
+<div class="paragraph">
+<p>and \(T_{tx,pc}\) the \(y_{tx,pc}\)  duration [s]</p>
+</div>
+<div class="paragraph">
+<p>The use of broadband FM tranmission enables to provide volume backscatter strength as a function of frequency, through:</p>
+</div>
+\begin{equation}
+S_v(f)= 10\log_{10}(p_{\textrm{rx,e}}(f)) + 20\log_{10}(r) + 2\alpha(f) r - 10\log_{10}\left(\frac{y_{tx,pc}(f) P_t  \lambda^2 c \psi (\frac{f_n}{f})^2 \tau_{FFT}}{32 \pi^2} \right) - 2G_0(f),
+\end{equation}
+<div class="paragraph">
+<p>where \(p_{\textrm{rx,e}}(f)\) and \(y_{tx,pc}(f)\) are the Fourier transforms at frequency f   of  \(p_{\textrm{rx,e}}\) and \(y_{tx,pc}\) , performed with the same duration/windowing characteristics, \(r\) is the range [m] from the transducer to the sample centered in the Fourier transform window , and \(\tau_{FFT}\) the duration of applied Fourier transform.</p>
+</div>
+<div class="paragraph">
+<p>Single target strength as a function of frequency is obtained from a similar equation, for targets located on beam-axis:</p>
+</div>
+\begin{equation}
+TS(f) = 10\log_{10}(p_{\textrm{rx,e}}(f)) + 40\log_{10}(r) + 2\alpha(f) r
+- 10\log_{10}\left( \frac{y_{tx,pc}(f) P_t\lambda^{2}}{16\pi^2} \right)- 2G_0(f),
+\end{equation}
+<div class="paragraph">
+<p>Beam pattern compensation for echoes that do not arrive on the transducer axis may be added to this equation, if such angles are estimated, as can be done with split-aperture transducers.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4132,13 +4313,9 @@ tbd.
 <div class="paragraph">
 <p>Two complex signals, \(z_0\) and \(z_1\), are converted into the calibrated target strength via:</p>
 </div>
-<div class="stemblock">
-<div class="content">
-\[\begin{equation} \label{eq:FCV38TS}
+\begin{equation} \label{eq:FCV38TS}
 TS = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\ \log_{10}\left(r\right) + 2\alpha r - \left(TR + \Delta G\right),
-\end{equation}\]
-</div>
-</div>
+\end{equation}
 <div class="paragraph">
 <p>where \(A\) is the amplitude or envelope of the received voltage signal (V), calculated from:</p>
 </div>
@@ -4536,7 +4713,7 @@ R_{BCS-&gt;TCS} =
 </div>
 </div>
 <div class="paragraph">
-<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>)</p>
+<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeamGroupTable">Table 11</a>)</p>
 </div>
 <div class="paragraph">
 <p>and:</p>
@@ -4549,7 +4726,7 @@ R_{PCS-&gt;SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 </div>
 </div>
 <div class="paragraph">
-<p>where \(h,p,r\) are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>).
+<p>where \(h,p,r\) are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeamGroupTable">Table 11</a>).
 (<em>Those variables can also be defined at a higher sample rate in the platform group  (see <a href="#platformGroupTable">Table 4</a>)</em>)</p>
 </div>
 <div class="paragraph">
@@ -4641,7 +4818,7 @@ R_{BCS-&gt;TCS} =
 </div>
 </div>
 <div class="paragraph">
-<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>)</p>
+<p>where \(\Phi,\Theta,\Psi\) are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <a href="#sonarBeamGroupTable">Table 11</a>)</p>
 </div>
 <div class="paragraph">
 <p>and:</p>
@@ -4687,7 +4864,7 @@ R_{PCS-&gt;SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 </div>
 </div>
 <div class="paragraph">
-<p>where \(h,p,r\) are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>) or platform group (see <a href="#platformGroupTable">Table 4</a>)</p>
+<p>where \(h,p,r\) are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <a href="#sonarBeamGroupTable">Table 11</a>) or platform group (see <a href="#platformGroupTable">Table 4</a>)</p>
 </div>
 </div>
 </div>
@@ -4725,7 +4902,7 @@ The vertical translation at each time is a vector obtained by adding the variabl
 <h2 id="_split_aperture_beams">6. Split-aperture beams</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to store such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the <em>beam_type</em> variable in each <a href="#sonarBeammodeTable">Beam_groupX</a> subgroup. Split-aperture echo arrival angles are always given in the sonar beam coordinate system (see <a href="#_coordinate_systems">Chapter 5</a>).</p>
+<p>Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to store such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the <em>beam_type</em> variable in each <a href="#sonarBeamGroupTable">Beam_groupX</a> subgroup. Split-aperture echo arrival angles are always given in the sonar beam coordinate system (see <a href="#_coordinate_systems">Chapter 5</a>).</p>
 </div>
 <div class="paragraph">
 <p>When sub-beams from a split-aperture transducer are provided, it is also necessary to combine them to give the power or amplitude of the echoes, as received by the combined beam. All known split-aperture systems achieve this by taking the average of the sub-beam values, noting that the sub-beam data are typically complex power or amplitude values.</p>
@@ -4742,7 +4919,7 @@ The vertical translation at each time is a vector obtained by adding the variabl
 <div class="sect2">
 <h3 id="_angles_not_stored_in_file">6.2. Angles not stored in file</h3>
 <div class="paragraph">
-<p>The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<a href="#transducer_types">Figure 3</a>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the <em>subbeam</em> dimension in the backscatter variables in <a href="#sonarBeammodeTable">[sonarBeammodeTable]</a>, in the same order as labelled in <a href="#transducer_types">Figure 3</a>.</p>
+<p>The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<a href="#transducer_types">Figure 3</a>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the <em>subbeam</em> dimension in the backscatter variables in <a href="#sonarBeamGroupTable">Table 11</a>, in the same order as labelled in <a href="#transducer_types">Figure 3</a>.</p>
 </div>
 <div id="transducer_types" class="imageblock text-center">
 <div class="content">
@@ -4825,6 +5002,22 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <dt class="hdlist1">Platform and Sonar</dt>
 <dd>
 <p>The transducer description now allows for separate emitting and receiving antennas (as used by some bathymetric sonars). The sonar beam variable names and descriptions have been updated to distinguish between transmit and receive beams.</p>
+</dd>
+<dt class="hdlist1">Equation type</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Type 3 and 4 data have been added in order to handle backscatter data from respectively Simrad EK60 and EK80 echosounders.</p>
+</li>
+<li>
+<p>Type 5 data has been added for handling sonars that directly store Sv and/or TS data as defined in MacLennan et al. (2002).</p>
+</li>
+<li>
+<p>Type 6 data has been added for handling data recorded by Furuno FCV-38 echosounder.</p>
+</li>
+</ul>
+</div>
 </dd>
 <dt class="hdlist1">Beam</dt>
 <dd>
@@ -5360,7 +5553,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2021-12-09 21:56:15 UTC
+Last updated 2021-12-14 00:46:44 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
