@@ -21,7 +21,7 @@ jobs:
       uses: actions/checkout@master
 
     - name: build SONARnetCDF4.adoc
-      run: asciidoctor -r asciidoctor-bibtex --backend html5 -a data-uri crr341.adoc  
+      run: asciidoctor -r asciidoctor-bibtex -r asciidoctor-mathematical --backend html5 -a data-uri crr341.adoc  
       working-directory: docs
     
     - name: move crr341 file to report folder
