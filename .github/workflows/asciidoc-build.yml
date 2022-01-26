@@ -15,7 +15,7 @@ jobs:
       run: apk add --update git 
         
     - name: install asciidoctor-bibtex
-      run: gem install asciidoctor-bibtex
+      run: gem install asciidoctor-bibtex asciidoctor-mathematical
       
     - name: checkout 
       uses: actions/checkout@master
