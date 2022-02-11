@@ -811,6 +811,7 @@ More complex equations and algorithm for more precise positioning or for other s
 Given an echo _E(beam,i)_ where _i_ is the sample number (from zero to one less than the number of samples) and _beam_ the receiving beam considered, several values can be associated with this echo :
 
 * A time stamp given by
+
 [stem]
 ++++
 \begin{equation}
