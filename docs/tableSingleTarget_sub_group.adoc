@@ -1,0 +1,45 @@
+:var: {nbsp}{nbsp}{nbsp}{nbsp}
+:attr: {var}{var}
+[%autowidth,options="header",]
+|===
+|Description |Obligation |Comment
+e|Types | |
+ 2+|{var}int(*) sample_index |Variable length vector used to store array of index of single target data detected using backscatter_r and backscatter_ior backscater_r and echoangle_major and echoangle_minor.
+ 2+|{var}float(*) sample_range |Variable length vector used to store array of range of single target data detected using backscatter_r and backscatter_ior backscater_r and echoangle_major and echoangle_minor.
+ 2+|{var}float(*) sample_angle |Variable length vector used to store variable length array of angle of single target data detected using backscatter_r and backscatter_ior backscater_r and echoangle_major and echoangle_minor.
+ 2+|{var}float(*) sample_TS |Variable length vector used to store variable length array of Target Strength of single target data detected using backscatter_r and backscatter_ior backscater_r and echoangle_major and echoangle_minor.
+
+
+e|Variables | |
+ |{var}int detection_count(ping_time, beam) |MA |The number of single target detection in each beam/ping in the single_target_XXX variables.
+ 3+|{attr}:long_name = "Number of single target detection in each beam, per ping"
+ 3+|{attr}:units = "1"
+ 3+|{attr}int :valid_min = 0
+
+ |{var}sample_index single_target_index(ping_time,beam) |MA |Index of single target detected and possibly tracked on multiple pings.
+ 3+|{attr}:units = "dB"
+ 3+|{attr}:long_name = "Index of single target detected"
+
+ |{var}sample_range single_target_range(ping_time,beam) |MA |Range of single target detected.
+ 3+|{attr}:units = "m"
+ 3+|{attr}:long_name = "Range of single target detected"
+
+ |{var}sample_angle single_target_alongship_angle(ping_time,beam) |MA |Angle of single target detected in the minor beam coordinate.
+ 3+|{attr}:units = "arc_degree"
+ 3+|{attr}:long_name = "Single target arrival angle in the minor beam coordinate"
+ 3+|{attr}float :valid_range = −180.0, 180.0
+
+ |{var}sample_angle single_target_athwartship_angle(ping_time,beam) |MA |Angle of single target detected in the major beam coordinate.
+ 3+|{attr}:units = "arc_degree"
+ 3+|{attr}:long_name = "Single target arrival angle in the major beam coordinate"
+ 3+|{attr}float :valid_range = −180.0, 180.0
+
+ |{var}sample_TS compensated_TS(ping_time,beam,frequency) |MA |Calculated beam compensated Target Strength.
+ 3+|{attr}:units = "dB"
+ 3+|{attr}:long_name = "Calculated Target Strength after compensation for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"
+ 
+ |{var}sample_TS uncompensated_TS(ping_time,beam,frequency) |MA |Calculated beam uncompensated Target Strength.
+ 3+|{attr}:units = "m/s"
+ 3+|{attr}:long_name = "Calculated Target Strength uncompensated for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"
+
+|===
