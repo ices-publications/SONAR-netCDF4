@@ -257,7 +257,7 @@ e|Variables | |
  3+|{attr}:valid_min = "0" 
  3+|{attr}:long_name = "Receive transducer index" 
  
- |{var}int transmit_transducer_index(ping_time, beam) |MA |Transmitting or monostatic transducer index associated with the given receiving beam
+ |{var}int transmit_transducer_index(ping_time, tx_beam) |MA |Transmitting or monostatic transducer index associated with the given transmit beam
  3+|{attr}:valid_min = "0" 
  3+|{attr}:long_name = "Transmit transducer index" 
  
