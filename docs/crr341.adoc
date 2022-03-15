@@ -345,7 +345,9 @@ include::tableMean_current_sub_group.adoc[]
 
 This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
 
-_more to come_
+.Description of the beam grid subgroups of the sonar group.
+[[sonarGridGroupTable]]
+include::tableBeamGridGroup1.adoc[]
 
 ===== Interpretation
 This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Gridded and Beam_group. The netCDF4 group name is *InterpretationX*, where *X* is an integer.
