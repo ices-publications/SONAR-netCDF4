@@ -1,0 +1,33 @@
+:var: {nbsp}{nbsp}{nbsp}{nbsp}
+:attr: {var}{var}
+[%autowidth,options="header",]
+|===
+|Description |Obligation |Comment
+e|Variables | |
+ |{var}float transducer_impedance_i(ping_time, beam, frequency) |M |Transducer impedance imaginary part.
+ 3+|{attr}:long_name = "Transducer impedance imaginary part" 
+ 3+|{attr}:units = "ohm 
+ 
+ |{var}float transducer_impedance_r(ping_time, beam, frequency) |M |Transducer impedance real part.
+ 3+|{attr}:long_name = "Transducer impedance real part" 
+ 3+|{attr}:units = "ohm 
+
+|{var}float transceiver_impedance_i(ping_time, beam, frequency) |M |Transceiver impedance imaginary part.
+ 3+|{attr}:long_name = "Transceiver impedance imaginary part" 
+ 3+|{attr}:units = "ohm 
+ 
+ |{var}float transceiver_impedance_r(ping_time, beam, frequency) |M |Transceiver impedance real part.
+ 3+|{attr}:long_name = "Transceiver impedance real part" 
+ 3+|{attr}:units = "ohm 
+
+ |{var}int transceiver_sample_frequency(ping_time, beam) |M |Transceiver sample frequency.
+ 3+|{attr}:long_name = "Transceiver sample frequency" 
+ 3+|{attr}int :valid_min = 1
+
+ |{var}float filter_coefficients(ping_time, beam, stage) |M |Filter coefficients.
+ 3+|{attr}:long_name = "Filter coefficients" 
+  
+ |{var}int filter_decimation(ping_time, beam, stage) |M |Filter decimation.
+ 3+|{attr}:long_name = "Filter decimation" 
+ 3+|{attr}int :valid_min = 1  
+|===

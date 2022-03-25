@@ -1,0 +1,1434 @@
+= The SONAR-netCDF4 convention for sonar data, Version 2.0
+Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
+:toc: left
+:toclevels: 4
+:doctype: book
+:revnumber: 1.8
+:xrefstyle: short
+:source-highlighter: highlightjs
+:highlightjsdir: highlight
+:sectnumslevels: 4
+:stem: latexmath
+:eqnums:
+:bibtex-file: references.bib
+:bibtex-style: ices-journal-of-marine-science
+
+// a future version of Asciidoctor will use the 'untitled' option to now show the heading
+[colophon%untitled]
+== Colophon
+International Council for the Exploration of the Sea +
+Conseil International pour l’Exploration de la Mer
+
+{empty}H. C. Andersens Boulevard 44-46  +
+DK-1553 Copenhagen V +
+Denmark +
+Telephone (+45) 33 38 67 00 +
+Telefax (+45) 33 93 42 15 +
+http://www.ices.dk[www.ices.dk] +
+info@ices.dk
+
+Recommended format for purposes of citation:
+
+_to be filled in once a new version is published_
+
+Series Editor: Emory D. Anderson
+
+The material in this report may be reused for non-commercial purposes using the recommended citation. ICES may only grant usage rights of information, data, images, graphs, etc. of which it has ownership. For other third-party material cited in this report, you must contact the original copyright holder for permission. For citation of datasets or use of data to be included in other databases, please refer to the latest ICES data policy on ICES website. All extracts must be acknowledged. For other reproduction requests please contact the General Secretary.
+
+This document is the product of an expert group under the auspices of the International Council for the Exploration of the Sea and does not necessarily represent the view of the Council.
+
+Cover image: (C) OCEANA/Carlos Suárez
+
+http://doi.org/10.17895/ices.pub.4392 +
+ISBN 978-87-7482-214-1 +
+ISSN 1017-6195
+
+(C) 2018 International Council for the Exploration of the Sea
+
+:sectnums!:
+== Foreword
+:sectnums:
+
+This report documents a convention for the storage of sonar data in netCDF4-formatted computer files, with an initial focus on omnisonars. The intention is to provide a well-founded convention that is supported by multiple sonar systems and multiple sonar analysis software packages, with the aim of facilitating the use of sonar data for research and survey purposes. The name of this convention is SONAR-netCDF4.
+
+This document was developed by the Topic Group on Defining a data format for omnidirectional fisheries sonar, part of ICES Working Group on Fisheries Acoustics, Science, and Technology (WGFAST).
+
+== Introduction
+
+Sonars have long been used to study and understand fisheries and the aquatic environment, but only recently have they directly provided digital data for quantitative analysis. Each manufacturer typically provides such data in a proprietary, but usually open, file format specific to their sonar systems. This hinders the effective use and exchange of such data by requiring the development and maintenance of file-reading software for multiple analysis programs and multiple sonars.
+
+This document presents a convention for the storage and exchange of fisheries sonar data, with an initial focus on omnisonars. It is sufficiently generic and flexible to contain all foreseeable types of fisheries sonar data, along with necessary metadata. It also serves as a statement of the minimum set of data and metadata required to use omnisonar data in a quantitative manner.
+
+=== Background
+
+Many purpose-built file formats exist to store and exchange data from scientific and industrial equipment. Formats have been created by sonar and echosounder manufacturers; in addition, more generic acoustic data formats such as the Generic Water Column (GWC) format cite:[geeMultibeamWaterColumn2012], the eXtended Triton Format (XTF; citenp:[triton2013]), and the HydroACoustics (HAC) format cite:[mcquinn2005] have also been created. These formats store a time-ordered sequence of datagrams, making it easy to append new data. Other data, such as geographical position, are typically interleaved into the sequence of datagrams. However, this is not optimal for analysis purposes when data are viewed and analysed as a set of pings and metadata from a time-period or spatial grouping. In addition, efficient random-read access to individual pings is not possible unless an index is available or created.
+
+The Topic Group on Defining a data format for omnidirectional fisheries sonar do not want to create yet another sonar-specific file format; the knowledge required is not within the expertise of this group. However, the group does have the expertise to specify what data must be stored to allow for unambiguous use of backscatter data during quantitative analysis.
+
+Accordingly, an existing file-format definition has been utilized and what should be stored is specified. The requirements for such a file format definition were:
+
+* ability to adequately represent the content and structure of sonar data and associated metadata;
+* standardized, open-file format;
+* fast random access to data stored in the file;
+* ability to store multiple types of data (e.g. position and backscatter);
+* ability to store metadata (e.g. sonar settings);
+* freely available and open libraries to read the data files into programming languages and technical computing environments (e.g. Java, C, C++, Python, Matlab, and R);
+* reliable and space-efficient format for data exchange and storage;
+* self-describing file format;
+* backwards compatibility upon modification of the file contents specification (i.e. old software/tools can still read relevant parts of a newer version);
+* computer platform-independent;
+* long-term support and extensive use in other scientific fields;
+* support for very large datasets.
+
+Other scientific communities that collect and produce voluminous amounts of data have addressed similar needs, resulting in the Hierarchical Data Format cite:[thehdfgroup2017], currently at version 5 (HDF5). This is the only file format that meets all the listed requirements and is utilized for sonar data. There are two realizations of the HDF5 file format: (i) HDF5 itself and (ii) netCDF4 cite:[unidata2017], which is a subset of HDF5. Both are sufficient, but netCDF4 is more widely used and has slightly wider language support and implementation diversity. Accordingly, netCDF4 has been chosen.
+
+Using a well-supported file format has the significant benefit that many data exploration, query, extraction, and analysis tools already read such files. This eliminates the need to develop and maintain sonar-specific file-reading software and facilitates the use of existing tools for data management, distribution, and analysis (a pertinent example is OPeNDAP, which provides a network-transparent standard for distributing scientific data).
+
+An attractive feature of netCDF4 is the ease and transparency with which data can be added to an existing netCDF4 file. For example, processed data and how it was obtained can be included in the same file as the raw data. In addition, netCDF4 files can be very large while still providing fast access to data subsets. This allows a single SONAR-netCDF4 file to contain data from a transect or an entire survey. These features would simplify data management, improve traceability and long-term storage of analysis, enhance the sharing of processed datasets, and facilitate analysis of large disparate datasets. In general, any amount of additional data can be stored in the files without affecting the ability to use the data specified by the SONAR-netCDF4 convention.
+
+A distinction is commonly made between file formats designed for archiving data in the original form, formats designed for storing partially or fully processed data, and formats for data exchange cite:[jackson2014]. The SONAR-netCDF4 convention is intended to be suitable for all of these.
+
+The initial focus of this convention has been to specify the storage of backscatter amplitude data from omnisonars. It is envisaged that future versions could specify how to store data from other acoustic equipment (e.g. echosounders) and derived data (e.g. bottom and school detections, categorization of backscatter, and integrated backscatter at multiple resolutions). Ancillary information such as sonar display screen-grabs could also be stored.
+
+=== Versioning
+
+This document and the convention that it describes will change over time to implement enhancements and to correct errors and omissions. To accommodate this, the SONAR-netCDF4 convention always requires a version number. This document has a separate version number, allowing for revised versions of the document to describe the same version of the convention.
+
+The convention version number will always be included in the title of the document. The document version number will always be found in <<_revision_history>>.
+
+== Use of the SONAR-netCDF4 convention in echo-integration processing
+
+There are several processing steps that are common among the echo-integration postprocessing programs, and there is a need to ease the use of such programs interchangeably. This section describes a few standard processing steps and outlines how the convention is intended to be used to facilitate this. Note that the steps may be different between programs, and the convention only recommends how to store the data for the steps that are most common. We do not address how and in which order to process the data.
+
+Exchange of information between different parts in the processing chain is increasingly important. This is particularly relevant for deep learning and machine learning frameworks, which have hardware requirements that are often different to the computers that are used for traditional desktop applications. Processing tools that run on autonomous platforms are also a need, which often require a different suite of software solutions, typically tailored to low power situations. 
+
+Typical steps in the postprocessing chain of sonar data include noise removal, seabed detection, target classification, and echo-integration (<<postprocessing_data_flow_figure>>). Here we outline the different groups in the convention that can support the input and output from these steps. If a processing software step can read the data, process the information and write back to the data using the convention, other software can pick it up and process it further. 
+
+.Typical steps in an echo-integration processing chain for water column data. The two main groups may be used for several steps depending on the objective, and the `GridGroup` may be seen as a projection of the `BeamGroup` and the conversion to `GridGroup` is typically lossy. The output from the sonars are typically the `BeamGroup` and the report format are typically the `GridGroup`.
+[[postprocessing_data_flow_figure]]
+image::postprocessing_data_flow_figure.svg[]
+
+=== Typical processing steps and the associated data models
+
+Two main data models are available in the convention: `Beam_group` and `Gridded`. The `Beam_group` allows for different sample rates, different ping rates, etc, for each channel. It is a flexible model and able to cope with all sonar systems. The `Gridded` is a storage structure for multi-channel data that has been re-gridded or has homogeneous ping times and range bins across all channels (i.e., frequencies).
+
+Depending on the type of processing, both `Beam_group` and `Gridded` could be used as input and output.
+
+==== Noise removal
+_to come_
+
+==== Seabed detection
+Range to the seabed is needed when echo-integrating biological backscatter close to the seabed. Different algorithms have been developed and the recommendation is to store the range to the seabed in the `Beam_group`.
+
+==== Labeling
+Labeling acoustic data, i.e. scrutinizing and allocating the acoustic energy to categories, is traditionally achieved by manually assigning backscatter. A data structure to contain such labels is detailed in <<Interpretation>>.
+
+An earlier overview of how different echo-integration software stores this information can be found here:
+https://docs.google.com/document/d/1F5ub9-ElnGWgoFzOhwrNiAB6fZRhKI8Nw6FskMhzI0g/edit#heading=h.ihw2gdxqw9td[Label overview]
+
+==== Machine learning
+Convolutional neural networks and other machine learning methods are suitable for processing sonar data, but it is typically more convenient to map the data to a common range, time and frequency grid before passing it to a deep learning framework. The use of `Gridded` on a high resolution grid should be used for this purpose.
+
+==== Integrated backscatter
+The output from the echo-integration process is typically further processed to yield distribution and abundance estimates of selected species. It is recommended to use the `Gridded` for this purpose, where the data is gridded typically on a coarser grid that that used for the machine learning objective.
+
+== The SONAR-netCDF4 convention
+
+=== Introduction
+
+NetCDF4 is a data model, application programming interface (API) library, and file format for storing and managing data, developed and maintained by Unidata. Unidata is part of the US University Corporation for Atmospheric Research (http://www2.ucar.edu/[UCAR]) Community Programs (http://www.ucp.ucar.edu/[UCP]) and funded primarily by the US National Science Foundation.
+
+SONAR-netCDF4 is a data and metadata convention for the storage of data from active sonars in netCDF4 formatted files. SONAR-netCDF4 consists primarily of a naming convention and a data structure within the netCDF4 data model.
+
+Datasets can be added to SONAR-netCDF4 files if they do not conflict with the SONAR-netCDF4 datasets. If such additions are potentially of use to other users of the file format, it is recommended that they be proposed for inclusion in this or additional convention specifications.
+
+Each SONAR-netCDF4 file is intended to store data from one sonar mounted on one platform. The storage of data from multiple sonars and multiple platforms in one SONAR-netCDF4 file is not in the scope of the convention.
+
+A design principle of SONAR-netCDF4 has been to focus on describing the acoustic backscatter data, not the overall purpose and context of why the data were collected. Such broader metadata are better stored in separate metadata systems and schema (e.g. citenp:[iso2014,ices2016]).
+
+
+
+=== Hierarchical structure
+
+NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy.
+
+[plantuml, format=svg, opts="inline"]
+----
+legend
+Top-level
+|_ Annotation
+|_ Environment
+|_ Platform
+|_ Provenance
+|_ Sonar
+  |_ Beam_groupX
+  |_ GriddedX
+  |_ InterpretationX
+|_ Vendor_specific
+end legend
+----
+
+SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:
+
+. *Top-level –* contains metadata about the SONAR-netCDF4 file format;
+.. *Annotation –* contains time-stamped annotations;
+.. *Environment –* contains information relevant to acoustic propagation through water;
+.. *Platform* *–* contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.
+.. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained and processed;
+.. *Sonar –* contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;
+... *Beam_groupX –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;
+... *GriddedX –* contains gridded backscatter data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;
+... *InterpretationX –* contains the interpretation regions; the intepretation mask is independent from the backscatter groups;
+.. *Vendor specific –* contains vendor-specific information about the sonar and the data.
+
+The 'X' suffix on some group names indicates that there can be multiple of these type of groups and that the true group name will have a trailing number.
+
+These groups contain variables and variable attributes with prescribed names and contents.
+
+=== Obligations and missing data
+
+Some variables and attributes in SONAR-netCD4 are mandatory; these form the minimal set of data required to quantitatively use backscattering amplitude data. The remaining variables and attributes have various levels of optionality and provide enhanced context and information about the sonar data. The obligations are:
+
+. *M*: mandatory
+. *MA*: mandatory if applicable or available
+. *R*: recommended
+. *O*: optional
+
+Any non-mandatory variables can be absent from a SONAR-netCDF4 file. If a variable is mandatory, it must be present and must contain data. The set of mandatory variables and attributes has been chosen so that omnisonar systems can directly generate SONAR-netCDF4-conforming files without needing survey, experiment, or cruise-specific data.
+
+The _FillValue attribute should be used to indicate missing data in variables. For floating point values, the IEEE 754 not-a-number (NaN) is the preferred fill value as this is convenient for commonly-used analysis packages (e.g. Python, Matlab, R).
+
+=== Metadata and authorities
+
+The fisheries acoustics community has developed a metadata convention for processed acoustic data cite:[ices2016]. Where relevant, attribute and variable names have been reused from this convention. The NetCDF Climate and Forecast (CF) Metadata Conventions cite:[eatonNetCDFClimateForecast2017] have been used where sensible (the efficient storage of unprocessed active sonar data has not been a design goal of the CF convention) along with the ESIP Attribute Convention for Data Discovery (ACDD). Terms and concepts from other metadata conventions have also been used where appropriate.
+
+=== Units
+
+All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package cite:[ucar2014]. Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention.
+
+==== Time units
+Even though NetCDF and the UDUNITS-2 part of the CF conventions allow for the specification any valid time unit, to prevent any extra complication in software that reads the SONAR-netCDF4 files, only two time units are supported in this convention.
+
+* nanoseconds since 1601-01-01 00:00:00Z
+
+* nanoseconds since 1970-01-01 00:00:00Z
+
+The choice of nanoseconds is because sonar system timestamp precision can be less than one millisecond. Other forms of time units, such as 100 nanoseconds, are not well supported by the various tools that read CF-formatted time units, and nanoseconds units is retained.
+
+The year 1601 is used because it is the epoch year unit used in Simrad .raw files and Windows32/64  systems.
+
+The year 1970 is used because it is the epoch time widely used in Unix and most programming languages.
+
+=== Datatypes
+
+Each item has a suggested datatype, chosen to have sufficient range and precision to contain the expected data. Alternative datatypes can be used if necessary, but are discouraged. The “string” type should contain text in the UTF-8 encoding and should be treated as case-sensitive during any comparisons. Enumerated datatypes are used for some of the controlled vocabularies.
+
+=== Vocabularies
+
+The contents of some variables and attributes are restricted to defined vocabularies. These are listed or referenced where required. Desired additions to the vocabularies should be proposed to WGFAST for incorporation into this document. Some of the vocabularies have been represented as netCDF4 enumeration data types and some using the CF flag_values convention.
+
+=== File-naming convention
+
+SONAR-netCDF4 files should always end with a “.nc” suffix to indicate that they are a netCDF file. It is recommended that the filename should sort alphanumerically into chronological order (e.g. date and time of the first ping in the file; thus: YYYYMMDD-HHMMSS.nc). This facilitates file management and use in analysis systems.
+
+=== CDL version of SONAR-netCDF4
+
+An example of a SONAR-netCDF4 file is provided in the Common Data form Language (CDL). This provides a more formalized and structured representation of the data format. A CDL file can be converted into a NetCDF file using the “ncgen” utility (available as part of the netCDF software distribution) and then used as a template for creating populated SONAR-netCDF4 files.
+
+=== Groups
+
+The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<<topLevelTable>>).
+
+.Description of the top-level group.
+[[topLevelTable]]
+include::tableToplevel.adoc[]
+
+==== Annotation group
+
+The annotation group contains timestamped annotations with optional identification code. Annotations are typically textual notes entered by users relevant to the data at a particular time. Some sonar systems provide an interface for creating manual and programmatic annotations. The netCDF4 group name is */Annotation* and is described in <<annotationTable>>.
+
+.Description of the annotation group.
+[[annotationTable]]
+include::tableAnnotation.adoc[]
+
+==== Environment group
+
+The environment group contains information on environmental conditions, especially the speed of sound in water and acoustic absorption. The netCDF4 group name is */Environment* and is described in <<environmentTable>>. Sound speed, absorption, and current profiles can also be stored in this group, as can profile measurements of salinity, temperature, and pressure. Such profile data should use the NCEI NetCDF “profile” template, v2.0 or greater.
+
+.Description of the environment group.
+[[environmentTable]]
+include::tableEnvironment.adoc[]
+
+==== Platform group
+
+This group contains information about the sonar platform (e.g. ship). The netCDF4 group name is */Platform* and is described in <<platformGroupTable>>. Optionally, subgroups of /Platform can be used to store data from individual instruments that provide measurements about the platform, such as position, attitude, etc (note that if the measurements are about the environment around the platform they should be stored in the /Environment group). This structure must be used to store all instrument data. 
+
+Each platform can contain several instruments of the same type, such as multiple position sensors. Each instrument type is defined as a subgroup of the /Platform group and data for each instrument are stored in a subgroup of the instrument group. Subgroup names for common instrument types are given in <<platformInstrumentsTable>> and how to store data from those instruments are also cross-referenced in <<platformInstrumentsTable>>. For example, data from individual position and attitude instruments are stored as subgroups of the /Platform/Position and /Platform/Attitude subgroups. The names of those subgroups must match the names of the instrument's serial number or identifier as defined in the MRU_ids and position_ids variables in the /Platform group (<<platformGroupTable>>).  Additional instrument type subgroups can be created as required.
+
+Each instrument group can also store unprocessed and unparsed sensor data. The data format for unprocessed and unparsed data is not prescribed, but could, for example, be NMEA-style text and/or numeric values. These subgroups must have one attribute called “description” that provides a short description of the contents. Other attributes can be added as desired. The variables under the subgroup should have appropriate names and an attribute that gives the units, where appropriate.
+
+As a general example, parsed data from a GPS with id _Garmin1234_ would be stored in /Platform/Position/Garmin1234 and if NMEA data from that GPS were also stored, it would be in /Platform/Position/Garmin1234/NMEA.
+
+The coordinate system convention used for the /Platform group variables is detailed in <<_coordinate_systems>>.
+
+.Description of the platform group.
+[[platformGroupTable]]
+include::tablePlatform.adoc[]
+
+.Suggested subgroup names for platform instruments.
+[cols=",,",options="header",]
+[[platformInstrumentsTable]]
+|===
+|Sensor or datagram |Subgroup name | Comment
+|Attitude sensors, MRU |Attitude | Use data structure described in <<AttitudeSubGroup>>
+|GPS sensors, Position |Position | Use data structure described in <<PositionSubGroup>>
+|Clock or time synchronisation datagrams | Clock | 
+|NMEA telegrams | NMEA | Use data structure described in <<NMEATable>>.
+|===
+
+.Description of a platform attitude subgroup.
+[[AttitudeSubGroup]]
+include::tableAttitude_sub_group.adoc[]
+
+.Description of a platform position subgroup.
+[[PositionSubGroup]]
+include::tablePosition_sub_group.adoc[]
+
+.Suggested group for storing NMEA datagrams from marine instruments.
+[[NMEATable]]
+include::tableNMEA.adoc[]
+
+==== Provenance group
+
+The provenance group provides information on how the SONAR-netCDF4 version of the data were created and what processes were applied to this data. The netCDF4 group name is */Provenance* and is described in <<provenanceTable>>.
+
+.Description of the provenance group.
+[[provenanceTable]]
+include::tableProvenance.adoc[]
+
+==== Sonar group
+
+The netCDF4 group name is */Sonar* and contains three subgroups.
+
+===== Beam group
+This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_groupX*, where *X* is an integer.
+
+Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeamGroupTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
+
+Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
+
+.Description of the sonar group.
+[[sonarGroupTable]]
+include::tableSonar.adoc[]
+
+.Description of the beam subgroups of the sonar group.
+[[sonarBeamGroupTable]]
+include::tableBeamGroup1.adoc[]
+
+==== Proposed calculated backscatter additions
+
+This group contains the calculated SV, for a single ping or 
+a series of pings formed by a calculation interval.
+The netCDF4 group name is VolumeBackscatter and is a subgroup of /Sonar/Beam_group.
+
+.Description of the VolumeBackscatter subgroup of the BeamGroup1 group.
+[[sonarVolumeBackscatterTable]]
+include::tableVolumeBackscater_sub_group.adoc[]
+
+.Description of the AveragedVolumeBackscatter subgroup of the VolumeBackscatterGroup group.
+[[sonarAveragedVolumeBackscatterTable]]
+include::tableAveragedVolumeBackscater_sub_group.adoc[]
+
+==== Proposed ADCP additions
+
+This group contains the ADCP beam data, single ping calculations and associated metadata.
+The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.
+
+.Description of the ADCP subgroup of the BeamGroup1 group.
+[[sonarADCPTable]]
+include::tableADCP_sub_group.adoc[]
+
+This group contains the calculated averaged current velocity data and associated metadata.
+The netCDF4 group name is Mean_current and is a subgroup of ADCP group.
+
+.Description of the Mean current subgroup of the ADCP group.
+[[sonarMeanCurrentTable]]
+include::tableMean_current_sub_group.adoc[]
+
+===== Gridded group
+
+This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
+
+.Description of the beam grid subgroups of the sonar group.
+[[sonarGridGroupTable]]
+include::tableBeamGridGroup1.adoc[]
+
+===== Interpretation
+This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Gridded and Beam_group. The netCDF4 group name is *InterpretationX*, where *X* is an integer.
+
+The interpretation masks are based on a time and range, for a given a sound speed.
+
+An proposal for storing interpretation masks in a netCDF4 structure is being developed https://github.com/nilsolav/EchosounderNetCDF[here], with the actual netCDF4 structure provided as an example https://github.com/nilsolav/EchosounderNetCDF/blob/master/docs/demo_mask.cdl[here].
+
+_more to come_
+
+==== Vendor specific group
+
+The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is */Vendor_specific*. Currently, there is no mandatory information for the vendor specific group.
+
+==== Proposed SimradWBT vendor specific additions
+
+This group contains optional transducer and Simrad WBT information for processing.
+
+.Description of the SimradWBT group in the Vendor group.
+[[sonarVendor_specific_SimradWBT_Table]]
+include::tableVendor_specific_SimradWBT_group.adoc[]
+
+
+== Conversion equations
+
+This section provides detailed formulae on how to convert the backscatter data in the Sonar group into calibrated target strength and volume backscatter strength.
+
+=== Type 1
+
+Type 1 conversion equations are used for data recorded by the Simrad SU90, SX90, and SH90 omnisonars and are presented in detail by citenp:[macaulay2016].
+
+The complex-valued backscatter data are converted into calibrated target strength via:
+
+[stem]
+++++
+\begin{equation}
+TS = 10 \log_{10}(P_{r}) + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2}\right) - G - 40\log_{10}(\cos\gamma),
+\end{equation}
+++++
+
+where latexmath:[P_r] is linearly proportional to the received power (square of the magnitude of the complex number given by backscatter_r and backscatter_i, W) and _r_ is the range between the transducer and target, calculated from:
+
+[stem]
+++++
+\begin{equation} \label{eq:timeToRange}
+r = \frac{c ( dt \cdot i - t_0)}{2},
+\end{equation}
+++++
+
+where _c_ is sound speed (NetCDF4 variable is sound_speed_indicative, m/s), _dt_ is the time between recorded samples (sample_interval, s), _i_ is the sample number (from zero to one less than the number of samples), and latexmath:[t_0] is a time-offset (sample_time_offset-blanking_interval, s).
+
+The absorption coefficient of sound in water is _α_ (absorption_indicative, dB/m), latexmath:[P_t] is the transmit power (transmit_power, W), latexmath:[\lambda] is the acoustic wavelength (derived from the average of transmit_frequency_start and transmit_frequency_stop, and sound_speed_indicative, m), _G_ is the transducer gain (transducer_gain, dB)_,_ and latexmath:[\gamma] is the beam tilt angle (derived from beam_direction_x, beam_direction_y, beam_direction_z, degrees from horizontal).
+
+The volume backscatter strength (Sv, citenp:[maclennan2002]) is derived from a similar equation:
+
+[stem]
+++++
+\begin{equation}
+S_{v} = 10\log_{10}(P_{r}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t\lambda^{2}c\psi\tau_{e}}{32\pi^{2}}\right) - G - 40\log_{10}(\cos\gamma),
+\end{equation}
+++++
+
+where latexmath:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr), latexmath:[\tau_e] is the effective pulse duration (_receive_duration_effective, s), and _G_ is the transducer gain (transducer_gain, dB).
+
+=== Type 2
+
+Type 2 conversion equations are intended for data recorded by Furuno omnisonars. The received real-valued backscatter data are converted into calibrated target strength via:
+
+[stem]
+++++
+\begin{equation}
+TS = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\log_{10}(r) + 2\alpha r - (SL + K + \Delta G + G_{T}),
+\end{equation}
+++++
+
+where _A_ (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , _r_ is the range as given by equation \eqref{eq:timeToRange}, and _α_ is the absorption coefficient of sound in water (absorption_indicative, dB/m). _SL_ is source level (transmit_source_level, dB re 1μPa at 1 m) and _K_ is receiver sensitivity (receiver_sensitivity, dB re 1/μPa). Both parameters may depend on tilt angle of the beam for transmitting and receiving.
+
+Gain correction, latexmath:[\Delta G], (gain_correction, dB) is determined by the calibration. Time-varied gain, latexmath:[G_T] (time_varied_gain, dB), is given at each sample number _i_.
+
+The volume backscatter strength is derived from a similar equation:
+
+[stem]
+++++
+\begin{equation}
+S_v = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{c\tau_e}{2}\Psi \right) - (SL + K + \Delta G + G_T),
+\end{equation}
+++++
+
+where _c_ is sound speed (sound_speed_indicative, m/s), latexmath:[\tau_e] is the effective pulse duration (receive_duration_effective, s), and latexmath:[\Psi] is the equivalent beam angle (equivalent_beam_angle, sr). Considering the time-varied-gain (TVG) effect on the echo shape cite:[sawada1993], the replacement of _r_ by latexmath:[r - r_0], where latexmath:[r_0 = \frac{1}{4} c \tau_e], is recommended cite:[maclennan1986,furusawaRangeErrorsSound1999] for calculation of latexmath:[S_v].
+
+=== Type 3
+
+Type 3 conversion equations are intended for data produced by Simrad EK60, ES60, and ES70 echosounders.
+
+The backscatter power values are stored in the _backscatter_r_ variable with data type _short_ (16-bit signed integers) that are converted to logarithmic received power via:
+
+[stem]
+++++
+\begin{equation}
+P_r = \frac{10\log_{10}(2)}{256} P_c, 
+\end{equation}
+++++
+where latexmath:[P_c] is the compressed power value stored in the _backscatter_r_ variable and latexmath:[P_r] the logarithmic received power that is transformed into calibrated target strength via:
+
+[stem]
+++++
+\begin{equation}
+TS = P_r + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2} \right) - 2G_0,
+\end{equation}
+++++
+where latexmath:[r] is the range from the transducer to the target [m], latexmath:[\alpha] the acoustic absorption [dB m^-1^], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable), latexmath:[\lambda] the acoustic wavelength [m], and latexmath:[G_0] the on-axis gain (variable _transducer_gain_). Beam pattern compensation for echoes that do not arrive on the transducer axis is done in addition to this equation (if such angles can be estimated, as can be done with split-aperture transducers). Volume backscatter strength is obtained from a similar equation:
+
+[stem]
+++++
+\begin{equation}
+S_v = P_r + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t \lambda^2 c \psi \tau_e}{32 \pi^2} \right) - 2G_0,
+\end{equation}
+++++
+
+where latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle (variable _equivalent_beam_angle_), and latexmath:[\tau_e] the effective pulse duration (variable _receive_duration_effective_).
+
+The effective pulse duration is computed for EK60, ES60 and ES70 from the nominal transmit pulse duration (variable _transmit_duration_nominal_) and the Simrad term latexmath:[S_{a,corr}] in dB from the calibration exercise as :
+
+[stem]
+++++
+\begin{equation}
+\tau_e = \tau * 10^{\frac{2S_{a,corr}}{10}},
+\end{equation}
+++++
+
+The range from the transducer to the target is given by:
+
+[stem]
+++++
+\begin{equation}
+tbd.
+\end{equation}
+++++
+
+.List of equation symbols and the matching SONAR-netCDF4 variable
+[[equationVariables]]
+[%autowidth,options="header",]
+|===
+|Symbol |Variable|Equation type
+a|latexmath:[P_c]|backscatter_r|all
+a|latexmath:[\tau]|transmit_duration_nominal|3
+a|latexmath:[\alpha]|Calculated from ...|
+|===
+
+=== Type 4
+
+Type 4 conversion equations are intended for data produced by Simrad EK80 and ES80 broadband echosounders when data is recorded with complex samples.
+
+EK80 and ES80 can record data using EK60 Power and Angle format and Type 3 equations can then be used.
+
+In order to take advantage of the broadband mode of the EK80 echosounder, the backscatter complex amplitude samples are stored in the _backscatter_r_ and the _backscatter_i_ variable with data type _float_ for each sub-beam corresponding to each sub-array of the transducer (<<Split-aperture beams>>).
+
+For FM transmission mode, in order to increase signal-to-noise ratio and resolution along the beam axis, pulse compression is used for each sub-beam by convolving the complex backscatter received signal with a complex conjugated and time reversed version of the theoretical transmit and filtered pulse  (_transmit_pulse_model_).
+
+Noting latexmath:[n], the sample index in the discrete time domain, the pulse compressed complex samples for each sub-beam denoted latexmath:[y_{pc}] are then equal to:
+
+[stem]
+++++
+\begin{equation}
+y_{pc}(n) = \frac{y_{rx}(n)*y_{tx,th}^*(-n)}{||y_{tx,th}||^2_2},
+\end{equation}
+++++
+
+where latexmath:[y_{rx}] is the complex received signal stored in the _backscatter_r_ and _backscatter_i_ variables and latexmath:[y_{tx,th}] is the complex theoretical transmit and filtered signal stored in _transmit_pulse_model_r_ and _transmit_pulse_model_i_ variables
+
+The transceiver measures voltage over a load, latexmath:[z_{\textrm{rx,e}}], connected in series with the transducer impedance, latexmath:[z_{\textrm{td,e}}]. The number of sub-beams latexmath:[N_{u}] are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeamGroupTable>> and received electric power is then equal to :
+
+[stem]
+++++
+\begin{equation}
+p_{\textrm{rx,e}}(n)= \frac{1}{N_{u}}\left( \frac{| \sum_{u = 1}^{N_{u}} y(n,u)|}{2\sqrt{2}} \right)^2 \left( \frac{|z_{\textrm{rx,e}}+z_{\textrm{td,e}}|}{|z_{\textrm{rx,e}|}} \right)^2 \frac{1}{|z_{\textrm{td,e}}|}.
+\end{equation}
+++++
+
+with latexmath:[y] taken as latexmath:[y_{rx}] for CW transmission and as latexmath:[y_{pc}] for FM transmission.
+
+For CW transmission, Type 3 equations can then be applied, taking logarithmic received power latexmath:[P_r] as:
+
+[stem]
+++++
+\begin{equation}
+P_r = 10\log_{10}(p_{\textrm{rx,e}})
+\end{equation}
+++++
+
+and the nominal transmit pulse duration latexmath:[\tau] as:
+
+[stem]
+++++
+\begin{equation}
+\tau = T_{tx,th}\frac{mean|y_{tx,th}|^2}{max|y_{tx,th}|^2}
+\end{equation}
+++++
+
+with latexmath:[T_{tx,th}] the duration [s] of the complex theoretical transmit and filtered signal latexmath:[y_{tx,th}].
+
+For FM transmission, match filtered received electric power is transformed into volume backscatter strength using:
+
+[stem]
+++++
+\begin{equation}
+S_v(n) = 10\log_{10}(p_{\textrm{rx,e}}(n)) + 20\log_{10}(r) + 2\alpha(f_c) r
+- 10\log_{10}\left(\frac{P_t \lambda^2 c \psi (\frac{f_c}{f_n})^2 \tau_e}{32 \pi^2} \right) - 2G_0(f_c),
+\end{equation}
+++++
+
+where  latexmath:[r] is the range from the transducer to the sample latexmath:[n] [m], latexmath:[\alpha] the acoustic absorption at the frequency f [dB m^-1^], latexmath:[f_c] the central frequency of the pulse bandwidth [Hz], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable) [W], latexmath:[\lambda] the acoustic wavelength [m], latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle at the transducer nominal frequency latexmath:[f_n] (variable _equivalent_beam_angle_), latexmath:[\tau_e] the effective pulse duration (variable _receive_duration_effective_) and latexmath:[G_0] the on-axis gain (variable _transducer_gain_) from the calibration exercise at the frequency latexmath:[f_c].
+
+The match filtered effective pulse duration latexmath:[\tau_e] is computed for EK80 and ES80 from
+
+[stem]
+++++
+\begin{equation}
+\tau_e = T_{tx,{pc}}.\frac{mean|y_{tx,{pc}}|^2}{max|y_{tx,{pc}}|^2},
+\end{equation}
+++++
+
+where latexmath:[y_{tx,{pc}}] is the autocorrelation of the theoretical transmit pulse
+
+[stem]
+++++
+\begin{equation}
+y_{tx,{pc}}(n)=\frac{y_{tx,th}(n)*y_{tx,th}^*(-n)}{||y_{tx,th}||^2_2},
+\end{equation}
+++++
+
+and latexmath:[T_{tx,{pc}}] the latexmath:[y_{tx,{pc}}] duration [s]
+
+The use of broadband FM tranmission enables to provide volume backscatter strength as a function of frequency, through:
+
+[stem]
+++++
+\begin{equation}
+S_v(f)= 10\log_{10}(p_{\textrm{rx,e}}(f)) + 20\log_{10}(r) + 2\alpha(f) r - 10\log_{10}\left(\frac{y_{tx,{pc}}(f) P_t  \lambda^2 c \psi (\frac{f_n}{f})^2 \tau_{FFT}}{32 \pi^2} \right) - 2G_0(f),
+\end{equation}
+++++
+
+where latexmath:[p_{\textrm{rx,e}}(f)] and latexmath:[y_{tx,{pc}}(f)] are the Fourier transforms at frequency f   of  latexmath:[p_{\textrm{rx,e}}] and latexmath:[y_{tx,{pc}}] , performed with the same duration/windowing characteristics, latexmath:[r] is the range [m] from the transducer to the sample centered in the Fourier transform window , and latexmath:[\tau_{FFT}] the duration of applied Fourier transform.
+
+Single target strength as a function of frequency is obtained from a similar equation, for targets located on beam-axis:
+
+[stem]
+++++
+\begin{equation}
+TS(f) = 10\log_{10}(p_{\textrm{rx,e}}(f)) + 40\log_{10}(r) + 2\alpha(f) r
+- 10\log_{10}\left( \frac{y_{tx,{pc}}(f) P_t\lambda^{2}}{16\pi^2} \right)- 2G_0(f),
+\end{equation}
+++++
+
+Beam pattern compensation for echoes that do not arrive on the transducer axis may be added to this equation, if such angles are estimated, as can be done with split-aperture transducers.
+
+=== Type 5
+
+Type 5 conversion equation is intended for sonars for which the sonar manufacturer computes standard TS and Sv values as defined in  MacLennan et al. (2002).
+
+Using equation 5, the Sv value is directly stored in the _backscatter_r_ variable and/or the TS value is directly stored in the _backscatter_i_ variable. It is permitted to store only Sv or only TS values, meaning that a file could have just a _backscatter_r_ variable, just a _backscatter_i_ variable, or both.
+
+=== Type 6
+
+Type 6 conversion equations are intended for data recorded by Furuno FCV-38 echosounder.
+
+The echosouder has a split-aperture transducer with type A arrangement (see <<_four_quadrants_type_a>>). It outputs four complex backscatter signals (backscatter_r, backscatter_i, 1) from beam number 0, 1, 2, and 3. The signals from beam number 0 and 1 are defined by stem:[z_0 = y_3 + y_4] and stem:[z_1 = y_1 + y_2], respectively, where stem:[y_x] is the complex signal from quadrant stem:[x]. Similarly, the signals from beam number 2 and 3 are defined by stem:[z_2 = y_2 + y_3] and stem:[z_3 = y_1 + y_4], respectively.
+
+Two complex signals, stem:[z_0] and stem:[z_1], are converted into the calibrated target strength via:
+
+[stem]
+++++
+\begin{equation} \label{eq:FCV38TS}
+TS = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\ \log_{10}\left(r\right) + 2\alpha r - \left(TR + \Delta G\right),
+\end{equation}
+++++
+
+where stem:[A] is the amplitude or envelope of the received voltage signal (V), calculated from:
+
+[stem]
+++++
+\begin{equation}
+I = \mathrm{Re}\left(z_0\right) + \mathrm{Re}\left(z_1\right),
+\end{equation}
+++++
+
+[stem]
+++++
+\begin{equation}
+Q = \mathrm{Im}\left(z_0\right) + \mathrm{Im}\left(z_1\right),
+\end{equation}
+++++
+
+[stem]
+++++
+\begin{equation}
+A = \frac{4\sqrt{I^2 + Q^2}}{2^{32} - 1}.
+\end{equation}
+++++
+
+The range between the transducer and target is stem:[r], calculated from:
+
+[stem]
+++++
+\begin{equation}
+r = \frac{c\left(dt \cdot i - t_0\right)}{2},
+\end{equation}
+++++
+
+where stem:[c] is the sound speed (sound_speed_indicative, m/s), stem:[dt] is the time between recorded samples (sample_interval, s),  stem:[i] is the sample number (from zero to one less than the number of samples), and stem:[t_0] is the time-offset (sample_time_offset - blanking_interval, s).
+
+The absorption coefficient of sound in water is stem:[\alpha] (absorption_indicative, dB/m). stem:[TR] is the transmitter and receiver coefficient (transmitter_and_receiver_coefficient, dB). The gain correction, stem:[\Delta G] (gain_correction, dB), is determined by the calibration. Beam pattern compensation for echoes that do not arrive on the transducer axis is done in addition to equation \eqref{eq:FCV38TS}.
+
+The volume backscatter strength is derived from a similar equation:
+
+[stem]
+++++
+\begin{equation}
+S_v = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\ \log_{10}\left(r\right) + 2\alpha r - 10\ \log_{10}\left(\frac{c \ \tau_e \ \psi}{2}\right) - \left(TR + \Delta G\right),
+\end{equation}
+++++
+
+where stem:[\tau_e] is the effective pulse duration (receive_duration_effective, s) and stem:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr). 
+
+
+== Coordinate systems
+
+This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a geographic coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.
+
+There are four right-handed Cartesian coordinate systems (<<coordinateSystemList>>, <<coordinate_system_figure_all>>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Coordinate system rotation angles are as per the right-hand rule.
+
+There is also a geographic coordinate system (<<coordinate_system_figure_all>>) that provides for location of the platform on Earth and also the height above a datum (e.g. mean sea level). The platform heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in the geographic coordinate system (this applies to both stationary and mobile sonar platforms).
+
+
+.List of coordinate systems used to physically locate the position of received echoes.
+[[coordinateSystemList]]
+
+|===
+|Coordinate system name|Origin|_x_-axis|_y_-axis|_z_-axis
+
+|Surface coordinate system (SCS) |Platform origin|Pointing horizontally towards North|Pointing horizontally towards East|Pointing down with gravity
+|Platform coordinate system (PCS) |Platform origin|Parallel to the main axis of the platform, positive values toward the front of the platform|Perpendicular to the main axis of the platform, positive values to the starboard side|Pointing down parallel to platform mast
+|Transducer coordinate system (TCS) |Centre of transducer face|||
+2+|_not stabilized_ |Pointing forward along transducer plane|Pointing starboard along transducer plane|Pointing down orthogonal to transducer plane
+2+|_stabilized_ |Pointing forward horizontally|Pointing horizontally and perpendicular to x-axis|Pointing down with gravity
+|Sonar Beam coordinate system (BCS) |Centre of transducer face|Arbitrary|Orthogonal to the _x_-axis|Pointing along the beam axis
+|===
+
+The platform coordinate system (PCS) is obtained from the transducer coordinate system (TCS) through a translation of the PCS origin and a rotation to align with the transducer face. Transducer depth and lever arms are applied in this coordinate system.
+
+The surface coordinate system (SCS) is obtained from the platform coordinate system (PCS)  through a rotation that corresponds to the yaw/heading, pitch and roll of the platform. No translation is necessary. Platform heave is not applied in this coordinate system.
+
+[NOTE]
+If a sonar actively alters beam pointing directions to compensate for motion of the platform including static installation offsets, the _beam_stabilisation_ variable is set to True, otherwise to False.
+If True, the transducer coordinate system (TCS) is obtained from the SCS only through a translation of SCS origin, the transducer adapts its beam in order to compensate for ship movements
+
+.Coordinate systems used to physically position an echo in an absolute geographical system. The arrows on the axes indicate the positive direction and the circular arrows around each platform coordinate system axis indicates positive rotations (Hull drawing based on image from Simrad SN90 manual, redrawn with permission).
+[[coordinate_system_figure_all]]
+image::coordinateSystemFigureAll.svg[align="center"]
+
+
+=== Coordinate System Transforms
+Coordinate system transforms  stem:[F_{A->B}] can be expressed as a combination of a Rotation and a Translation of one coordinate system A into another B.
+[stem]
+++++
+\begin{equation}
+F_{A->B} = R_{A->B} + T_{A->B}
+\end{equation}
+++++
+
+Transformation of coordinates from A to B can then be implemented as:
+
+[stem]
+++++
+\begin{equation}
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{B} = R_{A->B} \cdot \begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{A} +
+T_{A->B}
+\end{equation}
+++++
+
+Rotation is specified via three rotation variables and can be implemented via matrix multiplication. As an example, the matrix that will convert a coordinate from coordinate system PCS to coordinate system SCS is defined by:
+
+[stem]
+++++
+\begin{equation}
+R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_x(r)
+\end{equation}
+++++
+
+
+where latexmath:[R_z(h)] is the rotation about the _z_-axis by _h_ degrees, etc. The rotation symbols are chosen to reflect their common nautical names: _h_ for heading, _p_ for pitch, and _r_ for roll and used thus:
+
+[stem]
+++++
+\begin{eqnarray}
+
+R_z(h) =
+\begin{bmatrix}
+\cos(h) & -\sin(h) & 0 \\
+\sin(h) & \cos(h) & 0 \\
+0 & 0 & 1
+\end{bmatrix} \\
+
+R_y(p) =
+\begin{bmatrix}
+\cos(p) & 0 & \sin(p) \\
+0 & 1 & 0 \\
+-\sin(p) & 0 & cos(p)
+\end{bmatrix} \\
+
+R_x(r) =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(r) & -\sin(r) \\
+0 & \sin(r) & \cos(r)
+\end{bmatrix}
+
+\end{eqnarray}
+++++
+
+noting that the order of the matrices is important and should follow this order.
+
+To be clear, the right-hand rule when applied to roll, pitch, and heave means that:
+
+* looking along the positive _x_-axis, a positive rotation (roll) is clockwise (to starboard),
+* looking along the positive _y_-axis, a positive rotation (pitch) is clockwise (bow up),
+* looking along the positive _z_-axis, a positive rotation (heading) is clockwise (to starboard).
+
+The orientation of the platform is represented using the _z_–_y_’–_x_” Tait-Bryan intrinsic rotation convention (https://en.wikipedia.org/wiki/Euler_angles[en.wikipedia.org/wiki/Euler_angles]), corresponding to heading, pitch, and roll, respectively. Intrinsic means that rotations about the _y_-axis are measured after any rotation about the _z_-axis, and rotations about the _x_-axis are measured after rotations about the _y_-axis (for comparison, extrinsic angles are applied relative to a fixed-platform orientation). This is the most used rotation convention in the maritime field, and the main effect is that roll is measured relative to the plane tilted by the pitch angle.
+
+Translation are linked to a change of system origin, namely from platform origin and the transducer origins.
+The coordinate system offsets of the transducer are given in the Platform group.
+These allow for precise specification of the origin of sonar transducer. The offset is a (x,y,z) tuple in the platform coordinate system. Offsets are to be interpreted as a vector that starts at the platform coordinate system origin and ends at the transducer position.
+For example, an offset of (1, 2, –3) indicates a position that is 1 m toward the bow, 2 m to starboard, and 3 m above the origin of the platform coordinate system.
+
+Some sensors (e.g. the position, attitude sensor) can have their installation offset and angle defined in the Platform group and relative to the platform-coordinate system. Those parameters are usually taken into account by the sensors and the sensor data values are considered to given relatively to the platform origin (namely roll, pitch should not be compensate for level arms and installation offset except explicitely specified).
+
+=== Split-aperture coordinates
+
+Some sonar beams can estimate the arrival angle of echoes (<<Split-aperture beams>>). These angles are given as _minor_ and _major_ angles in the sonar beam coordinate system (BCS in <<coordinate_system_figure_all>>):
+
+* The _z_-axis is always the beam axis with the origin at the receive transducer,
+* The _minor_ arrival angle (latexmath:[\theta]) is given by the angle from the _z_ axis, measured in the _x_-_z_ plane, and
+* The _major_ arrival angle (latexmath:[\phi]) is given by the angle from the _z_ axis measured in the _y_-_z_ plane.
+
+Positive minor angles occur in the positive _x_ plane and positive major angles occur in the positive _y_ plane. Note that this convention does not follow the right-hand-rule for major angles.
+
+For conventional downward-looking echosounders mounted on a ship it is normal that the sonar beam coordinate system is identical to the transducer coordinate system and hence the split-aperture minor angle is oriented alongships with positive angles towards the bow and the split-aperture major angle is oriented athwartships with positive angles to starboard. 
+
+=== Equations for positioning echoes in a Surface coordinate system
+
+This section provides examples of equations that can be used to position echoes in a geographical coordinate system.
+These example make some assumptions and approximations :
+
+* Speed of sound is constant and as a consequence sound displacement follows a straight line.
+* Sound travel time are supposed to be symetrical, ie the travel time from transmitting position to echo and travel time from echo to receiving position are the same
+* Positionning is computed with respect to rx_beam only, meaning we do not make any computation for intersection between tx_beam and rx_beam and taking into account for the ship displacement between emission and reception
+
+Two main categories of system are considered as case studies : system with beam stabilization and pointing angle relative to SCS (typically ME70) and system where beam are not stabilised and
+beam pointing angles relative to TCS.
+
+More complex equations and algorithm for more precise positioning or for other sensors are out of scope of this section.
+
+Given an echo _E(beam,i)_ where _i_ is the sample number (from zero to one less than the number of samples) and _beam_ the receiving beam considered, several values can be associated with this echo :
+
+* A time stamp given by
+
+[stem]
+++++
+\begin{equation}
+t_i=ping\_time+\frac{i\cdot sample\_interval + blanking\_interval- sample\_time\_offset}{2}
+\end{equation}
+++++
+
+* Its range stem:[r_i] given by equation \eqref{eq:timeToRange}
+
+==== Beams are stabilized by the sonar and beam pointing angles are relative to SCS
+When beam are stabilized and installation angle offsets are compensated by the sonar their angles are relative to SCS. The sonar will dynamically change beam angles relative to TCS to follow platform movement and maintain a constant beam angle with respect to the SCS.
+The change from TCS to SCS is composed of a translation from transducer origin to platform origin, taking into account lever arms, and a rotation taking into account platform heading
+
+The position of the echo can be defined as :
+
+[stem]
+++++
+\begin{equation}
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{SCS} =R_{PCS->SCS}(t_i) \cdot T_{TCS->PCS}
++ R_{z}(h(t_i)) \cdot R_{BCS->TCS} \cdot \begin{bmatrix}
+\cos(\theta) & 0 & \sin(\theta) \\
+0 & 1 & 0 \\
+-\sin(\theta) & 0 & cos(\theta)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\phi) & \sin(\phi) \\
+0 & -\sin(\phi) & \cos(\phi)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+0\\
+0\\
+r_i
+\end{bmatrix}
+\end{equation}
+++++
+
+with latexmath:[\phi] and latexmath:[\theta] the split-aperture coordinates as defined in <<Split-aperture coordinates>>:
+
+
+and
+[stem]
+++++
+\begin{equation}
+R_{BCS->TCS} =
+\begin{bmatrix}
+\cos(\Psi) & -\sin(\Psi) & 0 \\
+\sin(\Psi) & \cos(\Psi) & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\cos(\Theta) & 0 & \sin(\Theta) \\
+0 & 1 & 0 \\
+-\sin(\Theta) & 0 & cos(\Theta)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\Phi) & -\sin(\Phi) \\
+0 & \sin(\Phi) & \cos(\Phi)
+\end{bmatrix}
+\end{equation}
+++++
+
+
+where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeamGroupTable>>)
+
+and:
+
+[stem]
+++++
+\begin{equation}
+R_{PCS->SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
+\end{equation}
+++++
+
+where stem:[h,p,r] are the heading, pitch and roll as given at the time of the ping in the platform_heading, platform_pitch, platform_roll variables of the beam mode subgroups of the sonar group (see <<sonarBeamGroupTable>>).
+(_Those variables can also be defined at a higher sample rate in the platform group  (see <<platformGroupTable>>)_)
+
+and:
+
+[stem]
+++++
+\begin{equation}
+T_{TCS->PCS} = \begin{bmatrix}
+transducer\_offset\_x \\
+transducer\_offset\_y \\
+transducer\_offset\_z
+\end{bmatrix}
+\end{equation}
+++++
+where transducer_offset_x, transducer_offset_y and transducer_offset_z are the installation offsets of the transducer associated
+with the echo, defined in the platform group  (see <<platformGroupTable>>)
+
+
+==== Beams are not stabilized by the sonar and beam pointing angles are relative to TCS
+When beam are not stabilized by the sonar, the beam angles  are given relative to the TCS and
+the sonar will not dynamically change the beam angles to follow the platform movement during a transmit/receive cycle.
+
+The position of the echo can be defined as :
+[stem]
+++++
+\begin{equation}
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}_{SCS} = R_{PCS->SCS}(t_i)  \cdot T_{TCS->PCS}  +
+R_{PCS->SCS}(t_i)  \cdot
+R_{TCS->PCS} \cdot
+R_{BCS->TCS} \cdot \begin{bmatrix}
+\cos(\theta) & 0 & \sin(\theta) \\
+0 & 1 & 0 \\
+-\sin(\theta) & 0 & cos(\theta)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\phi) & \sin(\phi) \\
+0 & -\sin(\phi) & \cos(\phi)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+0\\
+0\\
+r_i
+\end{bmatrix}
+\end{equation}
+++++
+
+with latexmath:[\phi] and latexmath:[\theta] the split-aperture coordinates as defined in <<Split-aperture coordinates>>:
+
+and:
+
+[stem]
+++++
+\begin{equation}
+R_{BCS->TCS} =
+\begin{bmatrix}
+\cos(\Psi) & -\sin(\Psi) & 0 \\
+\sin(\Psi) & \cos(\Psi) & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\cos(\Theta) & 0 & \sin(\Theta) \\
+0 & 1 & 0 \\
+-\sin(\Theta) & 0 & cos(\Theta)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\Phi) & -\sin(\Phi) \\
+0 & \sin(\Phi) & \cos(\Phi)
+\end{bmatrix}
+\end{equation}
+++++
+
+where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_beam_rotation_phi, rx_beam_rotation_theta, rx_beam_rotation_psi variables of the beam mode subgroups of the sonar group (see <<sonarBeamGroupTable>>)
+
+and:
+
+[stem]
+++++
+\begin{equation}
+R_{TCS->PCS} = R_z(transducer\_rotation\_z) \cdot R_y(transducer\_rotation\_y) \cdot R_x(transducer\_rotation\_x)
+\end{equation}
+++++
+
+with transducer_rotation_x, transducer_rotation_y and transducer_rotation_z,  the installation angles of the transducer associated
+with the echo, defined in the platform group (see <<platformGroupTable>>)
+(Note that calibration angles are supposed to be integrated in these variables)
+
+and:
+
+[stem]
+++++
+\begin{equation}
+T_{TCS->PCS} = \begin{bmatrix}
+transducer\_offset\_x \\
+transducer\_offset\_y \\
+transducer\_offset\_z
+\end{bmatrix}
+\end{equation}
+++++
+with transducer_offset_x, transducer_offset_y and transducer_offset_z the installation offsets of the transducer associated
+with the echo, defined in the platform group (see <<platformGroupTable>>)
+
+and:
+
+[stem]
+++++
+\begin{equation}
+R_{PCS->SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
+\end{equation}
+++++
+where stem:[h,p,r] are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <<sonarBeamGroupTable>>) or platform group (see <<platformGroupTable>>)
+
+
+=== Equations for positioning echoes in a Geographical Coordinate System
+The Surface Coordinate system is a coordinate system oriented with platform heave at the origin of the platform origin.
+In order to define an absolute position, the coordinate should be converted to a Terrestrial Geographic System coordinate and take into account heave, draft, tide and so on.
+
+The Terrestrial Geographic System coordinate will use latitude and longitude to define its' position with respect to Earth and elevation will be defined with respect to a absolute surface reference.
+The absolute surface reference could be the WGS84 ellipsoid, or a surface such as MSL (Mean Sea Level) or LAT (Lowest Astronomical Tide)
+
+Switching from SCS system to TGS is achieved by applying a vertical translation from the platform origin to the surface reference of the TGS
+The vertical translation at each time is a vector obtained by adding the variables :
+
+* waterline_to_chart_datum matching the distance from the surface reference to the waterline. This variable takes into account the tide and the surface definition for ship or similar
+* platform_vertical_offset containing the heave and draft for ship or similar
+
+Each translated coordinate can be then expressed as latitude-longitude coordinates given the platform position retrieved from GPS and the coordinates expressed in SCS system.
+
+
+== Split-aperture beams
+
+Some sonar beams can estimate the arrival angle of echoes using the split-aperture method and SONAR-netCDF4 supports several ways to store such angles. The type of split-aperture beam data contained in a SONAR-netCDF4 file is given by the _beam_type_ variable in each <<sonarBeamGroupTable,Beam_groupX>> subgroup. Split-aperture echo arrival angles are always given in the sonar beam coordinate system (see <<Coordinate systems>>).
+
+When sub-beams from a split-aperture transducer are provided, it is also necessary to combine them to give the power or amplitude of the echoes, as received by the combined beam. All known split-aperture systems achieve this by taking the average of the sub-beam values, noting that the sub-beam data are typically complex power or amplitude values.
+
+To allow for existing conventions on how the split-aperture angles are stored or derived (typically as phase angles between the split-aperture signals), angle sensitivities are given in variables _echoangle_major_sensitivity_ and _echoangle_minor_sensitivity_.
+
+=== Angles stored in file
+The calculation of the echo arrival angle is done by the sonar and the SONAR-netCDF4 file contains either physical arrival angles or phase angles. For the latter, the minor (latexmath:[\theta]) and major (latexmath:[\phi]) physical arrival angles are obtained by dividing by the minor latexmath:[\eta_\theta] and major latexmath:[\eta_\phi] angle sensitivities respectively. For consistency, when physical arrival angles are stored in the file, latexmath:[\eta_\theta] and latexmath:[\eta_\phi] should still be present and be set to 1.0.
+
+=== Angles not stored in file
+The sonar does not calculate the echo arrival angle - they are calculated from the split-aperture sub-beams, each of which are stored in the SONAR-netCDF4 files. Several types of sub-beam arrangements are supported (<<transducer_types>>) - the angle calculation methods for each type are given in the following sections. The sub-beams are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeamGroupTable>>, in the same order as labelled in <<transducer_types>>.
+
+.The split-aperture transducer arrangements supported by SONAR-netCDF4 (A: 4 quadrants; B: 3 sub-beams; C; 3+1 sub-beams). The Cartesian coordinates show the orientation of the sonar beam coordinate system relative to the transducer sub-beams (note that the _z'_-axis points into the page). The numbers indicate the sub-beam labels for each type of transducer.
+[[transducer_types]]
+image::splitApertureTransducers.svg[align="center"]
+
+==== Four quadrants (type A)
+This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are calculated thus:
+
+[stem]
+++++
+\begin{equation}
+y_\theta = (y_3 + y_4) \cdot (y_1 + y_2)^*,\\
+y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
+\theta = \frac{\arctan \left( \Im(y_\theta), \Re(y_\theta) \right)}{\eta_\theta},\\
+\phi =   \frac{\arctan \left( \Im(y_\phi), \Re(y_\phi) \right)}{\eta_\phi} 
+\end{equation}
+++++
+where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate, latexmath:[y_\theta] the phase angle in the minor axis,  latexmath:[y_\phi] the phase angle in the major axis, and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The angle sensitivities are latexmath:[\eta_\phi] for the major axis and latexmath:[\eta_\theta] for the minor axis.
+
+
+==== Three or four sub-beams (type B and C)
+
+This arrangement has either three equal sub-beams (<<transducer_types>>, part B) or a centre sub-beam and three surrounding sub-beams. (<<transducer_types>>, part C). Type C can be treated the same as type B once the centre sub-beam signal is added to each of the outer sub-beam signals. The phase angles between two pairs of the three sub-beams are then given by cite:[bodholt2001, bjorno2017]:
+
+[stem]
+++++
+\begin{equation}
+\omega_{31} = \arctan \left( \Im(y_3 \cdot y_1^*), \Re(y_3 \cdot y_1^*) \right) \\
+\omega_{32} = \arctan \left( \Im(y_3 \cdot y_2^*), \Re(y_3 \cdot y_2^*) \right)
+\end{equation}
+++++
+where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are then:
+
+[stem]
+++++
+\begin{equation}
+\theta = \frac{1}{\eta_\theta} (\omega_{32} - \omega_{31})\\
+\phi = \frac{1}{\sqrt{3}\eta_\phi} (\omega_{31} + \omega_{32})\\
+\end{equation}
+++++
+where latexmath:[\eta_\theta] is the angle sensitivity for the minor axis and latexmath:[\eta_\phi] the angle sensitivity for the major axis.
+
+== Revision history
+
+=== Significant changes from version 1 to version 2
+
+Version 2 of this document makes some significant changes to the convention presented in version 1. These are summarised here:
+
+Beam pointing:: The method used to specify the beam pointing direction has changed from angles to vectors. A number of coordinate systems and translations and rotations have also been added to enable the flexible and complete definition of beam pointing directions.
+
+Platform attributes:: Added variables to the Sonar groups to enable storage of geographic position of the platform interpolated to ping timestamps.
+
+Platform:: The platform group can now store data from multiple sensors of the same type.
+
+Platform and Sonar:: The transducer description now allows for separate emitting and receiving antennas (as used by some bathymetric sonars). The sonar beam variable names and descriptions have been updated to distinguish between transmit and receive beams.
+
+Equation type::
+* Type 3 and 4 data have been added in order to handle backscatter data from respectively Simrad EK60 and EK80 echosounders.
+* Type 5 data has been added for handling sonars that directly store Sv and/or TS data as defined in MacLennan et al. (2002).
+* Type 6 data has been added for handling data recorded by Furuno FCV-38 echosounder.
+
+Beam:: 
+* Added variables for the description and storage of data from split-aperture beams via a subbeam dimension added in the Sonar group.
+* transmit_frequency_start and transmit_frequency_stop cannot now collapse the beam dimension if all start or stop values are the same (while this increases storage, it will reduce complexity)
+* Explicitly allow for type 5 data to have only Sv, only TS, or both in a file.
+* added substitute_value_used attribute to some variables to indicate whether the variable has a nominal/default value in it, or an actual measured/calibrated value in it. This is useful for when a value for a mandatory variable is not available.
+* add an optional variable to hold the number of samples in each beam, for each ping. This can be used to speed up loading/processing of data files.
+
+Gridded:: A new subgroup, Gridded is added to allow for gridded backscatter data (i.e., resampled onto a consistent time/range grid).
+
+ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler current profilers.
+
+Provenance:: Changed the required timestamp format to match that used elsewhere in the convention.
+
+Beam:: Added variable for the transmit pulse slope.
+
+VolumeBackscatter:: A new subgroup, VolumeBackscatter, to Beam_Group1, has been added to to store calculated SV/SV(f) for single ping, all samples.
+
+AveragedVolumeBackscatter:: A new subgroup, AveragedVolumeBackscatter, to VolumeBackscatter, has been added to to store calculated SV/SV(f) for single ping or over a series of ping, calculation interval, for a selected layer range.
+
+Vendor_specific_SimradWBT:: A new group, Vendor_specific_SimradWBT, has been added to provide transducer and transceiver information for processing.
+
+=== Changes within a document version 
+
+[cols=",,,",options="header",]
+|===
+|Document version |SONAR-netCDF4 version |Date |Changes
+|{revnumber}|2.0 | Work in progress...|
+|1.7 |1.0 |29 May 2018 |Modifications due to ICES CRR review and editorial process.
+|1.6 |1.0 |7 Feburary 2018 |Modifications due to further Topic Group input.
+|1.5 |1.0 |20 December 2017 |Formatted to ICES CRR style
+|1.4 |1.0 |18 September 2017 |Added additional CF attributes to time variables. From Topic Group input: incorporation of Type 2 equation and additional variables to support it. Consistency and clarity corrections.
+|1.3 |1.0 |21 June 2017 |Extensive and significant modifications derived from feedback on v1.2, from creation of test SONAR-HDF4 files, and from implementation of reading in LSSS.
+|1.2 |1.0 |2 February 2017 |Further modifications after internal review.
+|1.1 |1.0 |13 January 2017 |Modifications after generation of test datasets.
+|1.0 |1.0 |22 December 2016 |Draft version for distribution to ICES WGFAST Topic Group on “Defining a data format for omni fisheries sonar”.
+|===
+
+== Acknowledgements
+
+We are grateful for the thorough and considered contributions from the Marine Acoustics Society of Japan’s Technical Committee. Advice and experience on the practicalities of reading netCDF files in analysis software was generously provided by Christian Michelsen Research AS, Echoview Software, and Nortek AS. Sindre Vatnehol and Arne Johannes Holmin kindly developed software to generate SONAR-netCDF4 files. We also thank Elodie Fernandez and Jim Biard for their invaluable reviews and suggestions for improving both the convention and this document.
+
+== References
+
+bibliography::[]
+
+:sectnums!:
+== Annex 1: Working with netCDF4 files
+
+NetCDF4 files are not commonly used for fisheries acoustics data. To facilitate the use of such files, this section provides simple examples of how to access and use SONAR-netCDF4 files in commonly used programming languages, namely Python, R, and Matlab.
+
+.Python example
+[source,python]
+----
+# Import packages needed to read and view data from netcdf4
+from netCDF4 import Dataset
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Name of the netcdf file
+filename = 'SU90-D20171107-T195023.nc'
+
+# Open the file
+dataset = Dataset(filename)
+
+# Open the group where the backscatter data is located
+SonarGr = dataset.groups['Sonar'].groups['Beam_group2']
+
+# Get the backscatter data from the 10th ping and and 31st beam
+back_r = SonarGr.variables['backscatter_r'][9,30]
+back_i = SonarGr.variables['backscatter_i'][9,30]
+
+# Close dataset
+dataset.close()
+
+# Compute the power
+power = abs(np.vectorize(complex)(back_r,back_i))**2
+
+# Plot the power of beam
+plt.figure(1)
+plt.clf()
+plt.plot(10*np.log10(power))
+plt.xlabel('Sample number')
+plt.ylabel('Amplitude [dB]')
+----
+
+.R example
+[source,r]
+----
+library(h5)
+SU90_nc <- PATH_TO_SONAR_NETCDF4_FILE
+
+# The h5 package is able to read the example file:
+data <- h5file(SU90_nc)
+
+# Show the contents:
+data
+
+# List the dimensions of the data sets:
+ds <- list.datasets(data)
+dims <- lapply(ds, function(x) openDataSet(data, x)@dim)
+names(dims) <- ds
+dims
+
+# Note that the backscatter data are stored as variable 
+# length datatype, so the dimensions in 'dims' does not 
+# reflect to the full size of the backscatter data. 
+# In this particular file the length of all beams and all 
+# pings of both Beam_group1 and Beam_group2 are identical:
+
+bs_r1_name <- "/Sonar/Beam_group2/backscatter_r"
+bs_i1_name <- "/Sonar/Beam_group2/backscatter_i"
+
+# Save the real part and set dimension to 
+# [length of beams, number of beams, number of pings]:
+backscatter1 <- complex(
+real=unlist(data[bs_r1_name][10,31]), 
+imaginary=unlist(data[bs_i1_name][10,31]))
+power <- abs(backscatter1)^2
+
+# Plot the first and second beam of the third ping:
+plot(10*log10(power), type="l", 
+ylab="Power", xlab="Sample number")
+
+# Close the file:
+h5close(data)
+----
+
+.Matlab example
+[source,matlab]
+----
+% Example Matlab script to load a SONAR-netCDF4 file using the
+% high-level HDF5 functions.
+
+% File to read
+file = 'SU90-D20171107-T195023.nc';
+
+% Ping and beam to read
+pingNo = 10;
+beamNo = 31;
+
+% Read the selected ping/beam from the file
+amp_r = h5read(file, '/Sonar/Beam_group2/backscatter_r', [beamNo pingNo], [1 1]);
+amp_i = h5read(file, '/Sonar/Beam_group2/backscatter_i', [beamNo pingNo], [1 1]);
+
+% Calculate the power values for the ping.
+power = abs(complex(cell2mat(amp_r), cell2mat(amp_i))).^2;
+
+% Plot the power
+plot(10*log10(power))
+xlabel('Sample number')
+ylabel('Power (dB)')
+----
+
+== Annex 2: Contact information
+
+[cols=",",options="header",]
+|===
+2+|*Editors* 
+a|
+*Gavin John Macaulay*
+
+Institute of Marine Research, Norway
+
+mailto:gavin.macaulay@hi.no[gavin.macaulay@hi.no]
+a|
+*Héctor Peña*
+
+Institute of Marine Research, Norway
+
+mailto:hector.pena@hi.no[hector.pena@hi.no]
+
+2+|**Members of the Topic Group on Defining a data format for omnidirectional fisheries sonar** (part of ICES Working Group on Fisheries Acoustics, Science, and Technology)
+a|
+*Akira Okunishi*
+
+Furuno Electric Co. Ltd., Japan
+
+mailto:akira.okunishi@furuno.co.jp[akira.okunishi@furuno.co.jp]
+a|
+*Christophe Cobieres*
+
+iXblue SAS, France
+
+mailto:christophe.corbieres@ixblue.com[christophe.corbieres@ixblue.com]
+a|
+*Arne Johannes Holmin*
+
+Institute of Marine Research, Norway
+
+mailto:ArneJohannes.Holmin@hi.no[ArneJohannes.Holmin@hi.no]
+a|
+*Dezhang Chu*
+
+National Oceanic and Atmospheric Administration, USA
+
+mailto:dezhang.chu@noaa.gov[dezhang.chu@noaa.gov]
+a|
+*Atle Totland*
+
+Institute of Marine Research, Norway
+
+mailto:atle.totland@hi.no[atle.totland@hi.no]
+a|
+*Doug McGowen*
+
+Edgetech, USA
+
+mailto:Doug.McGowen@edgetech.com[Doug.McGowen@edgetech.com]
+a|
+*Benoit Berges*
+
+Wageningen Marine Research, The Netherlands
+
+mailto:benoit.berges@wur.nl[benoit.berges@wur.nl]
+a|
+*Gavin John Macaulay*
+
+Institute of Marine Research, Norway
+
+mailto:gavin.macaulay@hi.no[gavin.macaulay@hi.no]
+a|
+*Briony Hutton*
+
+Echoview Software, Australia
+
+mailto:briony.hutton@echoview.com[briony.hutton@echoview.com]
+a|
+*Glen Rice*
+
+National Oceanic and Atmospheric Administration, USA
+
+mailto:glen.rice@noaa.gov[glen.rice@noaa.gov]
+a|
+*Héctor Peña*
+
+Institute of Marine Research, Norway
+
+mailto:hector.pena@hi.no[hector.pena@hi.no]
+a|
+*Leon Smith*
+
+Faroe Marine Research Institute, Faroe Islands
+
+mailto:leonsmit@hav.fo[leonsmit@hav.fo]
+a|
+*Inge Christian Eliassen*
+
+Christian Michelsen Research Institute, Norway
+
+inge.eliassen@cmr.no
+a|
+*Mariano Gutiérrez*
+
+Agroceánica Consultores, Perú
+
+mailto:msgtorero@gmail.com[msgtorero@gmail.com ]
+a|
+*Jan Arge Jacobsen*
+
+Faroe Marine Research Institute, Faroe Islands
+
+mailto:janarge@hav.fo[janarge@hav.fo]
+a|
+*Nils Olav Handegard*
+
+Institute of Marine Research, Norway
+
+mailto:nilsolav@hi.no[nilsolav@hi.no]
+a|
+*Kouichi Sawada*
+
+Japan Fisheries Research Agency, Japan
+
+mailto:ksawada@fra.affrc.go.jp[ksawada@fra.affrc.go.jp]
+a|
+*Sindre Vatnehol*
+
+Institute of Marine Research, Norway
+
+mailto:sindre.vatnehol@hi.no[sindre.vatnehol@hi.no]
+a|
+*Koshi Haraguchi*
+
+Sonic Corporation, Japan
+
+mailto:koshi-haraguchi@u-sonic.co.jp[koshi-haraguchi@u-sonic.co.jp]
+a|
+*Stéphane Gauthier*
+
+Fisheries and Oceans Canada, Canada
+
+mailto:stephane.gauthier@dfo-mpo.gc.ca[stephane.gauthier@dfo-mpo.gc.ca]
+a|
+*Lars Nonboe Andersen*
+
+Simrad, Kongsberg Maritime, Norway
+
+mailto:lars.nonboe.andersen@simrad.com[lars.nonboe.andersen@simrad.com]
+|===
