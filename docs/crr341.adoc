@@ -325,6 +325,16 @@ include::tableSonar.adoc[]
 [[sonarBeamGroupTable]]
 include::tableBeamGroup1.adoc[]
 
+==== Proposed Single Target additions
+
+This group contains the Single Target detection from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <<Conversion equations>>.
+Algorithm for single target detection and parameters are detailed in citenp:[Soule1997].
+The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.
+
+.Description of the single_target subgroup of the beam group.
+[[sonarSingleTargetTable]]
+include::tableSingleTarget_sub_group.adoc[]
+
 ==== Proposed ADCP additions
 
 This group contains the ADCP beam data, single ping calculations and associated metadata.
@@ -1120,6 +1130,8 @@ Beam::
 Gridded:: A new subgroup, Gridded is added to allow for gridded backscatter data (i.e., resampled onto a consistent time/range grid).
 
 ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler current profilers.
+
+SingleTarget:: A new subgroup, SingleTarget is added to allow for single target detections using backscatter_r and backscatter_i or backscater_r and echoangle_major and echoangle_minor. Calculation of Target Strength (TS) of single targets is given in equation 2,3,4 and 6 for different sonars.
 
 Provenance:: Changed the required timestamp format to match that used elsewhere in the convention.
 
