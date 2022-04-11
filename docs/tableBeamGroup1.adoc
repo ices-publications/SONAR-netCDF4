@@ -334,4 +334,5 @@ e|Variables | |
 
 e|Subgroups | |
  |{var}ADCP |O |Subgroup containing ADCP calculated current velocity data.
+ |{var}VolumeBackscatter|O |Subgroup containing calculated volume backscatter data.
 |===

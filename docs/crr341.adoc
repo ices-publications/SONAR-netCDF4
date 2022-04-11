@@ -325,6 +325,20 @@ include::tableSonar.adoc[]
 [[sonarBeamGroupTable]]
 include::tableBeamGroup1.adoc[]
 
+==== Proposed calculated backscatter additions
+
+This group contains the calculated SV, for a single ping or 
+a series of pings formed by a calculation interval.
+The netCDF4 group name is VolumeBackscatter and is a subgroup of /Sonar/Beam_group.
+
+.Description of the VolumeBackscatter subgroup of the BeamGroup1 group.
+[[sonarVolumeBackscatterTable]]
+include::tableVolumeBackscater_sub_group.adoc[]
+
+.Description of the AveragedVolumeBackscatter subgroup of the VolumeBackscatterGroup group.
+[[sonarAveragedVolumeBackscatterTable]]
+include::tableAveragedVolumeBackscater_sub_group.adoc[]
+
 ==== Proposed ADCP additions
 
 This group contains the ADCP beam data, single ping calculations and associated metadata.
@@ -1122,6 +1136,10 @@ Gridded:: A new subgroup, Gridded is added to allow for gridded backscatter data
 ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler current profilers.
 
 Provenance:: Changed the required timestamp format to match that used elsewhere in the convention.
+
+VolumeBackscatter:: A new subgroup, VolumeBackscatter, to Beam_Group1, has been added to to store calculated SV/SV(f) for single ping, all samples.
+
+AveragedVolumeBackscatter:: A new subgroup, AveragedVolumeBackscatter, to VolumeBackscatter, has been added to to store calculated SV/SV(f) for single ping or over a series of ping, calculation interval, for a selected layer range.
 
 === Changes within a document version 
 
