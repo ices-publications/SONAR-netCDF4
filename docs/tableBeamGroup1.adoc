@@ -196,6 +196,11 @@ e|Variables | |
  3+|{attr}:units = "Hz" 
  3+|{attr}float :valid_min = 0.0 
  
+ |{var}float nominal_transducer_frequency |O |Frequency for which transducer is designed to operate in CW.
+ 3+|{attr}:long_name = "Nominal transducer frequency" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
  |{var}float transmit_bandwidth(ping_time, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
  3+|{attr}:long_name = "Nominal bandwidth of transmitted pulse" 
  3+|{attr}:units = "Hz" 
@@ -206,6 +211,12 @@ e|Variables | |
  3+|{attr}:units = "s" 
  3+|{attr}float :valid_min = 0.0 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+ 
+ |{var}float transmit_pulse_slope(ping_time, tx_beam) |O |Slope of the transmit pulse. 
+ 3+|{attr}:long_name = "Slope of transmitted pulse" 
+ 3+|{attr}:units = "%" 
+ 3+|{attr}float :valid_min = 0.0 
+ 3+|{attr}float :valid_max = 50.0 
  
  |{var}pulse_t transmit_pulse_model_r(ping_time, tx_beam) |MA |Real part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate of the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
  3+|{attr}:long_name = "Real part of the model of the transmit pulse" 
@@ -331,7 +342,4 @@ e|Variables | |
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
-
-e|Subgroups | |
- |{var}ADCP |O |Subgroup containing ADCP calculated current velocity data.
 |===

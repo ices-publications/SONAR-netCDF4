@@ -1123,6 +1123,8 @@ ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler 
 
 Provenance:: Changed the required timestamp format to match that used elsewhere in the convention.
 
+Beam:: Added variable for the transmit pulse slope and nominal transducer frequency.
+
 === Changes within a document version 
 
 [cols=",,,",options="header",]
