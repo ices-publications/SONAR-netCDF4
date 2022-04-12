@@ -337,7 +337,7 @@ include::tableVolumeBackscatter_sub_group.adoc[]
 
 .Description of the AveragedVolumeBackscatter subgroup of the VolumeBackscatterGroup group.
 [[sonarAveragedVolumeBackscatterTable]]
-include::tableAveragedVolumeBackscater_sub_group.adoc[]
+include::tableAveragedVolumeBackscatter_sub_group.adoc[]
 
 ==== Proposed ADCP additions
 
