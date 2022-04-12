@@ -14,7 +14,7 @@ e|Variables | |
 
 |{var}float transceiver_impedance_i(ping_time, beam, frequency) |M |Transceiver impedance imaginary part.
  3+|{attr}:long_name = "Transceiver impedance imaginary part" 
- 3+|{attr}:units = "ohm 
+ 3+|{attr}:units = "ohm" 
  
  |{var}float transceiver_impedance_r(ping_time, beam, frequency) |M |Transceiver impedance real part.
  3+|{attr}:long_name = "Transceiver impedance real part" 
