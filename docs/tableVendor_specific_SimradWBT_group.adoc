@@ -26,7 +26,7 @@ e|Variables | |
 3+|{attr}:units = "Hz"
  |{var}float filter_coefficients(ping_time, beam, stage) |M |Filter coefficients.
  3+|{attr}:long_name = "Filter coefficients" 
-  
+  3+|{attr}:units = "1"
  |{var}int filter_decimation(ping_time, beam, stage) |M |Filter decimation.
  3+|{attr}:long_name = "Filter decimation" 
  3+|{attr}int :valid_min = 1  
