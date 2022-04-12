@@ -327,7 +327,7 @@ include::tableBeamGroup1.adoc[]
 
 ==== Proposed calculated backscatter additions
 
-This group contains the calculated SV, for a single ping or 
+This group contains the calculated latexmath:[S_v], for a single ping or 
 a series of pings formed by a calculation interval.
 The netCDF4 group name is VolumeBackscatter and is a subgroup of /Sonar/Beam_group.
 
