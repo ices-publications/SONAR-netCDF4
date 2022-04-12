@@ -333,7 +333,7 @@ The netCDF4 group name is VolumeBackscatter and is a subgroup of /Sonar/Beam_gro
 
 .Description of the VolumeBackscatter subgroup of the BeamGroup1 group.
 [[sonarVolumeBackscatterTable]]
-include::tableVolumeBackscater_sub_group.adoc[]
+include::tableVolumeBackscatter_sub_group.adoc[]
 
 .Description of the AveragedVolumeBackscatter subgroup of the VolumeBackscatterGroup group.
 [[sonarAveragedVolumeBackscatterTable]]
