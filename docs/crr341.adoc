@@ -351,7 +351,7 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.
 [[sonarMeanCurrentTable]]
 include::tableMean_current_sub_group.adoc[]
 
-===== Gridded group
+==== Gridded group
 
 This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
 
@@ -359,7 +359,7 @@ This group contains gridded sonar backscatter data and associated metadata. The 
 [[sonarGridGroupTable]]
 include::tableBeamGridGroup1.adoc[]
 
-===== Interpretation
+==== Interpretation
 This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Gridded and Beam_group. The netCDF4 group name is *InterpretationX*, where *X* is an integer.
 
 The interpretation masks are based on a time and range, for a given a sound speed.
