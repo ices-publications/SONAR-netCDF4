@@ -214,7 +214,7 @@ e|Variables | |
  
  |{var}float transmit_pulse_slope(ping_time, tx_beam) |O |Slope of the transmit pulse. 
  3+|{attr}:long_name = "Slope of transmitted pulse" 
- 3+|{attr}:units = "%" 
+ 3+|{attr}:units = "percent" 
  3+|{attr}float :valid_min = 0.0 
  3+|{attr}float :valid_max = 50.0 
  
