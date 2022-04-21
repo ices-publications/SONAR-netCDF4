@@ -1,6 +1,6 @@
 :var: {nbsp}{nbsp}{nbsp}{nbsp}
 :attr: {var}{var}
-[%autowidth,options="header",]
+[cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
 e|Dimensions | |

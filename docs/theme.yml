@@ -1,0 +1,4 @@
+extends: default
+  role:
+    tablefont:
+      font-size: 6

@@ -239,25 +239,37 @@ An example of a SONAR-netCDF4 file is provided in the Common Data form Language 
 
 The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<<topLevelTable>>).
 
+[.landscape]
+<<<
 .Description of the top-level group.
 [[topLevelTable]]
 include::tableToplevel.adoc[]
+[.portrait]
+<<<
 
 ==== Annotation group
 
 The annotation group contains timestamped annotations with optional identification code. Annotations are typically textual notes entered by users relevant to the data at a particular time. Some sonar systems provide an interface for creating manual and programmatic annotations. The netCDF4 group name is */Annotation* and is described in <<annotationTable>>.
 
+[.landscape]
+<<<
 .Description of the annotation group.
 [[annotationTable]]
 include::tableAnnotation.adoc[]
+[.portrait]
+<<<
 
 ==== Environment group
 
 The environment group contains information on environmental conditions, especially the speed of sound in water and acoustic absorption. The netCDF4 group name is */Environment* and is described in <<environmentTable>>. Sound speed, absorption, and current profiles can also be stored in this group, as can profile measurements of salinity, temperature, and pressure. Such profile data should use the NCEI NetCDF “profile” template, v2.0 or greater.
 
+[.landscape]
+<<<
 .Description of the environment group.
 [[environmentTable]]
 include::tableEnvironment.adoc[]
+[.portrait]
+<<<
 
 ==== Platform group
 
@@ -271,6 +283,8 @@ As a general example, parsed data from a GPS with id _Garmin1234_ would be store
 
 The coordinate system convention used for the /Platform group variables is detailed in <<_coordinate_systems>>.
 
+[.landscape]
+<<<
 .Description of the platform group.
 [[platformGroupTable]]
 include::tablePlatform.adoc[]
@@ -297,7 +311,11 @@ include::tablePosition_sub_group.adoc[]
 .Suggested group for storing NMEA datagrams from marine instruments.
 [[NMEATable]]
 include::tableNMEA.adoc[]
+[.portrait]
+<<<
 
+[.landscape]
+<<<
 ==== Provenance group
 
 The provenance group provides information on how the SONAR-netCDF4 version of the data were created and what processes were applied to this data. The netCDF4 group name is */Provenance* and is described in <<provenanceTable>>.
@@ -305,6 +323,8 @@ The provenance group provides information on how the SONAR-netCDF4 version of th
 .Description of the provenance group.
 [[provenanceTable]]
 include::tableProvenance.adoc[]
+[.portrait]
+<<<
 
 ==== Sonar group
 
@@ -317,6 +337,8 @@ Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in
 
 Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
 
+[.landscape]
+<<<
 .Description of the sonar group.
 [[sonarGroupTable]]
 include::tableSonar.adoc[]
@@ -324,7 +346,11 @@ include::tableSonar.adoc[]
 .Description of the beam subgroups of the sonar group.
 [[sonarBeamGroupTable]]
 include::tableBeamGroup1.adoc[]
+[.portrait]
+<<<
 
+[.landscape]
+<<<
 ==== Proposed Single Target additions
 
 This group contains the Single Target detection from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <<Conversion equations>>.
@@ -334,7 +360,11 @@ The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.
 .Description of the single_target subgroup of the beam group.
 [[sonarSingleTargetTable]]
 include::tableSingleTarget_sub_group.adoc[]
+[.portrait]
+<<<
 
+[.landscape]
+<<<
 ==== Proposed ADCP additions
 
 This group contains the ADCP beam data, single ping calculations and associated metadata.
@@ -350,14 +380,20 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.
 .Description of the Mean current subgroup of the ADCP group.
 [[sonarMeanCurrentTable]]
 include::tableMean_current_sub_group.adoc[]
+[.portrait]
+<<<
 
 ==== Gridded group
 
 This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
 
+[.landscape]
+<<<
 .Description of the beam grid subgroups of the sonar group.
 [[sonarGridGroupTable]]
 include::tableBeamGridGroup1.adoc[]
+[.portrait]
+<<<
 
 ==== Interpretation
 This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Gridded and Beam_group. The netCDF4 group name is *InterpretationX*, where *X* is an integer.
