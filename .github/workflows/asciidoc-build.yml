@@ -14,8 +14,8 @@ jobs:
     - name: install git
       run: apk add --update git 
         
-    - name: install asciidoctor-bibtex
-      run: gem install asciidoctor-bibtex asciidoctor-mathematical
+    - name: install asciidoctor requirements
+      run: gem install asciidoctor-bibtex asciidoctor-mathematical prawn-gmagick
       
     - name: checkout 
       uses: actions/checkout@master
