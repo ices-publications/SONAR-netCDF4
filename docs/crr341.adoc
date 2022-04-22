@@ -61,9 +61,11 @@ This document was originally developed by the Topic Group on Defining a data for
 
 == Introduction
 
-Sonarsfootnote:[The term sonar is used here to mean all underwater acoustic systems that actively transmit sound and then listen for echoes from that transmission.] have long been used to study and understand fisheries and the aquatic environment, but only recently have they directly provided digital data for quantitative analysis. Each manufacturer typically provides such data in a proprietary, but usually open, file format specific to their sonar systems. This hinders the effective use and exchange of such data by requiring the development and maintenance of file-reading software for multiple analysis programs and multiple sonars.
+Sonars have long been used to study and understand fisheries and the aquatic environment, but only recently have they directly provided digital data for quantitative analysis. Each manufacturer typically provides such data in a proprietary, but usually open, file format specific to their sonar systems. This hinders the effective use and exchange of such data by requiring the development and maintenance of file-reading software for multiple analysis programs and multiple sonars.
 
 This document presents a convention for the storage and exchange of fisheries sonar data, with an initial focus on omnisonars. It is sufficiently generic and flexible to contain all foreseeable types of fisheries sonar data, along with necessary metadata. It also serves as a statement of the minimum set of data and metadata required to use omnisonar data in a quantitative manner.
+
+The term sonar is used in this convention to mean all underwater acoustic systems that actively transmit sound and then listen for echoes from that transmission.
 
 === Background
 
