@@ -192,7 +192,7 @@ The fisheries acoustics community has developed a metadata convention for proces
 
 All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package cite:[ucar2014]. 
 
-Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention. Note that reference values commonly used with decibels should not be part of the units attribute, but rather included in the variable description.
+Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention. Note that reference values commonly used with decibels should not be part of the units attribute, but rather included in the variable description (see citenp:[nedelec2021], §11.4 for an explanation of this).
 
 Numeric variables that are dimensionless should have a units attribute of "1".
 
@@ -440,7 +440,7 @@ TS = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\log_{10}(r) + 2\alpha r - (
 \end{equation}
 ++++
 
-where _A_ (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , _r_ is the range as given by equation \eqref{eq:timeToRange}, and _α_ is the absorption coefficient of sound in water (absorption_indicative, dB/m). _SL_ is source level (transmit_source_level, dB re 1μPa at 1 m) and _K_ is receiver sensitivity (receiver_sensitivity, dB re 1/μPa). Both parameters may depend on tilt angle of the beam for transmitting and receiving.
+where _A_ (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , _r_ is the range as given by equation \eqref{eq:timeToRange}, and _α_ is the absorption coefficient of sound in water (absorption_indicative, dB/m). _SL_ is source level (transmit_source_level (re 1μPa at 1 m), dB) and _K_ is receiver sensitivity (receiver_sensitivity (re 1/μPa), dB). Both parameters may depend on tilt angle of the beam for transmitting and receiving.
 
 Gain correction, latexmath:[\Delta G], (gain_correction, dB) is determined by the calibration. Time-varied gain, latexmath:[G_T] (time_varied_gain, dB), is given at each sample number _i_.
 

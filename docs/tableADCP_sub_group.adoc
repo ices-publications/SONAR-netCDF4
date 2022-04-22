@@ -119,12 +119,12 @@ s|Variables | |
  
  |{var}int sv_dbw_high_limit(ping_time) |MA |Filtering parameter. Element discarded if backscatter is above given limit.
  3+|{attr}:units = "dB" 
- 3+|{attr}:long_name = "Sv maximum limit used for filtering current ping" 
+ 3+|{attr}:long_name = "Sv (re 1 m^-1^) maximum limit used for filtering current ping" 
  3+|{attr}int :valid_range = -235, 0 
  
  |{var}int sv_dbw_low_limit(ping_time) |MA |Filtering parameter. Element discarded if backscatter is below given limit.
  3+|{attr}:units = "dB" 
- 3+|{attr}:long_name = "Sv minimum limit used for filtering current ping" 
+ 3+|{attr}:long_name = "Sv (re 1 m^-1^) minimum limit used for filtering current ping" 
  3+|{attr}int :valid_range = -235, 0 
  
  |{var}sample_v velocity(ping_time, beam) |O |Calculated beam velocity. Each element in the 2D matrix is a variable length vector that contains the calculated velocity along that beam and ping time.

@@ -34,15 +34,15 @@ s|Variables | |
 
  |{var}target_TS compensated_TS(ping_time,beam,frequency) |MA |Calculated beam compensated Target Strength.
  3+|{attr}:units = "dB"
- 3+|{attr}:long_name = "Calculated Target Strength after compensation for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"
+ 3+|{attr}:long_name = "Calculated Target Strength (re 1 m^2^) after compensation for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"
  
  |{var}target_TS uncompensated_TS(ping_time,beam,frequency) |MA |Calculated beam uncompensated Target Strength.
  3+|{attr}:units = "dB"
- 3+|{attr}:long_name = "Calculated Target Strength uncompensated for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"
+ 3+|{attr}:long_name = "Calculated Target Strength (re 1 m^2^) uncompensated for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"
 
  |{var}float param_TS_threshold(ping_time,beam) |MA |TS threshold for single target detection
  3+|{attr}:units = "dB"
- 3+|{attr}:long_name = "Minimum TS threshold for single target detection"
+ 3+|{attr}:long_name = "Minimum TS (re 1 m^2^) threshold for single target detection"
 
  |{var}float param_gain_compensation(ping_time,beam) |MA |Gain compensation for single target detection
  3+|{attr}:units = "dB"
