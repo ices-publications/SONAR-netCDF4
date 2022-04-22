@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<meta name="author" content="Gavin Macaulay, Héctor Peña">
-<title>The SONAR-netCDF4 convention for sonar data, Version 2.0</title>
+<meta name="author" content="List of authors">
+<title>The SONAR-netCDF4 convention for sonar data, version 2.0</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,13 +440,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>The SONAR-netCDF4 convention for sonar data, Version 2.0</h1>
+<h1>The SONAR-netCDF4 convention for sonar data, version 2.0</h1>
 <div class="details">
-<span id="author" class="author">Gavin Macaulay</span><br>
-<span id="email" class="email"><a href="mailto:gavin.macaulay@hi.no">gavin.macaulay@hi.no</a></span><br>
-<span id="author2" class="author">Héctor Peña</span><br>
-<span id="email2" class="email"><a href="mailto:hector.pena@hi.no">hector.pena@hi.no</a></span><br>
-<span id="revnumber">version 1.8</span>
+<span id="author" class="author">List of authors</span><br>
+<span id="revnumber">version 2.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -486,23 +483,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_datatypes">3.6. Datatypes</a></li>
 <li><a href="#_vocabularies">3.7. Vocabularies</a></li>
 <li><a href="#_file_naming_convention">3.8. File-naming convention</a></li>
-<li><a href="#_cdl_version_of_sonar_netcdf4">3.9. CDL version of SONAR-netCDF4</a></li>
-<li><a href="#_groups">3.10. Groups</a>
+<li><a href="#_groups">3.9. Groups</a>
 <ul class="sectlevel3">
-<li><a href="#_annotation_group">3.10.1. Annotation group</a></li>
-<li><a href="#_environment_group">3.10.2. Environment group</a></li>
-<li><a href="#_platform_group">3.10.3. Platform group</a></li>
-<li><a href="#_provenance_group">3.10.4. Provenance group</a></li>
-<li><a href="#_sonar_group">3.10.5. Sonar group</a>
+<li><a href="#_annotation_group">3.9.1. Annotation group</a></li>
+<li><a href="#_environment_group">3.9.2. Environment group</a></li>
+<li><a href="#_platform_group">3.9.3. Platform group</a></li>
+<li><a href="#_provenance_group">3.9.4. Provenance group</a></li>
+<li><a href="#_sonar_group">3.9.5. Sonar group</a>
 <ul class="sectlevel4">
 <li><a href="#_beam_group">Beam group</a></li>
 </ul>
 </li>
-<li><a href="#_proposed_single_target_additions">3.10.6. Proposed Single Target additions</a></li>
-<li><a href="#_proposed_adcp_additions">3.10.7. Proposed ADCP additions</a></li>
-<li><a href="#_gridded_group">3.10.8. Gridded group</a></li>
-<li><a href="#_interpretation">3.10.9. Interpretation</a></li>
-<li><a href="#_vendor_specific_group">3.10.10. Vendor specific group</a></li>
+<li><a href="#_proposed_single_target_additions">3.9.6. Proposed Single Target additions</a></li>
+<li><a href="#_proposed_adcp_additions">3.9.7. Proposed ADCP additions</a></li>
+<li><a href="#_gridded_group">3.9.8. Gridded group</a></li>
+<li><a href="#_interpretation">3.9.9. Interpretation</a></li>
+<li><a href="#_vendor_specific_group">3.9.10. Vendor specific group</a></li>
 </ul>
 </li>
 </ul>
@@ -550,7 +546,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_acknowledgements">8. Acknowledgements</a></li>
 <li><a href="#_references">9. References</a></li>
 <li><a href="#_annex_1_working_with_netcdf4_files">Annex 1: Working with netCDF4 files</a></li>
-<li><a href="#_annex_2_contact_information">Annex 2: Contact information</a></li>
 </ul>
 </div>
 </div>
@@ -572,30 +567,7 @@ Telefax (+45) 33 93 42 15<br>
 <a href="mailto:info@ices.dk">info@ices.dk</a></p>
 </div>
 <div class="paragraph">
-<p>Recommended format for purposes of citation:</p>
-</div>
-<div class="paragraph">
-<p><em>to be filled in once a new version is published</em></p>
-</div>
-<div class="paragraph">
-<p>Series Editor: Emory D. Anderson</p>
-</div>
-<div class="paragraph">
-<p>The material in this report may be reused for non-commercial purposes using the recommended citation. ICES may only grant usage rights of information, data, images, graphs, etc. of which it has ownership. For other third-party material cited in this report, you must contact the original copyright holder for permission. For citation of datasets or use of data to be included in other databases, please refer to the latest ICES data policy on ICES website. All extracts must be acknowledged. For other reproduction requests please contact the General Secretary.</p>
-</div>
-<div class="paragraph">
-<p>This document is the product of an expert group under the auspices of the International Council for the Exploration of the Sea and does not necessarily represent the view of the Council.</p>
-</div>
-<div class="paragraph">
-<p>Cover image: &#169; OCEANA/Carlos Suárez</p>
-</div>
-<div class="paragraph">
-<p><a href="http://doi.org/10.17895/ices.pub.4392" class="bare">http://doi.org/10.17895/ices.pub.4392</a><br>
-ISBN 978-87-7482-214-1<br>
-ISSN 1017-6195</p>
-</div>
-<div class="paragraph">
-<p>&#169; 2018 International Council for the Exploration of the Sea</p>
+<p><em>ICES boilerplate stuff goes here.</em></p>
 </div>
 </div>
 </div>
@@ -603,10 +575,10 @@ ISSN 1017-6195</p>
 <h2 id="_foreword">Foreword</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This report documents a convention for the storage of sonar data in netCDF4-formatted computer files, with an initial focus on omnisonars. The intention is to provide a well-founded convention that is supported by multiple sonar systems and multiple sonar analysis software packages, with the aim of facilitating the use of sonar data for research and survey purposes. The name of this convention is SONAR-netCDF4.</p>
+<p>This report documents a convention for the storage of sonar data in netCDF4-formatted computer files. The intention is to provide a well-founded convention that is supported by multiple sonar systems and multiple sonar analysis software packages, with the aim of facilitating the use of sonar data for research and survey purposes. The name of this convention is SONAR-netCDF4.</p>
 </div>
 <div class="paragraph">
-<p>This document was developed by the Topic Group on Defining a data format for omnidirectional fisheries sonar, part of ICES Working Group on Fisheries Acoustics, Science, and Technology (WGFAST).</p>
+<p>This document was originally developed by the Topic Group on Defining a data format for omnidirectional fisheries sonar, part of ICES Working Group on Fisheries Acoustics, Science, and Technology (WGFAST). The current version was developed by the Open Data subgroup of WGFAST.</p>
 </div>
 </div>
 </div>
@@ -619,13 +591,16 @@ ISSN 1017-6195</p>
 <div class="paragraph">
 <p>This document presents a convention for the storage and exchange of fisheries sonar data, with an initial focus on omnisonars. It is sufficiently generic and flexible to contain all foreseeable types of fisheries sonar data, along with necessary metadata. It also serves as a statement of the minimum set of data and metadata required to use omnisonar data in a quantitative manner.</p>
 </div>
+<div class="paragraph">
+<p>The term sonar is used in this convention to mean all underwater acoustic systems that actively transmit sound and then listen for echoes from that transmission.</p>
+</div>
 <div class="sect2">
 <h3 id="_background">1.1. Background</h3>
 <div class="paragraph">
 <p>Many purpose-built file formats exist to store and exchange data from scientific and industrial equipment. Formats have been created by sonar and echosounder manufacturers; in addition, more generic acoustic data formats such as the Generic Water Column (GWC) format (<a href="#geeMultibeamWaterColumn2012">Gee <em>et al.</em>&#44; 2012</a>), the eXtended Triton Format (XTF; <a href="#triton2013">Triton (2013)</a>), and the HydroACoustics (HAC) format (<a href="#mcquinn2005">McQuinn <em>et al.</em>&#44; 2005</a>) have also been created. These formats store a time-ordered sequence of datagrams, making it easy to append new data. Other data, such as geographical position, are typically interleaved into the sequence of datagrams. However, this is not optimal for analysis purposes when data are viewed and analysed as a set of pings and metadata from a time-period or spatial grouping. In addition, efficient random-read access to individual pings is not possible unless an index is available or created.</p>
 </div>
 <div class="paragraph">
-<p>The Topic Group on Defining a data format for omnidirectional fisheries sonar do not want to create yet another sonar-specific file format; the knowledge required is not within the expertise of this group. However, the group does have the expertise to specify what data must be stored to allow for unambiguous use of backscatter data during quantitative analysis.</p>
+<p>The work presented here does not create yet another sonar-specific file format; the knowledge required is not within the expertise of this group. However, the group does have the expertise to specify what data must be stored to allow for unambiguous use of backscatter data during quantitative analysis.</p>
 </div>
 <div class="paragraph">
 <p>Accordingly, an existing file-format definition has been utilized and what should be stored is specified. The requirements for such a file format definition were:</p>
@@ -671,10 +646,10 @@ ISSN 1017-6195</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Other scientific communities that collect and produce voluminous amounts of data have addressed similar needs, resulting in the Hierarchical Data Format (<a href="#thehdfgroup2017">The HDF Group&#44; 2017</a>), currently at version 5 (HDF5). This is the only file format that meets all the listed requirements and is utilized for sonar data. There are two realizations of the HDF5 file format: (i) HDF5 itself and (ii) netCDF4 (<a href="#unidata2017">Unidata&#44; 2017</a>), which is a subset of HDF5. Both are sufficient, but netCDF4 is more widely used and has slightly wider language support and implementation diversity. Accordingly, netCDF4 has been chosen.</p>
+<p>Other scientific communities that collect and produce voluminous amounts of data have addressed similar needs, resulting in the Hierarchical Data Format (<a href="#thehdfgroup2017">The HDF Group&#44; 2017</a>), currently at version 5 (HDF5). This is the only file format that meets all the listed requirements and is utilized here for sonar data. There are two realizations of the HDF5 file format: (i) HDF5 itself and (ii) netCDF4 (<a href="#unidata2017">Unidata&#44; 2017</a>), which is a subset of HDF5. Both are sufficient, but netCDF4 is more widely used and has slightly wider language support and implementation diversity. Accordingly, netCDF4 has been chosen.</p>
 </div>
 <div class="paragraph">
-<p>Using a well-supported file format has the significant benefit that many data exploration, query, extraction, and analysis tools already read such files. This eliminates the need to develop and maintain sonar-specific file-reading software and facilitates the use of existing tools for data management, distribution, and analysis (a pertinent example is OPeNDAP, which provides a network-transparent standard for distributing scientific data).</p>
+<p>Using a well-supported file format has the significant benefit that many data exploration, query, extraction, and analysis tools already read such files. This eliminates the need to develop and maintain sonar-specific file-reading software and facilitates the use of existing tools for data management, distribution, and analysis.</p>
 </div>
 <div class="paragraph">
 <p>An attractive feature of netCDF4 is the ease and transparency with which data can be added to an existing netCDF4 file. For example, processed data and how it was obtained can be included in the same file as the raw data. In addition, netCDF4 files can be very large while still providing fast access to data subsets. This allows a single SONAR-netCDF4 file to contain data from a transect or an entire survey. These features would simplify data management, improve traceability and long-term storage of analysis, enhance the sharing of processed datasets, and facilitate analysis of large disparate datasets. In general, any amount of additional data can be stored in the files without affecting the ability to use the data specified by the SONAR-netCDF4 convention.</p>
@@ -683,7 +658,7 @@ ISSN 1017-6195</p>
 <p>A distinction is commonly made between file formats designed for archiving data in the original form, formats designed for storing partially or fully processed data, and formats for data exchange (<a href="#jackson2014">Jackson <em>et al.</em>&#44; 2014</a>). The SONAR-netCDF4 convention is intended to be suitable for all of these.</p>
 </div>
 <div class="paragraph">
-<p>The initial focus of this convention has been to specify the storage of backscatter amplitude data from omnisonars. It is envisaged that future versions could specify how to store data from other acoustic equipment (e.g. echosounders) and derived data (e.g. bottom and school detections, categorization of backscatter, and integrated backscatter at multiple resolutions). Ancillary information such as sonar display screen-grabs could also be stored.</p>
+<p>Version 1 of this convention specified how to store backscatter amplitude data from omnisonars. Version 2 now provides for the storage of data from other acoustic equipment, including echosounders, multi-beam sonars, and Acoustic Doppler Current Profilers (ADCP). It also has proposed implementations for the storage of derived data, such as bottom and school detections, categorization of backscatter, and integrated backscatter at multiple resolutions.</p>
 </div>
 </div>
 <div class="sect2">
@@ -738,7 +713,7 @@ ISSN 1017-6195</p>
 <div class="sect3">
 <h4 id="_labeling">2.1.3. Labeling</h4>
 <div class="paragraph">
-<p>Labeling acoustic data, i.e. scrutinizing and allocating the acoustic energy to categories, is traditionally achieved by manually assigning backscatter. A data structure to contain such labels is detailed in <a href="#_interpretation">Section 3.10.9</a>.</p>
+<p>Labeling acoustic data, i.e. scrutinizing and allocating the acoustic energy to categories, is traditionally achieved by manually assigning backscatter. A data structure to contain such labels is detailed in <a href="#_interpretation">Section 3.9.9</a>.</p>
 </div>
 <div class="paragraph">
 <p>An earlier overview of how different echo-integration software stores this information can be found here:
@@ -784,31 +759,12 @@ ISSN 1017-6195</p>
 <div class="sect2">
 <h3 id="_hierarchical_structure">3.2. Hierarchical structure</h3>
 <div class="paragraph">
-<p>NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>legend
-Top-level
-|_ Annotation
-|_ Environment
-|_ Platform
-|_ Provenance
-|_ Sonar
-  |_ Beam_groupX
-  |_ GriddedX
-  |_ InterpretationX
-|_ Vendor_specific
-end legend</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:</p>
+<p>NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy. SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Top-level –</strong> contains metadata about the SONAR-netCDF4 file format;</p>
+<p><strong>/ –</strong> The top-level or root of the hierarchy and contains metadata about the SONAR-netCDF4 file format;</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -876,7 +832,7 @@ end legend</pre>
 </ol>
 </div>
 <div class="paragraph">
-<p>Any non-mandatory variables can be absent from a SONAR-netCDF4 file. If a variable is mandatory, it must be present and must contain data. The set of mandatory variables and attributes has been chosen so that omnisonar systems can directly generate SONAR-netCDF4-conforming files without needing survey, experiment, or cruise-specific data.</p>
+<p>Any non-mandatory variables can be absent from a SONAR-netCDF4 file. If a variable is mandatory, it must be present and must contain data. The set of mandatory variables and attributes has been chosen so that sonar systems can directly generate SONAR-netCDF4-conforming files without needing survey, experiment, or cruise-specific data.</p>
 </div>
 <div class="paragraph">
 <p>The _FillValue attribute should be used to indicate missing data in variables. For floating point values, the IEEE 754 not-a-number (NaN) is the preferred fill value as this is convenient for commonly-used analysis packages (e.g. Python, Matlab, R).</p>
@@ -891,7 +847,13 @@ end legend</pre>
 <div class="sect2">
 <h3 id="_units">3.5. Units</h3>
 <div class="paragraph">
-<p>All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package (<a href="#ucar2014">UCAR&#44; 2014</a>). Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention.</p>
+<p>All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package (<a href="#ucar2014">UCAR&#44; 2014</a>).</p>
+</div>
+<div class="paragraph">
+<p>Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention. Note that reference values commonly used with decibels should not be part of the units attribute, but rather included in the variable description (see <a href="#nedelec2021">Nedelec <em>et al.</em> (2021)</a>, §11.4 for an explanation of this).</p>
+</div>
+<div class="paragraph">
+<p>Numeric variables that are dimensionless should have a units attribute of "1".</p>
 </div>
 <div class="sect3">
 <h4 id="_time_units">3.5.1. Time units</h4>
@@ -938,15 +900,9 @@ end legend</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cdl_version_of_sonar_netcdf4">3.9. CDL version of SONAR-netCDF4</h3>
+<h3 id="_groups">3.9. Groups</h3>
 <div class="paragraph">
-<p>An example of a SONAR-netCDF4 file is provided in the Common Data form Language (CDL). This provides a more formalized and structured representation of the data format. A CDL file can be converted into a NetCDF file using the “ncgen” utility (available as part of the netCDF software distribution) and then used as a template for creating populated SONAR-netCDF4 files.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_groups">3.10. Groups</h3>
-<div class="paragraph">
-<p>The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<a href="#topLevelTable">Table 1</a>).</p>
+<p>The top-level group (labelled "/" in netCDF4 terminology) contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<a href="#topLevelTable">Table 1</a>).</p>
 </div>
 <div style="page-break-after: always;"></div>
 <table id="topLevelTable" class="tableblock frame-all grid-all stretch">
@@ -1023,7 +979,7 @@ end legend</pre>
 </table>
 <div style="page-break-after: always;"></div>
 <div class="sect3">
-<h4 id="_annotation_group">3.10.1. Annotation group</h4>
+<h4 id="_annotation_group">3.9.1. Annotation group</h4>
 <div class="paragraph">
 <p>The annotation group contains timestamped annotations with optional identification code. Annotations are typically textual notes entered by users relevant to the data at a particular time. Some sonar systems provide an interface for creating manual and programmatic annotations. The netCDF4 group name is <strong>/Annotation</strong> and is described in <a href="#annotationTable">Table 2</a>.</p>
 </div>
@@ -1102,7 +1058,7 @@ end legend</pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_environment_group">3.10.2. Environment group</h4>
+<h4 id="_environment_group">3.9.2. Environment group</h4>
 <div class="paragraph">
 <p>The environment group contains information on environmental conditions, especially the speed of sound in water and acoustic absorption. The netCDF4 group name is <strong>/Environment</strong> and is described in <a href="#environmentTable">Table 3</a>. Sound speed, absorption, and current profiles can also be stored in this group, as can profile measurements of salinity, temperature, and pressure. Such profile data should use the NCEI NetCDF “profile” template, v2.0 or greater.</p>
 </div>
@@ -1195,7 +1151,7 @@ end legend</pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="_platform_group">3.10.3. Platform group</h4>
+<h4 id="_platform_group">3.9.3. Platform group</h4>
 <div class="paragraph">
 <p>This group contains information about the sonar platform (e.g. ship). The netCDF4 group name is <strong>/Platform</strong> and is described in <a href="#platformGroupTable">Table 4</a>. Optionally, subgroups of /Platform can be used to store data from individual instruments that provide measurements about the platform, such as position, attitude, etc (note that if the measurements are about the environment around the platform they should be stored in the /Environment group). This structure must be used to store all instrument data.</p>
 </div>
@@ -2051,7 +2007,7 @@ end legend</pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="_provenance_group">3.10.4. Provenance group</h4>
+<h4 id="_provenance_group">3.9.4. Provenance group</h4>
 <div class="paragraph">
 <p>The provenance group provides information on how the SONAR-netCDF4 version of the data were created and what processes were applied to this data. The netCDF4 group name is <strong>/Provenance</strong> and is described in <a href="#provenanceTable">Table 9</a>.</p>
 </div>
@@ -2123,7 +2079,7 @@ end legend</pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="_sonar_group">3.10.5. Sonar group</h4>
+<h4 id="_sonar_group">3.9.5. Sonar group</h4>
 <div class="paragraph">
 <p>The netCDF4 group name is <strong>/Sonar</strong> and contains three subgroups.</p>
 </div>
@@ -2133,7 +2089,7 @@ end legend</pre>
 <p>This group contains ping based sonar backscatter data and associated metadata and is described in <a href="#sonarGroupTable">Table 10</a>. The netCDF4 group name is <strong>Beam_groupX</strong>, where <strong>X</strong> is an integer.</p>
 </div>
 <div class="paragraph">
-<p>Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <a href="#sonarBeamGroupTable">Table 11</a>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.</p>
+<p>Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <a href="#sonarBeamGroupTable">Table 11</a>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude.</p>
 </div>
 <div class="paragraph">
 <p>Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group.</p>
@@ -2689,10 +2645,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Receiver sensitivity"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Receiver sensitivity (re 1/μPa)"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1/μ"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
@@ -2951,10 +2907,10 @@ end legend</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Source level generated by the transmit ping. Necessary for type 2 conversion equations.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transmit source level"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transmit source level (re 1 μPa at 1 m)"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1 μPa at 1m"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :substitute_value_used = 0</p></td>
@@ -3229,11 +3185,9 @@ end legend</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_proposed_single_target_additions">3.10.6. Proposed Single Target additions</h4>
+<h4 id="_proposed_single_target_additions">3.9.6. Proposed Single Target additions</h4>
 <div class="paragraph">
-<p>This group contains the Single Target detection from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <a href="#_conversion_equations">Chapter 4</a>.
-Algorithm for single target detection and parameters are detailed in <a href="#soule1997">Soule <em>et al.</em> (1997)</a>.
-The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.</p>
+<p>This group contains the single target detections from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <a href="#_conversion_equations">Chapter 4</a>. Algorithm for single target detection and parameters are detailed in <a href="#soule1997">Soule <em>et al.</em> (1997)</a>. The netCDF4 group name is /Sonar/Beam_group/SingleTarget.</p>
 </div>
 <table id="sonarSingleTargetTable" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 12. Description of the single_target subgroup of the beam group.</caption>
@@ -3343,7 +3297,7 @@ The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.</
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated Target Strength after compensation for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated Target Strength (re 1 m<sup>2</sup>) after compensation for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;target_TS uncompensated_TS(ping_time,beam,frequency)</p></td>
@@ -3354,7 +3308,7 @@ The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.</
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated Target Strength uncompensated for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Calculated Target Strength (re 1 m<sup>2</sup>) uncompensated for off-axis angle for each frequency of the receive echo from spectral analysis of the FM pulse or frequency of the CW pulse"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float param_TS_threshold(ping_time,beam)</p></td>
@@ -3365,7 +3319,7 @@ The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.</
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Minimum TS threshold for single target detection"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Minimum TS (re 1 m<sup>2</sup>) threshold for single target detection"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float param_gain_compensation(ping_time,beam)</p></td>
@@ -3430,10 +3384,10 @@ The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.</
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="_proposed_adcp_additions">3.10.7. Proposed ADCP additions</h4>
+<h4 id="_proposed_adcp_additions">3.9.7. Proposed ADCP additions</h4>
 <div class="paragraph">
 <p>This group contains the ADCP beam data, single ping calculations and associated metadata.
-The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.</p>
+The netCDF4 group name is /Sonar/Beam_groupX/ADCP.</p>
 </div>
 <table id="sonarADCPTable" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 13. Description of the ADCP subgroup of the BeamGroup1 group.</caption>
@@ -3780,7 +3734,7 @@ The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.</p>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Sv maximum limit used for filtering current ping"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Sv (re 1 m<sup>-1</sup>) maximum limit used for filtering current ping"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_range = -235, 0</p></td>
@@ -3794,7 +3748,7 @@ The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.</p>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Sv minimum limit used for filtering current ping"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Sv (re 1 m<sup>-1</sup>) minimum limit used for filtering current ping"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_range = -235, 0</p></td>
@@ -4196,7 +4150,7 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="_gridded_group">3.10.8. Gridded group</h4>
+<h4 id="_gridded_group">3.9.8. Gridded group</h4>
 <div class="paragraph">
 <p>This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is <strong>GriddedX</strong>, where <strong>X</strong> is an integer.</p>
 </div>
@@ -4238,7 +4192,7 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;byte enum backscatter_type_t {Sv = 0, Sa = 1}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">In what form is the acoustic data stored? Controlled vocabulary options include : Sv, Volume backscattering strength (dB re 1 m-1) and Sa, Nautical area scattering coefficient (m2 nmi-2).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In what form is the acoustic data stored? Controlled vocabulary options include : Sv, Volume backscattering strength (dB re 1 m<sup>-1</sup>) and Sa, Nautical area scattering coefficient (m<sup>2</sup> nmi<sup>-2</sup>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;byte enum range_axis_interval_type_t {Range = 0, Depth = 1}</p></td>
@@ -4598,10 +4552,10 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Receiver sensitivity"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Receiver sensitivity (re 1/μPa)"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1/μ"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float sample_interval(ping_axis, beam)</p></td>
@@ -4780,10 +4734,10 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Source level generated by the transmit ping. Necessary for type 2 conversion equations.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transmit source level"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transmit source level (re 1 μPa at 1m)"</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB re 1 μPa at 1m"</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "dB"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;transmit_t transmit_type(ping_axis, tx_beam)</p></td>
@@ -4912,7 +4866,7 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="_interpretation">3.10.9. Interpretation</h4>
+<h4 id="_interpretation">3.9.9. Interpretation</h4>
 <div class="paragraph">
 <p>This group contains the interpretation masks. the interpretation mask is independent of the ping or grid and can be used for data in both the Gridded and Beam_group. The netCDF4 group name is <strong>InterpretationX</strong>, where <strong>X</strong> is an integer.</p>
 </div>
@@ -4927,7 +4881,7 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vendor_specific_group">3.10.10. Vendor specific group</h4>
+<h4 id="_vendor_specific_group">3.9.10. Vendor specific group</h4>
 <div class="paragraph">
 <p>The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is <strong>/Vendor_specific</strong>. Currently, there is no mandatory information for the vendor specific group.</p>
 </div>
@@ -4999,7 +4953,7 @@ TS = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\log_{10}(r) + 2\alpha r - (
 </div>
 </div>
 <div class="paragraph">
-<p>where <em>A</em> (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , <em>r</em> is the range as given by equation \eqref{eq:timeToRange}, and <em>α</em> is the absorption coefficient of sound in water (absorption_indicative, dB/m). <em>SL</em> is source level (transmit_source_level, dB re 1μPa at 1 m) and <em>K</em> is receiver sensitivity (receiver_sensitivity, dB re 1/μPa). Both parameters may depend on tilt angle of the beam for transmitting and receiving.</p>
+<p>where <em>A</em> (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , <em>r</em> is the range as given by equation \eqref{eq:timeToRange}, and <em>α</em> is the absorption coefficient of sound in water (absorption_indicative, dB/m). <em>SL</em> is source level (transmit_source_level (re 1μPa at 1 m), dB) and <em>K</em> is receiver sensitivity (receiver_sensitivity (re 1/μPa), dB). Both parameters may depend on tilt angle of the beam for transmitting and receiving.</p>
 </div>
 <div class="paragraph">
 <p>Gain correction, <span class="image"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTkuMTcyNTIzcHQiIGhlaWdodD0iOS4wNzYxNzJwdCIgdmlld0JveD0iMCAwIDE5LjE3MjUyMyA5LjA3NjE3MiIgdmVyc2lvbj0iMS4xIj4KPGRlZnM+CjxnPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgwLTAiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDAuNTkzNzUgMi4xMjUgTCAwLjU5Mzc1IC04LjQ2ODc1IEwgNi41OTM3NSAtOC40Njg3NSBMIDYuNTkzNzUgMi4xMjUgWiBNIDEuMjY1NjI1IDEuNDUzMTI1IEwgNS45Mzc1IDEuNDUzMTI1IEwgNS45Mzc1IC03Ljc4MTI1IEwgMS4yNjU2MjUgLTcuNzgxMjUgWiBNIDEuMjY1NjI1IDEuNDUzMTI1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMC0xIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSA3LjMxMjUgMCBMIC0wLjM5MDYyNSAwIEwgNC42NzE4NzUgLTguNzUgTCA1LjY1NjI1IC04Ljc1IFogTSA1Ljg0Mzc1IC0wLjYyNSBMIDQuNTc4MTI1IC03LjMyODEyNSBMIDAuNzAzMTI1IC0wLjYyNSBaIE0gNS44NDM3NSAtMC42MjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgwLTIiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDguMDMxMjUgLTYuMTQwNjI1IEMgOC4wMzEyNSAtNi44NjcxODggNy44NDc2NTYgLTcuNDA2MjUgNy40ODQzNzUgLTcuNzUgQyA3LjExNzE4OCAtOC4xMDE1NjIgNi41NTA3ODEgLTguMjgxMjUgNS43ODEyNSAtOC4yODEyNSBDIDQuNzY5NTMxIC04LjI4MTI1IDMuOTUzMTI1IC03Ljk1MzEyNSAzLjMyODEyNSAtNy4yOTY4NzUgQyAyLjcwMzEyNSAtNi42NDg0MzggMi4yNjU2MjUgLTUuNjcxODc1IDIuMDE1NjI1IC00LjM1OTM3NSBDIDEuNzY1NjI1IC0zLjA3ODEyNSAxLjgzMjAzMSAtMi4xMDE1NjIgMi4yMTg3NSAtMS40Mzc1IEMgMi42MDE1NjIgLTAuNzgxMjUgMy4yODkwNjIgLTAuNDUzMTI1IDQuMjgxMjUgLTAuNDUzMTI1IEMgNC43MTg3NSAtMC40NTMxMjUgNS4xNDg0MzggLTAuNTAzOTA2IDUuNTc4MTI1IC0wLjYwOTM3NSBDIDYuMDAzOTA2IC0wLjcyMjY1NiA2LjQyMTg3NSAtMC44OTA2MjUgNi44MjgxMjUgLTEuMTA5Mzc1IEwgNy4yNjU2MjUgLTMuMzc1IEwgNS42MDkzNzUgLTMuMzc1IEwgNS43MzQzNzUgLTQgTCA4LjU3ODEyNSAtNCBMIDcuOTM3NSAtMC43MzQzNzUgQyA3LjM1MTU2MiAtMC40Mjk2ODggNi43NSAtMC4yMDMxMjUgNi4xMjUgLTAuMDQ2ODc1IEMgNS41IDAuMDk3NjU2MiA0Ljg0Mzc1IDAuMTcxODc1IDQuMTU2MjUgMC4xNzE4NzUgQyAyLjgzMjAzMSAwLjE3MTg3NSAxLjg1MTU2MiAtMC4yMzgyODEgMS4yMTg3NSAtMS4wNjI1IEMgMC41OTM3NSAtMS44OTQ1MzEgMC40MTAxNTYgLTIuOTkyMTg4IDAuNjcxODc1IC00LjM1OTM3NSBDIDAuOTQxNDA2IC01Ljc0MjE4OCAxLjU1NDY4OCAtNi44NDc2NTYgMi41MTU2MjUgLTcuNjcxODc1IEMgMy40NzI2NTYgLTguNDkyMTg4IDQuNjI1IC04LjkwNjI1IDUuOTY4NzUgLTguOTA2MjUgQyA2LjQ2ODc1IC04LjkwNjI1IDYuOTcyNjU2IC04Ljg0NzY1NiA3LjQ4NDM3NSAtOC43MzQzNzUgQyA3Ljk5MjE4OCAtOC42MTcxODggOC41MjM0MzggLTguNDQxNDA2IDkuMDc4MTI1IC04LjIwMzEyNSBMIDguNjg3NSAtNi4xNDA2MjUgWiBNIDguMDMxMjUgLTYuMTQwNjI1ICIvPgo8L3N5bWJvbD4KPC9nPgo8L2RlZnM+CjxnIGlkPSJzdXJmYWNlNjExIj4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMC0xIiB4PSIxLjA1NDY4OCIgeT0iOC45MDQyOTciLz4KPC9nPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgwLTIiIHg9IjkuNDIxODc1IiB5PSI4LjkwNDI5NyIvPgo8L2c+CjwvZz4KPC9zdmc+Cg==" alt="stem 9601cec5d98fc89d374ad84f2e5becaa" width="19" height="9"></span>, (gain_correction, dB) is determined by the calibration. Time-varied gain, <span class="image"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTYuODg1NDY2cHQiIGhlaWdodD0iMTEuMzU1NDY5cHQiIHZpZXdCb3g9IjAgMCAxNi44ODU0NjYgMTEuMzU1NDY5IiB2ZXJzaW9uPSIxLjEiPgo8ZGVmcz4KPGc+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDAtMCI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMC41OTM3NSAyLjEyNSBMIDAuNTkzNzUgLTguNDY4NzUgTCA2LjU5Mzc1IC04LjQ2ODc1IEwgNi41OTM3NSAyLjEyNSBaIE0gMS4yNjU2MjUgMS40NTMxMjUgTCA1LjkzNzUgMS40NTMxMjUgTCA1LjkzNzUgLTcuNzgxMjUgTCAxLjI2NTYyNSAtNy43ODEyNSBaIE0gMS4yNjU2MjUgMS40NTMxMjUgIi8+Cjwvc3ltYm9sPgo8c3ltYm9sIG92ZXJmbG93PSJ2aXNpYmxlIiBpZD0iZ2x5cGgwLTEiPgo8cGF0aCBzdHlsZT0ic3Ryb2tlOm5vbmU7IiBkPSJNIDguMDMxMjUgLTYuMTQwNjI1IEMgOC4wMzEyNSAtNi44NjcxODggNy44NDc2NTYgLTcuNDA2MjUgNy40ODQzNzUgLTcuNzUgQyA3LjExNzE4OCAtOC4xMDE1NjIgNi41NTA3ODEgLTguMjgxMjUgNS43ODEyNSAtOC4yODEyNSBDIDQuNzY5NTMxIC04LjI4MTI1IDMuOTUzMTI1IC03Ljk1MzEyNSAzLjMyODEyNSAtNy4yOTY4NzUgQyAyLjcwMzEyNSAtNi42NDg0MzggMi4yNjU2MjUgLTUuNjcxODc1IDIuMDE1NjI1IC00LjM1OTM3NSBDIDEuNzY1NjI1IC0zLjA3ODEyNSAxLjgzMjAzMSAtMi4xMDE1NjIgMi4yMTg3NSAtMS40Mzc1IEMgMi42MDE1NjIgLTAuNzgxMjUgMy4yODkwNjIgLTAuNDUzMTI1IDQuMjgxMjUgLTAuNDUzMTI1IEMgNC43MTg3NSAtMC40NTMxMjUgNS4xNDg0MzggLTAuNTAzOTA2IDUuNTc4MTI1IC0wLjYwOTM3NSBDIDYuMDAzOTA2IC0wLjcyMjY1NiA2LjQyMTg3NSAtMC44OTA2MjUgNi44MjgxMjUgLTEuMTA5Mzc1IEwgNy4yNjU2MjUgLTMuMzc1IEwgNS42MDkzNzUgLTMuMzc1IEwgNS43MzQzNzUgLTQgTCA4LjU3ODEyNSAtNCBMIDcuOTM3NSAtMC43MzQzNzUgQyA3LjM1MTU2MiAtMC40Mjk2ODggNi43NSAtMC4yMDMxMjUgNi4xMjUgLTAuMDQ2ODc1IEMgNS41IDAuMDk3NjU2MiA0Ljg0Mzc1IDAuMTcxODc1IDQuMTU2MjUgMC4xNzE4NzUgQyAyLjgzMjAzMSAwLjE3MTg3NSAxLjg1MTU2MiAtMC4yMzgyODEgMS4yMTg3NSAtMS4wNjI1IEMgMC41OTM3NSAtMS44OTQ1MzEgMC40MTAxNTYgLTIuOTkyMTg4IDAuNjcxODc1IC00LjM1OTM3NSBDIDAuOTQxNDA2IC01Ljc0MjE4OCAxLjU1NDY4OCAtNi44NDc2NTYgMi41MTU2MjUgLTcuNjcxODc1IEMgMy40NzI2NTYgLTguNDkyMTg4IDQuNjI1IC04LjkwNjI1IDUuOTY4NzUgLTguOTA2MjUgQyA2LjQ2ODc1IC04LjkwNjI1IDYuOTcyNjU2IC04Ljg0NzY1NiA3LjQ4NDM3NSAtOC43MzQzNzUgQyA3Ljk5MjE4OCAtOC42MTcxODggOC41MjM0MzggLTguNDQxNDA2IDkuMDc4MTI1IC04LjIwMzEyNSBMIDguNjg3NSAtNi4xNDA2MjUgWiBNIDguMDMxMjUgLTYuMTQwNjI1ICIvPgo8L3N5bWJvbD4KPHN5bWJvbCBvdmVyZmxvdz0idmlzaWJsZSIgaWQ9ImdseXBoMS0wIj4KPHBhdGggc3R5bGU9InN0cm9rZTpub25lOyIgZD0iTSAwLjQyMTg3NSAxLjUgTCAwLjQyMTg3NSAtNiBMIDQuNjg3NSAtNiBMIDQuNjg3NSAxLjUgWiBNIDAuOTA2MjUgMS4wMzEyNSBMIDQuMjAzMTI1IDEuMDMxMjUgTCA0LjIwMzEyNSAtNS41MzEyNSBMIDAuOTA2MjUgLTUuNTMxMjUgWiBNIDAuOTA2MjUgMS4wMzEyNSAiLz4KPC9zeW1ib2w+CjxzeW1ib2wgb3ZlcmZsb3c9InZpc2libGUiIGlkPSJnbHlwaDEtMSI+CjxwYXRoIHN0eWxlPSJzdHJva2U6bm9uZTsiIGQ9Ik0gMS4wMTU2MjUgMCBMIDEuMTA5Mzc1IC0wLjQzNzUgTCAxLjkwNjI1IC0wLjQzNzUgTCAyLjkyMTg3NSAtNS43MTg3NSBMIDEuMTA5Mzc1IC01LjcxODc1IEwgMC45MjE4NzUgLTQuNzUgTCAwLjQwNjI1IC00Ljc1IEwgMC42ODc1IC02LjIwMzEyNSBMIDYuMjAzMTI1IC02LjIwMzEyNSBMIDUuOTIxODc1IC00Ljc1IEwgNS40MDYyNSAtNC43NSBMIDUuNTkzNzUgLTUuNzE4NzUgTCAzLjc2NTYyNSAtNS43MTg3NSBMIDIuNzM0Mzc1IC0wLjQzNzUgTCAzLjUzMTI1IC0wLjQzNzUgTCAzLjQ1MzEyNSAwIFogTSAxLjAxNTYyNSAwICIvPgo8L3N5bWJvbD4KPC9nPgo8L2RlZnM+CjxnIGlkPSJzdXJmYWNlMjUxIj4KPGcgc3R5bGU9ImZpbGw6cmdiKDAlLDAlLDAlKTtmaWxsLW9wYWNpdHk6MTsiPgogIDx1c2UgeGxpbms6aHJlZj0iI2dseXBoMC0xIiB4PSIwLjM5MDYyNSIgeT0iOC45MDQyOTciLz4KPC9nPgo8ZyBzdHlsZT0iZmlsbDpyZ2IoMCUsMCUsMCUpO2ZpbGwtb3BhY2l0eToxOyI+CiAgPHVzZSB4bGluazpocmVmPSIjZ2x5cGgxLTEiIHg9IjEwLjIxMDkzOCIgeT0iMTEuMzUzNTE2Ii8+CjwvZz4KPC9nPgo8L3N2Zz4K" alt="stem af991925fbfd3075e4c6a02c755ac710" width="16" height="11"></span> (time_varied_gain, dB), is given at each sample number <em>i</em>.</p>
@@ -5941,10 +5895,14 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <div class="sect2">
 <h3 id="_significant_changes_from_version_1_to_version_2">7.1. Significant changes from version 1 to version 2</h3>
 <div class="paragraph">
-<p>Version 2 of this document makes some significant changes to the convention presented in version 1. These are summarised here:</p>
+<p>Version 2 of this document mades significant changes to the convention presented in version 1. These are summarised here:</p>
 </div>
 <div class="dlist">
 <dl>
+<dt class="hdlist1">decibel units</dt>
+<dd>
+<p>The reference values for decibel units have been moved from the units attribute to the variable description (typically the <code>long_name</code>).</p>
+</dd>
 <dt class="hdlist1">Beam pointing</dt>
 <dd>
 <p>The method used to specify the beam pointing direction has changed from angles to vectors. A number of coordinate systems and translations and rotations have also been added to enable the flexible and complete definition of beam pointing directions.</p>
@@ -6037,10 +5995,10 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.8</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Work in progress&#8230;&#8203;</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">April 2022</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Significant additions to support additional sonar types.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.7</p></td>
@@ -6141,6 +6099,9 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 </div>
 <div class="paragraph">
 <p><a id="mcquinn2005"></a>McQuinn, I. H., Reid, D. G., Berger, L., Diner, N., Heatley, D., Higginbottom, I., Andersen, L. N., <em>et al.</em> 2005. Description of the ICES HAC Standard Data Exchange Format, Version 1.60. ICES Cooperative Research Report No. 278.</p>
+</div>
+<div class="paragraph">
+<p><a id="nedelec2021"></a>Nedelec, S., Ainslie, M., Andersson, M., Sei-Him, C., Halvorsen, M., Linné, M., Martin, B., <em>et al.</em> 2021. Best Practice Guide for Underwater Particle Motion Measurement for Biological Applications. Technical Report by the University of Exeter for the IOGP Marine Sound and Life Joint Industry Programme. <a href="http://dx.doi.org/10.25607/OBP-1726" class="bare">http://dx.doi.org/10.25607/OBP-1726</a>.</p>
 </div>
 <div class="paragraph">
 <p><a id="sawada1993"></a>Sawada, K., and Furusawa, M. 1993. Precision Calibration of Echo Sounder by Integration of Standard Sphere Echoes. Journal of the Acoustical Society of Japan, 14: 243–249.</p>
@@ -6273,252 +6234,11 @@ ylabel('Power (dB)')</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_annex_2_contact_information">Annex 2: Contact information</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top" colspan="2"><strong>Editors</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Gavin John Macaulay</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:gavin.macaulay@hi.no">gavin.macaulay@hi.no</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Héctor Peña</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:hector.pena@hi.no">hector.pena@hi.no</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Members of the Topic Group on Defining a data format for omnidirectional fisheries sonar</strong> (part of ICES Working Group on Fisheries Acoustics, Science, and Technology)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Akira Okunishi</strong></p>
-</div>
-<div class="paragraph">
-<p>Furuno Electric Co. Ltd., Japan</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:akira.okunishi@furuno.co.jp">akira.okunishi@furuno.co.jp</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Christophe Cobieres</strong></p>
-</div>
-<div class="paragraph">
-<p>iXblue SAS, France</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:christophe.corbieres@ixblue.com">christophe.corbieres@ixblue.com</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Arne Johannes Holmin</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:ArneJohannes.Holmin@hi.no">ArneJohannes.Holmin@hi.no</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Dezhang Chu</strong></p>
-</div>
-<div class="paragraph">
-<p>National Oceanic and Atmospheric Administration, USA</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:dezhang.chu@noaa.gov">dezhang.chu@noaa.gov</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Atle Totland</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:atle.totland@hi.no">atle.totland@hi.no</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Doug McGowen</strong></p>
-</div>
-<div class="paragraph">
-<p>Edgetech, USA</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:Doug.McGowen@edgetech.com">Doug.McGowen@edgetech.com</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Benoit Berges</strong></p>
-</div>
-<div class="paragraph">
-<p>Wageningen Marine Research, The Netherlands</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:benoit.berges@wur.nl">benoit.berges@wur.nl</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Gavin John Macaulay</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:gavin.macaulay@hi.no">gavin.macaulay@hi.no</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Briony Hutton</strong></p>
-</div>
-<div class="paragraph">
-<p>Echoview Software, Australia</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:briony.hutton@echoview.com">briony.hutton@echoview.com</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Glen Rice</strong></p>
-</div>
-<div class="paragraph">
-<p>National Oceanic and Atmospheric Administration, USA</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:glen.rice@noaa.gov">glen.rice@noaa.gov</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Héctor Peña</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:hector.pena@hi.no">hector.pena@hi.no</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Leon Smith</strong></p>
-</div>
-<div class="paragraph">
-<p>Faroe Marine Research Institute, Faroe Islands</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:leonsmit@hav.fo">leonsmit@hav.fo</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Inge Christian Eliassen</strong></p>
-</div>
-<div class="paragraph">
-<p>Christian Michelsen Research Institute, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:inge.eliassen@cmr.no">inge.eliassen@cmr.no</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Mariano Gutiérrez</strong></p>
-</div>
-<div class="paragraph">
-<p>Agroceánica Consultores, Perú</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:msgtorero@gmail.com">msgtorero@gmail.com </a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Jan Arge Jacobsen</strong></p>
-</div>
-<div class="paragraph">
-<p>Faroe Marine Research Institute, Faroe Islands</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:janarge@hav.fo">janarge@hav.fo</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Nils Olav Handegard</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:nilsolav@hi.no">nilsolav@hi.no</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Kouichi Sawada</strong></p>
-</div>
-<div class="paragraph">
-<p>Japan Fisheries Research Agency, Japan</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:ksawada@fra.affrc.go.jp">ksawada@fra.affrc.go.jp</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Sindre Vatnehol</strong></p>
-</div>
-<div class="paragraph">
-<p>Institute of Marine Research, Norway</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:sindre.vatnehol@hi.no">sindre.vatnehol@hi.no</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Koshi Haraguchi</strong></p>
-</div>
-<div class="paragraph">
-<p>Sonic Corporation, Japan</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:koshi-haraguchi@u-sonic.co.jp">koshi-haraguchi@u-sonic.co.jp</a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><strong>Stéphane Gauthier</strong></p>
-</div>
-<div class="paragraph">
-<p>Fisheries and Oceans Canada, Canada</p>
-</div>
-<div class="paragraph">
-<p><a href="mailto:stephane.gauthier@dfo-mpo.gc.ca">stephane.gauthier@dfo-mpo.gc.ca</a></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.8<br>
-Last updated 2022-04-22 00:03:07 UTC
+Version 2.0<br>
+Last updated 2022-04-22 04:26:20 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
