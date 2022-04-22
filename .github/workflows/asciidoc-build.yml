@@ -42,7 +42,7 @@ jobs:
         git config --local user.name "ices-github-bot"
         git status
         git add Formatted_docs/crr341.html
-        git add Formatted_docs/crr341.pdf
+        git add -f Formatted_docs/crr341.pdf
         git commit --allow-empty -m "Push triggered asciidoc build"
         
     - name: Push changes
