@@ -1,9 +1,9 @@
-= The SONAR-netCDF4 convention for sonar data, Version 2.0
-Gavin Macaulay <gavin.macaulay@hi.no>; Héctor Peña <hector.pena@hi.no>
+= The SONAR-netCDF4 convention for sonar data, version 2.0
+List of authors
 :toc: left
 :toclevels: 4
 :doctype: book
-:revnumber: 1.8
+:revnumber: 2.0
 :xrefstyle: short
 :source-highlighter: highlightjs
 :highlightjsdir: highlight
@@ -28,6 +28,10 @@ Telefax (+45) 33 93 42 15 +
 http://www.ices.dk[www.ices.dk] +
 info@ices.dk
 
+_ICES boilerplate stuff goes here._
+
+////
+
 Recommended format for purposes of citation:
 
 _to be filled in once a new version is published_
@@ -45,14 +49,15 @@ ISBN 978-87-7482-214-1 +
 ISSN 1017-6195
 
 (C) 2018 International Council for the Exploration of the Sea
+////
 
 :sectnums!:
 == Foreword
 :sectnums:
 
-This report documents a convention for the storage of sonar data in netCDF4-formatted computer files, with an initial focus on omnisonars. The intention is to provide a well-founded convention that is supported by multiple sonar systems and multiple sonar analysis software packages, with the aim of facilitating the use of sonar data for research and survey purposes. The name of this convention is SONAR-netCDF4.
+This report documents a convention for the storage of sonar data in netCDF4-formatted computer files. The intention is to provide a well-founded convention that is supported by multiple sonar systems and multiple sonar analysis software packages, with the aim of facilitating the use of sonar data for research and survey purposes. The name of this convention is SONAR-netCDF4.
 
-This document was developed by the Topic Group on Defining a data format for omnidirectional fisheries sonar, part of ICES Working Group on Fisheries Acoustics, Science, and Technology (WGFAST).
+This document was originally developed by the Topic Group on Defining a data format for omnidirectional fisheries sonar, part of ICES Working Group on Fisheries Acoustics, Science, and Technology (WGFAST). The current version was developed by the Open Data subgroup of WGFAST.
 
 == Introduction
 
@@ -60,11 +65,13 @@ Sonars have long been used to study and understand fisheries and the aquatic env
 
 This document presents a convention for the storage and exchange of fisheries sonar data, with an initial focus on omnisonars. It is sufficiently generic and flexible to contain all foreseeable types of fisheries sonar data, along with necessary metadata. It also serves as a statement of the minimum set of data and metadata required to use omnisonar data in a quantitative manner.
 
+The term sonar is used in this convention to mean all underwater acoustic systems that actively transmit sound and then listen for echoes from that transmission.
+
 === Background
 
 Many purpose-built file formats exist to store and exchange data from scientific and industrial equipment. Formats have been created by sonar and echosounder manufacturers; in addition, more generic acoustic data formats such as the Generic Water Column (GWC) format cite:[geeMultibeamWaterColumn2012], the eXtended Triton Format (XTF; citenp:[triton2013]), and the HydroACoustics (HAC) format cite:[mcquinn2005] have also been created. These formats store a time-ordered sequence of datagrams, making it easy to append new data. Other data, such as geographical position, are typically interleaved into the sequence of datagrams. However, this is not optimal for analysis purposes when data are viewed and analysed as a set of pings and metadata from a time-period or spatial grouping. In addition, efficient random-read access to individual pings is not possible unless an index is available or created.
 
-The Topic Group on Defining a data format for omnidirectional fisheries sonar do not want to create yet another sonar-specific file format; the knowledge required is not within the expertise of this group. However, the group does have the expertise to specify what data must be stored to allow for unambiguous use of backscatter data during quantitative analysis.
+The work presented here does not create yet another sonar-specific file format; the knowledge required is not within the expertise of this group. However, the group does have the expertise to specify what data must be stored to allow for unambiguous use of backscatter data during quantitative analysis.
 
 Accordingly, an existing file-format definition has been utilized and what should be stored is specified. The requirements for such a file format definition were:
 
@@ -81,15 +88,15 @@ Accordingly, an existing file-format definition has been utilized and what shoul
 * long-term support and extensive use in other scientific fields;
 * support for very large datasets.
 
-Other scientific communities that collect and produce voluminous amounts of data have addressed similar needs, resulting in the Hierarchical Data Format cite:[thehdfgroup2017], currently at version 5 (HDF5). This is the only file format that meets all the listed requirements and is utilized for sonar data. There are two realizations of the HDF5 file format: (i) HDF5 itself and (ii) netCDF4 cite:[unidata2017], which is a subset of HDF5. Both are sufficient, but netCDF4 is more widely used and has slightly wider language support and implementation diversity. Accordingly, netCDF4 has been chosen.
+Other scientific communities that collect and produce voluminous amounts of data have addressed similar needs, resulting in the Hierarchical Data Format cite:[thehdfgroup2017], currently at version 5 (HDF5). This is the only file format that meets all the listed requirements and is utilized here for sonar data. There are two realizations of the HDF5 file format: (i) HDF5 itself and (ii) netCDF4 cite:[unidata2017], which is a subset of HDF5. Both are sufficient, but netCDF4 is more widely used and has slightly wider language support and implementation diversity. Accordingly, netCDF4 has been chosen.
 
-Using a well-supported file format has the significant benefit that many data exploration, query, extraction, and analysis tools already read such files. This eliminates the need to develop and maintain sonar-specific file-reading software and facilitates the use of existing tools for data management, distribution, and analysis (a pertinent example is OPeNDAP, which provides a network-transparent standard for distributing scientific data).
+Using a well-supported file format has the significant benefit that many data exploration, query, extraction, and analysis tools already read such files. This eliminates the need to develop and maintain sonar-specific file-reading software and facilitates the use of existing tools for data management, distribution, and analysis.
 
 An attractive feature of netCDF4 is the ease and transparency with which data can be added to an existing netCDF4 file. For example, processed data and how it was obtained can be included in the same file as the raw data. In addition, netCDF4 files can be very large while still providing fast access to data subsets. This allows a single SONAR-netCDF4 file to contain data from a transect or an entire survey. These features would simplify data management, improve traceability and long-term storage of analysis, enhance the sharing of processed datasets, and facilitate analysis of large disparate datasets. In general, any amount of additional data can be stored in the files without affecting the ability to use the data specified by the SONAR-netCDF4 convention.
 
 A distinction is commonly made between file formats designed for archiving data in the original form, formats designed for storing partially or fully processed data, and formats for data exchange cite:[jackson2014]. The SONAR-netCDF4 convention is intended to be suitable for all of these.
 
-The initial focus of this convention has been to specify the storage of backscatter amplitude data from omnisonars. It is envisaged that future versions could specify how to store data from other acoustic equipment (e.g. echosounders) and derived data (e.g. bottom and school detections, categorization of backscatter, and integrated backscatter at multiple resolutions). Ancillary information such as sonar display screen-grabs could also be stored.
+Version 1 of this convention specified how to store backscatter amplitude data from omnisonars. Version 2 now provides for the storage of data from other acoustic equipment, including echosounders, multi-beam sonars, and Acoustic Doppler Current Profilers (ADCP). It also has proposed implementations for the storage of derived data, such as bottom and school detections, categorization of backscatter, and integrated backscatter at multiple resolutions.
 
 === Versioning
 
@@ -147,31 +154,11 @@ Each SONAR-netCDF4 file is intended to store data from one sonar mounted on one 
 
 A design principle of SONAR-netCDF4 has been to focus on describing the acoustic backscatter data, not the overall purpose and context of why the data were collected. Such broader metadata are better stored in separate metadata systems and schema (e.g. citenp:[iso2014,ices2016]).
 
-
-
 === Hierarchical structure
 
-NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy.
+NetCDF4 has two main organizational concepts: (i) the variable, which can contain a variety of data structures, and (ii) groups, being a collection of variables. Groups and variables can have attributes attached to them. Groups can be arranged into a hierarchy. SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:
 
-[plantuml, format=svg, opts="inline"]
-----
-legend
-Top-level
-|_ Annotation
-|_ Environment
-|_ Platform
-|_ Provenance
-|_ Sonar
-  |_ Beam_groupX
-  |_ GriddedX
-  |_ InterpretationX
-|_ Vendor_specific
-end legend
-----
-
-SONAR-netCDF4 divides sonar data into a set of hiearchical netCDF4 groups:
-
-. *Top-level –* contains metadata about the SONAR-netCDF4 file format;
+. */ –* The top-level or root of the hierarchy and contains metadata about the SONAR-netCDF4 file format;
 .. *Annotation –* contains time-stamped annotations;
 .. *Environment –* contains information relevant to acoustic propagation through water;
 .. *Platform* *–* contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.
@@ -195,7 +182,7 @@ Some variables and attributes in SONAR-netCD4 are mandatory; these form the mini
 . *R*: recommended
 . *O*: optional
 
-Any non-mandatory variables can be absent from a SONAR-netCDF4 file. If a variable is mandatory, it must be present and must contain data. The set of mandatory variables and attributes has been chosen so that omnisonar systems can directly generate SONAR-netCDF4-conforming files without needing survey, experiment, or cruise-specific data.
+Any non-mandatory variables can be absent from a SONAR-netCDF4 file. If a variable is mandatory, it must be present and must contain data. The set of mandatory variables and attributes has been chosen so that sonar systems can directly generate SONAR-netCDF4-conforming files without needing survey, experiment, or cruise-specific data.
 
 The _FillValue attribute should be used to indicate missing data in variables. For floating point values, the IEEE 754 not-a-number (NaN) is the preferred fill value as this is convenient for commonly-used analysis packages (e.g. Python, Matlab, R).
 
@@ -205,7 +192,11 @@ The fisheries acoustics community has developed a metadata convention for proces
 
 === Units
 
-All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package cite:[ucar2014]. Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention.
+All relevant variables and attributes in SONAR-netCDF4 files are required to have a textual netCDF4 attribute with the name “units” that specifies the units. The International System of Units (SI) is used. For simplicity, the data format mandates the use of particular units and their textual form, as per the definitions and conventions of the UDUNITS-2 package cite:[ucar2014]. 
+
+Decibels are commonly used in underwater acoustic quantities, but UDUNITS does not currently include such a unit. However, as the CF convention does permit decibel (with symbols: “dB”, “db”, and “dbel”), it is used in the SONAR-netCDF4 convention. Note that reference values commonly used with decibels should not be part of the units attribute, but rather included in the variable description (see citenp:[nedelec2021], §11.4 for an explanation of this).
+
+Numeric variables that are dimensionless should have a units attribute of "1".
 
 ==== Time units
 Even though NetCDF and the UDUNITS-2 part of the CF conventions allow for the specification any valid time unit, to prevent any extra complication in software that reads the SONAR-netCDF4 files, only two time units are supported in this convention.
@@ -232,13 +223,9 @@ The contents of some variables and attributes are restricted to defined vocabula
 
 SONAR-netCDF4 files should always end with a “.nc” suffix to indicate that they are a netCDF file. It is recommended that the filename should sort alphanumerically into chronological order (e.g. date and time of the first ping in the file; thus: YYYYMMDD-HHMMSS.nc). This facilitates file management and use in analysis systems.
 
-=== CDL version of SONAR-netCDF4
-
-An example of a SONAR-netCDF4 file is provided in the Common Data form Language (CDL). This provides a more formalized and structured representation of the data format. A CDL file can be converted into a NetCDF file using the “ncgen” utility (available as part of the netCDF software distribution) and then used as a template for creating populated SONAR-netCDF4 files.
-
 === Groups
 
-The top-level group contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<<topLevelTable>>).
+The top-level group (labelled "/" in netCDF4 terminology) contains metadata about the SONAR-netCDF4 file, represented as attributes in the group (<<topLevelTable>>).
 
 [.landscape]
 <<<
@@ -330,7 +317,7 @@ The netCDF4 group name is */Sonar* and contains three subgroups.
 ===== Beam group
 This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_groupX*, where *X* is an integer.
 
-Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeamGroupTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude. Variable definitions for data from split-aperture systems are not currently specified.
+Data from each beam mode (e.g. horizontal and vertical beam modes) are stored in subgroups under the /Sonar group (see <<sonarBeamGroupTable>>). The form of the backscatter data can vary between different sonar systems. For example, some provide a complex-valued amplitude, while others provide a real- or integer-valued amplitude.
 
 Subgroups under /Sonar each have a coordinate variable that contains ping timestamps. In some cases the coordinate variables in different subgroups contain the same data (such as when a sonar produces several types of beam data from each and every ping). To avoid duplication of timestamp data, a coordinate variable can be used across multiple subgroups. For organisational reasons, it is then recommended that such coordinate variables be located in the /Sonar group. 
 
@@ -350,9 +337,7 @@ include::tableBeamGroup1.adoc[]
 <<<
 ==== Proposed Single Target additions
 
-This group contains the Single Target detection from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <<Conversion equations>>.
-Algorithm for single target detection and parameters are detailed in citenp:[soule1997].
-The netCDF4 group name is SingleTarget and is a subgroup of /Sonar/Beam_group.
+This group contains the single target detections from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <<Conversion equations>>. Algorithm for single target detection and parameters are detailed in citenp:[soule1997]. The netCDF4 group name is /Sonar/Beam_group/SingleTarget.
 
 .Description of the single_target subgroup of the beam group.
 [[sonarSingleTargetTable]]
@@ -365,7 +350,7 @@ include::tableSingleTarget_sub_group.adoc[]
 ==== Proposed ADCP additions
 
 This group contains the ADCP beam data, single ping calculations and associated metadata.
-The netCDF4 group name is ADCP and is a subgroup of /Sonar/Beam_group.
+The netCDF4 group name is /Sonar/Beam_groupX/ADCP.
 
 .Description of the ADCP subgroup of the BeamGroup1 group.
 [[sonarADCPTable]]
@@ -457,7 +442,7 @@ TS = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\log_{10}(r) + 2\alpha r - (
 \end{equation}
 ++++
 
-where _A_ (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , _r_ is the range as given by equation \eqref{eq:timeToRange}, and _α_ is the absorption coefficient of sound in water (absorption_indicative, dB/m). _SL_ is source level (transmit_source_level, dB re 1μPa at 1 m) and _K_ is receiver sensitivity (receiver_sensitivity, dB re 1/μPa). Both parameters may depend on tilt angle of the beam for transmitting and receiving.
+where _A_ (backscatter_r, 1) is linearly proportional to the amplitude of the received echo , _r_ is the range as given by equation \eqref{eq:timeToRange}, and _α_ is the absorption coefficient of sound in water (absorption_indicative, dB/m). _SL_ is source level (transmit_source_level (re 1μPa at 1 m), dB) and _K_ is receiver sensitivity (receiver_sensitivity (re 1/μPa), dB). Both parameters may depend on tilt angle of the beam for transmitting and receiving.
 
 Gain correction, latexmath:[\Delta G], (gain_correction, dB) is determined by the calibration. Time-varied gain, latexmath:[G_T] (time_varied_gain, dB), is given at each sample number _i_.
 
@@ -1138,7 +1123,9 @@ where latexmath:[\eta_\theta] is the angle sensitivity for the minor axis and la
 
 === Significant changes from version 1 to version 2
 
-Version 2 of this document makes some significant changes to the convention presented in version 1. These are summarised here:
+Version 2 of this document mades significant changes to the convention presented in version 1. These are summarised here:
+
+decibel units:: The reference values for decibel units have been moved from the units attribute to the variable description (typically the `long_name`).
 
 Beam pointing:: The method used to specify the beam pointing direction has changed from angles to vectors. A number of coordinate systems and translations and rotations have also been added to enable the flexible and complete definition of beam pointing directions.
 
@@ -1173,7 +1160,7 @@ Provenance:: Changed the required timestamp format to match that used elsewhere 
 [cols=",,,",options="header",]
 |===
 |Document version |SONAR-netCDF4 version |Date |Changes
-|{revnumber}|2.0 | Work in progress...|
+|{revnumber}|2.0 | April 2022|Significant additions to support additional sonar types.
 |1.7 |1.0 |29 May 2018 |Modifications due to ICES CRR review and editorial process.
 |1.6 |1.0 |7 Feburary 2018 |Modifications due to further Topic Group input.
 |1.5 |1.0 |20 December 2017 |Formatted to ICES CRR style
@@ -1299,150 +1286,3 @@ plot(10*log10(power))
 xlabel('Sample number')
 ylabel('Power (dB)')
 ----
-
-== Annex 2: Contact information
-
-[cols=",",options="header",]
-|===
-2+|*Editors* 
-a|
-*Gavin John Macaulay*
-
-Institute of Marine Research, Norway
-
-mailto:gavin.macaulay@hi.no[gavin.macaulay@hi.no]
-a|
-*Héctor Peña*
-
-Institute of Marine Research, Norway
-
-mailto:hector.pena@hi.no[hector.pena@hi.no]
-
-2+|**Members of the Topic Group on Defining a data format for omnidirectional fisheries sonar** (part of ICES Working Group on Fisheries Acoustics, Science, and Technology)
-a|
-*Akira Okunishi*
-
-Furuno Electric Co. Ltd., Japan
-
-mailto:akira.okunishi@furuno.co.jp[akira.okunishi@furuno.co.jp]
-a|
-*Christophe Cobieres*
-
-iXblue SAS, France
-
-mailto:christophe.corbieres@ixblue.com[christophe.corbieres@ixblue.com]
-a|
-*Arne Johannes Holmin*
-
-Institute of Marine Research, Norway
-
-mailto:ArneJohannes.Holmin@hi.no[ArneJohannes.Holmin@hi.no]
-a|
-*Dezhang Chu*
-
-National Oceanic and Atmospheric Administration, USA
-
-mailto:dezhang.chu@noaa.gov[dezhang.chu@noaa.gov]
-a|
-*Atle Totland*
-
-Institute of Marine Research, Norway
-
-mailto:atle.totland@hi.no[atle.totland@hi.no]
-a|
-*Doug McGowen*
-
-Edgetech, USA
-
-mailto:Doug.McGowen@edgetech.com[Doug.McGowen@edgetech.com]
-a|
-*Benoit Berges*
-
-Wageningen Marine Research, The Netherlands
-
-mailto:benoit.berges@wur.nl[benoit.berges@wur.nl]
-a|
-*Gavin John Macaulay*
-
-Institute of Marine Research, Norway
-
-mailto:gavin.macaulay@hi.no[gavin.macaulay@hi.no]
-a|
-*Briony Hutton*
-
-Echoview Software, Australia
-
-mailto:briony.hutton@echoview.com[briony.hutton@echoview.com]
-a|
-*Glen Rice*
-
-National Oceanic and Atmospheric Administration, USA
-
-mailto:glen.rice@noaa.gov[glen.rice@noaa.gov]
-a|
-*Héctor Peña*
-
-Institute of Marine Research, Norway
-
-mailto:hector.pena@hi.no[hector.pena@hi.no]
-a|
-*Leon Smith*
-
-Faroe Marine Research Institute, Faroe Islands
-
-mailto:leonsmit@hav.fo[leonsmit@hav.fo]
-a|
-*Inge Christian Eliassen*
-
-Christian Michelsen Research Institute, Norway
-
-inge.eliassen@cmr.no
-a|
-*Mariano Gutiérrez*
-
-Agroceánica Consultores, Perú
-
-mailto:msgtorero@gmail.com[msgtorero@gmail.com ]
-a|
-*Jan Arge Jacobsen*
-
-Faroe Marine Research Institute, Faroe Islands
-
-mailto:janarge@hav.fo[janarge@hav.fo]
-a|
-*Nils Olav Handegard*
-
-Institute of Marine Research, Norway
-
-mailto:nilsolav@hi.no[nilsolav@hi.no]
-a|
-*Kouichi Sawada*
-
-Japan Fisheries Research Agency, Japan
-
-mailto:ksawada@fra.affrc.go.jp[ksawada@fra.affrc.go.jp]
-a|
-*Sindre Vatnehol*
-
-Institute of Marine Research, Norway
-
-mailto:sindre.vatnehol@hi.no[sindre.vatnehol@hi.no]
-a|
-*Koshi Haraguchi*
-
-Sonic Corporation, Japan
-
-mailto:koshi-haraguchi@u-sonic.co.jp[koshi-haraguchi@u-sonic.co.jp]
-a|
-*Stéphane Gauthier*
-
-Fisheries and Oceans Canada, Canada
-
-mailto:stephane.gauthier@dfo-mpo.gc.ca[stephane.gauthier@dfo-mpo.gc.ca]
-a|
-*Lars Nonboe Andersen*
-
-Simrad, Kongsberg Maritime, Norway
-
-mailto:lars.nonboe.andersen@simrad.com[lars.nonboe.andersen@simrad.com]
-|===
