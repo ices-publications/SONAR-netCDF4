@@ -15,7 +15,9 @@ jobs:
       run: apk add --update git 
         
     - name: install asciidoctor requirements
-      run: gem install asciidoctor-bibtex asciidoctor-mathematical prawn-gmagick
+      run: |
+       apk add graphicsmagick-dev ruby-dev musl-dev gcc
+       gem install asciidoctor-bibtex asciidoctor-mathematical prawn-gmagick
       
     - name: checkout 
       uses: actions/checkout@master
