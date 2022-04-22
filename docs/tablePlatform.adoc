@@ -3,20 +3,20 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Group attributes | |
+s|Group attributes | |
  |{attr}:platform_code_ICES |O |Platform code from the ICES SHIPC vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/SHIPC).
  |{attr}:platform_name |O |Platform name of which the sonar is a part.
  |{attr}:platform_type |O |Platform type that the sonar is part of. Use the description field from the ICES ”Platform Class” vocabulary (http://vocab.ices.dk/services/pox/GetCodeList/Platform%20Class).
  
-e|Types | |
+s|Types | |
  2+|{var}byte enum transducer_type_t {receive_only = 0, transmit_only = 1, monostatic = 3 } |Transducer function - transmit only, receive only or both (monostatic)
 
-e|Dimensions | |
+s|Dimensions | |
  |{var}transducer |M |Transducer count
  |{var}position |M |position sensor count
  |{var}MRU |M |MRU attitude sensor count
  
-e|Variables | |
+s|Variables | |
  |{var}float MRU_offset_x(MRU) |R |_x_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
  3+|{attr}:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the motion reference unit sensor origin" 
  3+|{attr}:units = "m" 
@@ -96,7 +96,7 @@ e|Variables | |
  3+|{attr}:long_name = "Distance from the platform coordinate system origin to the nominal water level along the _z_-axis" 
  3+|{attr}:units = "m" 
 
-e|Subgroups | |
+s|Subgroups | |
  |{var}Positions |M |Suggested subgroup to store Position sensor data.
  |{var}Attitudes |M |Suggested subgroup to store MRU sensor data.
 |===

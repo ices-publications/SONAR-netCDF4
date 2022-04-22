@@ -3,7 +3,7 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Group attributes | |
+s|Group attributes | |
  |{attr}:Conventions = "CF-1.7, SONAR-netCDF4-1.1, ACDD-1.3" |M |A comma-separated list of the conventions followed in the file. Include the SONAR-netCDF4 convention and version (e.g. ”SONAR-netCDF4-1.1”) and the relevant CF and ACDD conventions (e.g. ”CF-1.7” and ”ACDD-1.3”).
  |{attr}:date_created |M |Timestamp of file creation in ISO8601:2004 extended format, including the time zone (e.g. 2017-05-06T20:21:35Z).
  |{attr}:keywords |M |A comma-separated list of key words and/or phrases. For direct sonar-generated files, this should at least include the type of sonar.

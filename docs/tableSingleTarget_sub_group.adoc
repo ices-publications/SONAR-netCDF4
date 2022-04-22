@@ -3,14 +3,14 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Types | |
+s|Types | |
  2+|{var}int(*) target_identifier |Variable length vector used to store array of index of single target data detections.
  2+|{var}float(*) target_range |Variable length vector used to store array of range of single target data detections.
  2+|{var}float(*) target_angle |Variable length vector used to store variable length array of angle of single target detections.
  2+|{var}float(*) target_TS |Variable length vector used to store variable length array of Target Strength of single target detections.
 
 
-e|Variables | |
+s|Variables | |
  |{var}int single_target_count(ping_time, beam) |O |The number of single target detection in each beam/ping in the single_target_XXX variables. This value is not essential, but software that reads the vlen variables can use it to significantly improve data loading times.
  3+|{attr}:long_name = "Number of single target detection in each beam, per ping"
  3+|{attr}int :valid_min = 0

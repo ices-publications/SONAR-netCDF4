@@ -3,13 +3,13 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Group attributes | |
+s|Group attributes | |
  |{attr}string :description |O |System description
  
-e|Dimensions | |
+s|Dimensions | |
  |{var}time | |can be fixed or unlimited length, as appropriate
  
-e|Coordinate variables | |
+s|Coordinate variables | |
  |{var}uint64 time(time) |M |Time from position sensor
  3+|{attr}:axis = "T" 
  3+|{attr}:calendar = "gregorian" 
@@ -18,7 +18,7 @@ e|Coordinate variables | |
  3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  3+|{attr}:coordinates = "time latitude longitude" 
  
-e|Variables | |
+s|Variables | |
  |{var}double latitude(time) |M |Latitude of the platform reference point in WGS-84 reference system
  3+|{attr}double :valid_range = −90.0, 90.0 
  3+|{attr}:standard_name = "Platform latitude" 
@@ -76,6 +76,6 @@ e|Variables | |
  3+|{attr}:units = "m" 
  3+|{attr}float :valid_min = 0.0 
  3+|{attr}:coordinates = "time latitude longitude" 
-e|Subgroups | |
+s|Subgroups | |
  |{var}NMEA |O |Suggested subgroup to store raw NMEA data.
 |===

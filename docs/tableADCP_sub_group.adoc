@@ -3,10 +3,10 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Types | |
+s|Types | |
  2+|{var}float(*) sample_v |Variable length vector used to store ragged arrays of velocity data. Type added for ADCP.
 
-e|Variables | |
+s|Variables | |
  |{var}float backscatter_at_bottom_i(ping_time, beam) |MA |Backscatter value(imaginary part) at detected bottom, in each beam.
  3+|{attr}:units = "W" 
  3+|{attr}:long_name = "Raw backscatter at bottom (imaginary part)" 
@@ -143,6 +143,6 @@ e|Variables | |
  3+|{attr}:long_name = "Distance between recorded data samples" 
  3+|{attr}float :valid_min = 0.0 
 
-e|Subgroups | |
+s|Subgroups | |
  |{var}Mean_current |O |Subgroup containing calculated averaged current velocity data.
 |===

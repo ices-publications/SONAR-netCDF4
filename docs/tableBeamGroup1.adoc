@@ -3,25 +3,25 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Group attributes | |
+s|Group attributes | |
  |{attr}:beam_mode |M |Mode of the beam in this subgroup, taken from the defined vocabulary of: “vertical” (a set of beams that form a vertical slice through the water), ”horizontal” (a set of beams that form a nominally horizontal plane through the water), and ”inspection” (a set of beams with arbitrary pointing directions).
  |{attr}conversion_equation_t :conversion_equation_type |M |Type of equation used to convert backscatter measurements into volume backscattering strength and target strength.
  |{attr}int :preferred_MRU |MA |Index of the MRU sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_MRU. Index matches the ones used in the Platform MRU sensors variables.
  |{attr}int :preferred_position |MA |Index of the position sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_position_sensor. Index matches the ones used in the Platform position sensors variables.
  
-e|Types | |
+s|Types | |
  2+|{var}float(*) sample_t |Variable length vector used to store ragged arrays of backscatter data. Data type can be varied to suit data storage needs.
  2+|{var}float(*) angle_t |Variable length vector used to store ragged arrays of split-aperture angles. Data type can varied to suit data storage needs.
  2+|{var}float(*) pulse_t |Variable length vector used to store arrays of modeled transmit pulse samples.
 
-e|Dimensions | |
+s|Dimensions | |
  |{var}beam | |The number of beams in this beam group.
  |{var}subbeam | |The number of sub-beams in these beams.
  |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  |{var}tx_beam | |The number of transmit beams in this beam group
  |{var}frequency | |The number of frequencies during the calibration exercise of the FM mode.
  
-e|Coordinate variables | |
+s|Coordinate variables | |
  |{var}string beam(beam) |M |Beam name (or number or identification code).
  3+|{attr}:long_name = "Beam name" 
  
@@ -38,7 +38,7 @@ e|Coordinate variables | |
  3+|{attr}:units = "Hz" 
  3+|{attr}float :valid_min = 0.0 
  
-e|Variables | |
+s|Variables | |
  |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements (or for type 5 equations, TS values). Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
@@ -332,7 +332,7 @@ e|Variables | |
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  2+|{attr}:vertical_coordinate_reference_system = "MSL depth" |The vertical datum to which distance are referred to. Possible values are 'MSL Depth' or 'LAT Depth'
 
-e|Subgroups | |
+s|Subgroups | |
  |{var}ADCP |O |Subgroup containing ADCP calculated current velocity data.
  |{var}SingleTarget |O |Subgroup containing split-beam detected single-target data.
 

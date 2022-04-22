@@ -3,17 +3,17 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Dimensions | |
+s|Dimensions | |
  |{var}frequency = unlimited | |Can be of fixed or unlimited length, as appropriate.
  
-e|Coordinate variables | |
+s|Coordinate variables | |
  |{var}float frequency(frequency) |M |
  3+|{attr}:long_name = "Acoustic frequency" 
  3+|{attr}:standard_name = "sound_frequency" 
  3+|{attr}:units = "Hz" 
  3+|{attr}float :valid_min = 0.0 
  
-e|Variables | |
+s|Variables | |
  |{var}float absorption_indicative(frequency) |M |Indicative absorption values used to calculate the time-varied-gain (TVG), in the absence of more detailed data.
  3+|{attr}:long_name = "Indicative acoustic absorption" 
  3+|{attr}:units = "dB/m" 

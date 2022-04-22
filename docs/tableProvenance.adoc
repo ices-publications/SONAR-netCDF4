@@ -3,16 +3,16 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Group attributes | |
+s|Group attributes | |
  |{attr}:conversion_software_name |MA |Name of the software used to do the conversion.
  |{attr}:conversion_software_version |MA |Version of the software used to do the conversion.
  |{attr}:conversion_time |MA |Date and time of the start of the conversion process in ISO8601:2004 extended format, including time zone.
  |{attr}:history |R |Provides an audit trail for modifications to the original data. It should contain a separate line for each modification, with each line beginning with a timestamp and including user name, modification name and modification arguments. for example  2019-09-07T15:50+00Z (John Doe) File conversion by XXX software
  
-e|Dimensions | |
+s|Dimensions | |
  |{var}filenames = unlimited |MA |Can be of fixed or unlimited length, as appropriate.
  
-e|Variables | |
+s|Variables | |
  |{var}string source_filenames(filenames) |MA |Vector of datafile names that were used to generate the data in this SONAR-netCDF4 file.
  3+|{attr}:long_name = "Source filenames" 
 |===

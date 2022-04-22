@@ -3,23 +3,23 @@
 [cols="25%,10%,65%",options="header",]
 |===
 |Description |Obligation |Comment
-e|Group attributes | |
+s|Group attributes | |
  |{attr}:beam_mode |M |Mode of the beam in this subgroup, taken from the defined vocabulary of: “vertical” (a set of beams that form a vertical slice through the water), ”horizontal” (a set of beams that form a nominally horizontal plane through the water), and ”inspection” (a set of beams with arbitrary pointing directions).
  |{attr}conversion_equation_t :conversion_equation_type |M |Type of equation used to convert backscatter measurements into volume backscattering strength and target strength.
  
-e|Types | |
+s|Types | |
  2+|{var}byte enum backscatter_type_t {Sv = 0, Sa = 1} |In what form is the acoustic data stored? Controlled vocabulary options include : Sv, Volume backscattering strength (dB re 1 m-1) and Sa, Nautical area scattering coefficient (m2 nmi-2).
  2+|{var}byte enum range_axis_interval_type_t {Range = 0, Depth = 1} |Range axis interval by which data have been regridded. Controlled vocabulary includes: Range (metres), Depth relative to waterline (metres).
  2+|{var}byte enum ping_axis_interval_type_t {Time_seconds = 0, Distance_nautical_miles = 1, Distance_meters = 2, Number_of_ping = 3} | Ping axis interval by which data have been regridded. Controlled vocabulary includes: Time based intervals (  Time (seconds) ), Distance based intervals ( Distance (nautical miles); Distance (metres) ), Ping based intervals (Number of pings).
 
-e|Dimensions | |
+s|Dimensions | |
  |{var}beam | |The number of receive beams in this grid group.
  |{var}tx_beam | |The number of transmit beams in this grid group.
  |{var}frequency | |The number of frequencies in this grid group.
  |{var}ping_axis | |Number of cells in ping dimension.
  |{var}range_axis | |Number of cells in range dimension.
  
-e|Variables | |
+s|Variables | |
  |{var}string beam(beam) |M |Beam name (or number or identification code).
  3+|{attr}:long_name = "Beam name" 
  
