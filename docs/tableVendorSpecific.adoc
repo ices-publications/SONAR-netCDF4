@@ -1,0 +1,10 @@
+:var: {nbsp}{nbsp}{nbsp}{nbsp}
+:attr: {var}{var}
+[%autowidth,options="header",]
+|===
+|Description |Obligation |Comment
+e|Subgroups | |
+ |{var}sonarVendor_specific_SimradWBT_Table |O |Subgroup containing optional transducer and Simrad WBT specific information for processing and for reference.
+|===
+
+
