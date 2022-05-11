@@ -11,81 +11,56 @@ e|Dimensions | |
  
 e|Coordinate variables | |
  |{var}uint64 start_time(start_time) |M |Timestamp for the first ping using specific values.
- 3+|{attr}:axis = "T" 
- 3+|{attr}:calendar = "gregorian" 
- 3+|{attr}:long_name = "Time-stamp of each ping" 
- 3+|{attr}:standard_name = "time" 
- 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:axisÂ =Â "T" 
+ 3+|{attr}:calendarÂ =Â "gregorian" 
+ 3+|{attr}:long_nameÂ =Â "Time-stamp of each ping" 
+ 3+|{attr}:standard_nameÂ =Â "time" 
+ 3+|{attr}:unitsÂ =Â "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  
 e|Variables | |
- |{var}float filter_coefficients_i(start_time, beam, stage) |M |Imaginary part of filter coefficients.
- 3+|{attr}:long_name = "Filter coefficients (imaginary part)" 
+ |{var}float filter_coefficients_i(start_time, beam, stage) |MA |Imaginary part of filter coefficients.
+ 3+|{attr}:long_nameÂ =Â "Filter coefficients (imaginary part)" 
   
- |{var}float filter_coefficients_i(start_time, beam, stage) |M |Real part of filter coefficients.
- 3+|{attr}:long_name = "Filter coefficients (real part)" 
+ |{var}float filter_coefficients_r(start_time, beam, stage) |MA |Real part of filter coefficients.
+ 3+|{attr}:long_nameÂ =Â "Filter coefficients (real part)" 
   
- |{var}int filter_decimation(start_time, beam, stage) |M |Filter decimation.
- 3+|{attr}:long_name = "Filter decimation" 
- 3+|{attr}int :valid_min = 1 
+ |{var}int filter_decimation(start_time, beam, stage) |MA |Filter decimation.
+ 3+|{attr}:long_nameÂ =Â "Filter decimation" 
+ 3+|{attr}int :valid_minÂ =Â 1 
  
- |{var}int filter_center_frequency(start_time, beam, stage) |M |Centre frequency of the filter.
- 3+|{attr}:long_name = "Filter centre frequency" 
- 3+|{attr}int :valid_min = 1 
- 3+|{attr}:units = "hz" 
+ |{var}int filter_center_frequency(start_time, beam, stage) |O |Centre frequency of the filter.
+ 3+|{attr}:long_nameÂ =Â "Filter centre frequency" 
+ 3+|{attr}int :valid_minÂ =Â 1 
+ 3+|{attr}:unitsÂ =Â "Hz" 
 
- |{var}int filter_bandwidth(start_time, beam, stage) |M |Bandwidth of the filter.
- 3+|{attr}:long_name = "Filter bandwidth" 
- 3+|{attr}int :valid_min = 1 
- 3+|{attr}:units = "hz" 
+ |{var}int filter_bandwidth(start_time, beam, stage) |O |Bandwidth of the filter passband.
+ 3+|{attr}:long_nameÂ =Â "Filter bandwidth" 
+ 3+|{attr}int :valid_minÂ =Â 1 
+ 3+|{attr}:unitsÂ =Â "Hz" 
 
- |{var}float filter_transitionband(start_time, beam, stage) |M |Transition band of the filter.
- 3+|{attr}:long_name = "Filter transition band" 
- 3+|{attr}float :valid_min = 1.0 
- 3+|{attr}:units = "hz" 
+ |{var}string filter_generator_version(start_time, beam, stage) |MA |Version of the filter generator used.
+ 3+|{attr}:long_nameÂ =Â "Filter generator version" 
 
- |{var}int filter_gain(start_time, beam, stage) |M |Gain in the filter.
- 3+|{attr}:long_name = "Filter gain" 
- 3+|{attr}int :valid_min = 1 
-
- |{var}int filter_notches(start_time, beam, stage) |M |Number of notches in the filter.
- 3+|{attr}:long_name = "Filter notches" 
- 3+|{attr}int :valid_min = 0 
-
- |{var}int filter_correctADSampleTimingInFilter(start_time, beam, stage) |M |Correct AD Sample Timing in the filter.
- 3+|{attr}:long_name = "Filter correct AD sample timing" 
- 3+|{attr}int :valid_min = 0 
-
- |{var}int filter_length_in_filter_banks(start_time, beam, stage) |M |Filter length in filter banks.
- 3+|{attr}:long_name = "Filter length in filter banks" 
- 3+|{attr}int :valid_min = 0 
-
- |{var}int filter_bits_to_truncate_after_multiplication(start_time, beam, stage) |M |Filter bits to truncate after multiplication.
- 3+|{attr}:long_name = "Filter bits to truncate after multiplication" 
- 3+|{attr}int :valid_min = 0 
-
- |{var}float filter_generator_version(start_time, beam, stage) |MA |Version of the filter generator used.
- 3+|{attr}:long_name = "Filter generator version" 
-
- |{var}ping_t ping_valid(start_time) |MA |Reference to pings (by ping_time) using the group variables.
- 3+|{attr}:long_name = "Time reference to pings using the variables" 
+ |{var}ping_t ping_valid(start_time) |M |Reference to pings (by ping_time) using the group variables.
+ 3+|{attr}:string_nameÂ =Â "Time reference to pings using the variables" 
 
  |{var}float transceiver_impedance_i(start_time, beam, frequency) |M |Transceiver impedance imaginary part.
- 3+|{attr}:long_name = "Transceiver impedance imaginary part" 
- 3+|{attr}:units = "ohm" 
+ 3+|{attr}:long_nameÂ =Â "Transceiver impedance imaginary part" 
+ 3+|{attr}:unitsÂ =Â "ohm" 
  
  |{var}float transceiver_impedance_r(start_time, beam, frequency) |M |Transceiver impedance real part.
- 3+|{attr}:long_name = "Transceiver impedance real part" 
- 3+|{attr}:units = "ohm" 
+ 3+|{attr}:long_nameÂ =Â "Transceiver impedance real part" 
+ 3+|{attr}:unitsÂ =Â "ohm" 
 
  |{var}int transceiver_sample_frequency(start_time, beam) |M |Transceiver sample frequency.
- 3+|{attr}:long_name = "Transceiver sample frequency" 
- 3+|{attr}int :valid_min = 1
+ 3+|{attr}:long_nameÂ =Â "Transceiver sample frequency" 
+ 3+|{attr}int :valid_minÂ =Â 1
 
  |{var}float transducer_impedance_i(start_time, beam, frequency) |M |Transducer impedance imaginary part.
- 3+|{attr}:long_name = "Transducer impedance imaginary part" 
- 3+|{attr}:units = "ohm" 
+ 3+|{attr}:long_nameÂ =Â "Transducer impedance imaginary part" 
+ 3+|{attr}:unitsÂ =Â "ohm" 
  
  |{var}float transducer_impedance_r(start_time, beam, frequency) |M |Transducer impedance real part.
- 3+|{attr}:long_name = "Transducer impedance real part" 
- 3+|{attr}:units = "ohm" 
+ 3+|{attr}:long_nameÂ =Â "Transducer impedance real part" 
+ 3+|{attr}:unitsÂ =Â "ohm" 
 |===
