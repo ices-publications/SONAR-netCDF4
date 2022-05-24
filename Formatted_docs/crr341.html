@@ -498,7 +498,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_proposed_adcp_additions">3.9.7. Proposed ADCP additions</a></li>
 <li><a href="#_gridded_group">3.9.8. Gridded group</a></li>
 <li><a href="#_interpretation">3.9.9. Interpretation</a></li>
-<li><a href="#_vendor_specific_group">3.9.10. Vendor specific group</a></li>
+<li><a href="#_vendor_specific_group">3.9.10. Vendor specific group</a>
+<ul class="sectlevel4">
+<li><a href="#_simradwbt_group">SimradWBT group</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -4883,7 +4887,232 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.</p>
 <div class="sect3">
 <h4 id="_vendor_specific_group">3.9.10. Vendor specific group</h4>
 <div class="paragraph">
-<p>The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is <strong>/Vendor_specific</strong>. Currently, there is no mandatory information for the vendor specific group.</p>
+<p>The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is <strong>/Vendor_specific</strong>. There is no mandatory information for the vendor specific group.</p>
+</div>
+<table id="vendorSpecificTable" class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 16. Description of the vendor specific group.</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Obligation</th>
+<th class="tableblock halign-left valign-top">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Subgroups</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;SimradWBT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subgroup containing optional transducer and Simrad wideband transceiver (WBT) specific information for processing and reference.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="_simradwbt_group">SimradWBT group</h5>
+<div class="paragraph">
+<p>This Subgroup contains optional transducer and Simrad WBT information for processing and for reference.</p>
+</div>
+<table id="sonarVendor_specific_SimradWBT_Table" class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 17. Description of the SimradWBT group in the Vendor group.</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Obligation</th>
+<th class="tableblock halign-left valign-top">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Types</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">&#160;&#160;&#160;&#160;uint64(*) ping_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length vector used to store ping time of pings using the group variables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Dimensions</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;start_time = unlimited</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be of fixed or unlimited length, as appropriate.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Coordinate variables</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;uint64 start_time(start_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp for the first ping using specific values.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:axis = "T"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:calendar = "gregorian"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Time-stamp of each ping"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:standard_name = "time"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Variables</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float filter_coefficients_i(start_time, beam, stage)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imaginary part of filter coefficients.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Filter coefficients (imaginary part)"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float filter_coefficients_r(start_time, beam, stage)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real part of filter coefficients.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Filter coefficients (real part)"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int filter_decimation(start_time, beam, stage)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filter decimation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Filter decimation"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_min = 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int filter_center_frequency(start_time, beam, stage)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Centre frequency of the filter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Filter centre frequency"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_min = 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "Hz"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int filter_bandwidth(start_time, beam, stage)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bandwidth of the filter passband.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Filter bandwidth"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_min = 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "Hz"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;string filter_generator_version(start_time, beam, stage)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version of the filter generator used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Filter generator version"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;ping_t ping_valid(start_time)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to pings (by ping_time) using the group variables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:string_name = "Time reference to pings using the variables"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transceiver_impedance_i(start_time, beam, frequency)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transceiver impedance imaginary part.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transceiver impedance imaginary part"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "ohm"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transceiver_impedance_r(start_time, beam, frequency)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transceiver impedance real part.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transceiver impedance real part"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "ohm"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;int transceiver_sample_frequency(start_time, beam)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transceiver sample frequency.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transceiver sample frequency"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;int :valid_min = 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transducer_impedance_i(start_time, beam, frequency)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transducer impedance imaginary part.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transducer impedance imaginary part"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "ohm"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;float transducer_impedance_r(start_time, beam, frequency)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transducer impedance real part.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:long_name = "Transducer impedance real part"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;:units = "ohm"</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -5031,7 +5260,7 @@ tbd.
 </div>
 </div>
 <table id="equationVariables" class="tableblock frame-all grid-all fit-content">
-<caption class="title">Table 16. List of equation symbols and the matching SONAR-netCDF4 variable</caption>
+<caption class="title">Table 18. List of equation symbols and the matching SONAR-netCDF4 variable</caption>
 <colgroup>
 <col>
 <col>
@@ -5287,13 +5516,13 @@ S_v = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\ \log_{10}\left(r\right)
 <p>This section provides a complete mathematical overview of the coordinate systems necessary to physically locate the position of an echo relative to a geographic coordinate system when measured from a moving or stationary platform. The coordinate systems detailed here follow those used in some multibeam bathymetric mapping sonars, but in many cases this level of preciseness will be unnecessary and several coordinate systems will overlap.</p>
 </div>
 <div class="paragraph">
-<p>There are four right-handed Cartesian coordinate systems (<a href="#coordinateSystemList">Table 17</a>, <a href="#coordinate_system_figure_all">Figure 2</a>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Coordinate system rotation angles are as per the right-hand rule.</p>
+<p>There are four right-handed Cartesian coordinate systems (<a href="#coordinateSystemList">Table 19</a>, <a href="#coordinate_system_figure_all">Figure 2</a>) associated with the platform, transducer(s), and acoustic beams. Some of the coordinate systems have different origins and this is implemented as a translation vector in the input coordinate system. Coordinate system rotation angles are as per the right-hand rule.</p>
 </div>
 <div class="paragraph">
 <p>There is also a geographic coordinate system (<a href="#coordinate_system_figure_all">Figure 2</a>) that provides for location of the platform on Earth and also the height above a datum (e.g. mean sea level). The platform heading variable (degrees clockwise from north) can be used to obtain the sonar orientation in the geographic coordinate system (this applies to both stationary and mobile sonar platforms).</p>
 </div>
 <table id="coordinateSystemList" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. List of coordinate systems used to physically locate the position of received echoes.</caption>
+<caption class="title">Table 19. List of coordinate systems used to physically locate the position of received echoes.</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -5973,6 +6202,10 @@ y_\phi = (y_1 + y_4) \cdot (y_2 + y_3)^*,\\
 <dd>
 <p>Changed the required timestamp format to match that used elsewhere in the convention.</p>
 </dd>
+<dt class="hdlist1">Vendor_specific_SimradWBT</dt>
+<dd>
+<p>Vendor specific table created with a new subgroup, Vendor_specific_SimradWBT, to provide transducer and transceiver information for processing and reference.</p>
+</dd>
 </dl>
 </div>
 </div>
@@ -6238,7 +6471,7 @@ ylabel('Power (dB)')</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.0<br>
-Last updated 2022-04-25 06:38:57 UTC
+Last updated 2022-05-24 22:40:53 UTC
 </div>
 </div>
 <script src="highlight/highlight.min.js"></script>
