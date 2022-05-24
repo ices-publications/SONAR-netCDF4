@@ -370,7 +370,7 @@ _more to come_
 
 ==== Vendor specific group
 
-This group contains vendor-specific information about the sonar and the data.
+The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is */Vendor_specific*. There is no mandatory information for the vendor specific group.
 
 .Description of the vendor specific group.
 [[vendorSpecificTable]]
