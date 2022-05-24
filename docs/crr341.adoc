@@ -388,7 +388,18 @@ _more to come_
 
 ==== Vendor specific group
 
-The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is */Vendor_specific*. Currently, there is no mandatory information for the vendor specific group.
+The vendor specific group contains information about the sonar and data specific to the sonar. Data in this group must not be necessary for normal quantitative use of the sonar data. The contents of this group are at the discretion of the sonar and software that writes the SONAR-netCDF4 file. The netCDF4 group name is */Vendor_specific*. There is no mandatory information for the vendor specific group.
+
+.Description of the vendor specific group.
+[[vendorSpecificTable]]
+include::tableVendorSpecific.adoc[]
+
+===== SimradWBT group
+This Subgroup contains optional transducer and Simrad WBT information for processing and for reference.
+
+.Description of the SimradWBT group in the Vendor group.
+[[sonarVendor_specific_SimradWBT_Table]]
+include::tableVendor_specific_SimradWBT_sub_group.adoc[]
 
 == Conversion equations
 
@@ -1154,6 +1165,8 @@ ADCP:: A new subgroup, ADCP, has been added to store data from acoustic Doppler 
 SingleTarget:: A new subgroup, SingleTarget is added to allow for single target detections using backscatter_r and backscatter_i or backscater_r and echoangle_major and echoangle_minor. Calculation of Target Strength (TS) of single targets is given in equation 2,3,4 and 6 for different sonars.
 
 Provenance:: Changed the required timestamp format to match that used elsewhere in the convention.
+
+Vendor_specific_SimradWBT:: Vendor specific table created with a new subgroup, Vendor_specific_SimradWBT, to provide transducer and transceiver information for processing and reference.
 
 === Changes within a document version 
 
