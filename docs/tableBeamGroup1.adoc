@@ -335,5 +335,5 @@ s|Variables | |
 s|Subgroups | |
  |{var}ADCP |O |Subgroup containing ADCP calculated current velocity data.
  |{var}SingleTarget |O |Subgroup containing split-beam detected single-target data.
-
+ |{var}VolumeBackscatter|O |Subgroup containing calculated volume backscatter data.
 |===

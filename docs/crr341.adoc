@@ -347,6 +347,24 @@ include::tableSingleTarget_sub_group.adoc[]
 
 [.landscape]
 <<<
+==== Proposed calculated backscatter additions
+
+This group contains the calculated latexmath:[S_v], for a single ping or 
+a series of pings formed by a calculation interval.
+The netCDF4 group name is VolumeBackscatter and is a subgroup of /Sonar/Beam_group.
+
+.Description of the VolumeBackscatter subgroup of the BeamGroup1 group.
+[[sonarVolumeBackscatterTable]]
+include::tableVolumeBackscatter_sub_group.adoc[]
+
+.Description of the AveragedVolumeBackscatter subgroup of the VolumeBackscatterGroup group.
+[[sonarAveragedVolumeBackscatterTable]]
+include::tableAveragedVolumeBackscatter_sub_group.adoc[]
+[.portrait]
+<<<
+
+[.landscape]
+<<<
 ==== Proposed ADCP additions
 
 This group contains the ADCP beam data, single ping calculations and associated metadata.
@@ -1166,7 +1184,11 @@ SingleTarget:: A new subgroup, SingleTarget is added to allow for single target 
 
 Provenance:: Changed the required timestamp format to match that used elsewhere in the convention.
 
-Vendor_specific_SimradWBT:: Vendor specific table created with a new subgroup, Vendor_specific_SimradWBT, to provide transducer and transceiver information for processing and reference.
+SimradWBT:: Vendor specific table created with a new subgroup, Vendor_specific_SimradWBT, to provide transducer and transceiver information for processing and reference.
+
+VolumeBackscatter:: A new subgroup, VolumeBackscatter, to Beam_Group1, has been added to to store calculated SV/SV(f) for single ping, all samples.
+
+AveragedVolumeBackscatter:: A new subgroup, AveragedVolumeBackscatter, to VolumeBackscatter, has been added to to store calculated SV/SV(f) for single ping or over a series of ping, calculation interval, for a selected layer range.
 
 === Changes within a document version 
 
