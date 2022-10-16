@@ -7,7 +7,7 @@ It is also the place where new versions of the convention are discussed and deve
 
 Version 2.0 of the SONAR-netCDF4 convention is available http://nbviewer.org/github/ices-publications/SONAR-netCDF4/blob/v2.0/Formatted_docs/crr341.pdf[here]. Compared to version 1, more types of sonars are supported, including echosounders, multibeam systems, and doppler current profilers. An overview of the main changes are given in Section 7 of the convention.
 
-Version 1.0 of the SONAR-netCDF4 convention (as ICES CRR No. 341) is available http://www.ices.dk/sites/pub/Publication%20Reports/Cooperative%20Research%20Report%20(CRR)/CRR341.pdf[here].
+Version 1.0 of the SONAR-netCDF4 convention (as ICES CRR No. 341) is available https://ices-library.figshare.com/articles/report/The_SONAR-netCDF4_convention_for_sonar_data_Version_1_0/18624056[here].
 
 == Ongoing and future developments
 
