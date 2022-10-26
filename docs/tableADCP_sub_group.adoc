@@ -15,7 +15,7 @@ s|Variables | |
  3+|{attr}:units = "W" 
  3+|{attr}:long_name = "Raw backscatter at bottom (real part)" 
  
- |{var}float bin_lenght(ping_time) |MA |Distance covered by transmit pulse.
+ |{var}float bin_length(ping_time) |MA |Distance covered by transmit pulse.
  3+|{attr}:units = "m" 
  3+|{attr}:long_name = "Distance covered by transmit pulse" 
  3+|{attr}float :valid_range = 0.0, 20.0 
