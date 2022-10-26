@@ -41,8 +41,8 @@ s|Variables | |
  
  |{var}float course_over_ground(time) |O |a platform course is the cardinal direction along which the platform is to be steered
  3+|{attr}:standard_name = "platform_course" 
- 3+|{attr}:units = "m/s" 
- 3+|{attr}:long_name = "degree" 
+ 3+|{attr}:units = "degrees_north" 
+ 3+|{attr}:long_name = "Platform course over ground" 
  3+|{attr}:coordinates = "time latitude longitude" 
  
  |{var}float speed_over_ground(time) |MA |Speed is the magnitude of velocity. The platform speed with respect to ground is relative to the solid Earth beneath it, i.e. the sea floor for a ship.  
