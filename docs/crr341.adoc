@@ -440,7 +440,7 @@ S_{v} = 10\log_{10}(P_{r}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac
 \end{equation}
 ++++
 
-where latexmath:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr), latexmath:[\tau_e] is the effective pulse duration (_receive_duration_effective, s), and _G_ is the transducer gain (transducer_gain, dB).
+where latexmath:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr), latexmath:[\tau_e] is the effective pulse duration (receive_duration_effective, s), and _G_ is the transducer gain (transducer_gain, dB).
 
 === Type 2
 
