@@ -62,12 +62,12 @@ s|Variables | |
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = −180.0, 180.0 
  
- |{var}float echoangle_major_sensitivity(beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
+ |{var}float echoangle_major_sensitivity(beam) |MA |Scaling factor to convert electrical phase differences between transducer parts into physical echo arrival angles. Only required if beam_type is not set to single.
  3+|{attr}:long_name = "Major angle scaling factor" 
  3+|{attr}:units = "1" 
  3+|{attr}float :valid_min = 0.0 
  
- |{var}float echoangle_minor_sensitivity(beam) |MA |Scaling factor to convert electrical arrival angles into physical angles. Only required if beam_type is not set to single.
+ |{var}float echoangle_minor_sensitivity(beam) |MA |Scaling factor to convert electrical phase differences between transducer parts into physical echo arrival angles.
  3+|{attr}:long_name = "Minor angle scaling factor" 
  3+|{attr}:units = "1" 
  3+|{attr}float :valid_min = 0.0 
