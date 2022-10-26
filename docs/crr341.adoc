@@ -335,7 +335,7 @@ include::tableBeamGroup1.adoc[]
 
 [.landscape]
 <<<
-==== Proposed Single Target additions
+==== Proposed single target additions
 
 This group contains the single target detections from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <<Conversion equations>>. Algorithm for single target detection and parameters are detailed in citenp:[soule1997]. The netCDF4 group name is /Sonar/Beam_group/SingleTarget.
 
@@ -739,7 +739,7 @@ If True, the transducer coordinate system (TCS) is obtained from the SCS only th
 image::coordinateSystemFigureAll.svg[align="center"]
 
 
-=== Coordinate System Transforms
+=== Coordinate system transforms
 Coordinate system transforms  stem:[F_{A->B}] can be expressed as a combination of a Rotation and a Translation of one coordinate system A into another B.
 [stem#eqCSFAB,reftext=({counter:eqs})]
 ++++
@@ -1059,7 +1059,7 @@ R_{PCS->SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
 where stem:[h,p,r] are the heading, pitch and roll as given in the platform_heading, platform_pitch, platform_roll variables of the sonar group (see <<sonarBeamGroupTable>>) or platform group (see <<platformGroupTable>>)
 
 
-=== Equations for positioning echoes in a Geographical Coordinate System
+=== Equations for positioning echoes in a geographical coordinate system
 The Surface Coordinate system is a coordinate system oriented with platform heave at the origin of the platform origin.
 In order to define an absolute position, the coordinate should be converted to a Terrestrial Geographic System coordinate and take into account heave, draft, tide and so on.
 
