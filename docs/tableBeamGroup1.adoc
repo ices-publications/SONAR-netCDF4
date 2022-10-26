@@ -191,7 +191,7 @@ s|Variables | |
  3+|{attr}:units = "dB" 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
  
- |{var}float calibrated_frequency(frequency) |M |Frequencies for which transducer gain values have been estimated during the calibration exercise.
+ |{var}float calibrated_frequency(frequency) |M |Frequencies for which on-axis gain values have been estimated during the calibration exercise.
  3+|{attr}:long_name = "Calibration gain frequencies" 
  3+|{attr}:units = "Hz" 
  3+|{attr}float :valid_min = 0.0 
