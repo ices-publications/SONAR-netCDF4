@@ -164,7 +164,7 @@ NetCDF4 has two main organizational concepts: (i) the variable, which can contai
 .. *Platform* *–* contains information about the platform on which the sonar is installed and information about each sensor, e.g. its relative  position to the platform frame of reference.
 .. *Provenance –* contains metadata about how the SONAR-netCDF4 version of the data were obtained and processed;
 .. *Sonar –* contains the main data models in the convention; groups under Sonar are used for storing the data output from the sonars, as well as processed sonar data and interpretation masks;
-... *Beam_groupX –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies frequencies;
+... *Beam_groupX –* contains ping based backscatter; the group supports multiple sensors of the same type, e.g. multiple frequencies;
 ... *GriddedX –* contains gridded backscatter data; the grid is similar across multiple frequencies and can be used for fine scale grids as well as coarser resolution typically as a basis for the reports;
 ... *InterpretationX –* contains the interpretation regions; the intepretation mask is independent from the backscatter groups;
 .. *Vendor specific –* contains vendor-specific information about the sonar and the data.
