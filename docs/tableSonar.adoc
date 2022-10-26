@@ -9,7 +9,7 @@ s|Group attributes | |
  |{attr}:sonar_serial_number |R |Sonar serial number.
  |{attr}:sonar_software_name |R |Sonar software name.
  |{attr}:sonar_software_version |R |Sonar software version.
- |{attr}:sonar_type = "omni-sonar" |M |Type of sonar, chosen from a defined vocabulary (currently only one value): ”omnisonar” (a sonar with a nominally omnidirectional mode).
+ |{attr}:sonar_type = "omni-sonar" |M |Type of sonar, chosen from a defined vocabulary: "omnisonar" (a sonar with a nominally omnidirectional mode), and "echosounder" (a sonar with a single directed beam).
  
 s|Types | |
  2+|{var}byte enum beam_stabilisation_t {not_stabilised = 0, stabilised = 1} |Whether or not the beam direction is compensated for platform motion.
