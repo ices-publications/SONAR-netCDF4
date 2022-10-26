@@ -163,7 +163,7 @@ s|Variables | |
  3+|{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" 
  3+|{attr}:units = "s" 
  
- |{var}float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded sample is given by blanking_interval*sample_interval.
+ |{var}float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded samples is given by blanking_interval/sample_interval.
  3+|{attr}:long_name = "Amount of time during reception where samples are discarded" 
  3+|{attr}:units = "s" 
  3+|{attr}:valid_min = "0.0" 
