@@ -941,7 +941,7 @@ where stem:[h,p,r] are the heading, pitch and roll as given at the time of the p
 
 and:
 
-[stem#eqCST_TCS_PCS,reftext=({counter:eqs})]
+[stem#eqCST_TCS_PCS1,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 T_{TCS->PCS} = \begin{bmatrix}
@@ -1035,7 +1035,7 @@ with the echo, defined in the platform group (see <<platformGroupTable>>)
 
 and:
 
-[stem#eqCST_TCS_PCS,reftext=({counter:eqs})]
+[stem#eqCST_TCS_PCS2,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 T_{TCS->PCS} = \begin{bmatrix}
