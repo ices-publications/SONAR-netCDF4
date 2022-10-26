@@ -808,7 +808,7 @@ R_x(r) =
 
 noting that the order of the matrices is important and should follow this order.
 
-To be clear, the right-hand rule when applied to roll, pitch, and heave means that:
+To be clear, the right-hand rule when applied to roll, pitch, and heading means that:
 
 * looking along the positive _x_-axis, a positive rotation (roll) is clockwise (to starboard),
 * looking along the positive _y_-axis, a positive rotation (pitch) is clockwise (bow up),
@@ -821,7 +821,7 @@ The coordinate system offsets of the transducer are given in the Platform group.
 These allow for precise specification of the origin of sonar transducer. The offset is a (x,y,z) tuple in the platform coordinate system. Offsets are to be interpreted as a vector that starts at the platform coordinate system origin and ends at the transducer position.
 For example, an offset of (1, 2, –3) indicates a position that is 1 m toward the bow, 2 m to starboard, and 3 m above the origin of the platform coordinate system.
 
-Some sensors (e.g. the position, attitude sensor) can have their installation offset and angle defined in the Platform group and relative to the platform-coordinate system. Those parameters are usually taken into account by the sensors and the sensor data values are considered to given relatively to the platform origin (namely roll, pitch should not be compensate for level arms and installation offset except explicitely specified).
+Some sensors (e.g. the position, attitude sensor) can have their installation offset and angle defined in the Platform group and relative to the platform-coordinate system. Those parameters are usually taken into account by the sensors and the sensor data values are considered to be given relative to the platform origin (namely roll, pitch should not be compensated for level arms and installation offset except when explicitely specified).
 
 === Split-aperture coordinates
 
