@@ -336,6 +336,17 @@ include::tableBeamGroup1.adoc[]
 
 [.landscape]
 <<<
+===== Gridded group
+This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
+
+.Description of the beam grid subgroups of the sonar group.
+[[sonarGridGroupTable]]
+include::tableBeamGridGroup1.adoc[]
+[.portrait]
+<<<
+
+[.landscape]
+<<<
 ==== Proposed single target additions
 
 This group contains the single target detections from split-aperture beams positioned with their range and split-aperture arrival angles. Target Strength (TS) is calculated using conversion equations detailed in <<Conversion equations>>. Algorithm for single target detection and parameters are detailed in citenp:[soule1997]. The netCDF4 group name is /Sonar/Beam_group/SingleTarget.
@@ -363,18 +374,6 @@ The netCDF4 group name is Mean_current and is a subgroup of ADCP group.
 .Description of the Mean current subgroup of the ADCP group.
 [[sonarMeanCurrentTable]]
 include::tableMean_current_sub_group.adoc[]
-[.portrait]
-<<<
-
-==== Gridded group
-
-This group contains gridded sonar backscatter data and associated metadata. The netCDF4 group name is *GriddedX*, where *X* is an integer.
-
-[.landscape]
-<<<
-.Description of the beam grid subgroups of the sonar group.
-[[sonarGridGroupTable]]
-include::tableBeamGridGroup1.adoc[]
 [.portrait]
 <<<
 
