@@ -1,9 +1,10 @@
 = The SONAR-netCDF4 convention for sonar data, version 2.0
-List of authors
+ICES WGFAST - Open Data subgroup
 :toc: left
 :toclevels: 4
 :doctype: book
-:revnumber: 2.0
+:revnumber: 2.1 (working draft)
+:revremark: Generated at {localdatetime}
 :xrefstyle: short
 :source-highlighter: highlightjs
 :highlightjsdir: highlight
