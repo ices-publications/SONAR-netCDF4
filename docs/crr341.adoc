@@ -394,13 +394,17 @@ The vendor specific group contains information about the sonar and data specific
 [[vendorSpecificTable]]
 include::tableVendorSpecific.adoc[]
 
+[.landscape]
+<<<
 ===== SimradWBT group
 This Subgroup contains optional transducer and Simrad WBT information for processing and for reference.
 
 .Description of the SimradWBT group in the Vendor group.
 [[sonarVendor_specific_SimradWBT_Table]]
 include::tableVendor_specific_SimradWBT_sub_group.adoc[]
-
+[.portrait]
+<<<
+    
 == Conversion equations
 
 This section provides detailed formulae on how to convert the backscatter data in the Sonar group into calibrated target strength and volume backscatter strength.
