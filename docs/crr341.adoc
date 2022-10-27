@@ -411,7 +411,7 @@ Type 1 conversion equations are used for data recorded by the Simrad SU90, SX90,
 
 The complex-valued backscatter data are converted into calibrated target strength via:
 
-[stem#eqType1TS,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 TS = 10 \log_{10}(P_{r}) + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2}\right) - G - 40\log_{10}(\cos\gamma),
@@ -433,7 +433,7 @@ The absorption coefficient of sound in water is _α_ (absorption_indicative, dB/
 
 The volume backscatter strength (Sv, citenp:[maclennan2002]) is derived from a similar equation:
 
-[stem#eqType1Sv,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 S_{v} = 10\log_{10}(P_{r}) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t\lambda^{2}c\psi\tau_{e}}{32\pi^{2}}\right) - G - 40\log_{10}(\cos\gamma),
@@ -446,7 +446,7 @@ where latexmath:[\psi] is the equivalent beam angle (equivalent_beam_angle, sr),
 
 Type 2 conversion equations are intended for data recorded by Furuno omnisonars. The received real-valued backscatter data are converted into calibrated target strength via:
 
-[stem#eqType2TS,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 TS = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\log_{10}(r) + 2\alpha r - (SL + K + \Delta G + G_{T}),
@@ -459,7 +459,7 @@ Gain correction, latexmath:[\Delta G], (gain_correction, dB) is determined by th
 
 The volume backscatter strength is derived from a similar equation:
 
-[stem#eqType2Sv,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 S_v = 20\log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{c\tau_e}{2}\Psi \right) - (SL + K + \Delta G + G_T),
@@ -474,7 +474,7 @@ Type 3 conversion equations are intended for data produced by Simrad EK60, ES60,
 
 The backscatter power values are stored in the _backscatter_r_ variable with data type _short_ (16-bit signed integers) that are converted to logarithmic received power via:
 
-[stem#eqType3Pr,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 P_r = \frac{10\log_{10}(2)}{256} P_c, 
@@ -482,7 +482,7 @@ P_r = \frac{10\log_{10}(2)}{256} P_c,
 ++++
 where latexmath:[P_c] is the compressed power value stored in the _backscatter_r_ variable and latexmath:[P_r] the logarithmic received power that is transformed into calibrated target strength via:
 
-[stem#eqType3TS,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 TS = P_r + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{16\pi^2} \right) - 2G_0,
@@ -490,7 +490,7 @@ TS = P_r + 40\log_{10}(r) + 2\alpha r - 10\log_{10}\left( \frac{P_t\lambda^{2}}{
 ++++
 where latexmath:[r] is the range from the transducer to the target [m], latexmath:[\alpha] the acoustic absorption [dB m^-1^], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable), latexmath:[\lambda] the acoustic wavelength [m], and latexmath:[G_0] the on-axis gain (variable _transducer_gain_). Beam pattern compensation for echoes that do not arrive on the transducer axis is done in addition to this equation (if such angles can be estimated, as can be done with split-aperture transducers). Volume backscatter strength is obtained from a similar equation:
 
-[stem#eqType3Sv,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 S_v = P_r + 20\log_{10}(r) + 2\alpha r - 10\log_{10}\left(\frac{P_t \lambda^2 c \psi \tau_e}{32 \pi^2} \right) - 2G_0,
@@ -501,7 +501,7 @@ where latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent be
 
 The effective pulse duration is computed for EK60, ES60 and ES70 from the nominal transmit pulse duration (variable _transmit_duration_nominal_) and the Simrad term latexmath:[S_{a,corr}] in dB from the calibration exercise as :
 
-[stem#eqType3tau_e,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \tau_e = \tau * 10^{\frac{2S_{a,corr}}{10}},
@@ -510,7 +510,7 @@ The effective pulse duration is computed for EK60, ES60 and ES70 from the nomina
 
 The range from the transducer to the target is given by:
 
-[stem#eqType3r,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 tbd.
@@ -539,7 +539,7 @@ For FM transmission mode, in order to increase signal-to-noise ratio and resolut
 
 Noting latexmath:[n], the sample index in the discrete time domain, the pulse compressed complex samples for each sub-beam denoted latexmath:[y_{pc}] are then equal to:
 
-[stem#eqType4y_pc,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 y_{pc}(n) = \frac{y_{rx}(n)*y_{tx,th}^*(-n)}{||y_{tx,th}||^2_2},
@@ -550,7 +550,7 @@ where latexmath:[y_{rx}] is the complex received signal stored in the _backscatt
 
 The transceiver measures voltage over a load, latexmath:[z_{\textrm{rx,e}}], connected in series with the transducer impedance, latexmath:[z_{\textrm{td,e}}]. The number of sub-beams latexmath:[N_{u}] are stored as the _subbeam_ dimension in the backscatter variables in <<sonarBeamGroupTable>> and received electric power is then equal to :
 
-[stem#eqType4p_rxe,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 p_{\textrm{rx,e}}(n)= \frac{1}{N_{u}}\left( \frac{| \sum_{u = 1}^{N_{u}} y(n,u)|}{2\sqrt{2}} \right)^2 \left( \frac{|z_{\textrm{rx,e}}+z_{\textrm{td,e}}|}{|z_{\textrm{rx,e}|}} \right)^2 \frac{1}{|z_{\textrm{td,e}}|}.
@@ -561,7 +561,7 @@ with latexmath:[y] taken as latexmath:[y_{rx}] for CW transmission and as latexm
 
 For CW transmission, Type 3 equations can then be applied, taking logarithmic received power latexmath:[P_r] as:
 
-[stem#eqType4Pr,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 P_r = 10\log_{10}(p_{\textrm{rx,e}})
@@ -570,7 +570,7 @@ P_r = 10\log_{10}(p_{\textrm{rx,e}})
 
 and the nominal transmit pulse duration latexmath:[\tau] as:
 
-[stem#eqType4tau,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \tau = T_{tx,th}\frac{mean|y_{tx,th}|^2}{max|y_{tx,th}|^2}
@@ -581,7 +581,7 @@ with latexmath:[T_{tx,th}] the duration [s] of the complex theoretical transmit 
 
 For FM transmission, match filtered received electric power is transformed into volume backscatter strength using:
 
-[stem#eqType4Sv,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 S_v(n) = 10\log_{10}(p_{\textrm{rx,e}}(n)) + 20\log_{10}(r) + 2\alpha(f_c) r
@@ -593,7 +593,7 @@ where  latexmath:[r] is the range from the transducer to the sample latexmath:[n
 
 The match filtered effective pulse duration latexmath:[\tau_e] is computed for EK80 and ES80 from
 
-[stem#eqType4tau_e,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \tau_e = T_{tx,{pc}}.\frac{mean|y_{tx,{pc}}|^2}{max|y_{tx,{pc}}|^2},
@@ -602,7 +602,7 @@ The match filtered effective pulse duration latexmath:[\tau_e] is computed for E
 
 where latexmath:[y_{tx,{pc}}] is the autocorrelation of the theoretical transmit pulse
 
-[stem#eqType4y_txpc,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 y_{tx,{pc}}(n)=\frac{y_{tx,th}(n)*y_{tx,th}^*(-n)}{||y_{tx,th}||^2_2},
@@ -613,7 +613,7 @@ and latexmath:[T_{tx,{pc}}] the latexmath:[y_{tx,{pc}}] duration [s]
 
 The use of broadband FM tranmission enables to provide volume backscatter strength as a function of frequency, through:
 
-[stem#eqType4Svf,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 S_v(f)= 10\log_{10}(p_{\textrm{rx,e}}(f)) + 20\log_{10}(r) + 2\alpha(f) r - 10\log_{10}\left(\frac{y_{tx,{pc}}(f) P_t  \lambda^2 c \psi (\frac{f_n}{f})^2 \tau_{FFT}}{32 \pi^2} \right) - 2G_0(f),
@@ -624,7 +624,7 @@ where latexmath:[p_{\textrm{rx,e}}(f)] and latexmath:[y_{tx,{pc}}(f)] are the Fo
 
 Single target strength as a function of frequency is obtained from a similar equation, for targets located on beam-axis:
 
-[stem#eqType4TSf,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 TS(f) = 10\log_{10}(p_{\textrm{rx,e}}(f)) + 40\log_{10}(r) + 2\alpha(f) r
@@ -657,21 +657,21 @@ TS = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 40\ \log_{10}\left(r\right) 
 
 where stem:[A] is the amplitude or envelope of the received voltage signal (V), calculated from:
 
-[stem#eqType6I,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 I = \mathrm{Re}\left(z_0\right) + \mathrm{Re}\left(z_1\right),
 \end{equation}
 ++++
 
-[stem#eqType6Q,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 Q = \mathrm{Im}\left(z_0\right) + \mathrm{Im}\left(z_1\right),
 \end{equation}
 ++++
 
-[stem#eqType6A,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 A = \frac{4\sqrt{I^2 + Q^2}}{2^{32} - 1}.
@@ -680,7 +680,7 @@ A = \frac{4\sqrt{I^2 + Q^2}}{2^{32} - 1}.
 
 The range between the transducer and target is stem:[r], calculated from:
 
-[stem#eqType6r,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 r = \frac{c\left(dt \cdot i - t_0\right)}{2},
@@ -693,7 +693,7 @@ The absorption coefficient of sound in water is stem:[\alpha] (absorption_indica
 
 The volume backscatter strength is derived from a similar equation:
 
-[stem#eqType6Sv,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 S_v = 20\ \log_{10}\left(\frac{A}{\sqrt{2}}\right) + 20\ \log_{10}\left(r\right) + 2\alpha r - 10\ \log_{10}\left(\frac{c \ \tau_e \ \psi}{2}\right) - \left(TR + \Delta G\right),
@@ -741,7 +741,7 @@ image::coordinateSystemFigureAll.svg[align="center"]
 
 === Coordinate system transforms
 Coordinate system transforms  stem:[F_{A->B}] can be expressed as a combination of a Rotation and a Translation of one coordinate system A into another B.
-[stem#eqCSFAB,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 F_{A->B} = R_{A->B} + T_{A->B}
@@ -750,7 +750,7 @@ F_{A->B} = R_{A->B} + T_{A->B}
 
 Transformation of coordinates from A to B can then be implemented as:
 
-[stem#eqCSxyz1,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \begin{bmatrix}
@@ -768,7 +768,7 @@ T_{A->B}
 
 Rotation is specified via three rotation variables and can be implemented via matrix multiplication. As an example, the matrix that will convert a coordinate from coordinate system PCS to coordinate system SCS is defined by:
 
-[stem#eqCSR_PCR_SCS,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_x(r)
@@ -778,7 +778,7 @@ R_{PCS->SCS} = R_z(h) \cdot R_y(p) \cdot R_x(r)
 
 where latexmath:[R_z(h)] is the rotation about the _z_-axis by _h_ degrees, etc. The rotation symbols are chosen to reflect their common nautical names: _h_ for heading, _p_ for pitch, and _r_ for roll and used thus:
 
-[stem#eqCSRxyz,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{eqnarray}
 
@@ -853,7 +853,7 @@ Given an echo _E(beam,i)_ where _i_ is the sample number (from zero to one less 
 
 * A time stamp given by
 
-[stem#eqCSti,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 t_i=ping\_time+\frac{i\cdot sample\_interval + blanking\_interval- sample\_time\_offset}{2}
@@ -868,7 +868,7 @@ The change from TCS to SCS is composed of a translation from transducer origin t
 
 The position of the echo can be defined as :
 
-[stem#eqCS,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \begin{bmatrix}
@@ -900,7 +900,7 @@ with latexmath:[\phi] and latexmath:[\theta] the split-aperture coordinates as d
 
 
 and
-[stem#eqCSR_BCS_TCS1,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 R_{BCS->TCS} =
@@ -929,7 +929,7 @@ where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_b
 
 and:
 
-[stem#eqCSR_PCS_SCS1,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 R_{PCS->SCS}(t_i) = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
@@ -941,7 +941,7 @@ where stem:[h,p,r] are the heading, pitch and roll as given at the time of the p
 
 and:
 
-[stem#eqCST_TCS_PCS1,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 T_{TCS->PCS} = \begin{bmatrix}
@@ -960,7 +960,7 @@ When beam are not stabilized by the sonar, the beam angles  are given relative t
 the sonar will not dynamically change the beam angles to follow the platform movement during a transmit/receive cycle.
 
 The position of the echo can be defined as :
-[stem#eqCSxyz2,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \begin{bmatrix}
@@ -994,7 +994,7 @@ with latexmath:[\phi] and latexmath:[\theta] the split-aperture coordinates as d
 
 and:
 
-[stem#eqCSR_BCS_TCS2,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 R_{BCS->TCS} =
@@ -1022,7 +1022,7 @@ where stem:[\Phi,\Theta,\Psi] are the beam pointings angles as given in the rx_b
 
 and:
 
-[stem#eqCSR_TCS_PCS,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 R_{TCS->PCS} = R_z(transducer\_rotation\_z) \cdot R_y(transducer\_rotation\_y) \cdot R_x(transducer\_rotation\_x)
@@ -1035,7 +1035,7 @@ with the echo, defined in the platform group (see <<platformGroupTable>>)
 
 and:
 
-[stem#eqCST_TCS_PCS2,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 T_{TCS->PCS} = \begin{bmatrix}
@@ -1050,7 +1050,7 @@ with the echo, defined in the platform group (see <<platformGroupTable>>)
 
 and:
 
-[stem#eqCSR_PCS_SCS2,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 R_{PCS->SCS}(t_i)  = R_{z}(h(t_i)) \cdot R_{y}(p(t_i)) \cdot R_{x}(r(t_i))
@@ -1095,7 +1095,7 @@ image::splitApertureTransducers.svg[align="center"]
 ==== Four quadrants (type A)
 This arrangement has four equal quadrants in the transducer (<<transducer_types>>, part A) and the minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are calculated thus:
 
-[stem#eqTypeA,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 y_\theta = (y_3 + y_4) \cdot (y_1 + y_2)^*,\\
@@ -1111,7 +1111,7 @@ where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] 
 
 This arrangement has either three equal sub-beams (<<transducer_types>>, part B) or a centre sub-beam and three surrounding sub-beams. (<<transducer_types>>, part C). Type C can be treated the same as type B once the centre sub-beam signal is added to each of the outer sub-beam signals. The phase angles between two pairs of the three sub-beams are then given by cite:[bodholt2001, bjorno2017]:
 
-[stem#eqTypeBComega,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \omega_{31} = \arctan \left( \Im(y_3 \cdot y_1^*), \Re(y_3 \cdot y_1^*) \right) \\
@@ -1120,7 +1120,7 @@ This arrangement has either three equal sub-beams (<<transducer_types>>, part B)
 ++++
 where latexmath:[\arctan] is the four-quadrant inverse tangent, latexmath:[y_x] the complex signal from quadrant latexmath:[x], * indicates the complex conjugate and latexmath:[\Re] and latexmath:[\Im] the real and imaginary parts of the complex numbered signals. The minor (latexmath:[\theta]) and major (latexmath:[\phi]) angles are then:
 
-[stem#eqTypeBCthetaphi,reftext=({counter:eqs})]
+[stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
 \theta = \frac{1}{\eta_\theta} (\omega_{32} - \omega_{31})\\
