@@ -39,9 +39,30 @@ s|Coordinate variables | |
  3+|{attr}float :valid_min = 0.0 
  
 s|Variables | |
+ |{var}int active_MRU(ping_time) |MA |Indicate the index of the MRU sensor used at the time of the ping to compute the platform attitude.
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Active MRU sensor index" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}int active_position_sensor(ping_time) |MA |Indicate the index of the position sensor used at the time of the ping to compute the platform position.
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Active position sensor index" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
  |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements (or for type 5 equations, TS values). Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
+ 
+ |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
+ 3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
+ 2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
+ 
+ |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
+ 3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}beam_t beam_type |M |Type of split-aperture beam (or not).
+ 3+|{attr}:long_name = "Type of beam" 
  
  |{var}float beamwidth_receive_major(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
  3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 
@@ -64,16 +85,22 @@ s|Variables | |
  3+|{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
+
+ |{var}float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded samples is given by blanking_interval/sample_interval.
+ 3+|{attr}:long_name = "Amount of time during reception where samples are discarded" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}:valid_min = "0.0" 
+
+ |{var}float calibrated_frequency(frequency) |M |Frequencies for which on-axis gain values have been estimated during the calibration exercise.
+ 3+|{attr}:long_name = "Calibration gain frequencies" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
  
- |{var}int sample_count(ping_time, beam, subbeam) |O |The number of samples in each subbeam/beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.
- 3+|{attr}:long_name = "Number of samples per ping in each beam, and optionally subbeam" 
- 3+|{attr}:units = "1" 
- 3+|{attr}int :valid_min = 0 
- 
- |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
- 3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
- 2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
- 
+ |{var}float detected_bottom_range(ping_time, beam) |O |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
+ 3+|{attr}:long_name = "Detected range of the bottom" 
+ 3+|{attr}:units = "m" 
+ 3+|{attr}:valid_min = "0.0" 
+
  |{var}angle_t echoangle_major(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
  3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate" 
  3+|{attr}:units = "arc_degree" 
@@ -93,44 +120,7 @@ s|Variables | |
  3+|{attr}:long_name = "Minor angle scaling factor" 
  3+|{attr}:units = "1" 
  3+|{attr}float :valid_min = 0.0 
- 
- |{var}float rx_beam_rotation_phi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
- 3+|{attr}:long_name = "receive beam angular rotation about the _x_ axis" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −180.0, 180.0 
- 
- |{var}float rx_beam_rotation_theta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _y_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction.
- 3+|{attr}:long_name = "receive beam angular rotation about the _y_ axis" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −90.0, 90.0 
- 
- |{var}float rx_beam_rotation_psi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the receive beam coordinate system. For most cases this angle is set to zero.
- 3+|{attr}:long_name = "receive beam angular rotation about the _z_ axis" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −180.0, 180.0 
- 
- |{var}float tx_beam_rotation_phi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
- 3+|{attr}:long_name = "transmit beam angular rotation about the _x_ axis" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −180.0, 180.0 
- 
- |{var}float tx_beam_rotation_theta(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _y_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction.
- 3+|{attr}:long_name = "transmit beam angular rotation about the _y_ axis" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −90.0, 90.0 
- 
- |{var}float tx_beam_rotation_psi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For most cases this angle is set to zero.
- 3+|{attr}:long_name = "transmit beam angular rotation about the _z_ axis" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −180.0, 180.0 
- 
- |{var}beam_stabilisation_t beam_stabilisation(ping_time) |M |Indicates whether or not sonar beams have been compensated for platform motion.
- 3+|{attr}:long_name = "Beam stabilisation applied (or not)" 
- 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
- |{var}beam_t beam_type |M |Type of split-aperture beam (or not).
- 3+|{attr}:long_name = "Type of beam" 
- 
+
  |{var}float equivalent_beam_angle(ping_time, beam) |M |Equivalent beam angle.
  3+|{attr}:long_name = "Equivalent beam angle" 
  3+|{attr}:units = "sr" 
@@ -141,147 +131,20 @@ s|Variables | |
  3+|{attr}:long_name = "Gain correction" 
  3+|{attr}:units = "dB" 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
+
  |{var}short non_quantitative_processing(ping_time) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. A value of 0 always indicates no such processing.
  2+|{attr}:flag_meanings |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
  2+|{attr}short :flag_values |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
  3+|{attr}:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
- |{var}float receiver_sensitivity(ping_time, beam) |MA |Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.
- 3+|{attr}:long_name = "Receiver sensitivity (re 1/μPa)" 
- 3+|{attr}:units = "dB" 
- 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
- |{var}float sample_interval(ping_time) |M |Time between individual samples along a beam. Common for all beams in a ping.
- 3+|{attr}:long_name = "Interval between recorded raw data samples" 
- 3+|{attr}:units = "s" 
- 3+|{attr}float :valid_min = 0.0 
+
+ |{var}float platform_heading(ping_time) |M |Heading of the platform at time of the ping.
+ 3+|{attr}:standard_name = "platform_orientation" 
+ 3+|{attr}:units = "degrees_north" 
+ 3+|{attr}:long_name = "Platform heading(true)" 
+ 3+|{attr}float :valid_range = 0, 360.0 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
- |{var}float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2
- 3+|{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" 
- 3+|{attr}:units = "s" 
- 
- |{var}float blanking_interval(ping_time, beam) |M |Amount of time during reception where samples are discarded. The number of discarded samples is given by blanking_interval/sample_interval.
- 3+|{attr}:long_name = "Amount of time during reception where samples are discarded" 
- 3+|{attr}:units = "s" 
- 3+|{attr}:valid_min = "0.0" 
- 
- |{var}float detected_bottom_range(ping_time, beam) |O |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
- 3+|{attr}:long_name = "Detected range of the bottom" 
- 3+|{attr}:units = "m" 
- 3+|{attr}:valid_min = "0.0" 
- 
- |{var}float transducer_impedance(ping_time, subbeam) |MA |Impedance of the transducer. This is the impedance of the load over which the transceiver measures voltage on the transducer subbeam. Necessary for conversion equation type 4.
- 3+|{attr}:long_name = "Impedance of transducer" 
- 3+|{attr}:units = "ohm" 
- 
- |{var}float transceiver_impedance(ping_time, subbeam) |MA |Impedance of the transceiver. This is the impedance of the transducer subbeam. Necessary for conversion equation type 4.
- 3+|{attr}:long_name = "Impedance of transceiver" 
- 3+|{attr}:units = "ohm" 
- 
- |{var}sample_t time_varied_gain(ping_time) |MA |Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.
- 3+|{attr}:long_name = "Time-varied-gain coefficients" 
- 3+|{attr}:units = "dB" 
- 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
- |{var}float transducer_gain(ping_time, beam, frequency) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1, 3 and 4.
- 3+|{attr}:long_name = "Gain of transducer" 
- 3+|{attr}:units = "dB" 
- 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
- |{var}float calibrated_frequency(frequency) |M |Frequencies for which on-axis gain values have been estimated during the calibration exercise.
- 3+|{attr}:long_name = "Calibration gain frequencies" 
- 3+|{attr}:units = "Hz" 
- 3+|{attr}float :valid_min = 0.0 
- 
- |{var}float transmit_bandwidth(ping_time, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
- 3+|{attr}:long_name = "Nominal bandwidth of transmitted pulse" 
- 3+|{attr}:units = "Hz" 
- 3+|{attr}float :valid_min = 0.0 
- 
- |{var}float transmit_duration_nominal(ping_time, tx_beam) |M |Nominal duration of the transmit pulse. This is not the effective pulse duration.
- 3+|{attr}:long_name = "Nominal duration of transmitted pulse" 
- 3+|{attr}:units = "s" 
- 3+|{attr}float :valid_min = 0.0 
- 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
- |{var}pulse_t transmit_pulse_model_r(ping_time, tx_beam) |MA |Real part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate of the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
- 3+|{attr}:long_name = "Real part of the model of the transmit pulse" 
- 3+|{attr}float :valid_min = −1.0 
- 3+|{attr}float :valid_max = 1.0 
- 
- |{var}pulse_t transmit_pulse_model_i(ping_time, tx_beam) |MA |Imaginary part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate as the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
- 3+|{attr}:long_name = "Imaginary part of the model of the transmit pulse" 
- 3+|{attr}float :valid_min = −1.0 
- 3+|{attr}float :valid_max = 1.0 
- 
- |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2, 3 and 4 conversion equations.
- 3+|{attr}:long_name = "Effective duration of received pulse" 
- 3+|{attr}:units = "s" 
- 3+|{attr}float :valid_min = 0.0 
- 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
- |{var}float transmit_frequency_start(ping_time, tx_beam) |M |Frequency at the start of the transmit pulse.
- 3+|{attr}:long_name = "Start frequency in transmitted pulse" 
- 3+|{attr}:standard_name = "sound_frequency" 
- 3+|{attr}:units = "Hz" 
- 3+|{attr}float :valid_min = 0.0 
- 
- |{var}float transmit_frequency_stop(ping_time, tx_beam) |M |Frequency at the end of the transmit pulse.
- 3+|{attr}:long_name = "Stop frequency in transmitted pulse" 
- 3+|{attr}:standard_name = "sound_frequency" 
- 3+|{attr}:units = "Hz" 
- 3+|{attr}float :valid_min = 0.0 
- 
- |{var}float transmit_power(ping_time, tx_beam) |MA |Electrical transmit power used for the ping. Necessary for type 1 conversion equations
- 3+|{attr}:long_name = "Nominal transmit power" 
- 3+|{attr}:units = "W" 
- 3+|{attr}float :valid_min = 0.0 
- 
- |{var}float transmit_source_level(ping_time, tx_beam) |MA |Source level generated by the transmit ping. Necessary for type 2 conversion equations.
- 3+|{attr}:long_name = "Transmit source level (re 1 μPa at 1 m)" 
- 3+|{attr}:units = "dB" 
- 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
- |{var}float transmitter_and_receiver_coefficient(ping_time) |MA |Sum of transmit source level (dB re 1 μPa at 1 m), voltage sensitivity (dB re 1 V/μPa), and system gain (dB). Necessary for type 6 conversion equations.
- 3+|{attr}:long_name = "Transmitter and receiver coefficient" 
- 3+|{attr}:units = "dB" 
- 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
- 
- |{var}transmit_t transmit_type(ping_time, tx_beam) |M |Type of transmit pulse.
- 3+|{attr}:long_name = "Type of transmitted pulse" 
- 
- |{var}int receive_transducer_index(beam) |MA |Receiving or monostatic transducer index associated with the given beam
- 3+|{attr}:valid_min = "0" 
- 3+|{attr}:long_name = "Receive transducer index" 
- 
- |{var}int transmit_transducer_index(ping_time, tx_beam) |MA |Transmitting or monostatic transducer index associated with the given transmit beam
- 3+|{attr}:valid_min = "0" 
- 3+|{attr}:long_name = "Transmit transducer index" 
- 
- |{var}int transmit_beam_index(ping_time, beam) |MA |Transmit beam index associated with the given beam
- 3+|{attr}:valid_min = "0" 
- 3+|{attr}:long_name = "Transmit beam index associated with the given beam" 
- 
- |{var}int active_MRU(ping_time) |MA |Indicate the index of the MRU sensor used at the time of the ping to compute the platform attitude.
- 3+|{attr}:valid_min = "0" 
- 3+|{attr}:long_name = "Active MRU sensor index" 
- 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
- |{var}int active_position_sensor(ping_time) |MA |Indicate the index of the position sensor used at the time of the ping to compute the platform position.
- 3+|{attr}:valid_min = "0" 
- 3+|{attr}:long_name = "Active position sensor index" 
- 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
- |{var}float sound_speed_at_transducer(ping_time) |O |Sound speed at transducer depth at the time of the ping
- 3+|{attr}:long_name = "Indicative sound speed at ping time and transducer depth" 
- 3+|{attr}:units = "m/s" 
- 3+|{attr}float :valid_min = 0.0 
- 3+|{attr}:standard_name = "speed_of_sound_in_sea_water" 
- 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
+
  |{var}double platform_latitude(ping_time) |M |Latitude of the platform reference point in WGS-84 reference system at the time of the ping.
  3+|{attr}double :valid_range = −90.0, 90.0 
  3+|{attr}:standard_name = "Platform latitude" 
@@ -294,13 +157,6 @@ s|Variables | |
  3+|{attr}:standard_name = "Platform longitude" 
  3+|{attr}:units = "degrees_east" 
  3+|{attr}:long_name = "longitude" 
- 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
- 
- |{var}float platform_heading(ping_time) |M |Heading of the platform at time of the ping.
- 3+|{attr}:standard_name = "platform_orientation" 
- 3+|{attr}:units = "degrees_north" 
- 3+|{attr}:long_name = "Platform heading(true)" 
- 3+|{attr}float :valid_range = 0, 360.0 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
  |{var}float platform_pitch(ping_time) |M |Platform pitch at the time of the ping.
@@ -320,6 +176,150 @@ s|Variables | |
  3+|{attr}:long_name = "Platform vertical distance from reference point to the water line" 
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+
+ |{var}float receive_duration_effective(ping_time, tx_beam) |MA |Effective duration of the received pulse. This is the duration of the square pulse containing the same energy as the actual receive pulse. This parameter is either theoretical or comes from a calibration exercise and adjusts the nominal duration of the transmitted pulse to the measured one. During calibration it is obtained by integrating the energy of the received signal on the calibration target normalised by its maximum energy. Necessary for type 1, 2, 3 and 4 conversion equations.
+ 3+|{attr}:long_name = "Effective duration of received pulse" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
+ |{var}int receive_transducer_index(beam) |MA |Receiving or monostatic transducer index associated with the given beam
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Receive transducer index" 
+
+ |{var}float receiver_sensitivity(ping_time, beam) |MA |Sensitivity of the sonar receiver for the current ping. Necessary for type 2 conversion equation.
+ 3+|{attr}:long_name = "Receiver sensitivity (re 1/μPa)" 
+ 3+|{attr}:units = "dB" 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
+ |{var}float rx_beam_rotation_phi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
+ 3+|{attr}:long_name = "receive beam angular rotation about the _x_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+
+ |{var}float rx_beam_rotation_psi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the receive beam coordinate system. For most cases this angle is set to zero.
+ 3+|{attr}:long_name = "receive beam angular rotation about the _z_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
+ |{var}float rx_beam_rotation_theta(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _y_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction.
+ 3+|{attr}:long_name = "receive beam angular rotation about the _y_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −90.0, 90.0 
+ 
+ |{var}int sample_count(ping_time, beam, subbeam) |O |The number of samples in each subbeam/beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.
+ 3+|{attr}:long_name = "Number of samples per ping in each beam, and optionally subbeam" 
+ 3+|{attr}:units = "1" 
+ 3+|{attr}int :valid_min = 0 
+ 
+ |{var}float sample_interval(ping_time) |M |Time between individual samples along a beam. Common for all beams in a ping.
+ 3+|{attr}:long_name = "Interval between recorded raw data samples" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}float sample_time_offset(ping_time, tx_beam) |M |Time offset applied to sample time-stamps and intended for applying a range correction (e.g. as caused by signal processing delays). Positive values reduce the calculated range to a sample. The range of a given sample at index sample_index and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2
+ 3+|{attr}:long_name = "Time offset that is subtracted from the timestamp of each sample" 
+ 3+|{attr}:units = "s" 
+
+ |{var}float sound_speed_at_transducer(ping_time) |O |Sound speed at transducer depth at the time of the ping
+ 3+|{attr}:long_name = "Indicative sound speed at ping time and transducer depth" 
+ 3+|{attr}:units = "m/s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 3+|{attr}:standard_name = "speed_of_sound_in_sea_water" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}sample_t time_varied_gain(ping_time) |MA |Time-varied gain (TVG) used for each ping. Should contain TVG coefficient vectors. Necessary for type 2 conversion equations.
+ 3+|{attr}:long_name = "Time-varied-gain coefficients" 
+ 3+|{attr}:units = "dB" 
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+  
+ |{var}float transceiver_impedance(ping_time, subbeam) |MA |Impedance of the transceiver. This is the impedance of the transducer subbeam. Necessary for conversion equation type 4.
+ 3+|{attr}:long_name = "Impedance of transceiver" 
+ 3+|{attr}:units = "ohm" 
+
+ |{var}float transducer_gain(ping_time, beam, frequency) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1, 3 and 4.
+ 3+|{attr}:long_name = "Gain of transducer" 
+ 3+|{attr}:units = "dB" 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+ 
+ |{var}float transducer_impedance(ping_time, subbeam) |MA |Impedance of the transducer. This is the impedance of the load over which the transceiver measures voltage on the transducer subbeam. Necessary for conversion equation type 4.
+ 3+|{attr}:long_name = "Impedance of transducer" 
+ 3+|{attr}:units = "ohm" 
+  
+|{var}float transmit_bandwidth(ping_time, tx_beam) |O |Estimated bandwidth of the transmitted pulse. For CW pulses, this is a function of the pulse duration and frequency. For FM pulses, this will be close to the difference between transmit_frequency_start and transmit_frequency_stop.
+ 3+|{attr}:long_name = "Nominal bandwidth of transmitted pulse" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+
+ |{var}int transmit_beam_index(ping_time, beam) |MA |Transmit beam index associated with the given beam
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Transmit beam index associated with the given beam" 
+ 
+ |{var}float transmit_duration_nominal(ping_time, tx_beam) |M |Nominal duration of the transmit pulse. This is not the effective pulse duration.
+ 3+|{attr}:long_name = "Nominal duration of transmitted pulse" 
+ 3+|{attr}:units = "s" 
+ 3+|{attr}float :valid_min = 0.0 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+ 
+ |{var}pulse_t transmit_pulse_model_i(ping_time, tx_beam) |MA |Imaginary part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate as the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
+ 3+|{attr}:long_name = "Imaginary part of the model of the transmit pulse" 
+ 3+|{attr}float :valid_min = −1.0 
+ 3+|{attr}float :valid_max = 1.0 
+
+ |{var}float transmit_frequency_start(ping_time, tx_beam) |M |Frequency at the start of the transmit pulse.
+ 3+|{attr}:long_name = "Start frequency in transmitted pulse" 
+ 3+|{attr}:standard_name = "sound_frequency" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float transmit_frequency_stop(ping_time, tx_beam) |M |Frequency at the end of the transmit pulse.
+ 3+|{attr}:long_name = "Stop frequency in transmitted pulse" 
+ 3+|{attr}:standard_name = "sound_frequency" 
+ 3+|{attr}:units = "Hz" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float transmit_power(ping_time, tx_beam) |MA |Electrical transmit power used for the ping. Necessary for type 1 conversion equations
+ 3+|{attr}:long_name = "Nominal transmit power" 
+ 3+|{attr}:units = "W" 
+ 3+|{attr}float :valid_min = 0.0 
+
+ |{var}pulse_t transmit_pulse_model_r(ping_time, tx_beam) |MA |Real part of the model of the transmit pulse. The exact shape of the theoretical transmit pulse is given at the same sampling rate of the backscatter measurements. The shape reflects both the weighting of the pulse and the filters that have been applied. The  pulse shape is used for matched filtering of complex samples in type 4 conversion equations.
+ 3+|{attr}:long_name = "Real part of the model of the transmit pulse" 
+ 3+|{attr}float :valid_min = −1.0 
+ 3+|{attr}float :valid_max = 1.0 
+ 
+ |{var}float transmit_source_level(ping_time, tx_beam) |MA |Source level generated by the transmit ping. Necessary for type 2 conversion equations.
+ 3+|{attr}:long_name = "Transmit source level (re 1 μPa at 1 m)" 
+ 3+|{attr}:units = "dB" 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
+ |{var}int transmit_transducer_index(ping_time, tx_beam) |MA |Transmitting or monostatic transducer index associated with the given transmit beam
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Transmit transducer index" 
+ 
+ |{var}transmit_t transmit_type(ping_time, tx_beam) |M |Type of transmit pulse.
+ 3+|{attr}:long_name = "Type of transmitted pulse" 
+
+ |{var}float transmitter_and_receiver_coefficient(ping_time) |MA |Sum of transmit source level (dB re 1 μPa at 1 m), voltage sensitivity (dB re 1 V/μPa), and system gain (dB). Necessary for type 6 conversion equations.
+ 3+|{attr}:long_name = "Transmitter and receiver coefficient" 
+ 3+|{attr}:units = "dB" 
+ 2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+
+ |{var}float tx_beam_rotation_phi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _x_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+
+ |{var}float tx_beam_rotation_psi(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _z_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For most cases this angle is set to zero.
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _z_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+  
+ |{var}float tx_beam_rotation_theta(ping_time, tx_beam) |M |The intrinsic _z_–_y_’–_x_” clockwise about the _y_-axis of the platform coordinate system needed to give the transmit beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the along track direction.
+ 3+|{attr}:long_name = "transmit beam angular rotation about the _y_ axis" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −90.0, 90.0 
  
  |{var}float tx_transducer_depth(ping_time) |O |Tx transducer depth below waterline at time of the ping (distance are positives downwards). This variable can be recomputed in most cases by applying lever arm and rotation matrix taking into account for roll and pitch, platform_vertical_offset but can also take into account for drop keel position
  3+|{attr}:long_name = "Tx transducer depth below waterline" 
