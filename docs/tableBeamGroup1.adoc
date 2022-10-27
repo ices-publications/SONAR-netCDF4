@@ -43,35 +43,6 @@ s|Variables | |
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
  2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
  
- |{var}int sample_count(ping_time, beam, subbeam) |O |The number of samples in each subbeam/beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.
- 3+|{attr}:long_name = "Number of samples per ping in each beam, and optionally subbeam" 
- 3+|{attr}:units = "1" 
- 3+|{attr}int :valid_min = 0 
- 
- |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
- 3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
- 2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
- 
- |{var}angle_t echoangle_major(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
- 3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −180.0, 180.0 
- 
- |{var}angle_t echoangle_minor(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
- 3+|{attr}:long_name = "Echo arrival angle in the minor beam coordinate" 
- 3+|{attr}:units = "arc_degree" 
- 3+|{attr}float :valid_range = −180.0, 180.0 
- 
- |{var}float echoangle_major_sensitivity(beam) |MA |Scaling factor to convert electrical phase differences between transducer parts into physical echo arrival angles. Only required if beam_type is not set to single.
- 3+|{attr}:long_name = "Major angle scaling factor" 
- 3+|{attr}:units = "1" 
- 3+|{attr}float :valid_min = 0.0 
- 
- |{var}float echoangle_minor_sensitivity(beam) |MA |Scaling factor to convert electrical phase differences between transducer parts into physical echo arrival angles.
- 3+|{attr}:long_name = "Minor angle scaling factor" 
- 3+|{attr}:units = "1" 
- 3+|{attr}float :valid_min = 0.0 
- 
  |{var}float beamwidth_receive_major(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
  3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 
  3+|{attr}:units = "arc_degree" 
@@ -93,6 +64,35 @@ s|Variables | |
  3+|{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
+ 
+ |{var}int sample_count(ping_time, beam, subbeam) |O |The number of samples in each subbeam/beam/ping in the backscatter_r and backscatter_i variables. This value is not essential, but software that reads the backscatter_r and backscatter_i variables can use it to significantly improve data loading times.
+ 3+|{attr}:long_name = "Number of samples per ping in each beam, and optionally subbeam" 
+ 3+|{attr}:units = "1" 
+ 3+|{attr}int :valid_min = 0 
+ 
+ |{var}sample_t backscatter_r(ping_time, beam, subbeam) |M |Real part or amplitude or power of backscatter measurements. Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
+ 3+|{attr}:long_name = "Raw backscatter measurements (real part)" 
+ 2+|{attr}:units = "as appropriate" |Use units appropriate for the data.
+ 
+ |{var}angle_t echoangle_major(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
+ 3+|{attr}:long_name = "Echo arrival angle in the major beam coordinate" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+
+ |{var}float echoangle_major_sensitivity(beam) |MA |Scaling factor to convert electrical phase differences between transducer parts into physical echo arrival angles. Only required if beam_type is not set to single.
+ 3+|{attr}:long_name = "Major angle scaling factor" 
+ 3+|{attr}:units = "1" 
+ 3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}angle_t echoangle_minor(ping_time, beam) |MA |Electrical phase angle of the incoming echoes at time ping_time relative to the direction of each beam. Only required if the beam_type variable for this ping_time is set to split_aperture_angles.
+ 3+|{attr}:long_name = "Echo arrival angle in the minor beam coordinate" 
+ 3+|{attr}:units = "arc_degree" 
+ 3+|{attr}float :valid_range = −180.0, 180.0 
+ 
+ |{var}float echoangle_minor_sensitivity(beam) |MA |Scaling factor to convert electrical phase differences between transducer parts into physical echo arrival angles.
+ 3+|{attr}:long_name = "Minor angle scaling factor" 
+ 3+|{attr}:units = "1" 
+ 3+|{attr}float :valid_min = 0.0 
  
  |{var}float rx_beam_rotation_phi(ping_time, beam) |M |The intrinsic _z_–_y_’–_x_” clockwise rotation about the _x_-axis of the platform coordinate system needed to give the receive beam coordinate system. For ships and similar, if installation angles are close to zero, this rotation usually matches the beam pointing angle in the across track direction.
  3+|{attr}:long_name = "receive beam angular rotation about the _x_ axis" 
