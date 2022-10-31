@@ -313,7 +313,7 @@ include::tableProvenance.adoc[]
 
 ==== Sonar group
 
-The netCDF4 group name is */Sonar* and contains three subgroups.
+The netCDF4 group name is */Sonar* and contains three subgroups, all of which have an obligation of Optional (it is expected that a useful SONAR-netCDF4 file will have at least one of these subgroups, but is it not required).
 
 ===== Beam group
 This group contains ping based sonar backscatter data and associated metadata and is described in <<sonarGroupTable>>. The netCDF4 group name is *Beam_groupX*, where *X* is an integer.

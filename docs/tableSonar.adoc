@@ -18,8 +18,8 @@ s|Types | |
  2+|{var}byte enum transmit_t {CW = 0, LFM = 1, HFM = 2} |Type of transmit pulse. CW = continuous wave – a pulse nominally of one frequency, LFM = linear frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a linear manner over the nominal pulse duration (transmit_duration_nominal), HFM = hyperbolic frequency modulation – a pulse which varies from transmit_frequency_start to transmit_frequency_stop in a hyperbolic manner over the nominal pulse duration (transmit_duration_nominal).
 
 s|Subgroups | |
- |{var}Beam_group1 |M |Example of a beam group. Include as many subgroups as necessary for different beam groups. Use unique group names, preferably of the form Beam_groupX where X is an integer.
- |{var}Grid_group1 |O |Example of a grid group. Include as many subgroups as necessary for different grid groups containing different beam groups resampled on a user defined regular grid. Use unique group names, preferably of the form Grid_groupX where X is an integer.
+ |{var}Beam_group1 |O |Example of a beam group. Include as many subgroups as necessary for different beam groups. Use unique group names, preferably of the form Beam_groupX where X is an integer.
+ |{var}Gridded |O |Example of a grid group. Include as many subgroups as necessary for different grid groups containing different beam groups resampled on a user defined regular grid. Use unique group names, preferably of the form Grid_groupX where X is an integer.
 |===
 
 
