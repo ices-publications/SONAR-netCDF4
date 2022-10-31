@@ -1176,7 +1176,7 @@ Vendor_specific_SimradWBT:: Vendor specific table created with a new subgroup, V
 [cols=",,,",options="header",]
 |===
 |Document version |SONAR-netCDF4 version |Date |Changes
-|{revnumber}|2.0 | April 2022|Significant additions to support additional sonar types.
+|{revnumber}|2.0 | April 2022|Significant additions to support additional sonar types. Beam_group is now optional.
 |1.7 |1.0 |29 May 2018 |Modifications due to ICES CRR review and editorial process.
 |1.6 |1.0 |7 Feburary 2018 |Modifications due to further Topic Group input.
 |1.5 |1.0 |20 December 2017 |Formatted to ICES CRR style
