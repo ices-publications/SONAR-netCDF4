@@ -664,14 +664,14 @@ where stem:[A] is the amplitude or envelope of the received voltage signal (V), 
 [stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
-I = \mathrm{Re}\left(z_0\right) + \mathrm{Re}\left(z_1\right),
+I = \frac{\mathrm{Re}\left(z_0\right) + \mathrm{Re}\left(z_1\right)}{2},
 \end{equation}
 ++++
 
 [stem,reftext=({counter:eqs})]
 ++++
 \begin{equation}
-Q = \mathrm{Im}\left(z_0\right) + \mathrm{Im}\left(z_1\right),
+Q = \frac{\mathrm{Im}\left(z_0\right) + \mathrm{Im}\left(z_1\right)}{2},
 \end{equation}
 ++++
 
