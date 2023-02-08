@@ -301,7 +301,7 @@ s|Variables | |
  |{var}transmit_t transmit_type(ping_time, tx_beam) |M |Type of transmit pulse.
  3+|{attr}:long_name = "Type of transmitted pulse" 
 
- |{var}float transmitter_and_receiver_coefficient(ping_time) |MA |Sum of transmit source level (dB re 1 μPa at 1 m), voltage sensitivity (dB re 1 V/μPa), and system gain (dB). Necessary for type 6 conversion equations.
+ |{var}float transmitter_and_receiver_coefficient(ping_time) |MA |Sum of transmit source level (dB re 1 μPa at 1 m), voltage sensitivity for each beam (dB re 1 V/μPa), and system gain (dB). Necessary for type 6 conversion equations.
  3+|{attr}:long_name = "Transmitter and receiver coefficient" 
  3+|{attr}:units = "dB" 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
