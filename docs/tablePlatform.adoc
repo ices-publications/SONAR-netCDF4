@@ -15,6 +15,7 @@ s|Dimensions | |
  |{var}transducer |M |Transducer count
  |{var}position |M |position sensor count
  |{var}MRU |M |MRU attitude sensor count
+ |{var}gyro |M |Gyroscope sensor count
  
 s|Variables | |
  |{var}float MRU_offset_x(MRU) |R |_x_-axis component of the vector from the platform coordinate system origin to the motion reference unit origin.
@@ -47,6 +48,20 @@ s|Variables | |
  |{var}string MRU_ids(MRU) |MA |MRU serial number or identification name. Must be a valid netCDF4 group name.
  
  |{var}string position_ids(position) |MA |Position sensor serial number or identification name. Must be a valid netCDF4 group name.
+ 
+ |{var}string gyro_ids(gyro) |MA |Gyroscope serial number or identification name. Must be a valid netCDF4 group name.
+ 
+ |{var}float gyro_offset_x(gyro) |R |Distance from the platform coordinate system origin to the gyro sensor origin along the _x_-axis.
+ 3+|{attr}:long_name = "Distance from the platform coordinate system origin to the gyro sensor origin  along the _x_-axis." 
+ 3+|{attr}:units = "m" 
+ 
+ |{var}float gyro_offset_y(gyro) |R |Distance from the platform coordinate system origin to the gyro sensor origin along the _y_-axis.
+ 3+|{attr}:long_name = "Distance from the platform coordinate system origin to the gyro sensor origin along the _y_-axis." 
+ 3+|{attr}:units = "m" 
+ 
+ |{var}float gyro_offset_z(gyro) |R |Distance from the platform coordinate system origin to the gyro sensor origin along the _z_-axis.
+ 3+|{attr}:long_name = "Distance from the platform coordinate system origin to the gyro sensor origin along the _z_-axis." 
+ 3+|{attr}:units = "m" 
  
  |{var}float position_offset_x(position) |R |Distance from the platform coordinate system origin to the latitude/longitude position origin along the _x_-axis.
  3+|{attr}:long_name = "Distance along the _x_-axis from the platform coordinate system origin to the latitude/longitude sensor origin" 
@@ -97,6 +112,7 @@ s|Variables | |
  3+|{attr}:units = "m" 
 
 s|Subgroups | |
- |{var}Positions |M |Suggested subgroup to store Position sensor data.
- |{var}Attitudes |M |Suggested subgroup to store MRU sensor data.
+ |{var}Position |M |Suggested subgroup to store Position sensor data.
+ |{var}Attitude |M |Suggested subgroup to store MRU sensor data.
+ |{var}Gyro |M |Suggested subgroup to store gyroscope sensor data.
 |===
