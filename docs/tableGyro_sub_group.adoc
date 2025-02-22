@@ -1,0 +1,30 @@
+:var: {nbsp}{nbsp}{nbsp}{nbsp}
+:attr: {var}{var}
+[cols="25%,10%,65%",options="header",]
+|===
+|Description |Obligation |Comment
+s|Group attributes | |
+ |{attr}string :description |O |System description
+ 
+s|Dimensions | |
+ |{var}time | |can be fixed or unlimited length, as appropriate
+ 
+s|Coordinate variables | |
+ |{var}uint64 time(time) |M |Time from gyro sensor
+ 3+|{attr}:axis = "T" 
+ 3+|{attr}:calendar = "gregorian" 
+ 3+|{attr}:long_name = "Timestamps for gyro data" 
+ 3+|{attr}:standard_name = "time" 
+ 3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
+ 3+|{attr}:coordinates = "time latitude longitude" 
+ 
+s|Variables | |
+ |{var}float heading(time) |MA |Heading refers to the direction a platform is pointing. This may or may not be the direction that the platform actually travels, which is known as its course or track. Any difference between course and heading is due to the motion of the underlying medium, the air or water, or other effects like skidding or slipping. Heading is typically based on compass directions, so 0° (or 360°) indicates a direction toward true North, 90° indicates a direction toward true East, 180° is true South, and 270° is true West.  
+ 3+|{attr}:standard_name = "platform_orientation" 
+ 3+|{attr}:units = "degree" 
+ 3+|{attr}:long_name = "Platform heading(true)" 
+ 3+|{attr}:coordinates = "latitude longitude" 
+  
+s|Subgroups | |
+ |{var}NMEA |O |Suggested subgroup to store raw NMEA data.²
+|===

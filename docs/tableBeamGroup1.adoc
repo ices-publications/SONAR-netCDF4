@@ -8,6 +8,7 @@ s|Group attributes | |
  |{attr}conversion_equation_t :conversion_equation_type |M |Type of equation used to convert backscatter measurements into volume backscattering strength and target strength.
  |{attr}int :preferred_MRU |MA |Index of the MRU sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_MRU. Index matches the ones used in the Platform MRU sensors variables.
  |{attr}int :preferred_position |MA |Index of the position sensor to use by default. If the sensor used can be dynamically changed, refer to the variable active_position_sensor. Index matches the ones used in the Platform position sensors variables.
+ |{attr}int :preferred_gyro |O |Index of the gyro sensor to use by default, If this variable is defined heading is retrieve from the matching sensor. If the sensor used can be dynamically changed, refer to the variable active_gyro_sensor. Index matches the ones used in the Platform position sensors variables.
  
 s|Types | |
  2+|{var}float(*) sample_t |Variable length vector used to store ragged arrays of backscatter data. Data type can be varied to suit data storage needs.
@@ -48,6 +49,11 @@ s|Variables | |
  3+|{attr}:valid_min = "0" 
  3+|{attr}:long_name = "Active position sensor index" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}int active_gyro_sensor(ping_time) |MA |Indicate the index of the gyro sensor used at the time of the ping to compute the platform heading.
+ 3+|{attr}:valid_min = "0" 
+ 3+|{attr}:long_name = "Active gyro sensor index" 
+ 3+|{attr}:coordinates = "platform_latitude platform_longitude" 
  
  |{var}sample_t backscatter_i(ping_time, beam, subbeam) |MA |Imaginary part of backscatter measurements (or for type 5 equations, TS values). Each element in the 3D matrix is a variable length vector (of type sample_t) that contains the samples for that beam, ping time, and optionally subbeam.
  3+|{attr}:long_name = "Raw backscatter measurements (imaginary part)" 
@@ -91,11 +97,6 @@ s|Variables | |
  3+|{attr}:units = "s" 
  3+|{attr}:valid_min = "0.0" 
 
- |{var}float calibrated_frequency(frequency) |M |Frequencies for which on-axis gain values have been estimated during the calibration exercise.
- 3+|{attr}:long_name = "Calibration gain frequencies" 
- 3+|{attr}:units = "Hz" 
- 3+|{attr}float :valid_min = 0.0 
- 
  |{var}float detected_bottom_range(ping_time, beam) |O |Range from the transducer face where the bottom detection criteria were encountered for the amplitude or the phase of the backscattered echoes. The range of the bottom at index bottom_index with a monostatic transducer and if a constant sound speed is applied is given by detected_bottom_range= sound_speed_at_transducer*(blanking_interval+bottom_index*sample_interval - sample_time_offset)/2.
  3+|{attr}:long_name = "Detected range of the bottom" 
  3+|{attr}:units = "m" 
@@ -133,8 +134,8 @@ s|Variables | |
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
 
  |{var}short non_quantitative_processing(ping_time) |M |Settings of any processing that is applied prior to recording backscatter data that may prevent the calculation of calibrated backscatter. A value of 0 always indicates no such processing.
- 2+|{attr}:flag_meanings |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
- 2+|{attr}short :flag_values |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
+ 2+|{attr}:flag_meanings = "unknown" |Space-separated list of non-quantitative processing setting words or phrases. The first item must always be the no non-quantitative processing setting and subsequent items as appropriate to the sonar and data(e.g. ”no_non_quantitative_processing simrad_noise_filter_weak simrad_noise_filter_medium simrad_noise_filter_strong”).
+ 2+|{attr}short :flag_values = 0 |List of unique values (e.g. 0, 1, 3, 4) that indicate different non-quantitative processing settings that could be present in the sonar data. Must have the same number of values as settings given in the flag_meanings attribute.
  3+|{attr}:long_name = "Presence or not of non-quantitative processing applied to the backscattering data (sonar specific)" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
 
