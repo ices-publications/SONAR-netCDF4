@@ -10,7 +10,9 @@ Restriction on the current format :
 
 - The annotations are in JSON format, the format is made of several part, each part is described in a specific chapter. The first part is the header, the second part is the body containing annotations. 
 - Mandatory fields are marked with an asterisk (*), optional fields are not marked.
-- The annotations are stored in a JSON file, the file name is the same as the Sonar-NetCDF4 file name, with the extension `.json` instead of `.nc`.
+- The annotations are stored in a JSON file. There is no prerequisite on the cardinality between raw files and annotation, an annotation file can match several raw file. 
+- One single annotation file is made per transducer. This match the echogram and frequency on which annotation are defined.
+
 
  {
     "header": {
@@ -31,7 +33,7 @@ The header contains information about the annotation, such as the type of annota
     "header": {
         *"type": "2D annotation",
         *"version": "1.0",        
-        *"beamGroup": "beamGroup_1",
+        *"transducer_id": "beamGroup_1",
         "date": "2023-10-01 10:00:00",
         "author": "John Doe"
     },
@@ -44,7 +46,7 @@ The header contains information about the annotation, such as the type of annota
 -date : date of the creation or modification of the annotation file. It is a string using ISO 8601 encoding, such as "2010-10-25T12:00:00Z".
 -author : name of the person who created the annotation. It is a string, for example "John Doe".
 -type (Mandatory) : type of the annotation. It is a string among the following values : "2D annotation", "3D annotation".
--beamGroup (Mandatory) : name of the beam group to which the annotation applies. It is a string, for example "beamGroup_1" matching the beam group name in the SONAR-netCDF4 format. TO BE DISCUSSED : If the annotation file is not related to a SONAR-netCDF4 file, it should provide a unique identifier (frequency, transducer identifier) allowing to identify the transducer used to define annotations.  
+-beamGroup (Mandatory) : name of the beam group to which the annotation applies. It is a string, for example "beamGroup_1" matching the beam group name in the SONAR-netCDF4 format. If the annotation file is not related to a SONAR-netCDF4 file, it should provide a unique identifier (frequency, transducer identifier) allowing to identify the transducer used to define annotations.  
 
 
 ===== Common annotations structure
@@ -173,21 +175,24 @@ The 2D plane being defined as the approximated plane ensonified by single beam e
 - Y : match a depth in the sonar-netCDF4 file format. Depth of an echos takes into account transducer depth, heave, time delays to give a absolute position of an echo. 
 
 
-===== 2D range_index annotations
+===== 2D range annotations
 
 This annotation type could be use to describe annotation data on a 2D plane, in a range, time coordinate system. The 2D plane being defined as the approximated plane ensonified by single beam echo-sounders that can be pointing in an absolute direction (horizontal for example). The coordinate system used for such annotation is defined by the following parameters :
 - X : match a time in the sonar-netCDF4 file format. When annotation is defined on a raw sounder format it match a ping_time
-- Y : match a range_index in the sonar-netCDF4 file format. Range_index of an echo matches the index of the sample recorded in the Sonar-netCDF4 format, its distance relative to the transducer face with a monostatic transducer and if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+range_index*sample_interval - sample_time_offset)/2.
+- Y : match a distance relative top the transducer face. Range of an echo matches the distance of the sample recorded in the Sonar-netCDF4 format relatively to the transducer face with a monostatic transducer, if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2.
 
 
-===== 2D bottom index annotations
+===== 2D bottom annotations
 
 This annotation type could be use to describe annotation data on a 2D plane, in a range from depth detection and time coordinate system. The coordinate system used for such annotation is defined by the following parameters :
 - X : match a time in the sonar-netCDF4 file format. When annotation is defined on a raw sounder format it match a ping_time
-- Y : match a range_index in the sonar-netCDF4 file format. Range_index of an echo matches the index of the sample recorded in the Sonar-netCDF4 format but relative to the bottom detection echo index, its distance relative to the bottom detection if a constant sound speed is applied is given by range= sound_speed * ((bottom_index-range_index)*sample_interval)/2 where bottom_index is the index of the bottom detection echo.
+- Y : match a distance relative to the bottom detection. Bottom distance of an echo matches the distance of the sample recorded in the Sonar-netCDF4 format relative to the bottom detection echo, if a constant sound speed is applied is given by distance= sound_speed * ((bottom_index-sample_index)*sample_interval)/2 where bottom_index is the index of the bottom detection echo.
 
 ===== Use of geometry
 
 This chapter explains how annotation geometries are used to determine whether a specific echo sample falls within an annotated region, and how to retrieve the corresponding label for that sample. 
-To be Continued
+
+
+
+To be Continued Once validated
 
