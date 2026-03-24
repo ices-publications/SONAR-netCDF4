@@ -1,0 +1,198 @@
+The purpose of this document is to describe the format of the annotations used in the `annotations` chapter. The annotations are used to provide additional information about the data being processed, theses informations are classification  informations or textual notes on the data applied by users and relevant to the data processing. They covered areas on the data stored in Sonar-netCDF4 format and can be of different types : either 3D annotation for multibeam echo sounder or 2D annotations for single beam echo sounders. Singe beams annotations are used to describe the data in a 2D plane, while multibeam annotations are used to describe the data in a 3D space.
+
+Restriction on the current format :
+- Only single beam annotations are described,
+- Annotations are supposed to match a Sonar-NetCDF4 file raw data format, annotation matching gridded data format is not supported yet though compliance is seeked as far as possible even with raw data in another storage format.
+- Annotation format is a minimum core format, users are free to add additional fields in the JSON file, but they may be not supported by the processings softwares.
+
+
+===== Generic considerations about annotations
+
+- The annotations are in JSON format, the format is made of several part, each part is described in a specific chapter. The first part is the header, the second part is the body containing annotations. 
+- Mandatory fields are marked with an asterisk (*), optional fields are not marked.
+- The annotations are stored in a JSON file. There is no prerequisite on the cardinality between raw files and annotation, an annotation file can match several raw file. 
+- One single annotation file is made per transducer. This match the echogram and frequency on which annotation are defined.
+
+
+ {
+    "header": {
+    },
+    "annotations": {
+        
+    }
+ }
+
+
+
+===== header
+
+The header contains information about the annotation, such as the type of annotation, the date it was created, and the name of the person who created it
+
+
+{
+    "header": {
+        *"type": "2D annotation",
+        *"version": "1.0",        
+        *"transducer_id": "beamGroup_1",
+        "date": "2023-10-01 10:00:00",
+        "author": "John Doe"
+    },
+    "annotations": {
+        ...
+    }    
+ }
+
+-version(Mandatory) : version of the annotation format, it is used to check the compatibility of the annotation with the software. It is a string, for example "1.0".
+-date : date of the creation or modification of the annotation file. It is a string using ISO 8601 encoding, such as "2010-10-25T12:00:00Z".
+-author : name of the person who created the annotation. It is a string, for example "John Doe".
+-type (Mandatory) : type of the annotation. It is a string among the following values : "2D annotation", "3D annotation".
+-beamGroup (Mandatory) : name of the beam group to which the annotation applies. It is a string, for example "beamGroup_1" matching the beam group name in the SONAR-netCDF4 format. If the annotation file is not related to a SONAR-netCDF4 file, it should provide a unique identifier (frequency, transducer identifier) allowing to identify the transducer used to define annotations.  
+
+
+===== Common annotations structure
+
+The annotations are stored in a JSON array, each annotation is an object containing as set of common fields and a set of specific fields depending on the type of annotation, typically depending on the coordinates used to define the annotation. The common descriptions are :   
+
+{
+    "header" : {
+        ....
+    }
+    "annotations" : [
+        {
+            *"id": "annotation_1",
+            *"threshold": -65.4,
+            *"status": "Valid",
+            *"geometry_type": "layer",            
+            "labels": [
+                {
+                "class": "fish",
+                "confidence": 0.9,
+                "proportion": 0.5
+                },
+                {
+                "class": "aglae",
+                "confidence": 0.1,
+                "proportion": 0.5
+                }
+                ]
+            ]
+            *"description": "Note on the annotation",
+
+            *"bounding_box": {
+            ...
+            },
+            *"geometry": {
+            ...
+            },
+        }
+    ]
+
+
+}
+
+- annotations (Mandatory) : annotations is an array of objects, each object is an annotation. Annotation are ordererer by their position in the list, A priority is given to define annotation when overlapping occurs.  A first level of priority is given by its type : first annotation layer are the most important, then polygons overrides annotation layer.  
+
+-*id (Mandatory) : unique identifier of the annotation. It is a string, for example "annotation_1".
+- *threshold (Optional) : threshold of the annotation. It is a float, for example -65. It is used to define the threshold in dB of the data on which annotation was made. Threshold is defined at a annotation level to allow for different threshold on the same annotation. The behaviour of software for differents annotation on different levels is undertermined.
+
+- *valid (Mandatory) : status of the annotation. It is a string among the following values : "Valid", "Invalid", "Eraser". When invalid no annotation data is taken into account, when set to eraser the annotation is used to erase all data previously annotated in the area defined by the annotation geometry. 
+
+-*geometry_type (Mandatory) : type of the geometry used by annotation. It is a string among the following values : "layer", "polygon". For layer annotations only the corner of the layer geometry are defined. 
+-*description (Mandatory) : description of the annotation. It is a string, for example "Note on the annotation".
+-*label (Optional) : label of the annotation. It is an object containing the following fields :
+    -*class (Mandatory) : class of the annotation. It is a string, for example "fish".
+    - confidence (Optional) : confidence of the annotation. It is a float between 0 and 1, for example 0.9. It is used to indicate the confidence of the annotation, it is not mandatory but it is recommended to use it to provide additional information about the annotation and its certainty.
+    - proportion (Optional) : in case of multiple labels, it is a float between 0 and 1. It is used to indicate the proportion of the label in the annotation, it is not mandatory but it is recommended to use it to provide additional information about the annotation.
+
+Proportions and confidence are exclusive, they can be used to indicate multiple annotations either as a mixture of labels with a proportion or as several label hypothesis. Each hypothesis can be associated with a confidence value. The confidence values sums are equals to 1.0, the proportions values sums are equals to 1.0. 
+
+
+
+- geometry (Mandatory) : defined the shape of the geometry defining this annotation. The geometry depends on the geometry_type of annotation. It contains the description of geometry in a geojson format allowing for complex or simple shape. A suggestion is to use shapely or libgeos library to parse these annotations. Only Polygon and MultiPolygon geojson types are supported. The coordinates (X,Y) depends on the type of annotation. Note that a GeoJSON object may have a "bbox" member, the value of which must be a bounding box array matching the boundings of the geometry. Even if not mandatory, it is recommended to use it to speed up the processing of the annotation. The bounding box is defined as a list of 4 values : [minX, minY, maxX, maxY].
+
+Example of a Layer type associated geometry : 
+{
+    "type": "MultiPoint",
+    "coordinates": [ 
+                [0.0, 0.0],
+                [1.0, 1.0],
+    ]
+}
+
+Example of a polygon type associated geometry : 
+
+{
+    "type": "Polygon",
+    "coordinates": [
+        [
+            [0.0, 0.0],
+            [1.0, 0.0],
+            [1.0, 1.0],
+            [0.0, 1.0],
+            [0.0, 0.0]
+        ]
+    ]
+}
+
+Example of a layer geometry allowing for two holes : 
+{
+    "type": "MultiPolygon",
+    "coordinates": [
+        [
+            [
+                [0, 0.0],
+                [1, 2.0],
+                [1, 3.0],
+                [0, 3.0],
+                [0, 0.0]
+            ]
+        ],
+        [
+            [
+                [0.1, 0.0],
+                [0.5, 0.0],
+                [0.5, 1.0],
+                [0.1, 1.0],
+                [0.1, 0.0]
+            ],
+            [
+                [0.6, 0.2],
+                [0.6, 0.8],
+                [0.8, 0.8],
+                [0.8, 0.2],
+                [0.6, 0.2]
+            ]
+        ]
+    ]
+}
+
+
+===== 2D vertical annotations
+
+2D vertical annotation are typically used to describe the data in a 2D plane, in a depth (frequency independant), time coordinate system.
+The 2D plane being defined as the approximated plane ensonified by single beam echo-sounders. A typical usage for theses annotation is when echo sounders are vertically oriented looking upwards or downwards. The coordinate system used for such annotation is defined by the following parameters :
+- X : match a time in the sonar-netCDF4 file format. When annotation is defined on a raw sounder format it match a ping_time
+- Y : match a depth in the sonar-netCDF4 file format. Depth of an echos takes into account transducer depth, heave, time delays to give a absolute position of an echo. 
+
+
+===== 2D range annotations
+
+This annotation type could be use to describe annotation data on a 2D plane, in a range, time coordinate system. The 2D plane being defined as the approximated plane ensonified by single beam echo-sounders that can be pointing in an absolute direction (horizontal for example). The coordinate system used for such annotation is defined by the following parameters :
+- X : match a time in the sonar-netCDF4 file format. When annotation is defined on a raw sounder format it match a ping_time
+- Y : match a distance relative top the transducer face. Range of an echo matches the distance of the sample recorded in the Sonar-netCDF4 format relatively to the transducer face with a monostatic transducer, if a constant sound speed is applied is given by range= sound_speed_at_transducer*(blanking_interval+sample_index*sample_interval - sample_time_offset)/2.
+
+
+===== 2D bottom annotations
+
+This annotation type could be use to describe annotation data on a 2D plane, in a range from depth detection and time coordinate system. The coordinate system used for such annotation is defined by the following parameters :
+- X : match a time in the sonar-netCDF4 file format. When annotation is defined on a raw sounder format it match a ping_time
+- Y : match a distance relative to the bottom detection. Bottom distance of an echo matches the distance of the sample recorded in the Sonar-netCDF4 format relative to the bottom detection echo, if a constant sound speed is applied is given by distance= sound_speed * ((bottom_index-sample_index)*sample_interval)/2 where bottom_index is the index of the bottom detection echo.
+
+===== Use of geometry
+
+This chapter explains how annotation geometries are used to determine whether a specific echo sample falls within an annotated region, and how to retrieve the corresponding label for that sample. 
+
+
+
+To be Continued Once validated
+

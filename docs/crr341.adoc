@@ -238,11 +238,12 @@ include::tableToplevel.adoc[]
 
 ==== Annotation group
 
-The annotation group contains timestamped annotations with optional identification code. Annotations are typically textual notes entered by users relevant to the data at a particular time. Some sonar systems provide an interface for creating manual and programmatic annotations. The netCDF4 group name is */Annotation* and is described in <<annotationTable>>.
+The annotation group contains timestamped annotations with optional identification code. Annotations are typically textual notes entered by users relevant to the data at a particular time. Some sonar systems provide an interface for creating manual and programmatic annotations. 
 
-.Description of the annotation group.
-[[annotationTable]]
-include::tableAnnotation.adoc[]
+
+.Description of the annotation format.
+[[annotation_description]]
+include::annotation_format.adoc[]
 
 ==== Environment group
 
