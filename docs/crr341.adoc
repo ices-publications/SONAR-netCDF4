@@ -1,9 +1,9 @@
-= The SONAR-netCDF4 convention for sonar data, version 2.0
+= The SONAR-netCDF4 convention for sonar data, version 2.2
 ICES WGFAST - Open Data subgroup
 :toc: left
 :toclevels: 4
 :doctype: book
-:revnumber: 2.1 (working draft)
+:revnumber: 2.2 (working draft)
 :revremark: Generated at {localdatetime}
 :xrefstyle: short
 :source-highlighter: highlightjs
@@ -248,6 +248,8 @@ include::annotation_format.adoc[]
 ==== Environment group
 
 The environment group contains information on environmental conditions, especially the speed of sound in water and acoustic absorption. The netCDF4 group name is */Environment* and is described in <<environmentTable>>. Sound speed, absorption, and current profiles can also be stored in this group, as can profile measurements of salinity, temperature, and pressure. Such profile data should use the NCEI NetCDF “profile” template, v2.0 or greater.
+
+For broadband (FM) data, absorption_indicative is given as a function of frequency, at least at every frequency where a beam group gives transducer_gain, so that frequency-dependent quantities such as latexmath:[S_v(f)] and latexmath:[TS(f)] can be computed (<<Type 4>>). The single water-column temperature and salinity configured in the acquisition system and used to derive sound_speed_indicative and absorption_indicative can be stored in temperature_indicative and salinity_indicative, so that users can recompute absorption with another model or at other frequencies.
 
 [.landscape]
 <<<
@@ -599,7 +601,7 @@ S_v(n) = 10\log_{10}(p_{\textrm{rx,e}}(n)) + 20\log_{10}(r) + 2\alpha(f_c) r
 \end{equation}
 ++++
 
-where  latexmath:[r] is the range from the transducer to the sample latexmath:[n] [m], latexmath:[\alpha] the acoustic absorption at the frequency f [dB m^-1^], latexmath:[f_c] the central frequency of the pulse bandwidth [Hz], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable) [W], latexmath:[\lambda] the acoustic wavelength [m], latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle at the transducer nominal frequency latexmath:[f_n] (variable _equivalent_beam_angle_), latexmath:[\tau_e] the effective pulse duration (variable _receive_duration_effective_) and latexmath:[G_0] the on-axis gain (variable _transducer_gain_) from the calibration exercise at the frequency latexmath:[f_c].
+where  latexmath:[r] is the range from the transducer to the sample latexmath:[n] [m], latexmath:[\alpha] the acoustic absorption at the frequency f [dB m^-1^] (variable _absorption_indicative_ of the environment group, interpolated at latexmath:[f_c] if needed), latexmath:[f_c] the central frequency of the pulse bandwidth [Hz], latexmath:[P_t] the transmitted power setting (_transmit_power_ variable) [W], latexmath:[\lambda] the acoustic wavelength [m], latexmath:[c] is sound speed [m s^-1^], latexmath:[\psi] the equivalent beam angle at the transducer nominal frequency latexmath:[f_n] (variables _equivalent_beam_angle_ and _frequency_nominal_), latexmath:[\tau_e] the effective pulse duration (variable _receive_duration_effective_) and latexmath:[G_0] the on-axis gain (variable _transducer_gain_, given at the frequencies of the _frequency_ coordinate variable of the beam group) from the calibration exercise, interpolated at the frequency latexmath:[f_c].
 
 The match filtered effective pulse duration latexmath:[\tau_e] is computed for EK80 and ES80 from
 
@@ -630,7 +632,7 @@ S_v(f)= 10\log_{10}(p_{\textrm{rx,e}}(f)) + 20\log_{10}(r) + 2\alpha(f) r - 10\l
 \end{equation}
 ++++
 
-where latexmath:[p_{\textrm{rx,e}}(f)] and latexmath:[y_{tx,{pc}}(f)] are the Fourier transforms at frequency f   of  latexmath:[p_{\textrm{rx,e}}] and latexmath:[y_{tx,{pc}}] , performed with the same duration/windowing characteristics, latexmath:[r] is the range [m] from the transducer to the sample centered in the Fourier transform window , and latexmath:[\tau_{FFT}] the duration of applied Fourier transform.
+where latexmath:[p_{\textrm{rx,e}}(f)] and latexmath:[y_{tx,{pc}}(f)] are the Fourier transforms at frequency f   of  latexmath:[p_{\textrm{rx,e}}] and latexmath:[y_{tx,{pc}}] , performed with the same duration/windowing characteristics, latexmath:[r] is the range [m] from the transducer to the sample centered in the Fourier transform window , and latexmath:[\tau_{FFT}] the duration of applied Fourier transform. latexmath:[G_0(f)] is taken from _transducer_gain_ at the frequencies of the _frequency_ coordinate variable of the beam group, latexmath:[\alpha(f)] from _absorption_indicative_ at the same frequencies of the environment group, and latexmath:[\psi] is the equivalent beam angle at the nominal frequency latexmath:[f_n] given by _frequency_nominal_.
 
 Single target strength as a function of frequency is obtained from a similar equation, for targets located on beam-axis:
 
@@ -1141,6 +1143,20 @@ where latexmath:[\eta_\theta] is the angle sensitivity for the minor axis and la
 
 == Revision history
 
+=== Changes from version 2.0 to version 2.2
+
+These changes allow broadband (FM) data, as exported by the Simrad EK80 software, to be processed into frequency-dependent volume backscattering strength and target strength (<<Type 4>>) without external calibration files.
+
+Environment::
+* The _frequency_ coordinate variable and _absorption_indicative_ are now expected to cover the frequencies of every beam group in the file for broadband data.
+* Added the optional variables _temperature_indicative_ and _salinity_indicative_: the water-column temperature and salinity configured in the acquisition system and used to derive _sound_speed_indicative_ and _absorption_indicative_.
+
+Beam::
+* Added the variable _frequency_nominal_(beam): the transducer nominal frequency at which _equivalent_beam_angle_ and the beam widths are given. Necessary for type 4 conversion with FM transmission.
+* Clarified the _frequency_ dimension and coordinate variable: frequencies at which _transducer_gain_ is given, spanning the transmitted band for FM data. For a transducer calibrated in FM mode they follow the calibration frequencies; otherwise _transducer_gain_ holds modelled values and _substitute_value_used_ is set.
+* _equivalent_beam_angle_ remains a single value per beam (at _frequency_nominal_), as it is not measured during calibration.
+* Added the optional variable _water_temperature_at_transducer_(ping_time).
+
 === Significant changes from version 1 to version 2
 
 Version 2 of this document mades significant changes to the convention presented in version 1. These are summarised here:
@@ -1182,7 +1198,8 @@ Vendor_specific_SimradWBT:: Vendor specific table created with a new subgroup, V
 [cols=",,,",options="header",]
 |===
 |Document version |SONAR-netCDF4 version |Date |Changes
-|{revnumber}|2.0 | April 2022|Significant additions to support additional sonar types. Beam_group is now optional.
+|{revnumber}|2.2 | November 2026|Frequency-dependent parameters for broadband (FM) data: frequency_nominal, gain and absorption as a function of frequency, indicative temperature and salinity, water temperature at transducer.
+|2.1|2.0 | April 2022|Significant additions to support additional sonar types. Beam_group is now optional.
 |1.7 |1.0 |29 May 2018 |Modifications due to ICES CRR review and editorial process.
 |1.6 |1.0 |7 Feburary 2018 |Modifications due to further Topic Group input.
 |1.5 |1.0 |20 December 2017 |Formatted to ICES CRR style
