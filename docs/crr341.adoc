@@ -597,7 +597,7 @@ For FM transmission, match filtered received electric power is transformed into 
 ++++
 \begin{equation}
 S_v(n) = 10\log_{10}(p_{\textrm{rx,e}}(n)) + 20\log_{10}(r) + 2\alpha(f_c) r
-- 10\log_{10}\left(\frac{P_t \lambda^2 c \psi (\frac{f_c}{f_n})^2 \tau_e}{32 \pi^2} \right) - 2G_0(f_c),
+- 10\log_{10}\left(\frac{P_t \lambda^2 c \psi (\frac{f_n}{f_c})^2 \tau_e}{32 \pi^2} \right) - 2G_0(f_c),
 \end{equation}
 ++++
 
@@ -1156,6 +1156,9 @@ Beam::
 * Clarified the _frequency_ dimension and coordinate variable: frequencies at which _transducer_gain_ is given, spanning the transmitted band for FM data. For a transducer calibrated in FM mode they follow the calibration frequencies; otherwise _transducer_gain_ holds modelled values and _substitute_value_used_ is set.
 * _equivalent_beam_angle_ remains a single value per beam (at _frequency_nominal_), as it is not measured during calibration.
 * Added the optional variable _water_temperature_at_transducer_(ping_time).
+
+Type 4 equations::
+* Corrected the frequency scaling of the equivalent beam angle in the FM pulse-compressed latexmath:[S_v] equation: latexmath:[\psi (f_n/f_c)^2] instead of latexmath:[\psi (f_c/f_n)^2], consistent with the latexmath:[S_v(f)] equation.
 
 === Significant changes from version 1 to version 2
 
