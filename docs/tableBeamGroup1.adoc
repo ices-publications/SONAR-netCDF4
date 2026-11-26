@@ -20,7 +20,7 @@ s|Dimensions | |
  |{var}subbeam | |The number of sub-beams in these beams.
  |{var}ping_time = unlimited | |Can be of fixed or unlimited length, as appropriate.
  |{var}tx_beam | |The number of transmit beams in this beam group
- |{var}frequency | |The number of frequencies during the calibration exercise of the FM mode.
+ |{var}frequency | |The number of frequencies at which frequency-dependent calibration parameters (transducer_gain) are given. Equal to 1 for narrowband (CW) data.
  
 s|Coordinate variables | |
  |{var}string beam(beam) |M |Beam name (or number or identification code).
@@ -34,8 +34,9 @@ s|Coordinate variables | |
  3+|{attr}:units = "nanoseconds since 1970-01-01 00:00:00Z" or "nanoseconds since 1601-01-01 00:00:00Z" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
  
- |{var}float frequency(frequency) |MA |Frequencies for which transducer gain values have been estimated during the calibration exercise.
+ |{var}float frequency(frequency) |MA |Frequencies at which transducer_gain is given, in increasing order. For broadband (FM) data these should span the transmitted band (transmit_frequency_start to transmit_frequency_stop). When the transducer has been calibrated in FM mode, they are the frequencies of the calibration exercise, with the same frequency spacing; the values are identical to the calibration frequencies when the transmitted band and the calibration band match. Where no FM calibration is available, transducer_gain holds modelled values (see transducer_gain). For narrowband (CW) data, a single value equal to the transmit frequency.
  3+|{attr}:long_name = "Calibration gain frequencies" 
+ 3+|{attr}:standard_name = "sound_frequency" 
  3+|{attr}:units = "Hz" 
  3+|{attr}float :valid_min = 0.0 
  
@@ -70,24 +71,24 @@ s|Variables | |
  |{var}beam_t beam_type |M |Type of split-aperture beam (or not).
  3+|{attr}:long_name = "Type of beam" 
  
- |{var}float beamwidth_receive_major(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam.
+ |{var}float beamwidth_receive_major(ping_time, beam) |M |One-way beam width at half power down in the horizontal direction of the receive beam. For broadband (FM) data, this is the value at frequency_nominal.
  3+|{attr}:long_name = "Half power one-way receive beam width along major (horizontal) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
  
- |{var}float beamwidth_receive_minor(ping_time, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam.
+ |{var}float beamwidth_receive_minor(ping_time, beam) |M |One-way beam width at half power down in the vertical direction of the receive beam. For broadband (FM) data, this is the value at frequency_nominal.
  3+|{attr}:long_name = "Half power one-way receive beam width along minor (vertical) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
  
- |{var}float beamwidth_transmit_major(ping_time, tx_beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam.
+ |{var}float beamwidth_transmit_major(ping_time, tx_beam) |MA |One-way beam width at half power down in the horizontal direction of the transmit beam. For broadband (FM) data, this is the value at frequency_nominal.
  3+|{attr}:long_name = "Half power one-way transmit beam width along major (horizontal) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
  
- |{var}float beamwidth_transmit_minor(ping_time, tx_beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam.
+ |{var}float beamwidth_transmit_minor(ping_time, tx_beam) |MA |One-way beam width at half power down in the vertical direction of the transmit beam. For broadband (FM) data, this is the value at frequency_nominal.
  3+|{attr}:long_name = "Half power one-way transmit beam width along minor (vertical) axis of beam" 
  3+|{attr}:units = "arc_degree" 
  3+|{attr}float :valid_range = 0.0, 360.0 
@@ -122,11 +123,17 @@ s|Variables | |
  3+|{attr}:units = "1" 
  3+|{attr}float :valid_min = 0.0 
 
- |{var}float equivalent_beam_angle(ping_time, beam) |M |Equivalent beam angle.
+ |{var}float equivalent_beam_angle(ping_time, beam) |M |Equivalent beam angle. For broadband (FM) data, this is the value at the transducer nominal frequency (frequency_nominal); values at other frequencies are derived from it (see <<Type 4>>). The equivalent beam angle is not measured during a calibration exercise, so it has no frequency dimension.
  3+|{attr}:long_name = "Equivalent beam angle" 
  3+|{attr}:units = "sr" 
  2+|{attr}float :valid_range = 0.0, 12.56637061435917295385 |Maximum value is equivalent to 4π.
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
+ 
+ |{var}float frequency_nominal(beam) |MA |Nominal frequency of the transducer, at which equivalent_beam_angle and the beamwidth_receive_* and beamwidth_transmit_* variables are given. Necessary for conversion equation type 4 with broadband (FM) transmission. For narrowband (CW) data this is normally equal to the transmit frequency.
+ 3+|{attr}:long_name = "Nominal frequency for beamwidth and equivalent beam angle"
+ 3+|{attr}:standard_name = "sound_frequency"
+ 3+|{attr}:units = "Hz"
+ 3+|{attr}float :valid_min = 0.0
  
  |{var}float gain_correction(ping_time, beam) |MA |Gain correction. This parameter is set from a calibration exercise. Necessary for type 2 conversion equation.
  3+|{attr}:long_name = "Gain correction" 
@@ -239,7 +246,7 @@ s|Variables | |
  3+|{attr}:long_name = "Impedance of transceiver" 
  3+|{attr}:units = "ohm" 
 
- |{var}float transducer_gain(ping_time, beam, frequency) |MA |Gain of the transducer beam. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1, 3 and 4.
+ |{var}float transducer_gain(ping_time, beam, frequency) |MA |Gain of the transducer beam at each frequency of the frequency coordinate variable. This is the parameter that is set from a calibration exercise. Necessary for conversion equation type 1, 3 and 4. For broadband (FM) data from a transducer without FM calibration, the values are modelled from the narrowband gain at the nominal frequency, typically latexmath:[G(f) = G_0(f_n) + 20\log_{10}(f/f_n)], and substitute_value_used should be set to a non-zero value.
  3+|{attr}:long_name = "Gain of transducer" 
  3+|{attr}:units = "dB" 
  2+|{attr}int :substitute_value_used = 0 |If non-zero, indicates that the variable value is a nominal value used when a measured or calibrated value is not available for a mandatory variable.
@@ -326,6 +333,12 @@ s|Variables | |
  3+|{attr}:long_name = "Tx transducer depth below waterline" 
  3+|{attr}:units = "m" 
  3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude" 
+ 
+ |{var}float water_temperature_at_transducer(ping_time) |O |Water temperature measured at the transducer face at the time of the ping (e.g. by a sensor built into the transducer). Not to be confused with temperature_indicative in <<environmentTable>>.
+ 3+|{attr}:long_name = "Water temperature at transducer face"
+ 3+|{attr}:standard_name = "sea_water_temperature"
+ 3+|{attr}:units = "degree_Celsius"
+ 3+|{attr}:coordinates = "ping_time platform_latitude platform_longitude"
  
  |{var}float waterline_to_chart_datum(ping_time) |O |Vertical translation vector at the time of the ping matching the distance from the water line to the chart data reference (typically Lowest Astronomical Tide or Mean Sea Level). This variable is the vector that contains the tide and allows for the positioning of samples in an absolute reference system.
  3+|{attr}:long_name = "vertical translation from waterline to chart datum reference " 

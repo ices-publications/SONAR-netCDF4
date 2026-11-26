@@ -7,7 +7,7 @@ s|Dimensions | |
  |{var}frequency = unlimited | |Can be of fixed or unlimited length, as appropriate.
  
 s|Coordinate variables | |
- |{var}float frequency(frequency) |M |
+ |{var}float frequency(frequency) |M |Frequencies at which absorption_indicative is given, in increasing order. For broadband (FM) data, this should include the frequencies of the frequency coordinate variable of every beam group in the file (e.g. their union), so that absorption is available at every frequency where transducer_gain is given.
  3+|{attr}:long_name = "Acoustic frequency" 
  3+|{attr}:standard_name = "sound_frequency" 
  3+|{attr}:units = "Hz" 
@@ -24,4 +24,20 @@ s|Variables | |
  3+|{attr}:standard_name = "speed_of_sound_in_sea_water" 
  3+|{attr}:units = "m/s" 
  3+|{attr}float :valid_min = 0.0 
+ 
+ |{var}float salinity_indicative |O |Single water-column practical salinity (PSS-78) configured in the acquisition system and used to derive sound_speed_indicative and absorption_indicative. Allows absorption to be recomputed with another model or at other frequencies.
+ 3+|{attr}:long_name = "Indicative water salinity"
+ 3+|{attr}:standard_name = "sea_water_practical_salinity"
+ 3+|{attr}:units = "1"
+ 3+|{attr}float :valid_min = 0.0
+ 3+|{attr}float :valid_max = 50.0
+ 3+|{attr}:comment = "Single water-column practical salinity (PSS-78) configured in the acquisition system and used to derive sound_speed_indicative and absorption_indicative."
+ 
+ |{var}float temperature_indicative |O |Single water-column temperature configured in the acquisition system and used to derive sound_speed_indicative and absorption_indicative. This is not a measurement at the transducer (see water_temperature_at_transducer in <<sonarBeamGroupTable>>). Allows absorption to be recomputed with another model or at other frequencies.
+ 3+|{attr}:long_name = "Indicative water temperature"
+ 3+|{attr}:standard_name = "sea_water_temperature"
+ 3+|{attr}:units = "degree_Celsius"
+ 3+|{attr}float :valid_min = -5.0
+ 3+|{attr}float :valid_max = 50.0
+ 3+|{attr}:comment = "Single water-column temperature configured in the acquisition system and used to derive sound_speed_indicative and absorption_indicative. Not a measurement at the transducer."
 |===
