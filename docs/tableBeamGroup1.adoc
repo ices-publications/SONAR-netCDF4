@@ -36,6 +36,7 @@ s|Coordinate variables | |
  
  |{var}float frequency(frequency) |MA |Frequencies at which transducer_gain is given, in increasing order. For broadband (FM) data these should span the transmitted band (transmit_frequency_start to transmit_frequency_stop). When the transducer has been calibrated in FM mode, they are the frequencies of the calibration exercise, with the same frequency spacing; the values are identical to the calibration frequencies when the transmitted band and the calibration band match. Where no FM calibration is available, transducer_gain holds modelled values (see transducer_gain). For narrowband (CW) data, a single value equal to the transmit frequency.
  3+|{attr}:long_name = "Calibration gain frequencies" 
+ 3+|{attr}:standard_name = "sound_frequency" 
  3+|{attr}:units = "Hz" 
  3+|{attr}float :valid_min = 0.0 
  
@@ -130,6 +131,7 @@ s|Variables | |
  
  |{var}float frequency_nominal(beam) |MA |Nominal frequency of the transducer, at which equivalent_beam_angle and the beamwidth_receive_* and beamwidth_transmit_* variables are given. Necessary for conversion equation type 4 with broadband (FM) transmission. For narrowband (CW) data this is normally equal to the transmit frequency.
  3+|{attr}:long_name = "Nominal frequency for beamwidth and equivalent beam angle"
+ 3+|{attr}:standard_name = "sound_frequency"
  3+|{attr}:units = "Hz"
  3+|{attr}float :valid_min = 0.0
  
